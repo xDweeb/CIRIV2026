@@ -17,7 +17,7 @@ export const ui = {
     'nav.oneHealth': 'One Health',
     'cta.inscription': 'Inscription',
     'cta.register': 'S\'inscrire maintenant',
-    'hero.title': 'Congrès international de la recherche, de l\'innovation et de la valorisation',
+    'hero.title': 'Congrès international de la recherche, d\'innovation et de valorisation',
     'hero.subtitle': 'Réunir les professionnels de la santé humaine, animale et environnementale pour un avenir durable',
     'hero.trustedBy': 'Soutenu par',
     'footer.quickLinks': 'Liens rapides',

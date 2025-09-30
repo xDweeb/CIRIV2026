@@ -7,6 +7,9 @@ import { useTranslations } from '../../i18n/ui';
 const locale = 'ar';
 const t = useTranslations(locale);
 
+// Show committees or coming soon
+const showCommittees = false;
+
 // Load committees data
 const committeesData = await import('../../content/committees.ar.json').then(module => module.default);
 ---

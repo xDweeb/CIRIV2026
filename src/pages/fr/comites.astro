@@ -8,6 +8,9 @@ import { link } from '../../utils/paths';
 const locale = 'fr';
 const t = useTranslations(locale);
 
+// Show committees or coming soon
+const showCommittees = false;
+
 // Load committees data
 const committeesData = await import('../../content/committees.fr.json').then(module => module.default);
 ---
@@ -38,32 +41,48 @@ const committeesData = await import('../../content/committees.fr.json').then(mod
             Comité Scientifique
           </h2>
           
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {committeesData.scientific.map((member, index) => (
-              <div class={`group bg-slate-50 dark:bg-slate-700 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in`} style={`animation-delay: ${index * 150}ms`}>
-                <div class="text-center">
-                  <img
-                    src={member.image}
-                    alt={`Photo de ${member.name}`}
-                    class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-brand-primary/20 group-hover:border-brand-primary transition-colors"
-                    loading="lazy"
-                  />
-                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                    {member.name}
-                  </h3>
-                  <p class="text-brand-primary dark:text-brand-accent font-medium mb-2">
-                    {member.role}
-                  </p>
-                  <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                    {member.institution}
-                  </p>
-                  <div class="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 rounded-full px-3 py-1">
-                    {member.expertise}
+          {showCommittees ? (
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {committeesData.scientific.map((member, index) => (
+                <div class={`group bg-slate-50 dark:bg-slate-700 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in`} style={`animation-delay: ${index * 150}ms`}>
+                  <div class="text-center">
+                    <img
+                      src={member.image}
+                      alt={`Photo de ${member.name}`}
+                      class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-brand-primary/20 group-hover:border-brand-primary transition-colors"
+                      loading="lazy"
+                    />
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      {member.name}
+                    </h3>
+                    <p class="text-brand-primary dark:text-brand-accent font-medium mb-2">
+                      {member.role}
+                    </p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
+                      {member.institution}
+                    </p>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 rounded-full px-3 py-1">
+                      {member.expertise}
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+          ) : (
+            <div class="text-center py-16">
+              <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-brand-primary to-brand-accent rounded-full flex items-center justify-center">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
               </div>
-            ))}
-          </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                Bientôt disponible
+              </h3>
+              <p class="text-lg text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+                Les membres du comité scientifique seront annoncés prochainement. Restez connectés !
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
@@ -74,32 +93,48 @@ const committeesData = await import('../../content/committees.fr.json').then(mod
             Comité d'Organisation
           </h2>
           
-          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {committeesData.organizing.map((member, index) => (
-              <div class={`group bg-slate-50 dark:bg-slate-700 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in`} style={`animation-delay: ${index * 150}ms`}>
-                <div class="text-center">
-                  <img
-                    src={member.image}
-                    alt={`Photo de ${member.name}`}
-                    class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-emerald-400/20 group-hover:border-emerald-400 transition-colors"
-                    loading="lazy"
-                  />
-                  <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                    {member.name}
-                  </h3>
-                  <p class="text-emerald-600 dark:text-emerald-400 font-medium mb-2">
-                    {member.role}
-                  </p>
-                  <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                    {member.institution}
-                  </p>
-                  <div class="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 rounded-full px-3 py-1">
-                    {member.expertise}
+          {showCommittees ? (
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {committeesData.organizing.map((member, index) => (
+                <div class={`group bg-slate-50 dark:bg-slate-700 rounded-xl p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in`} style={`animation-delay: ${index * 150}ms`}>
+                  <div class="text-center">
+                    <img
+                      src={member.image}
+                      alt={`Photo de ${member.name}`}
+                      class="w-24 h-24 rounded-full mx-auto mb-4 object-cover border-4 border-emerald-400/20 group-hover:border-emerald-400 transition-colors"
+                      loading="lazy"
+                    />
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+                      {member.name}
+                    </h3>
+                    <p class="text-emerald-600 dark:text-emerald-400 font-medium mb-2">
+                      {member.role}
+                    </p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mb-3">
+                      {member.institution}
+                    </p>
+                    <div class="text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-600 rounded-full px-3 py-1">
+                      {member.expertise}
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+          ) : (
+            <div class="text-center py-16">
+              <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center">
+                <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
               </div>
-            ))}
-          </div>
+              <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-4">
+                Bientôt disponible
+              </h3>
+              <p class="text-lg text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+                Les membres du comité d'organisation seront annoncés prochainement. Restez connectés !
+              </p>
+            </div>
+          )}
         </div>
       </section>
 

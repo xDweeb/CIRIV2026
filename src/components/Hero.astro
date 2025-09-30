@@ -23,15 +23,17 @@ const baseUrl = import.meta.env.BASE_URL || '/';
     <div class={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${isRTL ? 'lg:grid-flow-col-dense' : ''}`}>
       <!-- Content -->
       <div class={`${isRTL ? 'lg:col-start-2 text-right' : 'text-left'} animate-fade-in`}>
-        <h1 class="text-4xl lg:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6">
-          <span class="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent">
-            {t('hero.title')}
-          </span>
-        </h1>
-        
-        <p class="text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed">
-          {t('hero.subtitle')}
-        </p>
+        <div class={`max-w-2xl lg:max-w-3xl ${isRTL ? 'mr-auto' : ''}`}>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6 whitespace-normal break-words hyphens-none">
+            <span class="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent inline-block">
+              {t('hero.title')}
+            </span>
+          </h1>
+          
+          <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-xl lg:max-w-2xl">
+            {t('hero.subtitle')}
+          </p>
+        </div>
         
         <div class={`flex ${isRTL ? 'justify-end' : 'justify-start'} mb-12`}>
           <a
@@ -63,6 +65,12 @@ const baseUrl = import.meta.env.BASE_URL || '/';
               class="h-12 opacity-70 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
               loading="lazy"
             />
+            <img 
+              src={`${baseUrl}assets/logos/AMARINOVA.png`}
+              alt="AMARINOVA Logo"
+              class="h-12 opacity-70 hover:opacity-100 transition-opacity duration-300 filter grayscale hover:grayscale-0"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
@@ -74,7 +82,7 @@ const baseUrl = import.meta.env.BASE_URL || '/';
           <div class="relative z-10 bg-white dark:bg-slate-800 rounded-3xl p-12 shadow-2xl shadow-brand-primary/10 border border-slate-200 dark:border-slate-700">
             <img 
               src={`${baseUrl}assets/logos/CIRIV.png`}
-              alt="CIRIV 2025 Conference Logo"
+              alt="CIRIV 2026 Conference Logo"
               class="w-48 h-48 object-contain mx-auto"
               loading="eager"
             />

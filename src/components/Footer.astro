@@ -31,10 +31,12 @@ const quickLinks = [
             class="h-8 w-8 object-contain"
             loading="lazy"
           />
-          <span class="text-lg font-bold text-brand-accent">CIRIV 2025</span>
+          <span class="text-lg font-bold text-brand-accent">CIRIV 2026</span>
         </div>
         <p class="text-slate-400 text-sm">
-          International One Health Conference
+          {locale === 'fr' ? 'Congrès international de la recherche, de l\'innovation et de la valorisation' : 
+           locale === 'en' ? 'International Congress on Research, Innovation, and Valorization' :
+           'المؤتمر الدولي للبحث والابتكار والتثمين'}
         </p>
       </div>
 
@@ -65,6 +67,12 @@ const quickLinks = [
           <img 
             src={`${baseUrl}assets/logos/FSBM.png`}
             alt="FSBM Faculty"
+            class="h-10 opacity-60 hover:opacity-100 transition-opacity"
+            loading="lazy"
+          />
+          <img 
+            src={`${baseUrl}assets/logos/AMARINOVA.png`}
+            alt="AMARINOVA"
             class="h-10 opacity-60 hover:opacity-100 transition-opacity"
             loading="lazy"
           />

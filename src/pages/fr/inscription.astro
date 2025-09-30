@@ -477,16 +477,30 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify(formData)
       });
 
-      if (response.ok) {
+      const data = await response.json();
+      
+      if (data.result === "success") {
         // Show success message
         loadingMessage.classList.add('hidden');
         successMessage.classList.remove('hidden');
       } else {
-        throw new Error('Network response was not ok');
+        throw new Error(data.error || 'Server error');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.');
+      
+      // More detailed error handling
+      let errorMessage = 'Une erreur est survenue lors de l\'envoi. ';
+      
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        errorMessage += 'Problème de connexion réseau.';
+      } else if (error.message) {
+        errorMessage += 'Erreur: ' + error.message;
+      } else {
+        errorMessage += 'Veuillez réessayer.';
+      }
+      
+      alert('❌ ' + errorMessage);
       loadingMessage.classList.add('hidden');
       form.classList.remove('hidden');
     }

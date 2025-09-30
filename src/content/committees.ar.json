@@ -1,0 +1,48 @@
+{
+  "scientific": [
+    {
+      "name": "أ.د. سارة مارتينيز",
+      "role": "رئيسة اللجنة العلمية",
+      "institution": "جامعة الحسن الثاني الدار البيضاء",
+      "expertise": "علم الأوبئة للصحة الواحدة",
+      "image": "https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "د. أحمد بنعلي",
+      "role": "متخصص في الصحة البيئية",
+      "institution": "كلية العلوم بن مسيك، جامعة الحسن الثاني",
+      "expertise": "التلوث البيئي والصحة العامة",
+      "image": "https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "أ.د. فاطمة الإدريسي",
+      "role": "خبيرة في الصحة الحيوانية",
+      "institution": "المعهد الزراعي والبيطري الحسن الثاني",
+      "expertise": "الأمراض حيوانية المنشأ والمراقبة الصحية",
+      "image": "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    }
+  ],
+  "organizing": [
+    {
+      "name": "د. يوسف العلمي",
+      "role": "رئيس لجنة التنظيم",
+      "institution": "كلية العلوم بن مسيك، جامعة الحسن الثاني",
+      "expertise": "تنظيم الفعاليات العلمية",
+      "image": "https://images.pexels.com/photos/5327647/pexels-photo-5327647.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "د. ليلى التازي",
+      "role": "منسقة اللوجستيات",
+      "institution": "كلية العلوم بن مسيك، جامعة الحسن الثاني",
+      "expertise": "إدارة المشاريع ولوجستيات الفعاليات",
+      "image": "https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "السيد كريم الزاهيري",
+      "role": "مدير الاتصالات",
+      "institution": "CIRIV",
+      "expertise": "التواصل العلمي والعلاقات العامة",
+      "image": "https://images.pexels.com/photos/5327630/pexels-photo-5327630.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    }
+  ]
+}

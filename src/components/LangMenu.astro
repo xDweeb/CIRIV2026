@@ -1,0 +1,154 @@
+---
+import { languages } from '../i18n/ui';
+import { link, getCurrentLocale } from '../utils/paths';
+
+interface Props {
+  locale: 'fr' | 'en' | 'ar';
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const isRTL = locale === 'ar';
+
+// Get current page slug by removing locale and base URL
+const baseUrl = import.meta.env.BASE_URL || '/';
+const pathWithoutBase = currentPath.replace(baseUrl, '');
+const pathSegments = pathWithoutBase.split('/').filter(Boolean);
+const pageSlug = pathSegments.length > 1 ? pathSegments.slice(1).join('/') : '';
+
+const languageOptions = Object.entries(languages).map(([lang, label]) => ({
+  lang: lang as keyof typeof languages,
+  label,
+  href: link({ locale: lang as 'fr' | 'en' | 'ar', slug: pageSlug }),
+  isActive: lang === locale,
+}));
+---
+
+<div class="relative">
+  <button
+    id="lang-menu-toggle"
+    type="button"
+    class="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand-primary dark:hover:text-brand-accent transition-colors rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+    aria-label="Language menu"
+    aria-expanded="false"
+    aria-haspopup="true"
+  >
+    <!-- Globe Icon -->
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 0a9 9 0 019-9 9 9 0 00-9 9m0 0a9 9 0 01-9 9 9 9 0 009-9z"></path>
+    </svg>
+    
+    <span class="hidden sm:inline">{languages[locale]}</span>
+    
+    <!-- Chevron -->
+    <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <div
+    id="lang-menu"
+    class={`absolute ${isRTL ? 'left-0' : 'right-0'} mt-2 w-32 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 hidden animate-slide-down`}
+    role="menu"
+    aria-hidden="true"
+  >
+    {languageOptions.map(({ lang, label, href, isActive }) => (
+      <a
+        href={href}
+        class={`block px-4 py-2 text-sm transition-colors ${
+          isActive 
+            ? 'bg-brand-primary text-white' 
+            : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 hover:text-brand-primary dark:hover:text-brand-accent'
+        }`}
+        role="menuitem"
+        hreflang={lang}
+      >
+        <span class="flex items-center justify-between">
+          {label}
+          {isActive && (
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+          )}
+        </span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const langMenuToggle = document.getElementById('lang-menu-toggle');
+    const langMenu = document.getElementById('lang-menu');
+    
+    if (langMenuToggle && langMenu) {
+      // Toggle menu on button click
+      langMenuToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const isExpanded = langMenuToggle.getAttribute('aria-expanded') === 'true';
+        
+        langMenuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+        langMenu.setAttribute('aria-hidden', isExpanded.toString());
+        langMenu.classList.toggle('hidden');
+        
+        // Rotate chevron
+        const chevron = langMenuToggle.querySelector('svg:last-child') as HTMLElement;
+        if (chevron) {
+          chevron.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
+      
+      // Close menu when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!langMenuToggle.contains(event.target as Node) && 
+            !langMenu.contains(event.target as Node)) {
+          langMenuToggle.setAttribute('aria-expanded', 'false');
+          langMenu.setAttribute('aria-hidden', 'true');
+          langMenu.classList.add('hidden');
+          
+          const chevron = langMenuToggle.querySelector('svg:last-child') as HTMLElement;
+          if (chevron) {
+            chevron.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+      
+      // Handle escape key
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !langMenu.classList.contains('hidden')) {
+          langMenuToggle.setAttribute('aria-expanded', 'false');
+          langMenu.setAttribute('aria-hidden', 'true');
+          langMenu.classList.add('hidden');
+          
+          const chevron = langMenuToggle.querySelector('svg:last-child') as HTMLElement;
+          if (chevron) {
+            chevron.style.transform = 'rotate(0deg)';
+          }
+          
+          langMenuToggle.focus();
+        }
+      });
+      
+      // Handle arrow keys navigation
+      langMenu.addEventListener('keydown', (event) => {
+        const menuItems = langMenu.querySelectorAll('a[role="menuitem"]');
+        const currentIndex = Array.from(menuItems).indexOf(document.activeElement as Element);
+        
+        switch (event.key) {
+          case 'ArrowDown':
+            event.preventDefault();
+            const nextIndex = (currentIndex + 1) % menuItems.length;
+            (menuItems[nextIndex] as HTMLElement).focus();
+            break;
+            
+          case 'ArrowUp':
+            event.preventDefault();
+            const prevIndex = currentIndex <= 0 ? menuItems.length - 1 : currentIndex - 1;
+            (menuItems[prevIndex] as HTMLElement).focus();
+            break;
+        }
+      });
+    }
+  });
+</script>

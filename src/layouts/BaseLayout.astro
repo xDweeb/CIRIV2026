@@ -1,0 +1,99 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  locale: 'fr' | 'en' | 'ar';
+  ogImage?: string;
+}
+
+import { getAlternateUrls } from '../utils/paths';
+
+const {
+  title = 'CIRIV 2025 - International One Health Conference',
+  description = 'Join leading professionals in human, animal, and environmental health for the premier One Health conference',
+  locale,
+  ogImage = '/assets/images/og/home.png'
+} = Astro.props;
+
+const siteUrl = import.meta.env.SITE || 'https://yourusername.github.io';
+const baseUrl = import.meta.env.BASE_URL || '/';
+const currentUrl = new URL(Astro.url.pathname, siteUrl);
+const isRTL = locale === 'ar';
+const fontFamily = isRTL ? 'font-cairo' : 'font-inter';
+
+const alternateUrls = getAlternateUrls(Astro.url.pathname);
+
+// Create full URLs for meta tags
+const ogImageUrl = new URL(`${baseUrl}${ogImage.replace(/^\//, '')}`, siteUrl).href;
+const ogLocale = locale === 'ar' ? 'ar_AR' : locale === 'en' ? 'en_US' : 'fr_FR';
+const alternateUrlFr = new URL(alternateUrls.fr, siteUrl).href;
+const alternateUrlEn = new URL(alternateUrls.en, siteUrl).href;
+const alternateUrlAr = new URL(alternateUrls.ar, siteUrl).href;
+---
+<!DOCTYPE html>
+<html lang={locale} dir={isRTL ? 'rtl' : 'ltr'} class={fontFamily}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href={`${baseUrl}favicon.png`} />
+    <meta name="generator" content={Astro.generator} />
+   
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={currentUrl.href} />
+   
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentUrl.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={ogLocale} />
+   
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+   
+    <!-- Alternate Language Links -->
+    <link rel="alternate" hreflang="fr" href={alternateUrlFr} />
+    <link rel="alternate" hreflang="en" href={alternateUrlEn} />
+    <link rel="alternate" hreflang="ar" href={alternateUrlAr} />
+    <link rel="alternate" hreflang="x-default" href={alternateUrlFr} />
+   
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+   
+    <!-- Theme Script - Runs before page load to prevent FOUC -->
+    <script is:inline>
+      (function() {
+        function getStoredTheme() {
+          try {
+            return localStorage.getItem('theme') || 'dark';
+          } catch {
+            return 'dark';
+          }
+        }
+       
+        function getSystemTheme() {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+       
+        function applyTheme(theme) {
+          const effectiveTheme = theme === 'system' ? getSystemTheme() : theme;
+          document.documentElement.classList.toggle('dark', effectiveTheme === 'dark');
+        }
+       
+        applyTheme(getStoredTheme());
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen bg-white dark:bg-surface-dark text-slate-900 dark:text-slate-100 transition-colors">
+    <slot />
+  </body>
+</html>

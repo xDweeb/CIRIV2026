@@ -1,0 +1,38 @@
+[
+  {
+    "date": "January 15, 2025",
+    "title": "Registration Opens",
+    "description": "Start of registration period for all participants. Early bird rates available until February 28th.",
+    "type": "announcement"
+  },
+  {
+    "date": "February 28, 2025",
+    "title": "Early Bird Registration Ends",
+    "description": "Deadline to benefit from reduced registration fees. Regular rates apply after this date.",
+    "type": "deadline"
+  },
+  {
+    "date": "March 15, 2025",
+    "title": "Preliminary Program Release",
+    "description": "Publication of the detailed program with confirmed plenary sessions, workshops, and presentations.",
+    "type": "announcement"
+  },
+  {
+    "date": "April 30, 2025",
+    "title": "Registration Closes",
+    "description": "Final deadline to register for the conference. No registrations will be accepted after this date.",
+    "type": "deadline"
+  },
+  {
+    "date": "May 15-17, 2025",
+    "title": "CIRIV 2025 Conference",
+    "description": "Three days dedicated to One Health discussions, featuring international experts, thematic sessions, and practical workshops.",
+    "type": "event"
+  },
+  {
+    "date": "May 20, 2025",
+    "title": "Proceedings Publication",
+    "description": "Online publication of presentations and conference synthesis documents for all participants.",
+    "type": "announcement"
+  }
+]

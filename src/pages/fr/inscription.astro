@@ -1,0 +1,240 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const locale = 'fr';
+const t = useTranslations(locale);
+
+// Google Forms configuration from environment variables
+const GOOGLE_FORM_ACTION = import.meta.env.GOOGLE_FORM_ACTION;
+const GOOGLE_FORM_EMBED_URL = import.meta.env.GOOGLE_FORM_EMBED_URL;
+const ENTRY_FULLNAME = import.meta.env.ENTRY_FULLNAME;
+const ENTRY_EMAIL = import.meta.env.ENTRY_EMAIL;
+const ENTRY_INSTITUTION = import.meta.env.ENTRY_INSTITUTION;
+const ENTRY_COUNTRY = import.meta.env.ENTRY_COUNTRY;
+const ENTRY_ROLE = import.meta.env.ENTRY_ROLE;
+const ENTRY_NOTES = import.meta.env.ENTRY_NOTES;
+
+const hasGoogleFormConfig = GOOGLE_FORM_ACTION && ENTRY_FULLNAME && ENTRY_EMAIL && ENTRY_INSTITUTION && ENTRY_COUNTRY && ENTRY_ROLE;
+---
+
+<BaseLayout
+  title="Inscription - CIRIV 2025"
+  description="Inscrivez-vous à la Conférence Internationale One Health CIRIV 2025"
+  locale={locale}
+>
+  <Header locale={locale} currentPath={Astro.url.pathname} />
+  
+  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
+            Inscription CIRIV 2025
+          </h1>
+          <p class="text-xl text-slate-600 dark:text-slate-300">
+            Rejoignez la première conférence internationale One Health au Maroc
+          </p>
+        </div>
+
+        {hasGoogleFormConfig ? (
+          <!-- Custom Form UI -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
+            <form method="POST" action={GOOGLE_FORM_ACTION} target="_blank" rel="noopener" class="space-y-6">
+              <!-- Full Name -->
+              <div>
+                <label for="fullname" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  {t('form.fullName')} <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="fullname"
+                  name={ENTRY_FULLNAME}
+                  required
+                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                  placeholder="Votre nom complet"
+                />
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  {t('form.email')} <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name={ENTRY_EMAIL}
+                  required
+                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                  placeholder="votre@email.com"
+                />
+              </div>
+
+              <!-- Institution -->
+              <div>
+                <label for="institution" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  {t('form.institution')} <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="institution"
+                  name={ENTRY_INSTITUTION}
+                  required
+                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                  placeholder="Nom de votre institution"
+                />
+              </div>
+
+              <!-- Country -->
+              <div>
+                <label for="country" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  {t('form.country')} <span class="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="country"
+                  name={ENTRY_COUNTRY}
+                  required
+                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                  placeholder="Votre pays"
+                />
+              </div>
+
+              <!-- Role -->
+              <div>
+                <label for="role" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  {t('form.role')} <span class="text-red-500">*</span>
+                </label>
+                <select
+                  id="role"
+                  name={ENTRY_ROLE}
+                  required
+                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                >
+                  <option value="">Sélectionnez votre fonction</option>
+                  <option value="Étudiant">Étudiant</option>
+                  <option value="Doctorant">Doctorant</option>
+                  <option value="Chercheur">Chercheur</option>
+                  <option value="Professeur">Professeur</option>
+                  <option value="Vétérinaire">Vétérinaire</option>
+                  <option value="Médecin">Médecin</option>
+                  <option value="Professionnel de santé publique">Professionnel de santé publique</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
+              <!-- Notes -->
+              {ENTRY_NOTES && (
+                <div>
+                  <label for="notes" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    {t('form.notes')}
+                  </label>
+                  <textarea
+                    id="notes"
+                    name={ENTRY_NOTES}
+                    rows="4"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="Informations complémentaires (optionnel)"
+                  ></textarea>
+                </div>
+              )}
+
+              <!-- Submit Button -->
+              <button
+                type="submit"
+                class="w-full px-6 py-4 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-primary/25 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+              >
+                {t('form.submit')}
+              </button>
+
+              <p class="text-sm text-slate-500 dark:text-slate-400 text-center">
+                <span class="text-red-500">*</span> {t('form.required')}
+              </p>
+            </form>
+          </div>
+        ) : (
+          <!-- Fallback: Embedded Google Form -->
+          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
+            <div class="text-center mb-6">
+              <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-2">Formulaire d'inscription</h2>
+              <p class="text-slate-600 dark:text-slate-300">
+                Veuillez remplir le formulaire ci-dessous pour vous inscrire à la conférence.
+              </p>
+            </div>
+            
+            {GOOGLE_FORM_EMBED_URL ? (
+              <div class="w-full h-96 md:h-[600px] rounded-lg overflow-hidden">
+                <iframe 
+                  src={GOOGLE_FORM_EMBED_URL}
+                  class="w-full h-full border-0"
+                  frameborder="0"
+                  marginheight="0"
+                  marginwidth="0"
+                  title="Formulaire d'inscription CIRIV 2025"
+                >
+                  Chargement…
+                </iframe>
+              </div>
+            ) : (
+              <div class="text-center py-12">
+                <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-2">
+                  Configuration du formulaire requise
+                </h3>
+                <p class="text-slate-600 dark:text-slate-300 mb-6">
+                  Le formulaire d'inscription sera disponible une fois la configuration Google Forms terminée.
+                </p>
+                <a
+                  href="/fr/contact/"
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-medium rounded-lg transition-colors"
+                >
+                  Nous contacter
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                  </svg>
+                </a>
+              </div>
+            )}
+          </div>
+        )}
+
+        <!-- Additional Information -->
+        <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+          <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
+            Informations importantes
+          </h3>
+          <ul class="space-y-2 text-blue-800 dark:text-blue-200">
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Tarifs préférentiels jusqu'au 28 février 2025
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Confirmation par email dans les 24h
+            </li>
+            <li class="flex items-start gap-2">
+              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+              </svg>
+              Support multilingue disponible
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer locale={locale} />
+</BaseLayout>

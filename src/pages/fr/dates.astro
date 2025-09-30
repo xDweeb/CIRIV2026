@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Timeline from '../../components/Timeline.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const locale = 'fr';
+const t = useTranslations(locale);
+
+// Load dates data
+const datesData = await import('../../content/dates.fr.json').then(module => module.default);
+---
+
+<BaseLayout
+  title="Dates importantes - CIRIV 2025"
+  description="Consultez le calendrier complet des événements et dates limites pour la conférence CIRIV 2025"
+  locale={locale}
+>
+  <Header locale={locale} currentPath={Astro.url.pathname} />
+  
+  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
+    <div class="container mx-auto px-4">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+          Dates importantes
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+          Suivez le calendrier des événements et ne manquez aucune date limite importante pour votre participation à CIRIV 2025
+        </p>
+      </div>
+
+      <!-- Timeline -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 lg:p-12">
+          <Timeline events={datesData} locale={locale} />
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="text-center mt-12">
+        <div class="bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl p-8 text-white">
+          <h2 class="text-2xl font-bold mb-4">
+            Prêt à vous inscrire ?
+          </h2>
+          <p class="text-lg mb-6 opacity-90">
+            Ne manquez pas cette opportunité unique de participer à la première conférence One Health au Maroc
+          </p>
+          <a
+            href="/fr/inscription/"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
+          >
+            S'inscrire maintenant
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer locale={locale} />
+</BaseLayout>

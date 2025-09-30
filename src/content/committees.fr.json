@@ -1,0 +1,48 @@
+{
+  "scientific": [
+    {
+      "name": "Prof. Dr. Sarah Martinez",
+      "role": "Présidente du Comité Scientifique",
+      "institution": "Université Hassan II Casablanca",
+      "expertise": "Épidémiologie One Health",
+      "image": "https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Dr. Ahmed Benali",
+      "role": "Spécialiste en Santé Environnementale",
+      "institution": "FSBM, UH2C",
+      "expertise": "Contamination environnementale et santé publique",
+      "image": "https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Prof. Dr. Fatima El-Idrissi",
+      "role": "Experte en Santé Animale",
+      "institution": "Institut Agronomique et Vétérinaire Hassan II",
+      "expertise": "Maladies zoonotiques et surveillance sanitaire",
+      "image": "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    }
+  ],
+  "organizing": [
+    {
+      "name": "Dr. Youssef Alami",
+      "role": "Président du Comité d'Organisation",
+      "institution": "FSBM, UH2C",
+      "expertise": "Organisation d'événements scientifiques",
+      "image": "https://images.pexels.com/photos/5327647/pexels-photo-5327647.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Dr. Leila Tazi",
+      "role": "Coordinatrice Logistique",
+      "institution": "FSBM, UH2C",
+      "expertise": "Gestion de projets et logistique événementielle",
+      "image": "https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "M. Karim Zahiri",
+      "role": "Responsable Communication",
+      "institution": "CIRIV",
+      "expertise": "Communication scientifique et relations publiques",
+      "image": "https://images.pexels.com/photos/5327630/pexels-photo-5327630.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    }
+  ]
+}

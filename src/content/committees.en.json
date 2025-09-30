@@ -1,0 +1,48 @@
+{
+  "scientific": [
+    {
+      "name": "Prof. Dr. Sarah Martinez",
+      "role": "Chair of Scientific Committee",
+      "institution": "Hassan II University Casablanca",
+      "expertise": "One Health Epidemiology",
+      "image": "https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Dr. Ahmed Benali",
+      "role": "Environmental Health Specialist",
+      "institution": "FSBM, UH2C",
+      "expertise": "Environmental contamination and public health",
+      "image": "https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Prof. Dr. Fatima El-Idrissi",
+      "role": "Animal Health Expert",
+      "institution": "Hassan II Agronomic and Veterinary Institute",
+      "expertise": "Zoonotic diseases and health surveillance",
+      "image": "https://images.pexels.com/photos/5327656/pexels-photo-5327656.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    }
+  ],
+  "organizing": [
+    {
+      "name": "Dr. Youssef Alami",
+      "role": "Chair of Organizing Committee",
+      "institution": "FSBM, UH2C",
+      "expertise": "Scientific event organization",
+      "image": "https://images.pexels.com/photos/5327647/pexels-photo-5327647.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Dr. Leila Tazi",
+      "role": "Logistics Coordinator",
+      "institution": "FSBM, UH2C",
+      "expertise": "Project management and event logistics",
+      "image": "https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    },
+    {
+      "name": "Mr. Karim Zahiri",
+      "role": "Communications Manager",
+      "institution": "CIRIV",
+      "expertise": "Scientific communication and public relations",
+      "image": "https://images.pexels.com/photos/5327630/pexels-photo-5327630.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&fit=crop"
+    }
+  ]
+}

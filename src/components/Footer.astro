@@ -1,0 +1,80 @@
+---
+import { useTranslations } from '../i18n/ui';
+import { link } from '../utils/paths';
+
+interface Props {
+  locale: 'fr' | 'en' | 'ar';
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const isRTL = locale === 'ar';
+const baseUrl = import.meta.env.BASE_URL || '/';
+
+const quickLinks = [
+  { key: 'nav.home', href: link({ locale }) },
+  { key: 'nav.dates', href: link({ locale, slug: 'dates' }) },
+  { key: 'nav.comites', href: link({ locale, slug: 'comites' }) },
+  { key: 'nav.contact', href: link({ locale, slug: 'contact' }) },
+];
+---
+
+<footer class="bg-slate-900 dark:bg-slate-950 text-white">
+  <div class="container mx-auto px-4 py-12">
+    <div class={`grid md:grid-cols-3 gap-8 items-center ${isRTL ? 'md:grid-flow-col-dense' : ''}`}>
+      <!-- Brand -->
+      <div class={`${isRTL ? 'md:col-start-3 text-right' : 'text-left'}`}>
+        <div class={`flex items-center gap-3 mb-4 ${isRTL ? 'justify-end flex-row-reverse' : 'justify-start'}`}>
+          <img 
+            src={`${baseUrl}assets/logos/CIRIV.png`}
+            alt="CIRIV Logo"
+            class="h-8 w-8 object-contain"
+            loading="lazy"
+          />
+          <span class="text-lg font-bold text-brand-accent">CIRIV 2025</span>
+        </div>
+        <p class="text-slate-400 text-sm">
+          International One Health Conference
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class={`${isRTL ? 'md:col-start-2 text-center' : 'text-center'}`}>
+        <h3 class="font-semibold mb-4 text-brand-accent">{t('footer.quickLinks')}</h3>
+        <nav class="space-y-2">
+          {quickLinks.map(({ key, href }) => (
+            <a
+              href={href}
+              class="block text-slate-400 hover:text-white transition-colors text-sm"
+            >
+              {t(key as keyof typeof import('../i18n/ui').ui.fr)}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Partner Logos -->
+      <div class={`${isRTL ? 'md:col-start-1 text-left' : 'text-right'}`}>
+        <div class={`flex items-center gap-4 mb-4 ${isRTL ? 'justify-start' : 'justify-end'}`}>
+          <img 
+            src={`${baseUrl}assets/logos/UH2C.png`}
+            alt="UH2C University"
+            class="h-10 opacity-60 hover:opacity-100 transition-opacity"
+            loading="lazy"
+          />
+          <img 
+            src={`${baseUrl}assets/logos/FSBM.png`}
+            alt="FSBM Faculty"
+            class="h-10 opacity-60 hover:opacity-100 transition-opacity"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class={`border-t border-slate-800 mt-8 pt-8 text-center text-sm text-slate-400 ${isRTL ? 'text-right' : 'text-left'} md:text-center`}>
+      <p>{t('footer.copyright')}</p>
+    </div>
+  </div>
+</footer>

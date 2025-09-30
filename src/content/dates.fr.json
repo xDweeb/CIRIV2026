@@ -1,0 +1,38 @@
+[
+  {
+    "date": "15 janvier 2025",
+    "title": "Ouverture des inscriptions",
+    "description": "Début de la période d'inscription pour tous les participants. Tarifs préférentiels disponibles jusqu'au 28 février.",
+    "type": "announcement"
+  },
+  {
+    "date": "28 février 2025",
+    "title": "Fin des inscriptions à tarif réduit",
+    "description": "Date limite pour bénéficier des tarifs préférentiels d'inscription. Après cette date, les tarifs normaux s'appliquent.",
+    "type": "deadline"
+  },
+  {
+    "date": "15 mars 2025",
+    "title": "Publication du programme préliminaire",
+    "description": "Diffusion du programme détaillé avec les sessions plénières, ateliers et présentations confirmées.",
+    "type": "announcement"
+  },
+  {
+    "date": "30 avril 2025",
+    "title": "Clôture des inscriptions",
+    "description": "Date limite d'inscription pour participer à la conférence. Aucune inscription ne sera acceptée après cette date.",
+    "type": "deadline"
+  },
+  {
+    "date": "15-17 mai 2025",
+    "title": "Conférence CIRIV 2025",
+    "description": "Trois journées dédiées aux échanges sur la santé unique, avec des experts internationaux, des sessions thématiques et des ateliers pratiques.",
+    "type": "event"
+  },
+  {
+    "date": "20 mai 2025",
+    "title": "Publication des actes",
+    "description": "Mise en ligne des présentations et documents de synthèse de la conférence pour tous les participants.",
+    "type": "announcement"
+  }
+]

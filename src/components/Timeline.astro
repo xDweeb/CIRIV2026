@@ -1,0 +1,82 @@
+---
+interface Props {
+  events: Array<{
+    date: string;
+    title: string;
+    description: string;
+    type: 'deadline' | 'event' | 'announcement';
+  }>;
+  locale: 'fr' | 'en' | 'ar';
+}
+
+const { events, locale } = Astro.props;
+const isRTL = locale === 'ar';
+
+function getTypeStyles(type: string) {
+  switch (type) {
+    case 'deadline':
+      return {
+        dot: 'bg-red-500',
+        border: 'border-red-200 dark:border-red-800',
+        bg: 'bg-red-50 dark:bg-red-900/20'
+      };
+    case 'event':
+      return {
+        dot: 'bg-brand-primary',
+        border: 'border-brand-primary/20 dark:border-brand-primary/40',
+        bg: 'bg-brand-primary/5 dark:bg-brand-primary/10'
+      };
+    case 'announcement':
+      return {
+        dot: 'bg-emerald-500',
+        border: 'border-emerald-200 dark:border-emerald-800',
+        bg: 'bg-emerald-50 dark:bg-emerald-900/20'
+      };
+    default:
+      return {
+        dot: 'bg-slate-400',
+        border: 'border-slate-200 dark:border-slate-700',
+        bg: 'bg-slate-50 dark:bg-slate-800/50'
+      };
+  }
+}
+---
+
+<div class={`relative ${isRTL ? 'text-right' : 'text-left'}`}>
+  <!-- Timeline Line -->
+  <div class={`absolute top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-700 ${isRTL ? 'right-4' : 'left-4'}`}></div>
+
+  <div class="space-y-8">
+    {events.map((event, index) => {
+      const styles = getTypeStyles(event.type);
+      return (
+        <div class={`relative ${isRTL ? 'pr-12' : 'pl-12'} animate-fade-in`} style={`animation-delay: ${index * 100}ms`}>
+          <!-- Timeline Dot -->
+          <div class={`absolute top-2 w-3 h-3 rounded-full ${styles.dot} ${isRTL ? '-right-1.5' : '-left-1.5'} ring-4 ring-white dark:ring-surface-dark`}></div>
+          
+          <!-- Event Card -->
+          <div class={`p-6 rounded-xl border ${styles.border} ${styles.bg} transition-all duration-300 hover:shadow-lg hover:scale-[1.02]`}>
+            <div class="flex items-center justify-between mb-2">
+              <time class="text-sm font-medium text-slate-600 dark:text-slate-400" datetime={event.date}>
+                {event.date}
+              </time>
+              <span class={`px-2 py-1 text-xs font-medium rounded-full ${
+                event.type === 'deadline' ? 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200' :
+                event.type === 'event' ? 'bg-brand-primary/10 text-brand-primary dark:bg-brand-primary/20 dark:text-brand-accent' :
+                'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200'
+              }`}>
+                {event.type}
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">
+              {event.title}
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+              {event.description}
+            </p>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</div>

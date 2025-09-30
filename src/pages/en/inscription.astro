@@ -6,209 +6,401 @@ import { useTranslations } from '../../i18n/ui';
 
 const locale = 'en';
 const t = useTranslations(locale);
-
-// Google Forms configuration from environment variables
-const GOOGLE_FORM_ACTION = import.meta.env.GOOGLE_FORM_ACTION;
-const GOOGLE_FORM_EMBED_URL = import.meta.env.GOOGLE_FORM_EMBED_URL;
-const ENTRY_FULLNAME = import.meta.env.ENTRY_FULLNAME;
-const ENTRY_EMAIL = import.meta.env.ENTRY_EMAIL;
-const ENTRY_INSTITUTION = import.meta.env.ENTRY_INSTITUTION;
-const ENTRY_COUNTRY = import.meta.env.ENTRY_COUNTRY;
-const ENTRY_ROLE = import.meta.env.ENTRY_ROLE;
-const ENTRY_NOTES = import.meta.env.ENTRY_NOTES;
-
-const hasGoogleFormConfig = GOOGLE_FORM_ACTION && ENTRY_FULLNAME && ENTRY_EMAIL && ENTRY_INSTITUTION && ENTRY_COUNTRY && ENTRY_ROLE;
 ---
 
 <BaseLayout
   title="Registration - CIRIV 2026"
-  description="Register for the International Congress on Research, Innovation, and Valorization CIRIV 2026"
+  description="Register for the International Research, Innovation and Valorization Congress CIRIV 2026"
   locale={locale}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
   
   <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
     <div class="container mx-auto px-4">
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             CIRIV 2026 Registration
           </h1>
           <p class="text-xl text-slate-600 dark:text-slate-300">
-            Join the first edition of CIRIV in Morocco
+            Join the first International Research, Innovation and Valorization Congress in Morocco
           </p>
         </div>
 
-        {hasGoogleFormConfig ? (
-          <!-- Custom Form UI -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-            <form method="POST" action={GOOGLE_FORM_ACTION} target="_blank" rel="noopener" class="space-y-6">
-              <!-- Full Name -->
-              <div>
-                <label for="fullname" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  {t('form.fullName')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullname"
-                  name={ENTRY_FULLNAME}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
-                  placeholder="Your full name"
-                />
+        <!-- Progress Bar -->
+        <div class="mb-8">
+          <div class="flex items-center justify-center space-x-4">
+            <div class="flex items-center">
+              <div id="step1-indicator" class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center font-semibold">
+                1
+              </div>
+              <span class="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">Personal Information</span>
+            </div>
+            <div class="w-16 h-0.5 bg-slate-300 dark:bg-slate-600"></div>
+            <div class="flex items-center">
+              <div id="step2-indicator" class="w-8 h-8 bg-slate-300 dark:bg-slate-600 text-slate-500 rounded-full flex items-center justify-center font-semibold">
+                2
+              </div>
+              <span class="ml-2 text-sm font-medium text-slate-500">Participation Type</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
+          <form id="registration-form" class="space-y-6">
+            
+            <!-- Step 1: Personal Information -->
+            <div id="step1" class="space-y-6">
+              <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+                Step 1: Personal Information
+              </h2>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- Last Name -->
+                <div>
+                  <label for="nom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Last Name <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="Your last name"
+                  />
+                </div>
+
+                <!-- First Name -->
+                <div>
+                  <label for="prenom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    First Name <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="Your first name"
+                  />
+                </div>
               </div>
 
-              <!-- Email -->
-              <div>
-                <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  {t('form.email')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name={ENTRY_EMAIL}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
-                  placeholder="your@email.com"
-                />
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- Title -->
+                <div>
+                  <label for="civilite" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Title / Gender
+                  </label>
+                  <select
+                    id="civilite"
+                    name="civilite"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                  >
+                    <option value="">Select</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Ms.">Ms.</option>
+                  </select>
+                </div>
+
+                <!-- Email -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Email <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
               </div>
 
-              <!-- Institution -->
-              <div>
-                <label for="institution" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  {t('form.institution')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="institution"
-                  name={ENTRY_INSTITUTION}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
-                  placeholder="Your institution name"
-                />
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- Phone -->
+                <div>
+                  <label for="telephone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    id="telephone"
+                    name="telephone"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="+212 6XX-XXXXXX"
+                  />
+                </div>
+
+                <!-- Institution -->
+                <div>
+                  <label for="etablissement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Institution <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="etablissement"
+                    name="etablissement"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="Your institution name"
+                  />
+                </div>
               </div>
 
-              <!-- Country -->
-              <div>
-                <label for="country" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  {t('form.country')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="country"
-                  name={ENTRY_COUNTRY}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
-                  placeholder="Your country"
-                />
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- Laboratory / Department -->
+                <div>
+                  <label for="departement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    Laboratory / Department
+                  </label>
+                  <input
+                    type="text"
+                    id="departement"
+                    name="departement"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="Laboratory or department"
+                  />
+                </div>
+
+                <!-- City & Country -->
+                <div>
+                  <label for="ville" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    City & Country <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="ville"
+                    name="ville"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="City, Country"
+                  />
+                </div>
               </div>
 
-              <!-- Role -->
+              <!-- Status -->
               <div>
-                <label for="role" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  {t('form.role')} <span class="text-red-500">*</span>
+                <label for="statut" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  Status <span class="text-red-500">*</span>
                 </label>
                 <select
-                  id="role"
-                  name={ENTRY_ROLE}
+                  id="statut"
+                  name="statut"
                   required
                   class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
                 >
-                  <option value="">Select your role</option>
+                  <option value="">Select your status</option>
                   <option value="Student">Student</option>
                   <option value="PhD Student">PhD Student</option>
+                  <option value="Lecturer-Researcher">Lecturer-Researcher</option>
                   <option value="Researcher">Researcher</option>
-                  <option value="Professor">Professor</option>
-                  <option value="Veterinarian">Veterinarian</option>
-                  <option value="Medical Doctor">Medical Doctor</option>
-                  <option value="Public Health Professional">Public Health Professional</option>
-                  <option value="Other">Other</option>
+                  <option value="Professional">Professional</option>
                 </select>
               </div>
 
-              <!-- Notes -->
-              {ENTRY_NOTES && (
-                <div>
-                  <label for="notes" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    {t('form.notes')}
-                  </label>
-                  <textarea
-                    id="notes"
-                    name={ENTRY_NOTES}
-                    rows="4"
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
-                    placeholder="Additional information (optional)"
-                  ></textarea>
-                </div>
-              )}
-
-              <!-- Submit Button -->
-              <button
-                type="submit"
-                class="w-full px-6 py-4 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-primary/25 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
-              >
-                {t('form.submit')}
-              </button>
-
-              <p class="text-sm text-slate-500 dark:text-slate-400 text-center">
-                <span class="text-red-500">*</span> {t('form.required')}
-              </p>
-            </form>
-          </div>
-        ) : (
-          <!-- Fallback: Configuration needed message -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-            <div class="text-center py-12">
-              <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
+              <!-- Next Button -->
+              <div class="flex justify-end">
+                <button
+                  type="button"
+                  id="next-step"
+                  class="px-8 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+                >
+                  Next →
+                </button>
               </div>
-              <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-2">
-                Form Configuration Required
-              </h3>
-              <p class="text-slate-600 dark:text-slate-300 mb-6">
-                The registration form will be available once Google Forms configuration is completed.
-              </p>
-              <a
-                href="/en/contact/"
-                class="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-medium rounded-lg transition-colors"
-              >
-                Contact Us
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                </svg>
-              </a>
             </div>
-          </div>
-        )}
 
-        <!-- Additional Information -->
-        <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
-          <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3">
-            Important Information
-          </h3>
-          <ul class="space-y-2 text-blue-800 dark:text-blue-200">
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            <!-- Step 2: Participation Type -->
+            <div id="step2" class="space-y-6 hidden">
+              <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+                Step 2: Participation Type
+              </h2>
+
+              <!-- Participation Type -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
+                  How would you like to participate? <span class="text-red-500">*</span>
+                </label>
+                <div class="space-y-3">
+                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                    <input
+                      type="radio"
+                      name="typeParticipation"
+                      value="Participant"
+                      class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600"
+                    />
+                    <div class="ml-3">
+                      <div class="text-sm font-medium text-slate-900 dark:text-white">Participant</div>
+                      <div class="text-sm text-slate-500 dark:text-slate-400">Attend conferences and participate in discussions</div>
+                    </div>
+                  </label>
+                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                    <input
+                      type="radio"
+                      name="typeParticipation"
+                      value="Presenter"
+                      class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600"
+                    />
+                    <div class="ml-3">
+                      <div class="text-sm font-medium text-slate-900 dark:text-white">Presenter</div>
+                      <div class="text-sm text-slate-500 dark:text-slate-400">Present a communication (oral or poster)</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Presenter Fields (Hidden by default) -->
+              <div id="presenter-fields" class="space-y-6 hidden">
+                <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                  <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-4">
+                    Information about your presentation
+                  </h3>
+
+                  <!-- Presentation Title -->
+                  <div class="mb-4">
+                    <label for="titreCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      Presentation Title <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="titreCommunication"
+                      name="titreCommunication"
+                      class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                      placeholder="Title of your presentation"
+                    />
+                  </div>
+
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Authors -->
+                    <div>
+                      <label for="auteurs" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        Authors <span class="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="auteurs"
+                        name="auteurs"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                        placeholder="Name1, Name2, Name3..."
+                      />
+                    </div>
+
+                    <!-- Corresponding Author -->
+                    <div>
+                      <label for="auteurCorrespondant" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        Corresponding Author <span class="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="auteurCorrespondant"
+                        name="auteurCorrespondant"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                        placeholder="Name and email of corresponding author"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Theme -->
+                    <div>
+                      <label for="thematique" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        Theme <span class="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="thematique"
+                        name="thematique"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                      >
+                        <option value="">Select a theme</option>
+                        <option value="Human Health">Human Health</option>
+                        <option value="Animal Health">Animal Health</option>
+                        <option value="Environment">Environment</option>
+                        <option value="Interdisciplinary">Interdisciplinary</option>
+                      </select>
+                    </div>
+
+                    <!-- Communication Type -->
+                    <div>
+                      <label for="choixCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        Communication Type <span class="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="choixCommunication"
+                        name="choixCommunication"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                      >
+                        <option value="">Select type</option>
+                        <option value="Oral Communication">Oral Communication</option>
+                        <option value="Poster Communication">Poster Communication</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Abstract File Upload -->
+                  <div>
+                    <label for="resumeFile" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      Abstract (file) <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                      <input
+                        type="file"
+                        id="resumeFile"
+                        name="resumeFile"
+                        accept=".pdf,.doc,.docx"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-primary file:text-white hover:file:bg-brand-primaryDark"
+                      />
+                    </div>
+                    <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                      Accepted formats: PDF, DOC, DOCX (max 5MB)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Navigation Buttons -->
+              <div class="flex justify-between pt-6">
+                <button
+                  type="button"
+                  id="prev-step"
+                  class="px-8 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                >
+                  ← Previous
+                </button>
+                <button
+                  type="submit"
+                  id="submit-form"
+                  class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+                >
+                  Submit Registration
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Success Message -->
+          <div id="success-message" class="hidden text-center py-12">
+            <div class="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
-              Early bird rates available until December 15, 2025
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              Email confirmation within 24 hours
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              Multilingual support available
-            </li>
-          </ul>
+            </div>
+            <h3 class="text-2xl font-bold text-green-600 mb-2">Registration Successful!</h3>
+            <p class="text-slate-600 dark:text-slate-300">
+              Thank you! Your registration has been recorded. You will receive a confirmation email shortly.
+            </p>
+          </div>
+
+          <!-- Loading State -->
+          <div id="loading-message" class="hidden text-center py-12">
+            <div class="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-slate-600 dark:text-slate-300">Sending...</p>
+          </div>
         </div>
       </div>
     </div>
@@ -216,3 +408,186 @@ const hasGoogleFormConfig = GOOGLE_FORM_ACTION && ENTRY_FULLNAME && ENTRY_EMAIL 
   
   <Footer locale={locale} />
 </BaseLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('registration-form');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const nextBtn = document.getElementById('next-step');
+  const prevBtn = document.getElementById('prev-step');
+  const step1Indicator = document.getElementById('step1-indicator');
+  const step2Indicator = document.getElementById('step2-indicator');
+  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
+  const presenterFields = document.getElementById('presenter-fields');
+  const successMessage = document.getElementById('success-message');
+  const loadingMessage = document.getElementById('loading-message');
+
+  // API endpoint
+  const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxUh2TEJ66SnlhsuQhpUL8bD5UQNy5_8KzNX4VfYWzAn8pVyRAxjlSJVSFYjvoU4QbDNw/exec';
+
+  // Step navigation
+  nextBtn.addEventListener('click', function() {
+    if (validateStep1()) {
+      showStep2();
+    }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    showStep1();
+  });
+
+  // Participation type change
+  participationRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'Presenter') {
+        presenterFields.classList.remove('hidden');
+        // Make presenter fields required
+        const presenterInputs = presenterFields.querySelectorAll('input[required], select[required]');
+        presenterInputs.forEach(input => input.setAttribute('required', 'required'));
+      } else {
+        presenterFields.classList.add('hidden');
+        // Remove required attribute from presenter fields
+        const presenterInputs = presenterFields.querySelectorAll('input, select');
+        presenterInputs.forEach(input => input.removeAttribute('required'));
+      }
+    });
+  });
+
+  // Form submission
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!validateStep2()) {
+      return;
+    }
+
+    // Show loading
+    form.classList.add('hidden');
+    loadingMessage.classList.remove('hidden');
+
+    try {
+      const formData = collectFormData();
+      
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        // Show success message
+        loadingMessage.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred while sending. Please try again.');
+      loadingMessage.classList.add('hidden');
+      form.classList.remove('hidden');
+    }
+  });
+
+  function validateStep1() {
+    const requiredFields = step1.querySelectorAll('input[required], select[required]');
+    let isValid = true;
+
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        field.classList.add('border-red-500');
+        isValid = false;
+      } else {
+        field.classList.remove('border-red-500');
+      }
+    });
+
+    if (!isValid) {
+      alert('Please fill in all required fields.');
+    }
+
+    return isValid;
+  }
+
+  function validateStep2() {
+    const participationType = document.querySelector('input[name="typeParticipation"]:checked');
+    
+    if (!participationType) {
+      alert('Please select your participation type.');
+      return false;
+    }
+
+    if (participationType.value === 'Presenter') {
+      const presenterRequiredFields = presenterFields.querySelectorAll('input[required], select[required]');
+      let isValid = true;
+
+      presenterRequiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.classList.add('border-red-500');
+          isValid = false;
+        } else {
+          field.classList.remove('border-red-500');
+        }
+      });
+
+      if (!isValid) {
+        alert('Please fill in all required fields for presenters.');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  function showStep1() {
+    step1.classList.remove('hidden');
+    step2.classList.add('hidden');
+    step1Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step1Indicator.classList.add('bg-brand-primary', 'text-white');
+    step2Indicator.classList.remove('bg-brand-primary', 'text-white');
+    step2Indicator.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+  }
+
+  function showStep2() {
+    step1.classList.add('hidden');
+    step2.classList.remove('hidden');
+    step2Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step2Indicator.classList.add('bg-brand-primary', 'text-white');
+  }
+
+  function collectFormData() {
+    const formData = new FormData(form);
+    const data = {};
+
+    // Collect basic form data
+    for (let [key, value] of formData.entries()) {
+      if (key !== 'resumeFile') {
+        data[key] = value;
+      }
+    }
+
+    // Handle file upload (for now, just store filename)
+    const fileInput = document.getElementById('resumeFile');
+    if (fileInput && fileInput.files[0]) {
+      data.resumeFileURL = fileInput.files[0].name;
+    } else {
+      data.resumeFileURL = '';
+    }
+
+    // Set default values for optional fields
+    data.civilite = data.civilite || '';
+    data.telephone = data.telephone || '';
+    data.departement = data.departement || '';
+    data.titreCommunication = data.titreCommunication || '';
+    data.auteurs = data.auteurs || '';
+    data.auteurCorrespondant = data.auteurCorrespondant || '';
+    data.thematique = data.thematique || '';
+    data.choixCommunication = data.choixCommunication || '';
+
+    return data;
+  }
+});
+</script>

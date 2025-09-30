@@ -6,18 +6,6 @@ import { useTranslations } from '../../i18n/ui';
 
 const locale = 'ar';
 const t = useTranslations(locale);
-
-// Google Forms configuration from environment variables
-const GOOGLE_FORM_ACTION = import.meta.env.GOOGLE_FORM_ACTION;
-const GOOGLE_FORM_EMBED_URL = import.meta.env.GOOGLE_FORM_EMBED_URL;
-const ENTRY_FULLNAME = import.meta.env.ENTRY_FULLNAME;
-const ENTRY_EMAIL = import.meta.env.ENTRY_EMAIL;
-const ENTRY_INSTITUTION = import.meta.env.ENTRY_INSTITUTION;
-const ENTRY_COUNTRY = import.meta.env.ENTRY_COUNTRY;
-const ENTRY_ROLE = import.meta.env.ENTRY_ROLE;
-const ENTRY_NOTES = import.meta.env.ENTRY_NOTES;
-
-const hasGoogleFormConfig = GOOGLE_FORM_ACTION && ENTRY_FULLNAME && ENTRY_EMAIL && ENTRY_INSTITUTION && ENTRY_COUNTRY && ENTRY_ROLE;
 ---
 
 <BaseLayout
@@ -27,188 +15,392 @@ const hasGoogleFormConfig = GOOGLE_FORM_ACTION && ENTRY_FULLNAME && ENTRY_EMAIL 
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
   
-  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
+  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12" dir="rtl">
     <div class="container mx-auto px-4">
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            تسجيل CIRIV 2026
+            التسجيل في CIRIV 2026
           </h1>
           <p class="text-xl text-slate-600 dark:text-slate-300">
-            انضم إلى الإصدار الأول من CIRIV في المغرب
+            انضم إلى أول مؤتمر دولي للبحث والابتكار والتثمين في المغرب
           </p>
         </div>
 
-        {hasGoogleFormConfig ? (
-          <!-- Custom Form UI -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-            <form method="POST" action={GOOGLE_FORM_ACTION} target="_blank" rel="noopener" class="space-y-6">
-              <!-- Full Name -->
-              <div>
-                <label for="fullname" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 text-right">
-                  {t('form.fullName')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullname"
-                  name={ENTRY_FULLNAME}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors text-right"
-                  placeholder="اسمك الكامل"
-                />
+        <!-- Progress Bar -->
+        <div class="mb-8">
+          <div class="flex items-center justify-center space-x-4 space-x-reverse">
+            <div class="flex items-center">
+              <div id="step1-indicator" class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center font-semibold">
+                1
+              </div>
+              <span class="mr-2 text-sm font-medium text-slate-700 dark:text-slate-300">المعلومات الشخصية</span>
+            </div>
+            <div class="w-16 h-0.5 bg-slate-300 dark:bg-slate-600"></div>
+            <div class="flex items-center">
+              <div id="step2-indicator" class="w-8 h-8 bg-slate-300 dark:bg-slate-600 text-slate-500 rounded-full flex items-center justify-center font-semibold">
+                2
+              </div>
+              <span class="mr-2 text-sm font-medium text-slate-500">نوع المشاركة</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
+          <form id="registration-form" class="space-y-6">
+            
+            <!-- Step 1: Personal Information -->
+            <div id="step1" class="space-y-6">
+              <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+                الخطوة 1: المعلومات الشخصية
+              </h2>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- اللقب -->
+                <div>
+                  <label for="nom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    اللقب <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="لقبك العائلي"
+                  />
+                </div>
+
+                <!-- الاسم -->
+                <div>
+                  <label for="prenom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    الاسم <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="prenom"
+                    name="prenom"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="اسمك الشخصي"
+                  />
+                </div>
               </div>
 
-              <!-- Email -->
-              <div>
-                <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 text-right">
-                  {t('form.email')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name={ENTRY_EMAIL}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
-                  placeholder="your@email.com"
-                />
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- اللقب / الجنس -->
+                <div>
+                  <label for="civilite" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    اللقب / الجنس
+                  </label>
+                  <select
+                    id="civilite"
+                    name="civilite"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                  >
+                    <option value="">اختر</option>
+                    <option value="السيد">السيد</option>
+                    <option value="السيدة">السيدة</option>
+                  </select>
+                </div>
+
+                <!-- البريد الإلكتروني -->
+                <div>
+                  <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    البريد الإلكتروني <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="your@email.com"
+                  />
+                </div>
               </div>
 
-              <!-- Institution -->
-              <div>
-                <label for="institution" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 text-right">
-                  {t('form.institution')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="institution"
-                  name={ENTRY_INSTITUTION}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors text-right"
-                  placeholder="اسم مؤسستك"
-                />
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- الهاتف -->
+                <div>
+                  <label for="telephone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    الهاتف
+                  </label>
+                  <input
+                    type="tel"
+                    id="telephone"
+                    name="telephone"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="+212 6XX-XXXXXX"
+                  />
+                </div>
+
+                <!-- المؤسسة -->
+                <div>
+                  <label for="etablissement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    المؤسسة <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="etablissement"
+                    name="etablissement"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="اسم مؤسستك"
+                  />
+                </div>
               </div>
 
-              <!-- Country -->
-              <div>
-                <label for="country" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 text-right">
-                  {t('form.country')} <span class="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="country"
-                  name={ENTRY_COUNTRY}
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors text-right"
-                  placeholder="بلدك"
-                />
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- المختبر / القسم -->
+                <div>
+                  <label for="departement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    المختبر / القسم
+                  </label>
+                  <input
+                    type="text"
+                    id="departement"
+                    name="departement"
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="المختبر أو القسم"
+                  />
+                </div>
+
+                <!-- المدينة والبلد -->
+                <div>
+                  <label for="ville" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    المدينة والبلد <span class="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="ville"
+                    name="ville"
+                    required
+                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                    placeholder="المدينة، البلد"
+                  />
+                </div>
               </div>
 
-              <!-- Role -->
+              <!-- الصفة -->
               <div>
-                <label for="role" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 text-right">
-                  {t('form.role')} <span class="text-red-500">*</span>
+                <label for="statut" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  الصفة <span class="text-red-500">*</span>
                 </label>
                 <select
-                  id="role"
-                  name={ENTRY_ROLE}
+                  id="statut"
+                  name="statut"
                   required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors text-right"
+                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
                 >
-                  <option value="">اختر وظيفتك</option>
+                  <option value="">اختر صفتك</option>
                   <option value="طالب">طالب</option>
                   <option value="طالب دكتوراه">طالب دكتوراه</option>
+                  <option value="أستاذ-باحث">أستاذ-باحث</option>
                   <option value="باحث">باحث</option>
-                  <option value="أستاذ">أستاذ</option>
-                  <option value="طبيب بيطري">طبيب بيطري</option>
-                  <option value="طبيب">طبيب</option>
-                  <option value="متخصص في الصحة العامة">متخصص في الصحة العامة</option>
-                  <option value="أخرى">أخرى</option>
+                  <option value="مهني">مهني</option>
                 </select>
               </div>
 
-              <!-- Notes -->
-              {ENTRY_NOTES && (
-                <div>
-                  <label for="notes" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 text-right">
-                    {t('form.notes')}
-                  </label>
-                  <textarea
-                    id="notes"
-                    name={ENTRY_NOTES}
-                    rows="4"
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors text-right"
-                    placeholder="معلومات إضافية (اختياري)"
-                  ></textarea>
-                </div>
-              )}
-
-              <!-- Submit Button -->
-              <button
-                type="submit"
-                class="w-full px-6 py-4 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-primary/25 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
-              >
-                {t('form.submit')}
-              </button>
-
-              <p class="text-sm text-slate-500 dark:text-slate-400 text-center">
-                <span class="text-red-500">*</span> {t('form.required')}
-              </p>
-            </form>
-          </div>
-        ) : (
-          <!-- Fallback: Configuration needed message -->
-          <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-            <div class="text-center py-12">
-              <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
+              <!-- زر التالي -->
+              <div class="flex justify-start">
+                <button
+                  type="button"
+                  id="next-step"
+                  class="px-8 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+                >
+                  ← التالي
+                </button>
               </div>
-              <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-2">
-                مطلوب تكوين النموذج
-              </h3>
-              <p class="text-slate-600 dark:text-slate-300 mb-6">
-                سيكون نموذج التسجيل متاحًا بمجرد اكتمال تكوين نماذج Google.
-              </p>
-              <a
-                href="/ar/contact/"
-                class="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-medium rounded-lg transition-colors"
-              >
-                اتصل بنا
-                <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                </svg>
-              </a>
             </div>
-          </div>
-        )}
 
-        <!-- Additional Information -->
-        <div class="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
-          <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-3 text-right">
-            معلومات مهمة
-          </h3>
-          <ul class="space-y-2 text-blue-800 dark:text-blue-200">
-            <li class="flex items-start gap-2 flex-row-reverse text-right">
-              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            <!-- Step 2: Participation Type -->
+            <div id="step2" class="space-y-6 hidden">
+              <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+                الخطوة 2: نوع المشاركة
+              </h2>
+
+              <!-- نوع المشاركة -->
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
+                  كيف تريد المشاركة؟ <span class="text-red-500">*</span>
+                </label>
+                <div class="space-y-3">
+                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                    <input
+                      type="radio"
+                      name="typeParticipation"
+                      value="مشارك"
+                      class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600"
+                    />
+                    <div class="mr-3">
+                      <div class="text-sm font-medium text-slate-900 dark:text-white">مشارك</div>
+                      <div class="text-sm text-slate-500 dark:text-slate-400">حضور المؤتمرات والمشاركة في المناقشات</div>
+                    </div>
+                  </label>
+                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
+                    <input
+                      type="radio"
+                      name="typeParticipation"
+                      value="مقدم عرض"
+                      class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600"
+                    />
+                    <div class="mr-3">
+                      <div class="text-sm font-medium text-slate-900 dark:text-white">مقدم عرض</div>
+                      <div class="text-sm text-slate-500 dark:text-slate-400">تقديم بحث (شفهي أو ملصق)</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- حقول المقدم (مخفية افتراضياً) -->
+              <div id="presenter-fields" class="space-y-6 hidden">
+                <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
+                  <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-4">
+                    معلومات حول عرضك
+                  </h3>
+
+                  <!-- عنوان البحث -->
+                  <div class="mb-4">
+                    <label for="titreCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      عنوان البحث <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="titreCommunication"
+                      name="titreCommunication"
+                      class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                      placeholder="عنوان بحثك"
+                    />
+                  </div>
+
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <!-- المؤلفون -->
+                    <div>
+                      <label for="auteurs" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        المؤلفون <span class="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="auteurs"
+                        name="auteurs"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                        placeholder="اسم1، اسم2، اسم3..."
+                      />
+                    </div>
+
+                    <!-- المؤلف المراسل -->
+                    <div>
+                      <label for="auteurCorrespondant" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        المؤلف المراسل <span class="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="auteurCorrespondant"
+                        name="auteurCorrespondant"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                        placeholder="اسم وبريد المؤلف المراسل"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <!-- الموضوع -->
+                    <div>
+                      <label for="thematique" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        الموضوع <span class="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="thematique"
+                        name="thematique"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                      >
+                        <option value="">اختر موضوعاً</option>
+                        <option value="الصحة البشرية">الصحة البشرية</option>
+                        <option value="الصحة الحيوانية">الصحة الحيوانية</option>
+                        <option value="البيئة">البيئة</option>
+                        <option value="متعدد التخصصات">متعدد التخصصات</option>
+                      </select>
+                    </div>
+
+                    <!-- نوع العرض -->
+                    <div>
+                      <label for="choixCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                        نوع العرض <span class="text-red-500">*</span>
+                      </label>
+                      <select
+                        id="choixCommunication"
+                        name="choixCommunication"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors"
+                      >
+                        <option value="">اختر النوع</option>
+                        <option value="عرض شفهي">عرض شفهي</option>
+                        <option value="ملصق">ملصق</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- رفع ملف الملخص -->
+                  <div>
+                    <label for="resumeFile" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      الملخص (ملف) <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                      <input
+                        type="file"
+                        id="resumeFile"
+                        name="resumeFile"
+                        accept=".pdf,.doc,.docx"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-colors file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-primary file:text-white hover:file:bg-brand-primaryDark"
+                      />
+                    </div>
+                    <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                      الصيغ المقبولة: PDF, DOC, DOCX (الحد الأقصى 5 ميغابايت)
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- أزرار التنقل -->
+              <div class="flex justify-between pt-6">
+                <button
+                  type="button"
+                  id="prev-step"
+                  class="px-8 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                >
+                  السابق →
+                </button>
+                <button
+                  type="submit"
+                  id="submit-form"
+                  class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+                >
+                  إرسال التسجيل
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- رسالة النجاح -->
+          <div id="success-message" class="hidden text-center py-12">
+            <div class="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
               </svg>
-              أسعار مبكرة متاحة حتى 15 ديسمبر 2025
-            </li>
-            <li class="flex items-start gap-2 flex-row-reverse text-right">
-              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              تأكيد بالبريد الإلكتروني في غضون 24 ساعة
-            </li>
-            <li class="flex items-start gap-2 flex-row-reverse text-right">
-              <svg class="w-5 h-5 mt-0.5 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-              </svg>
-              دعم متعدد اللغات متاح
-            </li>
-          </ul>
+            </div>
+            <h3 class="text-2xl font-bold text-green-600 mb-2">تم التسجيل بنجاح!</h3>
+            <p class="text-slate-600 dark:text-slate-300">
+              شكراً! تم تسجيل طلبك. ستتلقى رسالة تأكيد عبر البريد الإلكتروني قريباً.
+            </p>
+          </div>
+
+          <!-- حالة التحميل -->
+          <div id="loading-message" class="hidden text-center py-12">
+            <div class="w-16 h-16 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-slate-600 dark:text-slate-300">جاري الإرسال...</p>
+          </div>
         </div>
       </div>
     </div>
@@ -216,3 +408,186 @@ const hasGoogleFormConfig = GOOGLE_FORM_ACTION && ENTRY_FULLNAME && ENTRY_EMAIL 
   
   <Footer locale={locale} />
 </BaseLayout>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('registration-form');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const nextBtn = document.getElementById('next-step');
+  const prevBtn = document.getElementById('prev-step');
+  const step1Indicator = document.getElementById('step1-indicator');
+  const step2Indicator = document.getElementById('step2-indicator');
+  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
+  const presenterFields = document.getElementById('presenter-fields');
+  const successMessage = document.getElementById('success-message');
+  const loadingMessage = document.getElementById('loading-message');
+
+  // API endpoint
+  const API_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxUh2TEJ66SnlhsuQhpUL8bD5UQNy5_8KzNX4VfYWzAn8pVyRAxjlSJVSFYjvoU4QbDNw/exec';
+
+  // Step navigation
+  nextBtn.addEventListener('click', function() {
+    if (validateStep1()) {
+      showStep2();
+    }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    showStep1();
+  });
+
+  // Participation type change
+  participationRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (this.value === 'مقدم عرض') {
+        presenterFields.classList.remove('hidden');
+        // Make presenter fields required
+        const presenterInputs = presenterFields.querySelectorAll('input[required], select[required]');
+        presenterInputs.forEach(input => input.setAttribute('required', 'required'));
+      } else {
+        presenterFields.classList.add('hidden');
+        // Remove required attribute from presenter fields
+        const presenterInputs = presenterFields.querySelectorAll('input, select');
+        presenterInputs.forEach(input => input.removeAttribute('required'));
+      }
+    });
+  });
+
+  // Form submission
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    if (!validateStep2()) {
+      return;
+    }
+
+    // Show loading
+    form.classList.add('hidden');
+    loadingMessage.classList.remove('hidden');
+
+    try {
+      const formData = collectFormData();
+      
+      const response = await fetch(API_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        // Show success message
+        loadingMessage.classList.add('hidden');
+        successMessage.classList.remove('hidden');
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+      loadingMessage.classList.add('hidden');
+      form.classList.remove('hidden');
+    }
+  });
+
+  function validateStep1() {
+    const requiredFields = step1.querySelectorAll('input[required], select[required]');
+    let isValid = true;
+
+    requiredFields.forEach(field => {
+      if (!field.value.trim()) {
+        field.classList.add('border-red-500');
+        isValid = false;
+      } else {
+        field.classList.remove('border-red-500');
+      }
+    });
+
+    if (!isValid) {
+      alert('يرجى ملء جميع الحقول المطلوبة.');
+    }
+
+    return isValid;
+  }
+
+  function validateStep2() {
+    const participationType = document.querySelector('input[name="typeParticipation"]:checked');
+    
+    if (!participationType) {
+      alert('يرجى اختيار نوع مشاركتك.');
+      return false;
+    }
+
+    if (participationType.value === 'مقدم عرض') {
+      const presenterRequiredFields = presenterFields.querySelectorAll('input[required], select[required]');
+      let isValid = true;
+
+      presenterRequiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.classList.add('border-red-500');
+          isValid = false;
+        } else {
+          field.classList.remove('border-red-500');
+        }
+      });
+
+      if (!isValid) {
+        alert('يرجى ملء جميع الحقول المطلوبة لمقدمي العروض.');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  function showStep1() {
+    step1.classList.remove('hidden');
+    step2.classList.add('hidden');
+    step1Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step1Indicator.classList.add('bg-brand-primary', 'text-white');
+    step2Indicator.classList.remove('bg-brand-primary', 'text-white');
+    step2Indicator.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+  }
+
+  function showStep2() {
+    step1.classList.add('hidden');
+    step2.classList.remove('hidden');
+    step2Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step2Indicator.classList.add('bg-brand-primary', 'text-white');
+  }
+
+  function collectFormData() {
+    const formData = new FormData(form);
+    const data = {};
+
+    // Collect basic form data
+    for (let [key, value] of formData.entries()) {
+      if (key !== 'resumeFile') {
+        data[key] = value;
+      }
+    }
+
+    // Handle file upload (for now, just store filename)
+    const fileInput = document.getElementById('resumeFile');
+    if (fileInput && fileInput.files[0]) {
+      data.resumeFileURL = fileInput.files[0].name;
+    } else {
+      data.resumeFileURL = '';
+    }
+
+    // Set default values for optional fields
+    data.civilite = data.civilite || '';
+    data.telephone = data.telephone || '';
+    data.departement = data.departement || '';
+    data.titreCommunication = data.titreCommunication || '';
+    data.auteurs = data.auteurs || '';
+    data.auteurCorrespondant = data.auteurCorrespondant || '';
+    data.thematique = data.thematique || '';
+    data.choixCommunication = data.choixCommunication || '';
+
+    return data;
+  }
+});
+</script>

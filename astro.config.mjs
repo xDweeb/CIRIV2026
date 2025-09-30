@@ -4,8 +4,8 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://yourusername.github.io', // Replace with your GitHub username
-  base: '/ciriv-2025',
+  site: 'https://xDweeb.github.io',
+  base: '/CIRIV2026',
   trailingSlash: 'always',
   integrations: [tailwind()],
   output: 'static',

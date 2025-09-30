@@ -6,13 +6,33 @@ import { useTranslations } from '../../i18n/ui';
 
 const locale = 'fr';
 const t = useTranslations(locale);
+---seLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n/ui';port   title="Inscription - CIRIV 2026"
+  description="Inscrivez-vous au Congrès international de la recherche, d’innovation et de valorisation CIRIV 2026"seLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const locale = 'fr';
+const t = useTranslations(locale);
+---
+
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const locale = 'fr';
+const t = useTranslations(locale);
 ---
 
 <BaseLayout
   title="Inscription - CIRIV 2026"
-  description="Inscrivez-vous à la Conférence Internationale One Health CIRIV 2026"
+  description="Inscrivez-vous au Congrès international de la recherche, d'innovation et de valorisation CIRIV 2026"
   locale={locale}
->
   <Header locale={locale} currentPath={Astro.url.pathname} />
   
   <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
@@ -24,7 +44,7 @@ const t = useTranslations(locale);
             Inscription CIRIV 2026
           </h1>
           <p class="text-xl text-slate-600 dark:text-slate-300">
-            Rejoignez la première conférence internationale One Health au Maroc
+            Rejoignez la première édition du CIRIV au Maroc
           </p>
         </div>
 

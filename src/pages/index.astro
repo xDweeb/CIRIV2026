@@ -1,4 +1,6 @@
 ---
-// Redirect to default locale (French)
-return Astro.redirect('/CIRIV2026/fr/');
+// Permanent redirect to French version (301)
+import { link } from '../utils/paths';
+const frenchUrl = link({ locale: 'fr' });
+return Astro.redirect(frenchUrl, 301);
 ---

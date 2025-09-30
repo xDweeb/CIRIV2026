@@ -383,10 +383,15 @@ const t = useTranslations(locale);
             </div>
           </form>
 
-          <!-- Status Messages -->
+          <!-- Status Messages with Enhanced Animation -->
           <div id="status-message" class="hidden mb-6">
-            <div id="status-content" class="p-4 rounded-lg text-center font-medium">
-              <!-- Dynamic content will be inserted here -->
+            <div id="status-content" class="p-6 rounded-lg text-center font-medium transform transition-all duration-500 ease-in-out">
+              <div id="status-icon" class="mb-4 flex justify-center">
+                <!-- Icons will be dynamically inserted here -->
+              </div>
+              <div id="status-text" class="text-lg">
+                <!-- Message text will be inserted here -->
+              </div>
             </div>
           </div>
         </div>
@@ -399,6 +404,7 @@ const t = useTranslations(locale);
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Enhanced DOM element selection with type safety
   const form = document.getElementById('registration-form');
   const step1 = document.getElementById('step1');
   const step2 = document.getElementById('step2');
@@ -408,92 +414,139 @@ document.addEventListener('DOMContentLoaded', function() {
   const step2Indicator = document.getElementById('step2-indicator');
   const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
   const presenterFields = document.getElementById('presenter-fields');
-  const successMessage = document.getElementById('status-message');
-  const loadingMessage = document.getElementById('status-message');
+  const statusMessage = document.getElementById('status-message');
 
   // Google Apps Script endpoint
-  const SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUh2TEJ66SnlhsuQhpUL8bD5UQNy5_8KzNX4VfYWzAn8pVyRAxjlSJVSFYjvoU4QbDNw/exec';
 
-  // Step navigation
-  nextBtn.addEventListener('click', function() {
-    if (validateStep1()) {
-      showStep2();
-    }
-  });
+  // Enhanced message display with professional animations
+  function showMessage(type, title, description) {
+    if (!statusMessage) return;
 
-  prevBtn.addEventListener('click', function() {
-    showStep1();
-  });
+    const statusIcon = statusMessage.querySelector('.status-icon');
+    const statusTitle = statusMessage.querySelector('.status-title');
+    const statusDesc = statusMessage.querySelector('.status-description');
+    const statusContent = statusMessage.querySelector('.status-content');
 
-  // Participation type change
-  participationRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      if (this.value === 'Présentateur') {
-        presenterFields.classList.remove('hidden');
-        // Make presenter fields required
-        const presenterInputs = presenterFields.querySelectorAll('input[required], select[required]');
-        presenterInputs.forEach(input => input.setAttribute('required', 'required'));
-      } else {
-        presenterFields.classList.add('hidden');
-        // Remove required attribute from presenter fields
-        const presenterInputs = presenterFields.querySelectorAll('input, select');
-        presenterInputs.forEach(input => input.removeAttribute('required'));
-      }
-    });
-  });
+    if (!statusContent) return;
 
-  // Form submission
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+    // Reset and apply base classes
+    statusContent.className = 'status-content p-6 rounded-lg text-center font-medium transform transition-all duration-500 ease-in-out opacity-0 translate-y-4';
     
-    if (!validateStep2()) {
-      return;
+    // Apply type-specific styling and animations
+    switch (type) {
+      case 'loading':
+        statusContent.classList.add('bg-blue-500', 'text-white');
+        if (statusIcon) {
+          statusIcon.innerHTML = '⏳';
+          statusIcon.classList.add('animate-spin');
+        }
+        break;
+      case 'success':
+        statusContent.classList.add('bg-green-500', 'text-white');
+        if (statusIcon) {
+          statusIcon.innerHTML = '✅';
+          statusIcon.classList.add('animate-bounce');
+        }
+        // Hide form on success
+        if (form) form.style.display = 'none';
+        break;
+      case 'error':
+        statusContent.classList.add('bg-red-500', 'text-white');
+        if (statusIcon) {
+          statusIcon.innerHTML = '❌';
+          statusIcon.classList.add('animate-pulse');
+        }
+        break;
     }
 
-    // Show loading with French text
-    showMessage('loading', '⏳ Envoi en cours...');
-
-    try {
-      const formData = collectFormData();
-      
-      const response = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const result = await response.json();
-
-      if (response.ok && result.result === 'success') {
-        // Show success message in French
-        showMessage('success', '✅ Votre inscription a été enregistrée avec succès.');
+    // Set content
+    if (statusTitle) statusTitle.textContent = title;
+    if (statusDesc) {
+      if (description) {
+        statusDesc.textContent = description;
+        statusDesc.style.display = 'block';
       } else {
-        throw new Error('Submission failed');
+        statusDesc.style.display = 'none';
       }
-    } catch (error) {
-      console.error('Error:', error);
-      // Show error message in French
-      showMessage('error', '❌ Erreur lors de l\'envoi. Veuillez réessayer.');
     }
-  });
 
+    // Show message with smooth animation
+    statusMessage.classList.remove('hidden');
+    
+    // Trigger animation after a small delay
+    setTimeout(() => {
+      statusContent.classList.remove('opacity-0', 'translate-y-4');
+      statusContent.classList.add('opacity-100', 'translate-y-0', 'scale-105');
+    }, 100);
+
+    // Auto-hide success/error messages after 8 seconds
+    if (type !== 'loading') {
+      setTimeout(() => {
+        hideMessage();
+      }, 8000);
+    }
+  }
+
+  function hideMessage() {
+    if (!statusMessage) return;
+    
+    const statusContent = statusMessage.querySelector('.status-content');
+    if (statusContent) {
+      statusContent.classList.remove('opacity-100', 'translate-y-0', 'scale-105');
+      statusContent.classList.add('opacity-0', 'translate-y-4');
+    }
+    
+    setTimeout(() => {
+      statusMessage.classList.add('hidden');
+      // Show form again if it was hidden
+      if (form && form.style.display === 'none') {
+        form.style.display = 'block';
+      }
+    }, 500);
+  }
+
+  // Step navigation with enhanced animations
+  function showStep1() {
+    if (!step1 || !step2 || !step1Indicator || !step2Indicator) return;
+    
+    step1.classList.remove('hidden');
+    step2.classList.add('hidden');
+    step1Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step1Indicator.classList.add('bg-brand-primary', 'text-white');
+    step2Indicator.classList.remove('bg-brand-primary', 'text-white');
+    step2Indicator.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+  }
+
+  function showStep2() {
+    if (!step1 || !step2 || !step1Indicator || !step2Indicator) return;
+    
+    step1.classList.add('hidden');
+    step2.classList.remove('hidden');
+    step2Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step2Indicator.classList.add('bg-brand-primary', 'text-white');
+  }
+
+  // Enhanced validation with better error messages
   function validateStep1() {
+    if (!step1) return false;
+    
     const requiredFields = step1.querySelectorAll('input[required], select[required]');
     let isValid = true;
 
     requiredFields.forEach(field => {
       if (!field.value.trim()) {
-        field.classList.add('border-red-500');
+        field.classList.add('border-red-500', 'shake');
         isValid = false;
+        // Remove shake animation after it completes
+        setTimeout(() => field.classList.remove('shake'), 500);
       } else {
         field.classList.remove('border-red-500');
       }
     });
 
     if (!isValid) {
-      showMessage('error', '❌ Veuillez remplir tous les champs obligatoires.');
+      showMessage('error', '❌ Champs requis manquants', 'Veuillez remplir tous les champs obligatoires pour continuer.');
       return false;
     }
 
@@ -504,25 +557,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const participationType = document.querySelector('input[name="typeParticipation"]:checked');
     
     if (!participationType) {
-      showMessage('error', '❌ Veuillez sélectionner votre type de participation.');
+      showMessage('error', '❌ Type de participation requis', 'Veuillez sélectionner votre type de participation.');
       return false;
     }
 
-    if (participationType.value === 'Présentateur') {
+    if (participationType.value === 'Présentateur' && presenterFields) {
       const presenterRequiredFields = presenterFields.querySelectorAll('input[required], select[required]');
       let isValid = true;
 
       presenterRequiredFields.forEach(field => {
         if (!field.value.trim()) {
-          field.classList.add('border-red-500');
+          field.classList.add('border-red-500', 'shake');
           isValid = false;
+          setTimeout(() => field.classList.remove('shake'), 500);
         } else {
           field.classList.remove('border-red-500');
         }
       });
 
       if (!isValid) {
-        showMessage('error', '❌ Veuillez remplir tous les champs obligatoires pour les présentateurs.');
+        showMessage('error', '❌ Informations de présentation requises', 'Veuillez remplir tous les champs obligatoires pour les présentateurs.');
         return false;
       }
     }
@@ -530,23 +584,10 @@ document.addEventListener('DOMContentLoaded', function() {
     return true;
   }
 
-  function showStep1() {
-    step1.classList.remove('hidden');
-    step2.classList.add('hidden');
-    step1Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step1Indicator.classList.add('bg-brand-primary', 'text-white');
-    step2Indicator.classList.remove('bg-brand-primary', 'text-white');
-    step2Indicator.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-  }
-
-  function showStep2() {
-    step1.classList.add('hidden');
-    step2.classList.remove('hidden');
-    step2Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step2Indicator.classList.add('bg-brand-primary', 'text-white');
-  }
-
+  // Enhanced form data collection
   function collectFormData() {
+    if (!form) return {};
+    
     const formData = new FormData(form);
     const data = {};
 
@@ -557,7 +598,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    // Handle file upload (for now, just store filename)
+    // Handle file upload
     const fileInput = document.getElementById('resumeFile');
     if (fileInput && fileInput.files[0]) {
       data.resumeFileURL = fileInput.files[0].name;
@@ -578,39 +619,149 @@ document.addEventListener('DOMContentLoaded', function() {
     return data;
   }
 
-  function showMessage(type, message) {
-    const statusMessage = document.getElementById('status-message');
-    const statusContent = document.getElementById('status-content');
-    
-    // Reset classes
-    statusContent.className = 'p-4 rounded-lg text-center font-medium';
-    
-    // Add type-specific classes
-    if (type === 'success') {
-      statusContent.classList.add('bg-green-500', 'text-white');
-    } else if (type === 'error') {
-      statusContent.classList.add('bg-red-500', 'text-white');
-    } else if (type === 'loading') {
-      statusContent.classList.add('bg-blue-500', 'text-white');
-    }
-    
-    // Set message and show
-    statusContent.textContent = message;
-    statusMessage.classList.remove('hidden');
-    
-    // Hide form during loading/success
-    if (type === 'loading' || type === 'success') {
-      form.classList.add('hidden');
-    } else {
-      form.classList.remove('hidden');
-    }
-    
-    // Auto-hide error messages after 5 seconds
-    if (type === 'error') {
-      setTimeout(() => {
-        statusMessage.classList.add('hidden');
-      }, 5000);
-    }
+  // Event listeners
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() {
+      if (validateStep1()) {
+        showStep2();
+      }
+    });
   }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function() {
+      showStep1();
+    });
+  }
+
+  // Participation type change with smooth transitions
+  participationRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      if (!presenterFields) return;
+      
+      if (this.value === 'Présentateur') {
+        presenterFields.classList.remove('hidden');
+        presenterFields.style.opacity = '0';
+        presenterFields.style.transform = 'translateY(20px)';
+        
+        // Animate in
+        setTimeout(() => {
+          presenterFields.style.transition = 'all 0.3s ease-in-out';
+          presenterFields.style.opacity = '1';
+          presenterFields.style.transform = 'translateY(0)';
+        }, 50);
+        
+        // Make presenter fields required
+        const presenterInputs = presenterFields.querySelectorAll('input[required], select[required]');
+        presenterInputs.forEach(input => input.setAttribute('required', 'required'));
+      } else {
+        // Animate out
+        presenterFields.style.transition = 'all 0.3s ease-in-out';
+        presenterFields.style.opacity = '0';
+        presenterFields.style.transform = 'translateY(-20px)';
+        
+        setTimeout(() => {
+          presenterFields.classList.add('hidden');
+        }, 300);
+        
+        // Remove required attribute from presenter fields
+        const presenterInputs = presenterFields.querySelectorAll('input, select');
+        presenterInputs.forEach(input => input.removeAttribute('required'));
+      }
+    });
+  });
+
+  // Enhanced form submission with comprehensive error handling
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      if (!validateStep2()) {
+        return;
+      }
+
+      // Show loading with enhanced animation
+      showMessage('loading', '⏳ Envoi en cours...', 'Veuillez patienter pendant que nous traitons votre inscription. Cela peut prendre quelques instants.');
+
+      try {
+        const formData = collectFormData();
+        console.log('📤 Sending registration data:', formData);
+        
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(formData),
+          mode: 'cors'
+        });
+
+        console.log('📡 Response status:', response.status);
+        
+        if (!response.ok) {
+          throw new Error(`Erreur HTTP: ${response.status} - ${response.statusText}`);
+        }
+        
+        const result = await response.json();
+        console.log('📥 Server response:', result);
+
+        // Check for various success indicators
+        if (result.result === 'success' || result.status === 'success' || result.success === true) {
+          showMessage('success', '✅ Inscription réussie !', 'Votre inscription a été enregistrée avec succès. Vous recevrez une confirmation par email sous peu.');
+        } else {
+          throw new Error(result.error || result.message || 'Réponse inattendue du serveur');
+        }
+        
+      } catch (error) {
+        console.error('❌ Submission error:', error);
+        
+        let errorMessage = 'Une erreur technique est survenue. Veuillez vérifier votre connexion Internet et réessayer.';
+        
+        if (error.message.includes('fetch')) {
+          errorMessage = 'Impossible de contacter le serveur. Vérifiez votre connexion Internet.';
+        } else if (error.message.includes('JSON')) {
+          errorMessage = 'Erreur de format de réponse du serveur. Veuillez réessayer.';
+        } else if (error.message.includes('HTTP')) {
+          errorMessage = 'Erreur du serveur. Veuillez réessayer dans quelques instants.';
+        }
+        
+        showMessage('error', '❌ Erreur d\'envoi', errorMessage);
+      }
+    });
+  }
+
+  // Initialize form
+  showStep1();
 });
 </script>
+
+<style>
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  .status-content {
+    will-change: transform, opacity;
+  }
+  
+  /* Enhanced loading animation */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+    }
+  }
+  
+  .status-content.bg-blue-500 {
+    animation: pulse-glow 2s infinite;
+  }
+</style>

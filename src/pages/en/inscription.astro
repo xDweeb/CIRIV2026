@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const loadingMessage = document.getElementById('status-message');
 
   // Google Apps Script endpoint
-  const SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUh2TEJ66SnlhsuQhpUL8bD5UQNy5_8KzNX4VfYWzAn8pVyRAxjlSJVSFYjvoU4QbDNw/exec';
 
   // Step navigation
   nextBtn.addEventListener('click', function() {
@@ -450,32 +450,52 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Show loading with English text
-    showMessage('loading', '⏳ Sending...');
+    // Show loading with enhanced animation
+    showMessage('loading', '⏳ Submitting...', 'Please wait while we process your registration. This may take a few moments.');
 
     try {
       const formData = collectFormData();
+      console.log('📤 Sending registration data:', formData); // Debug log
       
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        mode: 'cors'
       });
 
+      console.log('📡 Response status:', response.status); // Debug log
+      
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status} - ${response.statusText}`);
+      }
+      
       const result = await response.json();
+      console.log('📥 Server response:', result); // Debug log
 
-      if (response.ok && result.result === 'success') {
-        // Show success message in English
-        showMessage('success', '✅ Your registration has been successfully submitted.');
+      // Check for various success indicators
+      if (result.result === 'success' || result.status === 'success' || result.success === true) {
+        showMessage('success', '✅ Registration successful!', 'Your registration has been successfully submitted. You will receive a confirmation email shortly.');
       } else {
-        throw new Error('Submission failed');
+        throw new Error(result.error || result.message || 'Unexpected server response');
       }
     } catch (error) {
-      console.error('Error:', error);
-      // Show error message in English
-      showMessage('error', '❌ Error while sending. Please try again.');
+      console.error('❌ Submission error:', error);
+      
+      let errorMessage = 'A technical error occurred. Please check your internet connection and try again.';
+      
+      if (error.message.includes('fetch')) {
+        errorMessage = 'Unable to contact server. Please check your internet connection.';
+      } else if (error.message.includes('JSON')) {
+        errorMessage = 'Server response format error. Please try again.';
+      } else if (error.message.includes('HTTP')) {
+        errorMessage = 'Server error. Please try again in a few moments.';
+      }
+      
+      showMessage('error', '❌ Submission error', errorMessage);
     }
   });
 
@@ -578,39 +598,123 @@ document.addEventListener('DOMContentLoaded', function() {
     return data;
   }
 
-  function showMessage(type, message) {
+  // Enhanced message display with professional animations
+  function showMessage(type, title, description) {
     const statusMessage = document.getElementById('status-message');
-    const statusContent = document.getElementById('status-content');
+    if (!statusMessage) return;
+
+    const statusIcon = statusMessage.querySelector('.status-icon');
+    const statusTitle = statusMessage.querySelector('.status-title');
+    const statusDesc = statusMessage.querySelector('.status-description');
+    const statusContent = statusMessage.querySelector('.status-content');
+
+    if (!statusContent) return;
+
+    // Reset and apply base classes
+    statusContent.className = 'status-content p-6 rounded-lg text-center font-medium transform transition-all duration-500 ease-in-out opacity-0 translate-y-4';
     
-    // Reset classes
-    statusContent.className = 'p-4 rounded-lg text-center font-medium';
-    
-    // Add type-specific classes
-    if (type === 'success') {
-      statusContent.classList.add('bg-green-500', 'text-white');
-    } else if (type === 'error') {
-      statusContent.classList.add('bg-red-500', 'text-white');
-    } else if (type === 'loading') {
-      statusContent.classList.add('bg-blue-500', 'text-white');
+    // Apply type-specific styling and animations
+    switch (type) {
+      case 'loading':
+        statusContent.classList.add('bg-blue-500', 'text-white');
+        if (statusIcon) {
+          statusIcon.innerHTML = '⏳';
+          statusIcon.classList.add('animate-spin');
+        }
+        break;
+      case 'success':
+        statusContent.classList.add('bg-green-500', 'text-white');
+        if (statusIcon) {
+          statusIcon.innerHTML = '✅';
+          statusIcon.classList.add('animate-bounce');
+        }
+        // Hide form on success
+        if (form) form.style.display = 'none';
+        break;
+      case 'error':
+        statusContent.classList.add('bg-red-500', 'text-white');
+        if (statusIcon) {
+          statusIcon.innerHTML = '❌';
+          statusIcon.classList.add('animate-pulse');
+        }
+        break;
     }
-    
-    // Set message and show
-    statusContent.textContent = message;
+
+    // Set content
+    if (statusTitle) statusTitle.textContent = title;
+    if (statusDesc) {
+      if (description) {
+        statusDesc.textContent = description;
+        statusDesc.style.display = 'block';
+      } else {
+        statusDesc.style.display = 'none';
+      }
+    }
+
+    // Show message with smooth animation
     statusMessage.classList.remove('hidden');
     
-    // Hide form during loading/success
-    if (type === 'loading' || type === 'success') {
-      form.classList.add('hidden');
-    } else {
-      form.classList.remove('hidden');
+    // Trigger animation after a small delay
+    setTimeout(() => {
+      statusContent.classList.remove('opacity-0', 'translate-y-4');
+      statusContent.classList.add('opacity-100', 'translate-y-0', 'scale-105');
+    }, 100);
+
+    // Auto-hide success/error messages after 8 seconds
+    if (type !== 'loading') {
+      setTimeout(() => {
+        hideMessage();
+      }, 8000);
+    }
+  }
+
+  function hideMessage() {
+    const statusMessage = document.getElementById('status-message');
+    if (!statusMessage) return;
+    
+    const statusContent = statusMessage.querySelector('.status-content');
+    if (statusContent) {
+      statusContent.classList.remove('opacity-100', 'translate-y-0', 'scale-105');
+      statusContent.classList.add('opacity-0', 'translate-y-4');
     }
     
-    // Auto-hide error messages after 5 seconds
-    if (type === 'error') {
-      setTimeout(() => {
-        statusMessage.classList.add('hidden');
-      }, 5000);
-    }
+    setTimeout(() => {
+      statusMessage.classList.add('hidden');
+      // Show form again if it was hidden
+      if (form && form.style.display === 'none') {
+        form.style.display = 'block';
+      }
+    }, 500);
   }
 });
 </script>
+
+<style>
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  .status-content {
+    will-change: transform, opacity;
+  }
+  
+  /* Enhanced loading animation */
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+    }
+  }
+  
+  .status-content.bg-blue-500 {
+    animation: pulse-glow 2s infinite;
+  }
+</style>

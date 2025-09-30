@@ -1,14 +1,17 @@
 ---
 // Redirect to inscription page
 // This page handles the redirect from /soumission/ to /inscription/
+import { link } from '../../utils/paths';
+const locale = 'fr';
+const inscriptionUrl = link({ locale, slug: 'inscription' });
 ---
 
-<script>
+<script define:inline>
   // Immediate redirect
-  window.location.replace('/fr/inscription/');
+  window.location.replace('/CIRIV2026/fr/inscription/');
 </script>
 
-<meta http-equiv="refresh" content="0; url=/fr/inscription/">
+<meta http-equiv="refresh" content="0; url=/CIRIV2026/fr/inscription/">
 
 <!-- Fallback content in case JavaScript is disabled -->
 <!DOCTYPE html>
@@ -17,13 +20,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirection - CIRIV 2025</title>
-  <link rel="canonical" href="/fr/inscription/">
+  <link rel="canonical" href="/CIRIV2026/fr/inscription/">
 </head>
 <body>
   <div style="text-align: center; padding: 2rem; font-family: system-ui, sans-serif;">
     <h1>Redirection en cours...</h1>
     <p>Vous êtes redirigé vers la page d'inscription.</p>
-    <p>Si la redirection ne fonctionne pas automatiquement, <a href="/fr/inscription/">cliquez ici</a>.</p>
+    <p>Si la redirection ne fonctionne pas automatiquement, <a href="/CIRIV2026/fr/inscription/">cliquez ici</a>.</p>
   </div>
 </body>
 </html>

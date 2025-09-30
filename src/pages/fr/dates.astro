@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Timeline from '../../components/Timeline.astro';
 import { useTranslations } from '../../i18n/ui';
+import { link } from '../../utils/paths';
 
 const locale = 'fr';
 const t = useTranslations(locale);
@@ -48,7 +49,7 @@ const datesData = await import('../../content/dates.fr.json').then(module => mod
             Ne manquez pas cette opportunité unique de participer à la première conférence One Health au Maroc
           </p>
           <a
-            href="/fr/inscription/"
+            href={link({ locale, slug: 'inscription' })}
             class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
           >
             S'inscrire maintenant

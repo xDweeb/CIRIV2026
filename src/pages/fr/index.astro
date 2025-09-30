@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui';
+import { link } from '../../utils/paths';
 
 const locale = 'fr';
 const t = useTranslations(locale);
@@ -23,7 +24,7 @@ const t = useTranslations(locale);
       <div class="container mx-auto px-4">
         <div class="grid md:grid-cols-3 gap-8">
           <a 
-            href="/fr/dates/" 
+            href={link({ locale, slug: 'dates' })} 
             class="group p-6 bg-slate-50 dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
           >
             <div class="flex items-center gap-4 mb-4">
@@ -38,7 +39,7 @@ const t = useTranslations(locale);
           </a>
 
           <a 
-            href="/fr/comites/" 
+            href={link({ locale, slug: 'comites' })} 
             class="group p-6 bg-slate-50 dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
           >
             <div class="flex items-center gap-4 mb-4">
@@ -53,7 +54,7 @@ const t = useTranslations(locale);
           </a>
 
           <a 
-            href="/fr/contact/" 
+            href={link({ locale, slug: 'contact' })} 
             class="group p-6 bg-slate-50 dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
           >
             <div class="flex items-center gap-4 mb-4">

@@ -383,26 +383,11 @@ const t = useTranslations(locale);
             </div>
           </form>
 
-          <!-- Alert Messages -->
-          <div id="alert-container" class="hidden"></div>
-
-          <!-- Success Message -->
-          <div id="success-message" class="hidden text-center py-12">
-            <div class="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-              </svg>
+          <!-- Status Messages -->
+          <div id="status-message" class="hidden mb-6">
+            <div id="status-content" class="p-4 rounded-lg text-center font-medium">
+              <!-- Dynamic content will be inserted here -->
             </div>
-            <h3 class="text-2xl font-bold text-green-600 mb-2">Registration Successful!</h3>
-            <p class="text-slate-600 dark:text-slate-300">
-              ✅ Your registration has been successfully submitted.
-            </p>
-          </div>
-
-          <!-- Loading State -->
-          <div id="loading-message" class="hidden text-center py-12">
-            <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p class="text-slate-600 dark:text-slate-300">⏳ Sending...</p>
           </div>
         </div>
       </div>
@@ -423,21 +408,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const step2Indicator = document.getElementById('step2-indicator');
   const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
   const presenterFields = document.getElementById('presenter-fields');
-  const successMessage = document.getElementById('success-message');
-  const loadingMessage = document.getElementById('loading-message');
+  const successMessage = document.getElementById('status-message');
+  const loadingMessage = document.getElementById('status-message');
 
-  // API endpoint
-  const SCRIPT_URL = "https://script.google.com/macros/s/XXXXXXXX/exec";
-
-  // Messages
-  const messages = {
-    loading: "⏳ Sending...",
-    success: "✅ Your registration has been successfully submitted.",
-    error: "❌ Error while sending. Please try again.",
-    validationError: "Please fill in all required fields.",
-    participationError: "Please select your participation type.",
-    presenterError: "Please fill in all required fields for presenters."
-  };
+  // Google Apps Script endpoint
+  const SCRIPT_URL = 'https://script.google.com/macros/s/XXXXXXXX/exec';
 
   // Step navigation
   nextBtn.addEventListener('click', function() {
@@ -475,9 +450,8 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Show loading
-    showAlert(messages.loading, 'blue');
-    form.classList.add('hidden');
+    // Show loading with English text
+    showMessage('loading', '⏳ Sending...');
 
     try {
       const formData = collectFormData();
@@ -492,18 +466,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
       const result = await response.json();
 
-      if (result.result === "success") {
-        // Show success message
-        hideAlert();
-        successMessage.classList.remove('hidden');
+      if (response.ok && result.result === 'success') {
+        // Show success message in English
+        showMessage('success', '✅ Your registration has been successfully submitted.');
       } else {
-        throw new Error(result.error || 'Unknown error');
+        throw new Error('Submission failed');
       }
     } catch (error) {
       console.error('Error:', error);
-      hideAlert();
-      showAlert(messages.error, 'red');
-      form.classList.remove('hidden');
+      // Show error message in English
+      showMessage('error', '❌ Error while sending. Please try again.');
     }
   });
 
@@ -521,7 +493,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     if (!isValid) {
-      showAlert(messages.validationError, 'red');
+      showMessage('error', '❌ Please fill in all required fields.');
+      return false;
     }
 
     return isValid;
@@ -531,7 +504,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const participationType = document.querySelector('input[name="typeParticipation"]:checked');
     
     if (!participationType) {
-      showAlert(messages.participationError, 'red');
+      showMessage('error', '❌ Please select your participation type.');
       return false;
     }
 
@@ -549,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       if (!isValid) {
-        showAlert(messages.presenterError, 'red');
+        showMessage('error', '❌ Please fill in all required fields for presenters.');
         return false;
       }
     }
@@ -605,34 +578,39 @@ document.addEventListener('DOMContentLoaded', function() {
     return data;
   }
 
-  // Alert functions
-  function showAlert(message, type) {
-    const alertContainer = document.getElementById('alert-container');
-    const colorClasses = {
-      'red': 'bg-red-500 border-red-600',
-      'green': 'bg-green-500 border-green-600',
-      'blue': 'bg-blue-500 border-blue-600'
-    };
+  function showMessage(type, message) {
+    const statusMessage = document.getElementById('status-message');
+    const statusContent = document.getElementById('status-content');
     
-    alertContainer.innerHTML = `
-      <div class="mb-6 p-4 rounded-lg border-l-4 ${colorClasses[type]} text-white">
-        <p class="font-medium">${message}</p>
-      </div>
-    `;
-    alertContainer.classList.remove('hidden');
+    // Reset classes
+    statusContent.className = 'p-4 rounded-lg text-center font-medium';
     
-    // Auto-hide success and error messages after 5 seconds
-    if (type !== 'blue') {
+    // Add type-specific classes
+    if (type === 'success') {
+      statusContent.classList.add('bg-green-500', 'text-white');
+    } else if (type === 'error') {
+      statusContent.classList.add('bg-red-500', 'text-white');
+    } else if (type === 'loading') {
+      statusContent.classList.add('bg-blue-500', 'text-white');
+    }
+    
+    // Set message and show
+    statusContent.textContent = message;
+    statusMessage.classList.remove('hidden');
+    
+    // Hide form during loading/success
+    if (type === 'loading' || type === 'success') {
+      form.classList.add('hidden');
+    } else {
+      form.classList.remove('hidden');
+    }
+    
+    // Auto-hide error messages after 5 seconds
+    if (type === 'error') {
       setTimeout(() => {
-        hideAlert();
+        statusMessage.classList.add('hidden');
       }, 5000);
     }
-  }
-
-  function hideAlert() {
-    const alertContainer = document.getElementById('alert-container');
-    alertContainer.classList.add('hidden');
-    alertContainer.innerHTML = '';
   }
 });
 </script>

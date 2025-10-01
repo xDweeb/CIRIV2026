@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const presenterFields = document.getElementById('presenter-fields');
 
   // Google Apps Script endpoint
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwF10Hb9L8JLJsut0X2bhKTUgJJetz81EnCUW6B5OWMR5N3SSBHrnpTHnUE_SYnXT1XgQ/exec';
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxlljbMZ0hP9Jl6gl7Fd8-hXwc5-cA61OvQNE__EZS9n73VrRxvWjrV9qDOs7s0vy94MQ/exec";
 
   // Language-specific messages
   const messages = {
@@ -498,15 +498,12 @@ document.addEventListener('DOMContentLoaded', function() {
     showAlert('loading', messages.sending);
 
     try {
-      const formData = collectFormData();
-      console.log("Form data being sent:", Object.fromEntries(formData.entries()));
+      const formData = new FormData(form);
+      console.log("📤 Sending:", [...formData.entries()]);
       
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams(formData).toString()
+        body: formData
       });
 
       console.log('📡 حالة الاستجابة:', response.status);
@@ -520,6 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (result.ok === true) {
         showAlert('success', messages.success);
+        console.log('✅ File URL:', result.fileUrl);
         form.reset();
         showStep1();
         
@@ -528,7 +526,7 @@ document.addEventListener('DOMContentLoaded', function() {
           hideAlert();
         }, 5000);
       } else {
-        throw new Error(result.error || 'فشل في الإرسال');
+        showAlert('error', result.error || messages.error);
       }
       
     } catch (error) {
@@ -696,38 +694,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     });
-  }
-
-  function collectFormData() {
-    const rawFormData = new FormData(form);
-    const formDataForSheet = new FormData();
-
-    // Direct mapping for most fields
-    const fields = [
-      'nom', 'prenom', 'civilite', 'email', 'telephone', 
-      'etablissement', 'departement', 'statut', 'typeParticipation',
-      'titreCommunication', 'auteurs', 'auteurCorrespondant', 
-      'thematique', 'choixCommunication'
-    ];
-
-    fields.forEach(field => {
-      formDataForSheet.append(field, rawFormData.get(field) || '');
-    });
-
-    // Handle combined "City, Country" field
-    const villePays = (rawFormData.get('ville') || ',').split(',');
-    formDataForSheet.append('ville', villePays[0] ? villePays[0].trim() : '');
-    formDataForSheet.append('pays', villePays[1] ? villePays[1].trim() : '');
-
-    // Handle file input - append filename
-    const resumeInput = document.getElementById('resumeFile');
-    if (resumeInput && resumeInput.files.length > 0) {
-      formDataForSheet.append('resumeFile', resumeInput.files[0].name);
-    } else {
-      formDataForSheet.append('resumeFile', '');
-    }
-
-    return formDataForSheet;
   }
 
   function showAlert(type, message) {

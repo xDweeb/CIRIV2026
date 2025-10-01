@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui';
 
-const locale = 'ar'; // <-- اللغة المحددة هي العربية
+const locale = 'ar'; // اللغة المحددة هي العربية
 const t = useTranslations(locale);
 ---
 
@@ -19,7 +19,7 @@ const t = useTranslations(locale);
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
         <div id="alert-container" class="mb-6 hidden">
-          <div id="alert-content" class="rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]">
+          <div id="alert-content" class="rounded-lg p-4 flex items-start space-x-3 rtl:space-x-reverse transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]">
             <div id="alert-icon" class="flex-shrink-0 text-2xl"></div>
             <div class="flex-1">
               <p id="alert-message" class="font-medium"></p>
@@ -42,7 +42,7 @@ const t = useTranslations(locale);
         </div>
 
         <div class="mb-8">
-          <div class="flex items-center justify-center space-x-4">
+          <div class="flex items-center justify-center space-x-4 rtl:space-x-reverse">
             <div class="flex items-center">
               <div id="step1-indicator" class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center font-semibold transition-all duration-300">
                 1
@@ -294,7 +294,6 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
-// The JavaScript logic is identical to the previous versions, only the messages are translated.
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('registration-form');
   const step1 = document.getElementById('step1');
@@ -307,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
   const presenterFields = document.getElementById('presenter-fields');
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-MgWIiRqnI5U9YmyBn5QG0ItNBr2NafS26Wnbrmg88jiLrjPOSxcnUu4yaiEecxuRQ/exec";
 
   const messages = {
     success: '✅ تم تسجيلكم بنجاح.',
@@ -428,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
               submitBtn.classList.add('state-error', 'shake');
               cross?.classList.remove('hidden');
               break;
-          default:
+          default: // 'default'
               text?.classList.remove('hidden');
               break;
       }
@@ -436,16 +435,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function validateField(id, message) {
     const element = document.getElementById(id);
-    const errorMsg = element?.parentElement?.querySelector('.error-message');
+    if (!element) return true;
+    const errorMsg = element.parentElement?.querySelector('.error-message');
     let isValid = true;
     
-    if (!element?.value.trim()) {
-        element?.classList.add('border-red-500');
+    if (!element.value.trim()) {
+        element.classList.add('border-red-500');
         if(errorMsg) errorMsg.textContent = message;
         errorMsg?.classList.remove('hidden');
         isValid = false;
     } else {
-        element?.classList.remove('border-red-500');
+        element.classList.remove('border-red-500');
         errorMsg?.classList.add('hidden');
     }
     return isValid;
@@ -544,7 +544,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const alertMessage = document.getElementById('alert-message');
     if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
 
-    alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]';
+    alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 rtl:space-x-reverse transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]';
     if (type === 'success') {
       alertContent.classList.add('bg-green-500', 'text-white');
       alertIcon.innerHTML = '✅';

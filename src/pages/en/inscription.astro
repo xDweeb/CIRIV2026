@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
   const presenterFields = document.getElementById('presenter-fields');
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-MgWIiRqnI5U9YmyBn5QG0ItNBr2NafS26Wnbrmg88jiLrjPOSxcnUu4yaiEecxuRQ/exec";
 
   const messages = {
     success: '✅ Your registration has been successfully saved.',
@@ -409,7 +409,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const checkmark = submitBtn.querySelector('.checkmark');
       const cross = submitBtn.querySelector('.cross');
 
-      // Reset all
       submitBtn.disabled = false;
       submitBtn.classList.remove('state-loading', 'state-success', 'state-error', 'shake');
       [text, spinner, checkmark, cross].forEach(el => el?.classList.add('hidden'));
@@ -434,19 +433,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
   }
 
-
   function validateField(id, message) {
     const element = document.getElementById(id);
-    const errorMsg = element?.parentElement?.querySelector('.error-message');
+    if (!element) return true;
+    const errorMsg = element.parentElement?.querySelector('.error-message');
     let isValid = true;
     
-    if (!element?.value.trim()) {
-        element?.classList.add('border-red-500');
+    if (!element.value.trim()) {
+        element.classList.add('border-red-500');
         if(errorMsg) errorMsg.textContent = message;
         errorMsg?.classList.remove('hidden');
         isValid = false;
     } else {
-        element?.classList.remove('border-red-500');
+        element.classList.remove('border-red-500');
         errorMsg?.classList.add('hidden');
     }
     return isValid;
@@ -462,7 +461,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
     let isStepValid = fields.every(field => validateField(field.id, field.message));
     
-    // Special email validation
     const emailField = document.getElementById('email');
     const emailErrorMsg = emailField?.parentElement?.querySelector('.error-message');
     if (emailField && emailErrorMsg) {
@@ -573,7 +571,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('alert-close')?.addEventListener('click', hideAlert);
   
-  // Initialize button state
   setButtonState('default');
 });
 </script>

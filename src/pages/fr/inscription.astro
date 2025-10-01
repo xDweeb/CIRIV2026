@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui';
 
-const locale = 'fr'; // <-- Langue définie sur Français
+const locale = 'fr'; // Langue définie sur Français
 const t = useTranslations(locale);
 ---
 
@@ -92,8 +92,8 @@ const t = useTranslations(locale);
                   </label>
                   <select id="civilite" name="civilite" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
                     <option value="">Sélectionner</option>
-                    <option value="Mr.">M.</option>
-                    <option value="Ms.">Mme.</option>
+                    <option value="M.">M.</option>
+                    <option value="Mme.">Mme.</option>
                   </select>
                 </div>
 
@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
   const presenterFields = document.getElementById('presenter-fields');
 
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-MgWIiRqnI5U9YmyBn5QG0ItNBr2NafS26Wnbrmg88jiLrjPOSxcnUu4yaiEecxuRQ/exec";
 
   const messages = {
     success: '✅ Votre inscription a été enregistrée avec succès.',
@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', function() {
   participationRadios.forEach(radio => {
     radio.addEventListener('change', function() {
       const target = this;
-      if (target.value === 'Communicant') { // Mise à jour de la valeur
+      if (target.value === 'Communicant') {
         presenterFields?.classList.remove('hidden');
         makePresenterFieldsRequired(true);
       } else {
@@ -435,16 +435,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function validateField(id, message) {
     const element = document.getElementById(id);
-    const errorMsg = element?.parentElement?.querySelector('.error-message');
+    if (!element) return true;
+    const errorMsg = element.parentElement?.querySelector('.error-message');
     let isValid = true;
     
-    if (!element?.value.trim()) {
-        element?.classList.add('border-red-500');
+    if (!element.value.trim()) {
+        element.classList.add('border-red-500');
         if(errorMsg) errorMsg.textContent = message;
         errorMsg?.classList.remove('hidden');
         isValid = false;
     } else {
-        element?.classList.remove('border-red-500');
+        element.classList.remove('border-red-500');
         errorMsg?.classList.add('hidden');
     }
     return isValid;
@@ -486,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
       isValid = false;
     } else {
       participationError?.classList.add('hidden');
-      if (participationType.value === 'Communicant') { // Mise à jour de la valeur
+      if (participationType.value === 'Communicant') {
         const presenterFieldsToValidate = [
           { id: 'titreCommunication', message: messages.requiredField },
           { id: 'auteurs', message: messages.requiredField },

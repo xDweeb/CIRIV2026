@@ -33,9 +33,16 @@ const t = useTranslations(locale);
         </div>
 
         <div class="text-center mb-12">
-          <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Inscription CIRIV 2026
-          </h1>
+          <div class="flex items-center justify-center mb-4 space-x-4">
+            <img 
+              src="/assets/logos/CIRIV.png" 
+              alt="Logo CIRIV" 
+              class="h-16 w-auto"
+            />
+            <h1 class="text-4xl font-bold text-slate-900 dark:text-white">
+              Inscription CIRIV 2026
+            </h1>
+          </div>
           <p class="text-xl text-slate-600 dark:text-slate-300">
             Rejoignez le premier Congrès International de Recherche, Innovation et Valorisation au Maroc
           </p>
@@ -102,17 +109,19 @@ const t = useTranslations(locale);
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
                   <label for="civilite" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Titre / Civilité
+                    Titre / Civilité <span class="text-red-500">*</span>
                   </label>
                   <select
                     id="civilite"
                     name="civilite"
+                    required
                     class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
                   >
                     <option value="">Sélectionner</option>
                     <option value="Mr.">M.</option>
                     <option value="Ms.">Mme</option>
                   </select>
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez sélectionner votre titre</p>
                 </div>
 
                 <div>
@@ -134,15 +143,17 @@ const t = useTranslations(locale);
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
                   <label for="telephone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Téléphone
+                    Téléphone <span class="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
                     id="telephone"
                     name="telephone"
+                    required
                     class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
                     placeholder="+212 6XX-XXXXXX"
                   />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
                 </div>
 
                 <div>
@@ -429,6 +440,7 @@ document.addEventListener('DOMContentLoaded', function() {
     requiredField: 'Ce champ est obligatoire',
     validEmail: 'Veuillez entrer une adresse email valide',
     selectStatus: 'Veuillez sélectionner votre statut',
+    selectTitle: 'Veuillez sélectionner votre titre',
     selectParticipation: 'Veuillez sélectionner un type de participation',
     selectTheme: 'Veuillez sélectionner une thématique',
     selectType: 'Veuillez sélectionner un type',
@@ -533,7 +545,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const requiredFields = [
       { id: 'nom', message: messages.requiredField },
       { id: 'prenom', message: messages.requiredField },
+      { id: 'civilite', message: messages.selectTitle },
       { id: 'email', message: messages.validEmail },
+      { id: 'telephone', message: messages.requiredField },
       { id: 'etablissement', message: messages.requiredField },
       { id: 'ville', message: messages.requiredField },
       { id: 'statut', message: messages.selectStatus }

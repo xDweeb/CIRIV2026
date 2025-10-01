@@ -1,6 +1,6 @@
 [
   {
-    "date": "1er octobre 2025",
+    "date": "6 octobre 2025",
     "title": "Lancement de l'appel à communications",
     "description": "Ouverture de la période de soumission des résumés pour les communications orales et les posters.",
     "type": "announcement"
@@ -12,8 +12,8 @@
     "type": "deadline"
   },
   {
-    "date": "30 novembre 2025",
-    "title": "Notification d'acceptation ou de rejet des résumés soumis",
+    "date": "Du 13 octobre au 30 novembre 2025",
+    "title": "Notification d'acceptation des résumés soumis",
     "description": "Les auteurs recevront la décision concernant l'acceptation de leurs communications.",
     "type": "announcement"
   },

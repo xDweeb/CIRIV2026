@@ -55,11 +55,12 @@ function doPost(e) {
     // Make sure the headers are present in the sheet
     ensureHeaders_(sheet);
 
-    // Parse the incoming FormData from the request
-    const data = e.parameter; // FormData parameters are in e.parameter
+    // For FormData, the data is in e.parameter, not e.postData.contents
+    const data = e.parameter || {};
     
     // Log received data for debugging
-    console.log('Received data:', data);
+    console.log('Received FormData:', data);
+    console.log('Event object keys:', Object.keys(e));
 
     // Create the new row array using data from the FormData payload.
     // Use || '' as a fallback for optional fields to avoid errors.
@@ -98,13 +99,15 @@ function doPost(e) {
       .createTextOutput(JSON.stringify({ 
         ok: true, 
         message: 'Registration successful.',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        receivedFields: Object.keys(data)
       }))
       .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
     // Log any errors and return an error response
     console.error('Error in doPost:', err.toString());
+    console.error('Error stack:', err.stack);
     
     return ContentService
       .createTextOutput(JSON.stringify({ 

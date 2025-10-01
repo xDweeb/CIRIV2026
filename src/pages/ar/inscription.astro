@@ -362,10 +362,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(form);
         const formValues = Object.fromEntries(formData.entries());
         
-        const payload = { ...formValues };
-        const [ville, pays] = (formValues.ville || ',').split(',').map(s => s.trim());
-        payload.ville = ville;
-        payload.pays = pays || '';
+        // Create payload with exact field names that match Google Apps Script
+        const payload = {
+          nom: formValues.nom || '',
+          prenom: formValues.prenom || '',
+          civilite: formValues.civilite || '',
+          email: formValues.email || '',
+          telephone: formValues.telephone || '',
+          etablissement: formValues.etablissement || '',
+          departement: formValues.departement || '',
+          ville: (formValues.ville || ',').split(',')[0].trim(),
+          pays: (formValues.ville || ',').split(',')[1]?.trim() || '',
+          statut: formValues.statut || '',
+          typeParticipation: formValues.typeParticipation || '',
+          titreCommunication: formValues.titreCommunication || '',
+          auteurs: formValues.auteurs || '',
+          auteurCorrespondant: formValues.auteurCorrespondant || '',
+          thematique: formValues.thematique || '',
+          choixCommunication: formValues.choixCommunication || '',
+          resumeFileLink: formValues.resumeFileLink || ''
+        };
+        
+        console.log("📤 إرسال البيانات:", payload);
         
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',

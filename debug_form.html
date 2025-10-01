@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Debug Test</title>
+</head>
+<body>
+    <h1>CIRIV Form Debug Test</h1>
+    
+    <button onclick="testFormSubmission()">Test Form Submission</button>
+    
+    <div id="result"></div>
+
+    <script>
+        async function testFormSubmission() {
+            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-MgWIiRqnI5U9YmyBn5QG0ItNBr2NafS26Wnbrmg88jiLrjPOSxcnUu4yaiEecxuRQ/exec";
+            
+            const testPayload = {
+                nom: 'Test',
+                prenom: 'User',
+                civilite: 'Mr.',
+                email: 'test@example.com',
+                telephone: '+212 6XX-XXXXXX',
+                etablissement: 'Test University',
+                departement: 'Computer Science',
+                ville: 'Casablanca',
+                pays: 'Morocco',
+                statut: 'Student',
+                typeParticipation: 'Participant',
+                titreCommunication: '',
+                auteurs: '',
+                auteurCorrespondant: '',
+                thematique: '',
+                choixCommunication: '',
+                resumeFileLink: ''
+            };
+            
+            document.getElementById('result').innerHTML = 'Sending test data...';
+            
+            try {
+                console.log("📤 Sending test payload:", testPayload);
+                
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(testPayload)
+                });
+                
+                console.log('📡 Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('📥 Response data:', result);
+                
+                document.getElementById('result').innerHTML = `
+                    <h3>Response:</h3>
+                    <pre>${JSON.stringify(result, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                document.getElementById('result').innerHTML = `
+                    <h3>Error:</h3>
+                    <pre style="color: red;">${error.message}</pre>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

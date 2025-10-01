@@ -4,22 +4,23 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui';
 
-const locale = 'ar'; // اللغة المحددة هي العربية
+const locale = 'ar';
 const t = useTranslations(locale);
 ---
 
 <BaseLayout
   title="التسجيل - CIRIV 2026"
-  description="سجل في المؤتمر الدولي للبحث والابتكار والتثمين CIRIV 2026"
+  description="سجّل في المؤتمر الدولي للبحث والابتكار والتثمين CIRIV 2026"
   locale={locale}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
   
-  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
+  <main dir="rtl" class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
+        <!-- رسائل التنبيه -->
         <div id="alert-container" class="mb-6 hidden">
-          <div id="alert-content" class="rounded-lg p-4 flex items-start space-x-3 rtl:space-x-reverse transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]">
+          <div id="alert-content" class="rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]">
             <div id="alert-icon" class="flex-shrink-0 text-2xl"></div>
             <div class="flex-1">
               <p id="alert-message" class="font-medium"></p>
@@ -32,36 +33,40 @@ const t = useTranslations(locale);
           </div>
         </div>
 
+        <!-- العنوان -->
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            التسجيل في مؤتمر CIRIV 2026
+            التسجيل في CIRIV 2026
           </h1>
           <p class="text-xl text-slate-600 dark:text-slate-300">
-            انضم إلى المؤتمر الدولي الأول للبحث والابتكار والتثمين في المغرب
+            شارك في أول مؤتمر دولي للبحث والابتكار والتثمين بالمغرب
           </p>
         </div>
 
+        <!-- شريط التقدم -->
         <div class="mb-8">
-          <div class="flex items-center justify-center space-x-4 rtl:space-x-reverse">
+          <div class="flex items-center justify-center space-x-4">
             <div class="flex items-center">
               <div id="step1-indicator" class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center font-semibold transition-all duration-300">
                 1
               </div>
-              <span class="ms-2 text-sm font-medium text-slate-700 dark:text-slate-300">المعلومات الشخصية</span>
+              <span class="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">المعلومات الشخصية</span>
             </div>
             <div class="w-16 h-0.5 bg-slate-300 dark:bg-slate-600"></div>
             <div class="flex items-center">
               <div id="step2-indicator" class="w-8 h-8 bg-slate-300 dark:bg-slate-600 text-slate-500 rounded-full flex items-center justify-center font-semibold transition-all duration-300">
                 2
               </div>
-              <span class="ms-2 text-sm font-medium text-slate-500">نوع المشاركة</span>
+              <span class="ml-2 text-sm font-medium text-slate-500">نوع المشاركة</span>
             </div>
           </div>
         </div>
 
+        <!-- استمارة التسجيل -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-          <form id="registration-form" class="space-y-6" novalidate>
+          <form id="registration-form" class="space-y-6">
             
+            <!-- الخطوة 1 -->
             <div id="step1" class="space-y-6">
               <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
                 الخطوة 1: المعلومات الشخصية
@@ -69,121 +74,116 @@ const t = useTranslations(locale);
 
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label for="nom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label for="nom" class="block text-sm font-medium mb-2">
                     الاسم العائلي <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="nom" name="nom" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="اسمك العائلي" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                  <input type="text" id="nom" name="nom" required placeholder="اكتب اسمك العائلي" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                 </div>
-
                 <div>
-                  <label for="prenom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label for="prenom" class="block text-sm font-medium mb-2">
                     الاسم الشخصي <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="prenom" name="prenom" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="اسمك الشخصي" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                  <input type="text" id="prenom" name="prenom" required placeholder="اكتب اسمك الشخصي" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label for="civilite" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    اللقب / الصفة
+                  <label for="civilite" class="block text-sm font-medium mb-2">
+                    اللقب / الجنس
                   </label>
-                  <select id="civilite" name="civilite" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
+                  <select id="civilite" name="civilite" class="w-full px-4 py-3 border ...">
                     <option value="">اختر</option>
                     <option value="Mr.">السيد</option>
                     <option value="Ms.">السيدة</option>
                   </select>
                 </div>
-
                 <div>
-                  <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label for="email" class="block text-sm font-medium mb-2">
                     البريد الإلكتروني <span class="text-red-500">*</span>
                   </label>
-                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="your@email.com" />
+                  <input type="email" id="email" name="email" required placeholder="name@example.com" class="w-full px-4 py-3 border ..." />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو إدخال بريد إلكتروني صحيح</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label for="telephone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label for="telephone" class="block text-sm font-medium mb-2">
                     الهاتف
                   </label>
-                  <input type="tel" id="telephone" name="telephone" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="+212 6XX-XXXXXX" />
+                  <input type="tel" id="telephone" name="telephone" placeholder="+212 6XX-XXXXXX" class="w-full px-4 py-3 border ..." />
                 </div>
-
                 <div>
-                  <label for="etablissement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label for="etablissement" class="block text-sm font-medium mb-2">
                     المؤسسة <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="etablissement" name="etablissement" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="اسم مؤسستك" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                  <input type="text" id="etablissement" name="etablissement" required placeholder="اسم مؤسستك" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label for="departement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                  <label for="departement" class="block text-sm font-medium mb-2">
                     المختبر / القسم
                   </label>
-                  <input type="text" id="departement" name="departement" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="المختبر أو القسم" />
+                  <input type="text" id="departement" name="departement" placeholder="مختبر أو قسم" class="w-full px-4 py-3 border ..." />
                 </div>
-
                 <div>
-                  <label for="ville" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    المدينة والدولة <span class="text-red-500">*</span>
+                  <label for="ville" class="block text-sm font-medium mb-2">
+                    المدينة و البلد <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="ville" name="ville" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="المدينة، الدولة" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                  <input type="text" id="ville" name="ville" required placeholder="المدينة، البلد" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                 </div>
               </div>
 
               <div>
-                <label for="statut" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                  الصفة <span class="text-red-500">*</span>
+                <label for="statut" class="block text-sm font-medium mb-2">
+                  الوضعية <span class="text-red-500">*</span>
                 </label>
-                <select id="statut" name="statut" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
-                  <option value="">اختر صفتك</option>
-                  <option value="طالب(ة)">طالب(ة)</option>
-                  <option value="طالب(ة) دكتوراه">طالب(ة) دكتوراه</option>
-                  <option value="أستاذ(ة) باحث(ة)">أستاذ(ة) باحث(ة)</option>
-                  <option value="باحث(ة)">باحث(ة)</option>
-                  <option value="مهني(ة)">مهني(ة)</option>
+                <select id="statut" name="statut" required class="w-full px-4 py-3 border ...">
+                  <option value="">اختر وضعيتك</option>
+                  <option value="Student">طالب</option>
+                  <option value="PhD Student">طالب دكتوراه</option>
+                  <option value="Lecturer-Researcher">أستاذ باحث</option>
+                  <option value="Researcher">باحث</option>
+                  <option value="Professional">مهني</option>
                 </select>
-                <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو اختيار صفتكم</p>
+                <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو اختيار الوضعية</p>
               </div>
 
               <div class="flex justify-end">
-                <button type="button" id="next-step" class="px-8 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800">
-                  التالي ←
+                <button type="button" id="next-step" class="px-8 py-3 bg-brand-primary ...">
+                  التالي →
                 </button>
               </div>
             </div>
 
+            <!-- الخطوة 2 -->
             <div id="step2" class="space-y-6 hidden">
-              <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
-                الخطوة 2: نوع المشاركة
-              </h2>
+              <h2 class="text-2xl font-semibold mb-6">الخطوة 2: نوع المشاركة</h2>
 
               <div>
-                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
-                  كيف تودون المشاركة؟ <span class="text-red-500">*</span>
+                <label class="block text-sm font-medium mb-4">
+                  كيف ترغب بالمشاركة؟ <span class="text-red-500">*</span>
                 </label>
                 <div class="space-y-3">
-                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
-                    <input type="radio" name="typeParticipation" value="مشارك(ة)" class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600" />
-                    <div class="ms-3">
-                      <div class="text-sm font-medium text-slate-900 dark:text-white">مشارك(ة)</div>
-                      <div class="text-sm text-slate-500 dark:text-slate-400">حضور المؤتمرات والمشاركة في النقاشات</div>
+                  <label class="flex items-center p-4 border ...">
+                    <input type="radio" name="typeParticipation" value="Participant" class="w-4 h-4 ..." />
+                    <div class="ml-3">
+                      <div class="text-sm font-medium">مشارك</div>
+                      <div class="text-sm text-slate-500">حضور المؤتمرات والمناقشات</div>
                     </div>
                   </label>
-                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
-                    <input type="radio" name="typeParticipation" value="متحدث(ة)" class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600" />
-                    <div class="ms-3">
-                      <div class="text-sm font-medium text-slate-900 dark:text-white">متحدث(ة)</div>
-                      <div class="text-sm text-slate-500 dark:text-slate-400">تقديم مداخلة (شفوية أو عبر ملصق)</div>
+                  <label class="flex items-center p-4 border ...">
+                    <input type="radio" name="typeParticipation" value="Presenter" class="w-4 h-4 ..." />
+                    <div class="ml-3">
+                      <div class="text-sm font-medium">مقدّم</div>
+                      <div class="text-sm text-slate-500">تقديم مداخلة (شفوية أو ملصق)</div>
                     </div>
                   </label>
                 </div>
@@ -191,96 +191,77 @@ const t = useTranslations(locale);
               </div>
 
               <div id="presenter-fields" class="space-y-6 hidden">
-                <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
-                  <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-4">
-                    معلومات حول مداخلتكم
-                  </h3>
+                <div class="border-t pt-6">
+                  <h3 class="text-lg font-medium mb-4">معلومات حول مداخلتك</h3>
 
                   <div class="mb-4">
-                    <label for="titreCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label for="titreCommunication" class="block text-sm font-medium mb-2">
                       عنوان المداخلة <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" id="titreCommunication" name="titreCommunication" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="عنوان مداخلتكم" />
-                    <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                    <input type="text" id="titreCommunication" name="titreCommunication" placeholder="اكتب عنوان المداخلة" class="w-full px-4 py-3 border ..." />
+                    <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                   </div>
 
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="auteurs" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label for="auteurs" class="block text-sm font-medium mb-2">
                         المؤلفون <span class="text-red-500">*</span>
                       </label>
-                      <input type="text" id="auteurs" name="auteurs" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="الاسم1، الاسم2، الاسم3..." />
-                      <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                      <input type="text" id="auteurs" name="auteurs" placeholder="مؤلف 1، مؤلف 2 ..." class="w-full px-4 py-3 border ..." />
+                      <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                     </div>
-
                     <div>
-                      <label for="auteurCorrespondant" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label for="auteurCorrespondant" class="block text-sm font-medium mb-2">
                         المؤلف المراسل <span class="text-red-500">*</span>
                       </label>
-                      <input type="text" id="auteurCorrespondant" name="auteurCorrespondant" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="اسم وبريد المؤلف المراسل" />
-                      <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل مطلوب</p>
+                      <input type="text" id="auteurCorrespondant" name="auteurCorrespondant" placeholder="اسم المؤلف المراسل" class="w-full px-4 py-3 border ..." />
+                      <p class="text-red-500 text-xs mt-1 hidden error-message">هذا الحقل إلزامي</p>
                     </div>
                   </div>
 
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="thematique" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label for="thematique" class="block text-sm font-medium mb-2">
                         المحور <span class="text-red-500">*</span>
                       </label>
-                      <select id="thematique" name="thematique" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
+                      <select id="thematique" name="thematique" class="w-full px-4 py-3 border ...">
                         <option value="">اختر المحور</option>
-                        <option value="صحة الإنسان">صحة الإنسان</option>
-                        <option value="صحة الحيوان">صحة الحيوان</option>
-                        <option value="البيئة">البيئة</option>
-                        <option value="متعدد التخصصات">متعدد التخصصات</option>
+                        <option value="Human Health">الصحة البشرية</option>
+                        <option value="Animal Health">صحة الحيوان</option>
+                        <option value="Environment">البيئة</option>
+                        <option value="Interdisciplinary">متعدد التخصصات</option>
                       </select>
                       <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو اختيار المحور</p>
                     </div>
-
                     <div>
-                      <label for="choixCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label for="choixCommunication" class="block text-sm font-medium mb-2">
                         نوع المداخلة <span class="text-red-500">*</span>
                       </label>
-                      <select id="choixCommunication" name="choixCommunication" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
+                      <select id="choixCommunication" name="choixCommunication" class="w-full px-4 py-3 border ...">
                         <option value="">اختر النوع</option>
-                        <option value="مداخلة شفوية">مداخلة شفوية</option>
-                        <option value="مداخلة عبر ملصق">مداخلة عبر ملصق</option>
+                        <option value="Oral Communication">مداخلة شفهية</option>
+                        <option value="Poster Communication">مداخلة بملصق</option>
                       </select>
-                      <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو اختيار نوع المداخلة</p>
+                      <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو اختيار النوع</p>
                     </div>
                   </div>
 
                   <div>
-                    <label for="resumeFileLink" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label for="resumeFileLink" class="block text-sm font-medium mb-2">
                       الملخص (رابط الملف) <span class="text-red-500">*</span>
                     </label>
-                    <div class="relative">
-                      <input type="url" id="resumeFileLink" name="resumeFileLink" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="https://drive.google.com/..." />
-                    </div>
-                    <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                      يرجى تحميل ملخصكم على Drive/Dropbox ولصق رابط المشاركة هنا.
-                    </p>
-                    <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو تقديم رابط الملف</p>
+                    <input type="url" id="resumeFileLink" name="resumeFileLink" placeholder="https://drive.google.com/file/..." class="w-full px-4 py-3 border ..." />
+                    <p class="mt-2 text-sm text-slate-500">حمّل الملخص على Google Drive أو Dropbox أو OneDrive ثم ضع الرابط هنا. الصيغ المقبولة: PDF, DOC, DOCX</p>
+                    <p class="text-red-500 text-xs mt-1 hidden error-message">المرجو إدخال رابط</p>
                   </div>
                 </div>
               </div>
 
               <div class="flex justify-between pt-6">
-                <button type="button" id="prev-step" class="px-8 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                  → السابق
-                </button>
-                <button type="submit" id="submit-form" class="relative px-8 py-3 w-48 text-white font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:cursor-not-allowed">
-                  <span class="button-content-wrapper">
-                    <span class="button-text">إرسال التسجيل</span>
-                    <span class="button-icon spinner hidden">
-                       <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                    </span>
-                    <span class="button-icon checkmark hidden">✅</span>
-                    <span class="button-icon cross hidden">❌</span>
-                  </span>
+                <button type="button" id="prev-step" class="px-8 py-3 border ...">← السابق</button>
+                <button type="submit" id="submit-form" class="px-8 py-3 bg-green-600 ...">
+                  <span id="submit-text">إرسال التسجيل</span>
+                  <span id="submit-loader" class="hidden">جاري الإرسال...</span>
                 </button>
               </div>
             </div>
@@ -294,332 +275,18 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registration-form');
-  const step1 = document.getElementById('step1');
-  const step2 = document.getElementById('step2');
-  const nextBtn = document.getElementById('next-step');
-  const prevBtn = document.getElementById('prev-step');
-  const submitBtn = document.getElementById('submit-form');
-  const step1Indicator = document.getElementById('step1-indicator');
-  const step2Indicator = document.getElementById('step2-indicator');
-  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
-  const presenterFields = document.getElementById('presenter-fields');
-
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-MgWIiRqnI5U9YmyBn5QG0ItNBr2NafS26Wnbrmg88jiLrjPOSxcnUu4yaiEecxuRQ/exec";
-
   const messages = {
-    success: '✅ تم تسجيلكم بنجاح.',
-    error: '❌ خطأ في الإرسال. يرجى المحاولة مرة أخرى.',
-    networkError: '❌ خطأ في الشبكة. يرجى التحقق من اتصالكم بالإنترنت والمحاولة مجدداً.',
-    requiredField: 'هذا الحقل مطلوب',
-    validEmail: 'المرجو إدخال بريد إلكتروني صحيح',
-    selectStatus: 'المرجو اختيار صفتكم',
+    sending: '⏳ جاري الإرسال...',
+    success: 'تم تسجيلك بنجاح.',
+    error: ' حدث خطأ أثناء الإرسال. المرجو إعادة المحاولة.',
+    networkError: ' خطأ في الشبكة. تحقق من الاتصال.',
+    serverError: ' خطأ في الخادم. حاول لاحقًا.',
+    requiredField: 'هذا الحقل إلزامي',
+    validEmail: 'المرجو إدخال بريد صحيح',
+    selectStatus: 'المرجو اختيار الوضعية',
     selectParticipation: 'المرجو اختيار نوع المشاركة',
     selectTheme: 'المرجو اختيار المحور',
-    selectType: 'المرجو اختيار نوع المداخلة',
-    uploadLink: 'المرجو تقديم رابط الملف'
+    selectType: 'المرجو اختيار النوع',
+    uploadLink: 'المرجو إدخال رابط الملف'
   };
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function() {
-      if (validateStep1()) {
-        showStep2();
-      }
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function() {
-      showStep1();
-    });
-  }
-
-  participationRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      const target = this;
-      if (target.value === 'متحدث(ة)') {
-        presenterFields?.classList.remove('hidden');
-        makePresenterFieldsRequired(true);
-      } else {
-        presenterFields?.classList.add('hidden');
-        makePresenterFieldsRequired(false);
-      }
-    });
-  });
-
-  if (form) {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      if (!validateStep2()) {
-        return;
-      }
-
-      setButtonState('loading');
-
-      try {
-        const formData = new FormData(form);
-        const formValues = Object.fromEntries(formData.entries());
-        
-        // Create payload with exact field names that match Google Apps Script
-        const payload = {
-          nom: formValues.nom || '',
-          prenom: formValues.prenom || '',
-          civilite: formValues.civilite || '',
-          email: formValues.email || '',
-          telephone: formValues.telephone || '',
-          etablissement: formValues.etablissement || '',
-          departement: formValues.departement || '',
-          ville: (formValues.ville || ',').split(',')[0].trim(),
-          pays: (formValues.ville || ',').split(',')[1]?.trim() || '',
-          statut: formValues.statut || '',
-          typeParticipation: formValues.typeParticipation || '',
-          titreCommunication: formValues.titreCommunication || '',
-          auteurs: formValues.auteurs || '',
-          auteurCorrespondant: formValues.auteurCorrespondant || '',
-          thematique: formValues.thematique || '',
-          choixCommunication: formValues.choixCommunication || '',
-          resumeFileLink: formValues.resumeFileLink || ''
-        };
-        
-        console.log("📤 إرسال البيانات:", payload);
-        
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const result = await response.json();
-        
-        if (result.ok === true) {
-          setButtonState('success');
-          showAlert('success', messages.success);
-          form.reset();
-          showStep1();
-          setTimeout(hideAlert, 5000);
-        } else {
-          throw new Error(result.error || 'Unknown server error');
-        }
-      } catch (error) {
-        setButtonState('error');
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        if (errorMessage.includes('fetch') || errorMessage.includes('NetworkError')) {
-          showAlert('error', messages.networkError);
-        } else {
-          showAlert('error', messages.error);
-        }
-      } finally {
-        setTimeout(() => setButtonState('default'), 3000);
-      }
-    });
-  }
-  
-  function setButtonState(state) {
-      if (!submitBtn) return;
-      const text = submitBtn.querySelector('.button-text');
-      const spinner = submitBtn.querySelector('.spinner');
-      const checkmark = submitBtn.querySelector('.checkmark');
-      const cross = submitBtn.querySelector('.cross');
-
-      submitBtn.disabled = false;
-      submitBtn.classList.remove('state-loading', 'state-success', 'state-error', 'shake');
-      [text, spinner, checkmark, cross].forEach(el => el?.classList.add('hidden'));
-
-      switch (state) {
-          case 'loading':
-              submitBtn.disabled = true;
-              submitBtn.classList.add('state-loading');
-              spinner?.classList.remove('hidden');
-              break;
-          case 'success':
-              submitBtn.classList.add('state-success');
-              checkmark?.classList.remove('hidden');
-              break;
-          case 'error':
-              submitBtn.classList.add('state-error', 'shake');
-              cross?.classList.remove('hidden');
-              break;
-          default: // 'default'
-              text?.classList.remove('hidden');
-              break;
-      }
-  }
-
-  function validateField(id, message) {
-    const element = document.getElementById(id);
-    if (!element) return true;
-    const errorMsg = element.parentElement?.querySelector('.error-message');
-    let isValid = true;
-    
-    if (!element.value.trim()) {
-        element.classList.add('border-red-500');
-        if(errorMsg) errorMsg.textContent = message;
-        errorMsg?.classList.remove('hidden');
-        isValid = false;
-    } else {
-        element.classList.remove('border-red-500');
-        errorMsg?.classList.add('hidden');
-    }
-    return isValid;
-  }
-
-  function validateStep1() {
-    const fields = [
-      { id: 'nom', message: messages.requiredField },
-      { id: 'prenom', message: messages.requiredField },
-      { id: 'etablissement', message: messages.requiredField },
-      { id: 'ville', message: messages.requiredField },
-      { id: 'statut', message: messages.selectStatus }
-    ];
-    let isStepValid = fields.every(field => validateField(field.id, field.message));
-    
-    const emailField = document.getElementById('email');
-    const emailErrorMsg = emailField?.parentElement?.querySelector('.error-message');
-    if (emailField && emailErrorMsg) {
-      if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-        emailField.classList.add('border-red-500');
-        emailErrorMsg.textContent = messages.validEmail;
-        emailErrorMsg.classList.remove('hidden');
-        isStepValid = false;
-      } else {
-        emailField.classList.remove('border-red-500');
-        emailErrorMsg.classList.add('hidden');
-      }
-    }
-    return isStepValid;
-  }
-
-  function validateStep2() {
-    let isValid = true;
-    const participationType = document.querySelector('input[name="typeParticipation"]:checked');
-    const participationError = document.querySelector('input[name="typeParticipation"]')?.closest('.space-y-3')?.nextElementSibling;
-    
-    if (!participationType) {
-      participationError?.classList.remove('hidden');
-      isValid = false;
-    } else {
-      participationError?.classList.add('hidden');
-      if (participationType.value === 'متحدث(ة)') {
-        const presenterFieldsToValidate = [
-          { id: 'titreCommunication', message: messages.requiredField },
-          { id: 'auteurs', message: messages.requiredField },
-          { id: 'auteurCorrespondant', message: messages.requiredField },
-          { id: 'thematique', message: messages.selectTheme },
-          { id: 'choixCommunication', message: messages.selectType },
-          { id: 'resumeFileLink', message: messages.uploadLink }
-        ];
-        if (!presenterFieldsToValidate.every(field => validateField(field.id, field.message))) {
-            isValid = false;
-        }
-      }
-    }
-    return isValid;
-  }
-
-  function showStep1() {
-    step1?.classList.remove('hidden');
-    step2?.classList.add('hidden');
-    step1Indicator?.classList.add('bg-brand-primary', 'text-white');
-    step1Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step2Indicator?.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step2Indicator?.classList.remove('bg-brand-primary', 'text-white');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function showStep2() {
-    step1?.classList.add('hidden');
-    step2?.classList.remove('hidden');
-    step2Indicator?.classList.add('bg-brand-primary', 'text-white');
-    step2Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function makePresenterFieldsRequired(required) {
-    presenterFields?.querySelectorAll('input, select').forEach(input => {
-      if (required) {
-        input.setAttribute('required', 'required');
-      } else {
-        input.removeAttribute('required');
-        input.classList.remove('border-red-500');
-        const errorMsg = input.parentElement?.querySelector('.error-message');
-        if (errorMsg) {
-          errorMsg.classList.add('hidden');
-        }
-      }
-    });
-  }
-
-  function showAlert(type, message) {
-    const alertContainer = document.getElementById('alert-container');
-    const alertContent = document.getElementById('alert-content');
-    const alertIcon = document.getElementById('alert-icon');
-    const alertMessage = document.getElementById('alert-message');
-    if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
-
-    alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 rtl:space-x-reverse transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]';
-    if (type === 'success') {
-      alertContent.classList.add('bg-green-500', 'text-white');
-      alertIcon.innerHTML = '✅';
-    } else if (type === 'error') {
-      alertContent.classList.add('bg-red-500', 'text-white');
-      alertIcon.innerHTML = '❌';
-    }
-    alertMessage.textContent = message;
-    alertContainer.classList.remove('hidden');
-    setTimeout(() => {
-      alertContent.classList.add('opacity-100', 'translate-y-0');
-    }, 100);
-  }
-
-  function hideAlert() {
-    const alertContainer = document.getElementById('alert-container');
-    const alertContent = document.getElementById('alert-content');
-    if (!alertContainer || !alertContent) return;
-    alertContent.classList.remove('opacity-100', 'translate-y-0');
-    setTimeout(() => {
-      alertContainer.classList.add('hidden');
-    }, 500);
-  }
-
-  document.getElementById('alert-close')?.addEventListener('click', hideAlert);
-  
-  setButtonState('default');
-});
 </script>
-
-<style>
-  #submit-form {
-    background-color: #16a34a; /* Default: green-600 */
-  }
-  #submit-form.state-loading {
-    background-color: #3b82f6; /* blue-500 */
-  }
-  #submit-form.state-success {
-    background-color: #22c55e; /* green-500 */
-  }
-  #submit-form.state-error {
-    background-color: #ef4444; /* red-500 */
-  }
-  
-  .button-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @keyframes shake {
-    10%, 90% { transform: translate3d(-1px, 0, 0); }
-    20%, 80% { transform: translate3d(2px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-    40%, 60% { transform: translate3d(4px, 0, 0); }
-  }
-  .shake {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  }
-</style>

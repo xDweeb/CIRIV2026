@@ -4,7 +4,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui';
 
-const locale = 'fr'; // Langue définie sur Français
+const locale = 'fr';
 const t = useTranslations(locale);
 ---
 
@@ -18,6 +18,7 @@ const t = useTranslations(locale);
   <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
+        <!-- Messages d’alerte -->
         <div id="alert-container" class="mb-6 hidden">
           <div id="alert-content" class="rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]">
             <div id="alert-icon" class="flex-shrink-0 text-2xl"></div>
@@ -32,255 +33,255 @@ const t = useTranslations(locale);
           </div>
         </div>
 
+        <!-- En-tête -->
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Inscription CIRIV 2026
           </h1>
           <p class="text-xl text-slate-600 dark:text-slate-300">
-            Rejoignez le premier Congrès International de Recherche, Innovation et Valorisation au Maroc
+            Participez au premier Congrès International de Recherche, Innovation et Valorisation au Maroc
           </p>
         </div>
 
+        <!-- Barre de progression -->
         <div class="mb-8">
           <div class="flex items-center justify-center space-x-4">
             <div class="flex items-center">
               <div id="step1-indicator" class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center font-semibold transition-all duration-300">
                 1
               </div>
-              <span class="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">Informations Personnelles</span>
+              <span class="ml-2 text-sm font-medium text-slate-700 dark:text-slate-300">Informations personnelles</span>
             </div>
             <div class="w-16 h-0.5 bg-slate-300 dark:bg-slate-600"></div>
             <div class="flex items-center">
               <div id="step2-indicator" class="w-8 h-8 bg-slate-300 dark:bg-slate-600 text-slate-500 rounded-full flex items-center justify-center font-semibold transition-all duration-300">
                 2
               </div>
-              <span class="ml-2 text-sm font-medium text-slate-500">Type de Participation</span>
+              <span class="ml-2 text-sm font-medium text-slate-500">Type de participation</span>
             </div>
           </div>
         </div>
 
+        <!-- Formulaire d’inscription -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-          <form id="registration-form" class="space-y-6" novalidate>
+          <form id="registration-form" class="space-y-6">
             
+            <!-- Étape 1 : Informations personnelles -->
             <div id="step1" class="space-y-6">
               <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
-                Étape 1 : Informations Personnelles
+                Étape 1 : Informations personnelles
               </h2>
 
               <div class="grid md:grid-cols-2 gap-6">
+                <!-- Nom -->
                 <div>
                   <label for="nom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Nom <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="nom" name="nom" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Votre nom de famille" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                  <input type="text" id="nom" name="nom" required placeholder="Votre nom" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                 </div>
 
+                <!-- Prénom -->
                 <div>
                   <label for="prenom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Prénom <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="prenom" name="prenom" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Votre prénom" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                  <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
+                <!-- Civilité -->
                 <div>
                   <label for="civilite" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                    Titre / Civilité
+                    Civilité / Genre
                   </label>
-                  <select id="civilite" name="civilite" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
+                  <select id="civilite" name="civilite" class="w-full px-4 py-3 border ...">
                     <option value="">Sélectionner</option>
-                    <option value="M.">M.</option>
-                    <option value="Mme.">Mme.</option>
+                    <option value="Mr.">M.</option>
+                    <option value="Ms.">Mme</option>
                   </select>
                 </div>
 
+                <!-- Email -->
                 <div>
                   <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Email <span class="text-red-500">*</span>
                   </label>
-                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="votre@email.com" />
+                  <input type="email" id="email" name="email" required placeholder="votre@email.com" class="w-full px-4 py-3 border ..." />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez entrer un email valide</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
+                <!-- Téléphone -->
                 <div>
                   <label for="telephone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Téléphone
                   </label>
-                  <input type="tel" id="telephone" name="telephone" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="+212 6XX-XXXXXX" />
+                  <input type="tel" id="telephone" name="telephone" placeholder="+212 6XX-XXXXXX" class="w-full px-4 py-3 border ..." />
                 </div>
 
+                <!-- Établissement -->
                 <div>
                   <label for="etablissement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Établissement <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="etablissement" name="etablissement" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Nom de votre établissement" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                  <input type="text" id="etablissement" name="etablissement" required placeholder="Nom de votre établissement" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
+                <!-- Département -->
                 <div>
                   <label for="departement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Laboratoire / Département
                   </label>
-                  <input type="text" id="departement" name="departement" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Laboratoire ou département" />
+                  <input type="text" id="departement" name="departement" placeholder="Laboratoire ou département" class="w-full px-4 py-3 border ..." />
                 </div>
 
+                <!-- Ville -->
                 <div>
                   <label for="ville" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Ville & Pays <span class="text-red-500">*</span>
                   </label>
-                  <input type="text" id="ville" name="ville" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Ville, Pays" />
-                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                  <input type="text" id="ville" name="ville" required placeholder="Ville, Pays" class="w-full px-4 py-3 border ..." />
+                  <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                 </div>
               </div>
 
+              <!-- Statut -->
               <div>
                 <label for="statut" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Statut <span class="text-red-500">*</span>
                 </label>
-                <select id="statut" name="statut" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
+                <select id="statut" name="statut" required class="w-full px-4 py-3 border ...">
                   <option value="">Sélectionnez votre statut</option>
-                  <option value="Étudiant(e)">Étudiant(e)</option>
-                  <option value="Doctorant(e)">Doctorant(e)</option>
-                  <option value="Enseignant-Chercheur">Enseignant-Chercheur</option>
-                  <option value="Chercheur">Chercheur</option>
-                  <option value="Professionnel">Professionnel</option>
+                  <option value="Student">Étudiant</option>
+                  <option value="PhD Student">Doctorant</option>
+                  <option value="Lecturer-Researcher">Enseignant-Chercheur</option>
+                  <option value="Researcher">Chercheur</option>
+                  <option value="Professional">Professionnel</option>
                 </select>
                 <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez sélectionner votre statut</p>
               </div>
 
+              <!-- Bouton Suivant -->
               <div class="flex justify-end">
-                <button type="button" id="next-step" class="px-8 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800">
+                <button type="button" id="next-step" class="px-8 py-3 bg-brand-primary ...">
                   Suivant →
                 </button>
               </div>
             </div>
 
+            <!-- Étape 2 : Type de participation -->
             <div id="step2" class="space-y-6 hidden">
               <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
-                Étape 2 : Type de Participation
+                Étape 2 : Type de participation
               </h2>
 
+              <!-- Radios -->
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
                   Comment souhaitez-vous participer ? <span class="text-red-500">*</span>
                 </label>
                 <div class="space-y-3">
-                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
-                    <input type="radio" name="typeParticipation" value="Participant" class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600" />
+                  <label class="flex items-center p-4 border ...">
+                    <input type="radio" name="typeParticipation" value="Participant" class="w-4 h-4 ..." />
                     <div class="ml-3">
-                      <div class="text-sm font-medium text-slate-900 dark:text-white">Participant</div>
-                      <div class="text-sm text-slate-500 dark:text-slate-400">Assister aux conférences et participer aux discussions</div>
+                      <div class="text-sm font-medium">Participant</div>
+                      <div class="text-sm text-slate-500">Assister aux conférences et participer aux discussions</div>
                     </div>
                   </label>
-                  <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
-                    <input type="radio" name="typeParticipation" value="Communicant" class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600" />
+                  <label class="flex items-center p-4 border ...">
+                    <input type="radio" name="typeParticipation" value="Presenter" class="w-4 h-4 ..." />
                     <div class="ml-3">
-                      <div class="text-sm font-medium text-slate-900 dark:text-white">Communicant</div>
-                      <div class="text-sm text-slate-500 dark:text-slate-400">Présenter une communication (orale ou par affiche)</div>
+                      <div class="text-sm font-medium">Présentateur</div>
+                      <div class="text-sm text-slate-500">Présenter une communication (orale ou poster)</div>
                     </div>
                   </label>
                 </div>
-                <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez sélectionner un type de participation</p>
+                <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez sélectionner un type</p>
               </div>
 
+              <!-- Champs Présentateur -->
               <div id="presenter-fields" class="space-y-6 hidden">
-                <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
-                  <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-4">
-                    Informations sur votre communication
-                  </h3>
+                <div class="border-t pt-6">
+                  <h3 class="text-lg font-medium mb-4">Informations sur votre communication</h3>
 
                   <div class="mb-4">
-                    <label for="titreCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                    <label for="titreCommunication" class="block text-sm font-medium mb-2">
                       Titre de la communication <span class="text-red-500">*</span>
                     </label>
-                    <input type="text" id="titreCommunication" name="titreCommunication" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Titre de votre communication" />
-                    <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                    <input type="text" id="titreCommunication" name="titreCommunication" placeholder="Titre de votre communication" class="w-full px-4 py-3 border ..." />
+                    <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                   </div>
 
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="auteurs" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label for="auteurs" class="block text-sm font-medium mb-2">
                         Auteurs <span class="text-red-500">*</span>
                       </label>
-                      <input type="text" id="auteurs" name="auteurs" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Auteur 1, Auteur 2, Auteur 3..." />
-                      <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                      <input type="text" id="auteurs" name="auteurs" placeholder="Auteur 1, Auteur 2, ..." class="w-full px-4 py-3 border ..." />
+                      <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                     </div>
-
                     <div>
-                      <label for="auteurCorrespondant" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                        Auteur Correspondant <span class="text-red-500">*</span>
+                      <label for="auteurCorrespondant" class="block text-sm font-medium mb-2">
+                        Auteur correspondant <span class="text-red-500">*</span>
                       </label>
-                      <input type="text" id="auteurCorrespondant" name="auteurCorrespondant" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Nom et email de l'auteur correspondant" />
-                      <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est obligatoire</p>
+                      <input type="text" id="auteurCorrespondant" name="auteurCorrespondant" placeholder="Nom de l’auteur correspondant" class="w-full px-4 py-3 border ..." />
+                      <p class="text-red-500 text-xs mt-1 hidden error-message">Ce champ est requis</p>
                     </div>
                   </div>
 
                   <div class="grid md:grid-cols-2 gap-6">
                     <div>
-                      <label for="thematique" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      <label for="thematique" class="block text-sm font-medium mb-2">
                         Thématique <span class="text-red-500">*</span>
                       </label>
-                      <select id="thematique" name="thematique" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
-                        <option value="">Sélectionnez une thématique</option>
-                        <option value="Santé Humaine">Santé Humaine</option>
-                        <option value="Santé Animale">Santé Animale</option>
-                        <option value="Environnement">Environnement</option>
-                        <option value="Interdisciplinaire">Interdisciplinaire</option>
+                      <select id="thematique" name="thematique" class="w-full px-4 py-3 border ...">
+                        <option value="">Sélectionner une thématique</option>
+                        <option value="Human Health">Santé humaine</option>
+                        <option value="Animal Health">Santé animale</option>
+                        <option value="Environment">Environnement</option>
+                        <option value="Interdisciplinary">Interdisciplinaire</option>
                       </select>
                       <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez sélectionner une thématique</p>
                     </div>
-
                     <div>
-                      <label for="choixCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                        Type de Communication <span class="text-red-500">*</span>
+                      <label for="choixCommunication" class="block text-sm font-medium mb-2">
+                        Type de communication <span class="text-red-500">*</span>
                       </label>
-                      <select id="choixCommunication" name="choixCommunication" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
-                        <option value="">Sélectionnez le type</option>
-                        <option value="Communication Orale">Communication Orale</option>
-                        <option value="Communication par Affiche">Communication par Affiche</option>
+                      <select id="choixCommunication" name="choixCommunication" class="w-full px-4 py-3 border ...">
+                        <option value="">Sélectionner un type</option>
+                        <option value="Oral Communication">Communication orale</option>
+                        <option value="Poster Communication">Communication poster</option>
                       </select>
                       <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez sélectionner un type</p>
                     </div>
                   </div>
 
+                  <!-- Lien fichier -->
                   <div>
-                    <label for="resumeFileLink" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                      Résumé (Lien du fichier) <span class="text-red-500">*</span>
+                    <label for="resumeFileLink" class="block text-sm font-medium mb-2">
+                      Résumé (Lien fichier) <span class="text-red-500">*</span>
                     </label>
-                    <div class="relative">
-                      <input type="url" id="resumeFileLink" name="resumeFileLink" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="https://drive.google.com/..." />
-                    </div>
-                    <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                      Veuillez téléverser votre résumé sur Drive/Dropbox et coller le lien de partage ici.
-                    </p>
-                    <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez fournir un lien vers le fichier</p>
+                    <input type="url" id="resumeFileLink" name="resumeFileLink" placeholder="https://drive.google.com/file/..." class="w-full px-4 py-3 border ..." />
+                    <p class="mt-2 text-sm text-slate-500">Téléversez votre résumé (Drive, Dropbox, OneDrive) et collez le lien ici. Formats acceptés : PDF, DOC, DOCX</p>
+                    <p class="text-red-500 text-xs mt-1 hidden error-message">Veuillez fournir un lien</p>
                   </div>
                 </div>
               </div>
 
+              <!-- Boutons navigation -->
               <div class="flex justify-between pt-6">
-                <button type="button" id="prev-step" class="px-8 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                  ← Précédent
-                </button>
-                <button type="submit" id="submit-form" class="relative px-8 py-3 w-48 text-white font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:cursor-not-allowed">
-                  <span class="button-content-wrapper">
-                    <span class="button-text">Soumettre l'inscription</span>
-                    <span class="button-icon spinner hidden">
-                       <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                    </span>
-                    <span class="button-icon checkmark hidden">✅</span>
-                    <span class="button-icon cross hidden">❌</span>
-                  </span>
+                <button type="button" id="prev-step" class="px-8 py-3 border ...">← Précédent</button>
+                <button type="submit" id="submit-form" class="px-8 py-3 bg-green-600 ...">
+                  <span id="submit-text">Valider l’inscription</span>
+                  <span id="submit-loader" class="hidden">Envoi...</span>
                 </button>
               </div>
             </div>
@@ -294,332 +295,18 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registration-form');
-  const step1 = document.getElementById('step1');
-  const step2 = document.getElementById('step2');
-  const nextBtn = document.getElementById('next-step');
-  const prevBtn = document.getElementById('prev-step');
-  const submitBtn = document.getElementById('submit-form');
-  const step1Indicator = document.getElementById('step1-indicator');
-  const step2Indicator = document.getElementById('step2-indicator');
-  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
-  const presenterFields = document.getElementById('presenter-fields');
-
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb-MgWIiRqnI5U9YmyBn5QG0ItNBr2NafS26Wnbrmg88jiLrjPOSxcnUu4yaiEecxuRQ/exec";
-
   const messages = {
-    success: '✅ Votre inscription a été enregistrée avec succès.',
-    error: '❌ Erreur de soumission. Veuillez réessayer.',
-    networkError: '❌ Erreur réseau. Vérifiez votre connexion et réessayez.',
-    requiredField: 'Ce champ est obligatoire',
+    sending: '⏳ Envoi en cours...',
+    success: 'Votre inscription a bien été enregistrée.',
+    error: 'Erreur lors de l’envoi. Veuillez réessayer.',
+    networkError: 'Erreur réseau. Vérifiez votre connexion.',
+    serverError: 'Erreur serveur. Réessayez plus tard.',
+    requiredField: 'Ce champ est requis',
     validEmail: 'Veuillez entrer un email valide',
     selectStatus: 'Veuillez sélectionner votre statut',
     selectParticipation: 'Veuillez sélectionner un type de participation',
     selectTheme: 'Veuillez sélectionner une thématique',
     selectType: 'Veuillez sélectionner un type',
-    uploadLink: 'Veuillez fournir un lien vers le fichier'
+    uploadLink: 'Veuillez fournir un lien de fichier'
   };
-
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function() {
-      if (validateStep1()) {
-        showStep2();
-      }
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function() {
-      showStep1();
-    });
-  }
-
-  participationRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      const target = this;
-      if (target.value === 'Communicant') {
-        presenterFields?.classList.remove('hidden');
-        makePresenterFieldsRequired(true);
-      } else {
-        presenterFields?.classList.add('hidden');
-        makePresenterFieldsRequired(false);
-      }
-    });
-  });
-
-  if (form) {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      if (!validateStep2()) {
-        return;
-      }
-
-      setButtonState('loading');
-
-      try {
-        const formData = new FormData(form);
-        const formValues = Object.fromEntries(formData.entries());
-        
-        // Create payload with exact field names that match Google Apps Script
-        const payload = {
-          nom: formValues.nom || '',
-          prenom: formValues.prenom || '',
-          civilite: formValues.civilite || '',
-          email: formValues.email || '',
-          telephone: formValues.telephone || '',
-          etablissement: formValues.etablissement || '',
-          departement: formValues.departement || '',
-          ville: (formValues.ville || ',').split(',')[0].trim(),
-          pays: (formValues.ville || ',').split(',')[1]?.trim() || '',
-          statut: formValues.statut || '',
-          typeParticipation: formValues.typeParticipation || '',
-          titreCommunication: formValues.titreCommunication || '',
-          auteurs: formValues.auteurs || '',
-          auteurCorrespondant: formValues.auteurCorrespondant || '',
-          thematique: formValues.thematique || '',
-          choixCommunication: formValues.choixCommunication || '',
-          resumeFileLink: formValues.resumeFileLink || ''
-        };
-        
-        console.log("📤 Envoi du payload:", payload);
-        
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error(`Erreur HTTP: ${response.status}`);
-        }
-
-        const result = await response.json();
-        
-        if (result.ok === true) {
-          setButtonState('success');
-          showAlert('success', messages.success);
-          form.reset();
-          showStep1();
-          setTimeout(hideAlert, 5000);
-        } else {
-          throw new Error(result.error || 'Erreur serveur inconnue');
-        }
-      } catch (error) {
-        setButtonState('error');
-        const errorMessage = error instanceof Error ? error.message : String(error);
-        if (errorMessage.includes('fetch') || errorMessage.includes('NetworkError')) {
-          showAlert('error', messages.networkError);
-        } else {
-          showAlert('error', messages.error);
-        }
-      } finally {
-        setTimeout(() => setButtonState('default'), 3000);
-      }
-    });
-  }
-  
-  function setButtonState(state) {
-      if (!submitBtn) return;
-      const text = submitBtn.querySelector('.button-text');
-      const spinner = submitBtn.querySelector('.spinner');
-      const checkmark = submitBtn.querySelector('.checkmark');
-      const cross = submitBtn.querySelector('.cross');
-
-      submitBtn.disabled = false;
-      submitBtn.classList.remove('state-loading', 'state-success', 'state-error', 'shake');
-      [text, spinner, checkmark, cross].forEach(el => el?.classList.add('hidden'));
-
-      switch (state) {
-          case 'loading':
-              submitBtn.disabled = true;
-              submitBtn.classList.add('state-loading');
-              spinner?.classList.remove('hidden');
-              break;
-          case 'success':
-              submitBtn.classList.add('state-success');
-              checkmark?.classList.remove('hidden');
-              break;
-          case 'error':
-              submitBtn.classList.add('state-error', 'shake');
-              cross?.classList.remove('hidden');
-              break;
-          default: // 'default'
-              text?.classList.remove('hidden');
-              break;
-      }
-  }
-
-  function validateField(id, message) {
-    const element = document.getElementById(id);
-    if (!element) return true;
-    const errorMsg = element.parentElement?.querySelector('.error-message');
-    let isValid = true;
-    
-    if (!element.value.trim()) {
-        element.classList.add('border-red-500');
-        if(errorMsg) errorMsg.textContent = message;
-        errorMsg?.classList.remove('hidden');
-        isValid = false;
-    } else {
-        element.classList.remove('border-red-500');
-        errorMsg?.classList.add('hidden');
-    }
-    return isValid;
-  }
-
-  function validateStep1() {
-    const fields = [
-      { id: 'nom', message: messages.requiredField },
-      { id: 'prenom', message: messages.requiredField },
-      { id: 'etablissement', message: messages.requiredField },
-      { id: 'ville', message: messages.requiredField },
-      { id: 'statut', message: messages.selectStatus }
-    ];
-    let isStepValid = fields.every(field => validateField(field.id, field.message));
-    
-    const emailField = document.getElementById('email');
-    const emailErrorMsg = emailField?.parentElement?.querySelector('.error-message');
-    if (emailField && emailErrorMsg) {
-      if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
-        emailField.classList.add('border-red-500');
-        emailErrorMsg.textContent = messages.validEmail;
-        emailErrorMsg.classList.remove('hidden');
-        isStepValid = false;
-      } else {
-        emailField.classList.remove('border-red-500');
-        emailErrorMsg.classList.add('hidden');
-      }
-    }
-    return isStepValid;
-  }
-
-  function validateStep2() {
-    let isValid = true;
-    const participationType = document.querySelector('input[name="typeParticipation"]:checked');
-    const participationError = document.querySelector('input[name="typeParticipation"]')?.closest('.space-y-3')?.nextElementSibling;
-    
-    if (!participationType) {
-      participationError?.classList.remove('hidden');
-      isValid = false;
-    } else {
-      participationError?.classList.add('hidden');
-      if (participationType.value === 'Communicant') {
-        const presenterFieldsToValidate = [
-          { id: 'titreCommunication', message: messages.requiredField },
-          { id: 'auteurs', message: messages.requiredField },
-          { id: 'auteurCorrespondant', message: messages.requiredField },
-          { id: 'thematique', message: messages.selectTheme },
-          { id: 'choixCommunication', message: messages.selectType },
-          { id: 'resumeFileLink', message: messages.uploadLink }
-        ];
-        if (!presenterFieldsToValidate.every(field => validateField(field.id, field.message))) {
-            isValid = false;
-        }
-      }
-    }
-    return isValid;
-  }
-
-  function showStep1() {
-    step1?.classList.remove('hidden');
-    step2?.classList.add('hidden');
-    step1Indicator?.classList.add('bg-brand-primary', 'text-white');
-    step1Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step2Indicator?.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step2Indicator?.classList.remove('bg-brand-primary', 'text-white');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function showStep2() {
-    step1?.classList.add('hidden');
-    step2?.classList.remove('hidden');
-    step2Indicator?.classList.add('bg-brand-primary', 'text-white');
-    step2Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function makePresenterFieldsRequired(required) {
-    presenterFields?.querySelectorAll('input, select').forEach(input => {
-      if (required) {
-        input.setAttribute('required', 'required');
-      } else {
-        input.removeAttribute('required');
-        input.classList.remove('border-red-500');
-        const errorMsg = input.parentElement?.querySelector('.error-message');
-        if (errorMsg) {
-          errorMsg.classList.add('hidden');
-        }
-      }
-    });
-  }
-
-  function showAlert(type, message) {
-    const alertContainer = document.getElementById('alert-container');
-    const alertContent = document.getElementById('alert-content');
-    const alertIcon = document.getElementById('alert-icon');
-    const alertMessage = document.getElementById('alert-message');
-    if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
-
-    alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]';
-    if (type === 'success') {
-      alertContent.classList.add('bg-green-500', 'text-white');
-      alertIcon.innerHTML = '✅';
-    } else if (type === 'error') {
-      alertContent.classList.add('bg-red-500', 'text-white');
-      alertIcon.innerHTML = '❌';
-    }
-    alertMessage.textContent = message;
-    alertContainer.classList.remove('hidden');
-    setTimeout(() => {
-      alertContent.classList.add('opacity-100', 'translate-y-0');
-    }, 100);
-  }
-
-  function hideAlert() {
-    const alertContainer = document.getElementById('alert-container');
-    const alertContent = document.getElementById('alert-content');
-    if (!alertContainer || !alertContent) return;
-    alertContent.classList.remove('opacity-100', 'translate-y-0');
-    setTimeout(() => {
-      alertContainer.classList.add('hidden');
-    }, 500);
-  }
-
-  document.getElementById('alert-close')?.addEventListener('click', hideAlert);
-  
-  setButtonState('default');
-});
 </script>
-
-<style>
-  #submit-form {
-    background-color: #16a34a; /* Default: green-600 */
-  }
-  #submit-form.state-loading {
-    background-color: #3b82f6; /* blue-500 */
-  }
-  #submit-form.state-success {
-    background-color: #22c55e; /* green-500 */
-  }
-  #submit-form.state-error {
-    background-color: #ef4444; /* red-500 */
-  }
-  
-  .button-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @keyframes shake {
-    10%, 90% { transform: translate3d(-1px, 0, 0); }
-    20%, 80% { transform: translate3d(2px, 0, 0); }
-    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-    40%, 60% { transform: translate3d(4px, 0, 0); }
-  }
-  .shake {
-    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  }
-</style>

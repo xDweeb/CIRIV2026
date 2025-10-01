@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const presenterFields = document.getElementById('presenter-fields');
 
   // Google Apps Script endpoint
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOCLpKldhfumG86NSXDa1OOFkzmTPCYdSQluQ8DudiQs_r0lzvMa_QK11u4YLnpb5-Gw/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyM4mpVbbzFTbyyDFvT8aeRm1GZ_HO1TWzk_D1dTQjRRptr53Qdw8JmgJxMUc1aJl2EjQ/exec";
 
   // Language-specific messages
   const messages = {
@@ -506,6 +506,15 @@ document.addEventListener('DOMContentLoaded', function() {
       formData.set('ville', villePays[0] ? villePays[0].trim() : '');
       formData.append('pays', villePays[1] ? villePays[1].trim() : '');
       
+      // Handle file upload with metadata
+      const fileInput = document.getElementById('resumeFile') as HTMLInputElement;
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        formData.append("resumeFile", file);
+        formData.append("resumeFileName", file.name);
+        formData.append("resumeFileMimeType", file.type);
+      }
+      
       console.log("📤 Sending FormData with fields:");
       for (let [key, value] of formData.entries()) {
         if (value instanceof File) {
@@ -516,8 +525,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       const response = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: formData // No Content-Type header - let browser set multipart boundary
+        method: "POST",
+        body: formData
       });
 
       console.log('📡 Response status:', response.status);

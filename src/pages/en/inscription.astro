@@ -369,24 +369,24 @@ const t = useTranslations(locale);
                     </div>
                   </div>
 
-                  <!-- Abstract File Upload -->
+                  <!-- Abstract File Link -->
                   <div>
-                    <label for="resumeFile" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                      Abstract (file) <span class="text-red-500">*</span>
+                    <label for="resumeFileLink" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                      Abstract (file link) <span class="text-red-500">*</span>
                     </label>
                     <div class="relative">
                       <input
-                        type="file"
-                        id="resumeFile"
-                        name="resumeFile"
-                        accept=".pdf,.doc,.docx"
-                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-primary file:text-white hover:file:bg-brand-primaryDark"
+                        type="url"
+                        id="resumeFileLink"
+                        name="resumeFileLink"
+                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
+                        placeholder="https://drive.google.com/file/d/... or https://dropbox.com/..."
                       />
                     </div>
                     <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                      Accepted formats: PDF, DOC, DOCX (max 5MB)
+                      Please upload your abstract to Google Drive, Dropbox, or OneDrive and paste the shareable link here
                     </p>
-                    <p class="text-red-500 text-xs mt-1 hidden error-message">Please upload a file</p>
+                    <p class="text-red-500 text-xs mt-1 hidden error-message">Please provide a file link</p>
                   </div>
                 </div>
               </div>
@@ -426,17 +426,6 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
-  // Helper function to convert a file to a Base64 string
-  function toBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      // Resolve with the Base64 string (without the data: URL prefix)
-      reader.onload = () => resolve(reader.result.split(',')[1]);
-      reader.onerror = error => reject(error);
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('registration-form');
     const step1 = document.getElementById('step1');
@@ -452,7 +441,7 @@ const t = useTranslations(locale);
     const presenterFields = document.getElementById('presenter-fields');
 
     // Google Apps Script endpoint
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwj6L-AEkSV3cRcU09w-mIfINHchwM3nz6p1_5htBGJEiiu4q9WZgFbZsmR6u8p1uqpvg/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
 
     // Language-specific messages
     const messages = {
@@ -467,7 +456,7 @@ const t = useTranslations(locale);
       selectParticipation: 'Please select a participation type',
       selectTheme: 'Please select a theme',
       selectType: 'Please select a type',
-      uploadFile: 'Please upload a file'
+      uploadLink: 'Please provide a file link'
     };
 
     // Step navigation
@@ -535,26 +524,13 @@ const t = useTranslations(locale);
               auteurCorrespondant: formValues.auteurCorrespondant,
               thematique: formValues.thematique,
               choixCommunication: formValues.choixCommunication,
+              resumeFileLink: formValues.resumeFileLink || ''
           };
           
           // Split the 'ville' field into 'ville' and 'pays'
           const [ville, pays] = (formValues.ville || ',').split(',').map(s => s.trim());
           payload.ville = ville;
           payload.pays = pays || '';
-
-          // Handle the file input: read as Base64 and attach to payload
-          const fileInput = document.getElementById('resumeFile');
-          if (fileInput && fileInput.files && fileInput.files[0]) {
-              const file = fileInput.files[0];
-              const base64Data = await toBase64(file);
-              payload.resumeFile = {
-                  name: file.name,
-                  type: file.type,
-                  data: base64Data
-              };
-          } else {
-              payload.resumeFile = null;
-          }
 
           console.log("📤 Sending JSON payload:", payload);
           
@@ -577,9 +553,6 @@ const t = useTranslations(locale);
 
           if (result.ok === true) {
             showAlert('success', messages.success);
-            if (result.fileUrl) {
-              console.log('✅ File uploaded successfully:', result.fileUrl);
-            }
             form.reset();
             showStep1();
             
@@ -680,7 +653,7 @@ const t = useTranslations(locale);
           { id: 'auteurCorrespondant', message: messages.requiredField },
           { id: 'thematique', message: messages.selectTheme },
           { id: 'choixCommunication', message: messages.selectType },
-          { id: 'resumeFile', message: messages.uploadFile }
+          { id: 'resumeFileLink', message: messages.uploadLink }
         ];
 
         presenterRequiredFields.forEach(field => {
@@ -689,34 +662,17 @@ const t = useTranslations(locale);
           
           const errorMsg = element.parentElement?.querySelector('.error-message');
           
-          if (field.id === 'resumeFile') {
-            const fileInput = element;
-            if (!fileInput.files || fileInput.files.length === 0) {
-              element.classList.add('border-red-500');
-              if (errorMsg) {
-                errorMsg.textContent = field.message;
-                errorMsg.classList.remove('hidden');
-              }
-              isValid = false;
-            } else {
-              element.classList.remove('border-red-500');
-              if (errorMsg) {
-                errorMsg.classList.add('hidden');
-              }
+          if (!element.value.trim()) {
+            element.classList.add('border-red-500');
+            if (errorMsg) {
+              errorMsg.textContent = field.message;
+              errorMsg.classList.remove('hidden');
             }
+            isValid = false;
           } else {
-            if (!element.value.trim()) {
-              element.classList.add('border-red-500');
-              if (errorMsg) {
-                errorMsg.textContent = field.message;
-                errorMsg.classList.remove('hidden');
-              }
-              isValid = false;
-            } else {
-              element.classList.remove('border-red-500');
-              if (errorMsg) {
-                errorMsg.classList.add('hidden');
-              }
+            element.classList.remove('border-red-500');
+            if (errorMsg) {
+              errorMsg.classList.add('hidden');
             }
           }
         });

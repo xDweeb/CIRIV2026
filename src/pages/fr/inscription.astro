@@ -10,8 +10,24 @@ const t = useTranslations(locale);
 
 <BaseLayout
   title="Inscription - CIRIV 2026"
-  description="Inscrivez-vous au Congrès International de Recherche, Innovation et Valorisation CIRIV 2026"
-  locale={locale}
+  description="Inscrivez-vous au Congrès International de Recherche, Innovation et Valorisation CIRIV 2026"  // Google Apps Script endpoint
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
+
+  // Language-specific messages
+  const messages = {
+    sending: '⏳ Envoi...',
+    success: '✅ Votre inscription a été enregistrée avec succès.',
+    error: '❌ Erreur d\'envoi. Veuillez réessayer.',
+    networkError: '❌ Erreur réseau. Vérifiez votre connexion et réessayez.',
+    serverError: '❌ Erreur serveur. Veuillez réessayer plus tard.',
+    requiredField: 'Ce champ est obligatoire',
+    validEmail: 'Veuillez entrer un email valide',
+    selectStatus: 'Veuillez sélectionner votre statut',
+    selectParticipation: 'Veuillez sélectionner un type de participation',
+    selectTheme: 'Veuillez sélectionner une thématique',
+    selectType: 'Veuillez sélectionner un type',
+    uploadLink: 'Veuillez fournir un lien vers le fichier'
+  };}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
   

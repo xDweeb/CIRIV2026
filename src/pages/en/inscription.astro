@@ -426,367 +426,392 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registration-form') as HTMLFormElement | null;
-  const step1 = document.getElementById('step1');
-  const step2 = document.getElementById('step2');
-  const nextBtn = document.getElementById('next-step');
-  const prevBtn = document.getElementById('prev-step');
-  const submitBtn = document.getElementById('submit-form') as HTMLButtonElement | null;
-  const submitText = document.getElementById('submit-text');
-  const submitLoader = document.getElementById('submit-loader');
-  const step1Indicator = document.getElementById('step1-indicator');
-  const step2Indicator = document.getElementById('step2-indicator');
-  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
-  const presenterFields = document.getElementById('presenter-fields');
-
-  // Google Apps Script endpoint
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNXicq1tFTysQ3CKHOpghpB2zoCtpX-Qmx9QhTDM-DoF1XkdPLcAdTZxdlOhkRSrvFqA/exec";
-
-  // Language-specific messages
-  const messages = {
-    sending: '⏳ Submitting...',
-    success: '✅ Your registration has been successfully saved.',
-    error: '❌ Submission error. Please try again.',
-    networkError: '❌ Network error. Check your internet and try again.',
-    serverError: '❌ Server error. Please try again later.',
-    requiredField: 'This field is required',
-    validEmail: 'Please enter a valid email',
-    selectStatus: 'Please select your status',
-    selectParticipation: 'Please select a participation type',
-    selectTheme: 'Please select a theme',
-    selectType: 'Please select a type',
-    uploadFile: 'Please upload a file'
-  };
-
-  // Step navigation
-  if (nextBtn) {
-    nextBtn.addEventListener('click', function() {
-      if (validateStep1()) {
-        showStep2();
-      }
+  // Helper function to convert a file to a Base64 string
+  function toBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      // Resolve with the Base64 string (without the data: URL prefix)
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = error => reject(error);
     });
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', function() {
-      showStep1();
-    });
-  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registration-form');
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const nextBtn = document.getElementById('next-step');
+    const prevBtn = document.getElementById('prev-step');
+    const submitBtn = document.getElementById('submit-form');
+    const submitText = document.getElementById('submit-text');
+    const submitLoader = document.getElementById('submit-loader');
+    const step1Indicator = document.getElementById('step1-indicator');
+    const step2Indicator = document.getElementById('step2-indicator');
+    const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
+    const presenterFields = document.getElementById('presenter-fields');
 
-  // Participation type change
-  participationRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      const target = this as HTMLInputElement;
-      if (target.value === 'Presenter') {
-        presenterFields?.classList.remove('hidden');
-        makePresenterFieldsRequired(true);
-      } else {
-        presenterFields?.classList.add('hidden');
-        makePresenterFieldsRequired(false);
-      }
-    });
-  });
+    // Google Apps Script endpoint
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwj6L-AEkSV3cRcU09w-mIfINHchwM3nz6p1_5htBGJEiiu4q9WZgFbZsmR6u8p1uqpvg/exec";
 
-  // Form submission
-  if (form) {
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      
-      if (!validateStep2()) {
-        return;
-      }
+    // Language-specific messages
+    const messages = {
+      sending: '⏳ Submitting...',
+      success: '✅ Your registration has been successfully saved.',
+      error: '❌ Submission error. Please try again.',
+      networkError: '❌ Network error. Check your internet and try again.',
+      serverError: '❌ Server error. Please try again later.',
+      requiredField: 'This field is required',
+      validEmail: 'Please enter a valid email',
+      selectStatus: 'Please select your status',
+      selectParticipation: 'Please select a participation type',
+      selectTheme: 'Please select a theme',
+      selectType: 'Please select a type',
+      uploadFile: 'Please upload a file'
+    };
 
-      // Disable submit button and show loader
-      if (submitBtn) submitBtn.disabled = true;
-      submitText?.classList.add('hidden');
-      submitLoader?.classList.remove('hidden');
-      showAlert('loading', messages.sending);
-
-      try {
-        // Create FormData object
-        const formData = new FormData(form);
-        
-        // Handle combined "City, Country" field - split and add as separate fields
-        const villePays = ((formData.get('ville') as string) || ',').split(',');
-        formData.set('ville', villePays[0] ? villePays[0].trim() : '');
-        formData.append('pays', villePays[1] ? villePays[1].trim() : '');
-        
-        // Handle file upload with metadata
-        const fileInput = document.getElementById('resumeFile') as HTMLInputElement;
-        if (fileInput && fileInput.files && fileInput.files[0]) {
-          const file = fileInput.files[0];
-          formData.set('resumeFile', file);
-          formData.append('resumeFileName', file.name);
-          formData.append('resumeFileMimeType', file.type);
-          
-          console.log('📎 File info:', {
-            name: file.name,
-            type: file.type,
-            size: file.size
-          });
+    // Step navigation
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        if (validateStep1()) {
+          showStep2();
         }
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        showStep1();
+      });
+    }
+
+    // Participation type change
+    participationRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        const target = this;
+        if (target.value === 'Presenter') {
+          presenterFields?.classList.remove('hidden');
+          makePresenterFieldsRequired(true);
+        } else {
+          presenterFields?.classList.add('hidden');
+          makePresenterFieldsRequired(false);
+        }
+      });
+    });
+
+    // Form submission
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
         
-        console.log("📤 Sending FormData with fields:");
-        for (let [key, value] of formData.entries()) {
-          if (value instanceof File) {
-            console.log(`${key}: File(${value.name}, ${value.size} bytes)`);
+        if (!validateStep2()) {
+          return;
+        }
+
+        // Disable submit button and show loader
+        if (submitBtn) submitBtn.disabled = true;
+        submitText?.classList.add('hidden');
+        submitLoader?.classList.remove('hidden');
+        showAlert('loading', messages.sending);
+
+        try {
+          // Create a plain object from form data
+          const formData = new FormData(form);
+          const formValues = Object.fromEntries(formData.entries());
+          
+          // Build the final JSON payload
+          const payload = {
+              nom: formValues.nom,
+              prenom: formValues.prenom,
+              civilite: formValues.civilite,
+              email: formValues.email,
+              telephone: formValues.telephone,
+              etablissement: formValues.etablissement,
+              departement: formValues.departement,
+              statut: formValues.statut,
+              typeParticipation: formValues.typeParticipation,
+              titreCommunication: formValues.titreCommunication,
+              auteurs: formValues.auteurs,
+              auteurCorrespondant: formValues.auteurCorrespondant,
+              thematique: formValues.thematique,
+              choixCommunication: formValues.choixCommunication,
+          };
+          
+          // Split the 'ville' field into 'ville' and 'pays'
+          const [ville, pays] = (formValues.ville || ',').split(',').map(s => s.trim());
+          payload.ville = ville;
+          payload.pays = pays || '';
+
+          // Handle the file input: read as Base64 and attach to payload
+          const fileInput = document.getElementById('resumeFile');
+          if (fileInput && fileInput.files && fileInput.files[0]) {
+              const file = fileInput.files[0];
+              const base64Data = await toBase64(file);
+              payload.resumeFile = {
+                  name: file.name,
+                  type: file.type,
+                  data: base64Data
+              };
           } else {
-            console.log(`${key}: ${value}`);
+              payload.resumeFile = null;
           }
-        }
-        
-        const response = await fetch(SCRIPT_URL, {
-          method: 'POST',
-          body: formData
-        });
 
-        console.log('📡 Response status:', response.status);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP Error: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log('📥 Response data:', result);
-
-        if (result.ok === true) {
-          showAlert('success', messages.success);
-          if (result.fileUrl) {
-            console.log('✅ File uploaded successfully:', result.fileUrl);
-          }
-          form.reset();
-          showStep1();
+          console.log("📤 Sending JSON payload:", payload);
           
-          // Auto-hide success message after 5 seconds
-          setTimeout(() => {
-            hideAlert();
-          }, 5000);
-        } else {
-          showAlert('error', result.error || messages.error);
-        }
-        
-      } catch (error) {
-        console.error('❌ Submission error:', error);
-        
-        const errorMessage = (error as Error).message;
-        if (errorMessage.includes('fetch') || errorMessage.includes('NetworkError')) {
-          showAlert('error', messages.networkError);
-        } else if (errorMessage.includes('HTTP')) {
-          showAlert('error', messages.serverError);
-        } else {
-          showAlert('error', messages.error);
-        }
-      } finally {
-        // Re-enable submit button and hide loader
-        if (submitBtn) submitBtn.disabled = false;
-        submitText?.classList.remove('hidden');
-        submitLoader?.classList.add('hidden');
-      }
-    });
-  }
+          const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+          });
 
-  function validateStep1() {
-    let isValid = true;
-    const requiredFields = [
-      { id: 'nom', message: messages.requiredField },
-      { id: 'prenom', message: messages.requiredField },
-      { id: 'email', message: messages.validEmail },
-      { id: 'etablissement', message: messages.requiredField },
-      { id: 'ville', message: messages.requiredField },
-      { id: 'statut', message: messages.selectStatus }
-    ];
+          console.log('📡 Response status:', response.status);
+          
+          if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+          }
 
-    requiredFields.forEach(field => {
-      const element = document.getElementById(field.id) as HTMLInputElement | null;
-      if (!element) return;
-      
-      const errorMsg = element.parentElement?.
-      querySelector('.error-message');
-      
-      if (!element.value.trim()) {
-        element.classList.add('border-red-500');
-        if (errorMsg) {
-          errorMsg.textContent = field.message;
-          errorMsg.classList.remove('hidden');
-        }
-        isValid = false;
-      } else {
-        element.classList.remove('border-red-500');
-        if (errorMsg) {
-          errorMsg.classList.add('hidden');
-        }
-      }
-    });
+          const result = await response.json();
+          console.log('📥 Response data:', result);
 
-    // Email validation
-    const emailField = document.getElementById('email') as HTMLInputElement | null;
-    if (emailField) {
-      const emailErrorMsg = emailField.parentElement?.querySelector('.error-message');
-      if (emailField.value.trim() && !isValidEmail(emailField.value)) {
-        emailField.classList.add('border-red-500');
-        if (emailErrorMsg) {
-          emailErrorMsg.textContent = messages.validEmail;
-          emailErrorMsg.classList.remove('hidden');
+          if (result.ok === true) {
+            showAlert('success', messages.success);
+            if (result.fileUrl) {
+              console.log('✅ File uploaded successfully:', result.fileUrl);
+            }
+            form.reset();
+            showStep1();
+            
+            // Auto-hide success message after 5 seconds
+            setTimeout(() => {
+              hideAlert();
+            }, 5000);
+          } else {
+            showAlert('error', result.error || messages.error);
+          }
+          
+        } catch (error) {
+          console.error('❌ Submission error:', error);
+          
+          const errorMessage = error.message;
+          if (errorMessage.includes('fetch') || errorMessage.includes('NetworkError')) {
+            showAlert('error', messages.networkError);
+          } else if (errorMessage.includes('HTTP')) {
+            showAlert('error', messages.serverError);
+          } else {
+            showAlert('error', messages.error);
+          }
+        } finally {
+          // Re-enable submit button and hide loader
+          if (submitBtn) submitBtn.disabled = false;
+          submitText?.classList.remove('hidden');
+          submitLoader?.classList.add('hidden');
         }
-        isValid = false;
-      }
+      });
     }
 
-    return isValid;
-  }
-
-  function validateStep2() {
-    let isValid = true;
-    const participationType = document.querySelector('input[name="typeParticipation"]:checked') as HTMLInputElement | null;
-    const participationError = document.querySelector('input[name="typeParticipation"]')?.parentElement?.parentElement?.querySelector('.error-message');
-    
-    if (!participationType) {
-      participationError?.classList.remove('hidden');
-      isValid = false;
-    } else {
-      participationError?.classList.add('hidden');
-    }
-
-    if (participationType && participationType.value === 'Presenter') {
-      const presenterRequiredFields = [
-        { id: 'titreCommunication', message: messages.requiredField },
-        { id: 'auteurs', message: messages.requiredField },
-        { id: 'auteurCorrespondant', message: messages.requiredField },
-        { id: 'thematique', message: messages.selectTheme },
-        { id: 'choixCommunication', message: messages.selectType },
-        { id: 'resumeFile', message: messages.uploadFile }
+    function validateStep1() {
+      let isValid = true;
+      const requiredFields = [
+        { id: 'nom', message: messages.requiredField },
+        { id: 'prenom', message: messages.requiredField },
+        { id: 'email', message: messages.validEmail },
+        { id: 'etablissement', message: messages.requiredField },
+        { id: 'ville', message: messages.requiredField },
+        { id: 'statut', message: messages.selectStatus }
       ];
 
-      presenterRequiredFields.forEach(field => {
-        const element = document.getElementById(field.id) as HTMLInputElement | HTMLSelectElement | null;
+      requiredFields.forEach(field => {
+        const element = document.getElementById(field.id);
         if (!element) return;
         
-        const errorMsg = element.parentElement?.querySelector('.error-message');
+        const errorMsg = element.parentElement?.
+        querySelector('.error-message');
         
-        if (field.id === 'resumeFile') {
-          const fileInput = element as HTMLInputElement;
-          if (!fileInput.files || fileInput.files.length === 0) {
-            element.classList.add('border-red-500');
-            if (errorMsg) {
-              errorMsg.textContent = field.message;
-              errorMsg.classList.remove('hidden');
+        if (!element.value.trim()) {
+          element.classList.add('border-red-500');
+          if (errorMsg) {
+            errorMsg.textContent = field.message;
+            errorMsg.classList.remove('hidden');
+          }
+          isValid = false;
+        } else {
+          element.classList.remove('border-red-500');
+          if (errorMsg) {
+            errorMsg.classList.add('hidden');
+          }
+        }
+      });
+
+      // Email validation
+      const emailField = document.getElementById('email');
+      if (emailField) {
+        const emailErrorMsg = emailField.parentElement?.querySelector('.error-message');
+        if (emailField.value.trim() && !isValidEmail(emailField.value)) {
+          emailField.classList.add('border-red-500');
+          if (emailErrorMsg) {
+            emailErrorMsg.textContent = messages.validEmail;
+            emailErrorMsg.classList.remove('hidden');
+          }
+          isValid = false;
+        }
+      }
+
+      return isValid;
+    }
+
+    function validateStep2() {
+      let isValid = true;
+      const participationType = document.querySelector('input[name="typeParticipation"]:checked');
+      const participationError = document.querySelector('input[name="typeParticipation"]')?.parentElement?.parentElement?.querySelector('.error-message');
+      
+      if (!participationType) {
+        participationError?.classList.remove('hidden');
+        isValid = false;
+      } else {
+        participationError?.classList.add('hidden');
+      }
+
+      if (participationType && participationType.value === 'Presenter') {
+        const presenterRequiredFields = [
+          { id: 'titreCommunication', message: messages.requiredField },
+          { id: 'auteurs', message: messages.requiredField },
+          { id: 'auteurCorrespondant', message: messages.requiredField },
+          { id: 'thematique', message: messages.selectTheme },
+          { id: 'choixCommunication', message: messages.selectType },
+          { id: 'resumeFile', message: messages.uploadFile }
+        ];
+
+        presenterRequiredFields.forEach(field => {
+          const element = document.getElementById(field.id);
+          if (!element) return;
+          
+          const errorMsg = element.parentElement?.querySelector('.error-message');
+          
+          if (field.id === 'resumeFile') {
+            const fileInput = element;
+            if (!fileInput.files || fileInput.files.length === 0) {
+              element.classList.add('border-red-500');
+              if (errorMsg) {
+                errorMsg.textContent = field.message;
+                errorMsg.classList.remove('hidden');
+              }
+              isValid = false;
+            } else {
+              element.classList.remove('border-red-500');
+              if (errorMsg) {
+                errorMsg.classList.add('hidden');
+              }
             }
-            isValid = false;
           } else {
-            element.classList.remove('border-red-500');
-            if (errorMsg) {
-              errorMsg.classList.add('hidden');
+            if (!element.value.trim()) {
+              element.classList.add('border-red-500');
+              if (errorMsg) {
+                errorMsg.textContent = field.message;
+                errorMsg.classList.remove('hidden');
+              }
+              isValid = false;
+            } else {
+              element.classList.remove('border-red-500');
+              if (errorMsg) {
+                errorMsg.classList.add('hidden');
+              }
             }
           }
+        });
+      }
+
+      return isValid;
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function showStep1() {
+      step1?.classList.remove('hidden');
+      step2?.classList.add('hidden');
+      step1Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+      step1Indicator?.classList.add('bg-brand-primary', 'text-white');
+      step2Indicator?.classList.remove('bg-brand-primary', 'text-white');
+      step2Indicator?.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showStep2() {
+      step1?.classList.add('hidden');
+      step2?.classList.remove('hidden');
+      step2Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+      step2Indicator?.classList.add('bg-brand-primary', 'text-white');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function makePresenterFieldsRequired(required) {
+      const presenterInputs = presenterFields?.querySelectorAll('input, select');
+      presenterInputs?.forEach(input => {
+        if (required) {
+          input.setAttribute('required', 'required');
         } else {
-          if (!element.value.trim()) {
-            element.classList.add('border-red-500');
-            if (errorMsg) {
-              errorMsg.textContent = field.message;
-              errorMsg.classList.remove('hidden');
-            }
-            isValid = false;
-          } else {
-            element.classList.remove('border-red-500');
-            if (errorMsg) {
-              errorMsg.classList.add('hidden');
-            }
+          input.removeAttribute('required');
+          input.classList.remove('border-red-500');
+          const errorMsg = input.parentElement?.querySelector('.error-message');
+          if (errorMsg) {
+            errorMsg.classList.add('hidden');
           }
         }
       });
     }
 
-    return isValid;
-  }
+    function showAlert(type, message) {
+      const alertContainer = document.getElementById('alert-container');
+      const alertContent = document.getElementById('alert-content');
+      const alertIcon = document.getElementById('alert-icon');
+      const alertMessage = document.getElementById('alert-message');
 
-  function isValidEmail(email: string) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
+      if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
 
-  function showStep1() {
-    step1?.classList.remove('hidden');
-    step2?.classList.add('hidden');
-    step1Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step1Indicator?.classList.add('bg-brand-primary', 'text-white');
-    step2Indicator?.classList.remove('bg-brand-primary', 'text-white');
-    step2Indicator?.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function showStep2() {
-    step1?.classList.add('hidden');
-    step2?.classList.remove('hidden');
-    step2Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-    step2Indicator?.classList.add('bg-brand-primary', 'text-white');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function makePresenterFieldsRequired(required: boolean) {
-    const presenterInputs = presenterFields?.querySelectorAll('input, select');
-    presenterInputs?.forEach(input => {
-      if (required) {
-        input.setAttribute('required', 'required');
-      } else {
-        input.removeAttribute('required');
-        input.classList.remove('border-red-500');
-        const errorMsg = input.parentElement?.querySelector('.error-message');
-        if (errorMsg) {
-          errorMsg.classList.add('hidden');
-        }
+      alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out';
+      
+      if (type === 'loading') {
+        alertContent.classList.add('bg-blue-500', 'text-white');
+        alertIcon.innerHTML = '<svg class="animate-spin w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+      } else if (type === 'success') {
+        alertContent.classList.add('bg-green-500', 'text-white');
+        alertIcon.innerHTML = '✅';
+      } else if (type === 'error') {
+        alertContent.classList.add('bg-red-500', 'text-white');
+        alertIcon.innerHTML = '❌';
       }
-    });
-  }
 
-  function showAlert(type: string, message: string) {
-    const alertContainer = document.getElementById('alert-container');
-    const alertContent = document.getElementById('alert-content');
-    const alertIcon = document.getElementById('alert-icon');
-    const alertMessage = document.getElementById('alert-message');
-
-    if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
-
-    alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out';
-    
-    if (type === 'loading') {
-      alertContent.classList.add('bg-blue-500', 'text-white');
-      alertIcon.innerHTML = '<svg class="animate-spin w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
-    } else if (type === 'success') {
-      alertContent.classList.add('bg-green-500', 'text-white');
-      alertIcon.innerHTML = '✅';
-    } else if (type === 'error') {
-      alertContent.classList.add('bg-red-500', 'text-white');
-      alertIcon.innerHTML = '❌';
+      alertMessage.textContent = message;
+      alertContainer.classList.remove('hidden');
+      
+      setTimeout(() => {
+        alertContent.classList.add('opacity-100', 'translate-y-0');
+      }, 100);
     }
 
-    alertMessage.textContent = message;
-    alertContainer.classList.remove('hidden');
-    
-    setTimeout(() => {
-      alertContent.classList.add('opacity-100', 'translate-y-0');
-    }, 100);
-  }
+    function hideAlert() {
+      const alertContainer = document.getElementById('alert-container');
+      const alertContent = document.getElementById('alert-content');
+      
+      if (!alertContainer || !alertContent) return;
+      
+      alertContent.classList.remove('opacity-100', 'translate-y-0');
+      alertContent.classList.add('opacity-0', 'translate-y-[-20px]');
+      
+      setTimeout(() => {
+        alertContainer.classList.add('hidden');
+      }, 500);
+    }
 
-  function hideAlert() {
-    const alertContainer = document.getElementById('alert-container');
-    const alertContent = document.getElementById('alert-content');
-    
-    if (!alertContainer || !alertContent) return;
-    
-    alertContent.classList.remove('opacity-100', 'translate-y-0');
-    alertContent.classList.add('opacity-0', 'translate-y-[-20px]');
-    
-    setTimeout(() => {
-      alertContainer.classList.add('hidden');
-    }, 500);
-  }
-
-  const alertCloseBtn = document.getElementById('alert-close');
-  if (alertCloseBtn) {
-    alertCloseBtn.addEventListener('click', hideAlert);
-  }
-});
+    const alertCloseBtn = document.getElementById('alert-close');
+    if (alertCloseBtn) {
+      alertCloseBtn.addEventListener('click', hideAlert);
+    }
+  });
 </script>
 
 <style>

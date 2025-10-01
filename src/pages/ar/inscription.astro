@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const presenterFields = document.getElementById('presenter-fields');
 
   // Google Apps Script endpoint
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwiyodpAhAehpXE7vJeHmDLeB0HaYbq5S2prP64YR6vNmGEMuA-p2Q-N02PKxod44pi6A/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwF10Hb9L8JLJsut0X2bhKTUgJJetz81EnCUW6B5OWMR5N3SSBHrnpTHnUE_SYnXT1XgQ/exec';
 
   // Language-specific messages
   const messages = {
@@ -499,14 +499,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       const formData = collectFormData();
-      console.log('📤 إرسال البيانات:', formData);
+      console.log("Form data being sent:", Object.fromEntries(formData.entries()));
       
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(formData)
+        body: new URLSearchParams(formData).toString()
       });
 
       console.log('📡 حالة الاستجابة:', response.status);
@@ -518,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const result = await response.json();
       console.log('📥 بيانات الاستجابة:', result);
 
-      if (result.success === true) {
+      if (result.ok === true) {
         showAlert('success', messages.success);
         form.reset();
         showStep1();
@@ -699,45 +699,35 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function collectFormData() {
-    const formData = new FormData(form);
-    
-    // Structure data to match Google Sheets columns
-    const data = {
-      // Required fields
-      nom: formData.get('nom') || '',
-      prenom: formData.get('prenom') || '',
-      email: formData.get('email') || '',
-      etablissement: formData.get('etablissement') || '',
-      ville: formData.get('ville') || '',
-      statut: formData.get('statut') || '',
-      typeParticipation: formData.get('typeParticipation') || '',
-      
-      // Optional fields
-      civilite: formData.get('civilite') || '',
-      telephone: formData.get('telephone') || '',
-      departement: formData.get('departement') || '',
-      
-      // Presenter fields (if applicable)
-      titreCommunication: formData.get('titreCommunication') || '',
-      auteurs: formData.get('auteurs') || '',
-      auteurCorrespondant: formData.get('auteurCorrespondant') || '',
-      thematique: formData.get('thematique') || '',
-      choixCommunication: formData.get('choixCommunication') || '',
-      
-      // File upload (for now, just store filename)
-      resumeFileURL: ''
-    };
+    const rawFormData = new FormData(form);
+    const formDataForSheet = new FormData();
 
-    // Handle file upload
-    const fileInput = document.getElementById('resumeFile');
-    if (fileInput && fileInput.files[0]) {
-      data.resumeFileURL = fileInput.files[0].name;
+    // Direct mapping for most fields
+    const fields = [
+      'nom', 'prenom', 'civilite', 'email', 'telephone', 
+      'etablissement', 'departement', 'statut', 'typeParticipation',
+      'titreCommunication', 'auteurs', 'auteurCorrespondant', 
+      'thematique', 'choixCommunication'
+    ];
+
+    fields.forEach(field => {
+      formDataForSheet.append(field, rawFormData.get(field) || '');
+    });
+
+    // Handle combined "City, Country" field
+    const villePays = (rawFormData.get('ville') || ',').split(',');
+    formDataForSheet.append('ville', villePays[0] ? villePays[0].trim() : '');
+    formDataForSheet.append('pays', villePays[1] ? villePays[1].trim() : '');
+
+    // Handle file input - append filename
+    const resumeInput = document.getElementById('resumeFile');
+    if (resumeInput && resumeInput.files.length > 0) {
+      formDataForSheet.append('resumeFile', resumeInput.files[0].name);
+    } else {
+      formDataForSheet.append('resumeFile', '');
     }
 
-    // Add timestamp for tracking
-    data.timestamp = new Date().toISOString();
-
-    return data;
+    return formDataForSheet;
   }
 
   function showAlert(type, message) {

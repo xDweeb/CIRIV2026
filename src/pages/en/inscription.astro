@@ -499,6 +499,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     try {
       const formData = new FormData(form);
+      
+      // Handle file upload - convert to Base64
+      const resumeFileInput = document.getElementById('resumeFile');
+      if (resumeFileInput && resumeFileInput.files.length > 0) {
+        const file = resumeFileInput.files[0];
+        const base64String = await convertFileToBase64(file);
+        
+        // Replace file with Base64 data and metadata
+        formData.delete('resumeFile');
+        formData.append('resumeFile', base64String);
+        formData.append('resumeFileName', file.name);
+        formData.append('resumeFileType', file.type);
+      }
+      
       console.log("📤 Sending:", [...formData.entries()]);
       
       const response = await fetch(SCRIPT_URL, {
@@ -546,6 +560,20 @@ document.addEventListener('DOMContentLoaded', function() {
       submitLoader.classList.add('hidden');
     }
   });
+
+  // Helper function to convert file to Base64
+  function convertFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // Remove the data:image/jpeg;base64, prefix to get just the Base64 string
+        const base64String = reader.result.split(',')[1];
+        resolve(base64String);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
 
   function validateStep1() {
     let isValid = true;

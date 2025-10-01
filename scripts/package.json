@@ -1,0 +1,12 @@
+{
+  "name": "ciriv-favicon-generator",
+  "version": "1.0.0",
+  "description": "Generate favicons for CIRIV 2026 project",
+  "main": "generate-favicons.js",
+  "scripts": {
+    "generate-favicons": "node generate-favicons.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.32.0"
+  }
+}

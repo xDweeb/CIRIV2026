@@ -18,7 +18,6 @@ const t = useTranslations(locale);
   <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
     <div class="container mx-auto px-4">
       <div class="max-w-4xl mx-auto">
-        <!-- Alert Messages -->
         <div id="alert-container" class="mb-6 hidden">
           <div id="alert-content" class="rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]">
             <div id="alert-icon" class="flex-shrink-0 text-2xl"></div>
@@ -33,7 +32,6 @@ const t = useTranslations(locale);
           </div>
         </div>
 
-        <!-- Header -->
         <div class="text-center mb-12">
           <h1 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">
             CIRIV 2026 Registration
@@ -43,7 +41,6 @@ const t = useTranslations(locale);
           </p>
         </div>
 
-        <!-- Progress Bar -->
         <div class="mb-8">
           <div class="flex items-center justify-center space-x-4">
             <div class="flex items-center">
@@ -62,159 +59,92 @@ const t = useTranslations(locale);
           </div>
         </div>
 
-        <!-- Registration Form -->
         <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8">
-          <form id="registration-form" class="space-y-6">
+          <form id="registration-form" class="space-y-6" novalidate>
             
-            <!-- Step 1: Personal Information -->
             <div id="step1" class="space-y-6">
               <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
                 Step 1: Personal Information
               </h2>
 
               <div class="grid md:grid-cols-2 gap-6">
-                <!-- Last Name -->
                 <div>
                   <label for="nom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Last Name <span class="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="nom"
-                    name="nom"
-                    required
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="Your last name"
-                  />
+                  <input type="text" id="nom" name="nom" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Your last name" />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                 </div>
 
-                <!-- First Name -->
                 <div>
                   <label for="prenom" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     First Name <span class="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="prenom"
-                    name="prenom"
-                    required
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="Your first name"
-                  />
+                  <input type="text" id="prenom" name="prenom" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Your first name" />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
-                <!-- Title -->
                 <div>
                   <label for="civilite" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Title / Gender
                   </label>
-                  <select
-                    id="civilite"
-                    name="civilite"
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                  >
+                  <select id="civilite" name="civilite" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
                     <option value="">Select</option>
                     <option value="Mr.">Mr.</option>
                     <option value="Ms.">Ms.</option>
                   </select>
                 </div>
 
-                <!-- Email -->
                 <div>
                   <label for="email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Email <span class="text-red-500">*</span>
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="your@email.com"
-                  />
+                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="your@email.com" />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">Please enter a valid email</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
-                <!-- Phone -->
                 <div>
                   <label for="telephone" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Phone
                   </label>
-                  <input
-                    type="tel"
-                    id="telephone"
-                    name="telephone"
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="+212 6XX-XXXXXX"
-                  />
+                  <input type="tel" id="telephone" name="telephone" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="+212 6XX-XXXXXX" />
                 </div>
 
-                <!-- Institution -->
                 <div>
                   <label for="etablissement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Institution <span class="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="etablissement"
-                    name="etablissement"
-                    required
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="Your institution name"
-                  />
+                  <input type="text" id="etablissement" name="etablissement" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Your institution name" />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                 </div>
               </div>
 
               <div class="grid md:grid-cols-2 gap-6">
-                <!-- Laboratory / Department -->
                 <div>
                   <label for="departement" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     Laboratory / Department
                   </label>
-                  <input
-                    type="text"
-                    id="departement"
-                    name="departement"
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="Laboratory or department"
-                  />
+                  <input type="text" id="departement" name="departement" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Laboratory or department" />
                 </div>
 
-                <!-- City & Country -->
                 <div>
                   <label for="ville" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                     City & Country <span class="text-red-500">*</span>
                   </label>
-                  <input
-                    type="text"
-                    id="ville"
-                    name="ville"
-                    required
-                    class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                    placeholder="City, Country"
-                  />
+                  <input type="text" id="ville" name="ville" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="City, Country" />
                   <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                 </div>
               </div>
 
-              <!-- Status -->
               <div>
                 <label for="statut" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Status <span class="text-red-500">*</span>
                 </label>
-                <select
-                  id="statut"
-                  name="statut"
-                  required
-                  class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                >
+                <select id="statut" name="statut" required class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
                   <option value="">Select your status</option>
                   <option value="Student">Student</option>
                   <option value="PhD Student">PhD Student</option>
@@ -225,49 +155,32 @@ const t = useTranslations(locale);
                 <p class="text-red-500 text-xs mt-1 hidden error-message">Please select your status</p>
               </div>
 
-              <!-- Next Button -->
               <div class="flex justify-end">
-                <button
-                  type="button"
-                  id="next-step"
-                  class="px-8 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
-                >
+                <button type="button" id="next-step" class="px-8 py-3 bg-brand-primary hover:bg-brand-primaryDark text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800">
                   Next →
                 </button>
               </div>
             </div>
 
-            <!-- Step 2: Participation Type -->
             <div id="step2" class="space-y-6 hidden">
               <h2 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
                 Step 2: Participation Type
               </h2>
 
-              <!-- Participation Type -->
               <div>
                 <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-4">
                   How would you like to participate? <span class="text-red-500">*</span>
                 </label>
                 <div class="space-y-3">
                   <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
-                    <input
-                      type="radio"
-                      name="typeParticipation"
-                      value="Participant"
-                      class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600"
-                    />
+                    <input type="radio" name="typeParticipation" value="Participant" class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600" />
                     <div class="ml-3">
                       <div class="text-sm font-medium text-slate-900 dark:text-white">Participant</div>
                       <div class="text-sm text-slate-500 dark:text-slate-400">Attend conferences and participate in discussions</div>
                     </div>
                   </label>
                   <label class="flex items-center p-4 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 cursor-pointer transition-colors">
-                    <input
-                      type="radio"
-                      name="typeParticipation"
-                      value="Presenter"
-                      class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600"
-                    />
+                    <input type="radio" name="typeParticipation" value="Presenter" class="w-4 h-4 text-brand-primary focus:ring-brand-accent border-slate-300 dark:border-slate-600" />
                     <div class="ml-3">
                       <div class="text-sm font-medium text-slate-900 dark:text-white">Presenter</div>
                       <div class="text-sm text-slate-500 dark:text-slate-400">Present a communication (oral or poster)</div>
@@ -277,71 +190,44 @@ const t = useTranslations(locale);
                 <p class="text-red-500 text-xs mt-1 hidden error-message">Please select a participation type</p>
               </div>
 
-              <!-- Presenter Fields (Hidden by default) -->
               <div id="presenter-fields" class="space-y-6 hidden">
                 <div class="border-t border-slate-200 dark:border-slate-700 pt-6">
                   <h3 class="text-lg font-medium text-slate-900 dark:text-white mb-4">
                     Information about your presentation
                   </h3>
 
-                  <!-- Presentation Title -->
                   <div class="mb-4">
                     <label for="titreCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                       Presentation Title <span class="text-red-500">*</span>
                     </label>
-                    <input
-                      type="text"
-                      id="titreCommunication"
-                      name="titreCommunication"
-                      class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                      placeholder="Title of your presentation"
-                    />
+                    <input type="text" id="titreCommunication" name="titreCommunication" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Title of your presentation" />
                     <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                   </div>
 
                   <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Authors -->
                     <div>
                       <label for="auteurs" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         Authors <span class="text-red-500">*</span>
                       </label>
-                      <input
-                        type="text"
-                        id="auteurs"
-                        name="auteurs"
-                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                        placeholder="Name1, Name2, Name3..."
-                      />
+                      <input type="text" id="auteurs" name="auteurs" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Name1, Name2, Name3..." />
                       <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                     </div>
 
-                    <!-- Corresponding Author -->
                     <div>
                       <label for="auteurCorrespondant" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         Corresponding Author <span class="text-red-500">*</span>
                       </label>
-                      <input
-                        type="text"
-                        id="auteurCorrespondant"
-                        name="auteurCorrespondant"
-                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                        placeholder="Name and email of corresponding author"
-                      />
+                      <input type="text" id="auteurCorrespondant" name="auteurCorrespondant" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="Name and email of corresponding author" />
                       <p class="text-red-500 text-xs mt-1 hidden error-message">This field is required</p>
                     </div>
                   </div>
 
                   <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Theme -->
                     <div>
                       <label for="thematique" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         Theme <span class="text-red-500">*</span>
                       </label>
-                      <select
-                        id="thematique"
-                        name="thematique"
-                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                      >
+                      <select id="thematique" name="thematique" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
                         <option value="">Select a theme</option>
                         <option value="Human Health">Human Health</option>
                         <option value="Animal Health">Animal Health</option>
@@ -351,16 +237,11 @@ const t = useTranslations(locale);
                       <p class="text-red-500 text-xs mt-1 hidden error-message">Please select a theme</p>
                     </div>
 
-                    <!-- Communication Type -->
                     <div>
                       <label for="choixCommunication" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                         Communication Type <span class="text-red-500">*</span>
                       </label>
-                      <select
-                        id="choixCommunication"
-                        name="choixCommunication"
-                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                      >
+                      <select id="choixCommunication" name="choixCommunication" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200">
                         <option value="">Select type</option>
                         <option value="Oral Communication">Oral Communication</option>
                         <option value="Poster Communication">Poster Communication</option>
@@ -369,49 +250,36 @@ const t = useTranslations(locale);
                     </div>
                   </div>
 
-                  <!-- Abstract File Link -->
                   <div>
                     <label for="resumeFileLink" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                      Abstract (file link) <span class="text-red-500">*</span>
+                      Abstract (File Link) <span class="text-red-500">*</span>
                     </label>
                     <div class="relative">
-                      <input
-                        type="url"
-                        id="resumeFileLink"
-                        name="resumeFileLink"
-                        class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200"
-                        placeholder="https://drive.google.com/file/d/... or https://dropbox.com/..."
-                      />
+                      <input type="url" id="resumeFileLink" name="resumeFileLink" class="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent dark:bg-slate-700 dark:text-white transition-all duration-200" placeholder="https://drive.google.com/..." />
                     </div>
                     <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-                      Please upload your abstract to Google Drive, Dropbox, or OneDrive and paste the shareable link here
+                      Upload your abstract to Drive/Dropbox and paste the shareable link here.
                     </p>
                     <p class="text-red-500 text-xs mt-1 hidden error-message">Please provide a file link</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Navigation Buttons -->
               <div class="flex justify-between pt-6">
-                <button
-                  type="button"
-                  id="prev-step"
-                  class="px-8 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
-                >
+                <button type="button" id="prev-step" class="px-8 py-3 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                   ← Previous
                 </button>
-                <button
-                  type="submit"
-                  id="submit-form"
-                  class="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  <span id="submit-text">Submit Registration</span>
-                  <span id="submit-loader" class="hidden">
-                    <svg class="animate-spin inline-block w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
+                <button type="submit" id="submit-form" class="relative px-8 py-3 w-48 text-white font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-800 disabled:cursor-not-allowed">
+                  <span class="button-content-wrapper">
+                    <span class="button-text">Submit Registration</span>
+                    <span class="button-icon spinner hidden">
+                       <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    </span>
+                    <span class="button-icon checkmark hidden">✅</span>
+                    <span class="button-icon cross hidden">❌</span>
                   </span>
                 </button>
               </div>
@@ -426,228 +294,203 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registration-form');
-    const step1 = document.getElementById('step1');
-    const step2 = document.getElementById('step2');
-    const nextBtn = document.getElementById('next-step');
-    const prevBtn = document.getElementById('prev-step');
-    const submitBtn = document.getElementById('submit-form');
-    const submitText = document.getElementById('submit-text');
-    const submitLoader = document.getElementById('submit-loader');
-    const step1Indicator = document.getElementById('step1-indicator');
-    const step2Indicator = document.getElementById('step2-indicator');
-    const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
-    const presenterFields = document.getElementById('presenter-fields');
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('registration-form');
+  const step1 = document.getElementById('step1');
+  const step2 = document.getElementById('step2');
+  const nextBtn = document.getElementById('next-step');
+  const prevBtn = document.getElementById('prev-step');
+  const submitBtn = document.getElementById('submit-form');
+  const step1Indicator = document.getElementById('step1-indicator');
+  const step2Indicator = document.getElementById('step2-indicator');
+  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
+  const presenterFields = document.getElementById('presenter-fields');
 
-    // Google Apps Script endpoint
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzlnZkAIS49uTILfeKGJzDl8kemtoB3MNXSKHfAJ9h4Mj8iVp2sqllXOz6WQjJbNOwh4w/exec";
 
-    // Language-specific messages
-    const messages = {
-      sending: '⏳ Submitting...',
-      success: '✅ Your registration has been successfully saved.',
-      error: '❌ Submission error. Please try again.',
-      networkError: '❌ Network error. Check your internet and try again.',
-      serverError: '❌ Server error. Please try again later.',
-      requiredField: 'This field is required',
-      validEmail: 'Please enter a valid email',
-      selectStatus: 'Please select your status',
-      selectParticipation: 'Please select a participation type',
-      selectTheme: 'Please select a theme',
-      selectType: 'Please select a type',
-      uploadLink: 'Please provide a file link'
-    };
+  const messages = {
+    success: '✅ Your registration has been successfully saved.',
+    error: '❌ Submission error. Please try again.',
+    networkError: '❌ Network error. Check your internet and try again.',
+    requiredField: 'This field is required',
+    validEmail: 'Please enter a valid email',
+    selectStatus: 'Please select your status',
+    selectParticipation: 'Please select a participation type',
+    selectTheme: 'Please select a theme',
+    selectType: 'Please select a type',
+    uploadLink: 'Please provide a file link'
+  };
 
-    // Step navigation
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function() {
-        if (validateStep1()) {
-          showStep2();
-        }
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function() {
-        showStep1();
-      });
-    }
-
-    // Participation type change
-    participationRadios.forEach(radio => {
-      radio.addEventListener('change', function() {
-        const target = this;
-        if (target.value === 'Presenter') {
-          presenterFields?.classList.remove('hidden');
-          makePresenterFieldsRequired(true);
-        } else {
-          presenterFields?.classList.add('hidden');
-          makePresenterFieldsRequired(false);
-        }
-      });
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function() {
+      if (validateStep1()) {
+        showStep2();
+      }
     });
+  }
 
-    // Form submission
-    if (form) {
-      form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        if (!validateStep2()) {
-          return;
-        }
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function() {
+      showStep1();
+    });
+  }
 
-        // Disable submit button and show loader
-        if (submitBtn) submitBtn.disabled = true;
-        submitText?.classList.add('hidden');
-        submitLoader?.classList.remove('hidden');
-        showAlert('loading', messages.sending);
-
-        try {
-          // Create a plain object from form data
-          const formData = new FormData(form);
-          const formValues = Object.fromEntries(formData.entries());
-          
-          // Build the final JSON payload
-          const payload = {
-              nom: formValues.nom,
-              prenom: formValues.prenom,
-              civilite: formValues.civilite,
-              email: formValues.email,
-              telephone: formValues.telephone,
-              etablissement: formValues.etablissement,
-              departement: formValues.departement,
-              statut: formValues.statut,
-              typeParticipation: formValues.typeParticipation,
-              titreCommunication: formValues.titreCommunication,
-              auteurs: formValues.auteurs,
-              auteurCorrespondant: formValues.auteurCorrespondant,
-              thematique: formValues.thematique,
-              choixCommunication: formValues.choixCommunication,
-              resumeFileLink: formValues.resumeFileLink || ''
-          };
-          
-          // Split the 'ville' field into 'ville' and 'pays'
-          const [ville, pays] = (formValues.ville || ',').split(',').map(s => s.trim());
-          payload.ville = ville;
-          payload.pays = pays || '';
-
-          console.log("📤 Sending JSON payload:", payload);
-          
-          const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload)
-          });
-
-          console.log('📡 Response status:', response.status);
-          
-          if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status}`);
-          }
-
-          const result = await response.json();
-          console.log('📥 Response data:', result);
-
-          if (result.ok === true) {
-            showAlert('success', messages.success);
-            form.reset();
-            showStep1();
-            
-            // Auto-hide success message after 5 seconds
-            setTimeout(() => {
-              hideAlert();
-            }, 5000);
-          } else {
-            showAlert('error', result.error || messages.error);
-          }
-          
-        } catch (error) {
-          console.error('❌ Submission error:', error);
-          
-          const errorMessage = error.message;
-          if (errorMessage.includes('fetch') || errorMessage.includes('NetworkError')) {
-            showAlert('error', messages.networkError);
-          } else if (errorMessage.includes('HTTP')) {
-            showAlert('error', messages.serverError);
-          } else {
-            showAlert('error', messages.error);
-          }
-        } finally {
-          // Re-enable submit button and hide loader
-          if (submitBtn) submitBtn.disabled = false;
-          submitText?.classList.remove('hidden');
-          submitLoader?.classList.add('hidden');
-        }
-      });
-    }
-
-    function validateStep1() {
-      let isValid = true;
-      const requiredFields = [
-        { id: 'nom', message: messages.requiredField },
-        { id: 'prenom', message: messages.requiredField },
-        { id: 'email', message: messages.validEmail },
-        { id: 'etablissement', message: messages.requiredField },
-        { id: 'ville', message: messages.requiredField },
-        { id: 'statut', message: messages.selectStatus }
-      ];
-
-      requiredFields.forEach(field => {
-        const element = document.getElementById(field.id);
-        if (!element) return;
-        
-        const errorMsg = element.parentElement?.
-        querySelector('.error-message');
-        
-        if (!element.value.trim()) {
-          element.classList.add('border-red-500');
-          if (errorMsg) {
-            errorMsg.textContent = field.message;
-            errorMsg.classList.remove('hidden');
-          }
-          isValid = false;
-        } else {
-          element.classList.remove('border-red-500');
-          if (errorMsg) {
-            errorMsg.classList.add('hidden');
-          }
-        }
-      });
-
-      // Email validation
-      const emailField = document.getElementById('email');
-      if (emailField) {
-        const emailErrorMsg = emailField.parentElement?.querySelector('.error-message');
-        if (emailField.value.trim() && !isValidEmail(emailField.value)) {
-          emailField.classList.add('border-red-500');
-          if (emailErrorMsg) {
-            emailErrorMsg.textContent = messages.validEmail;
-            emailErrorMsg.classList.remove('hidden');
-          }
-          isValid = false;
-        }
-      }
-
-      return isValid;
-    }
-
-    function validateStep2() {
-      let isValid = true;
-      const participationType = document.querySelector('input[name="typeParticipation"]:checked');
-      const participationError = document.querySelector('input[name="typeParticipation"]')?.parentElement?.parentElement?.querySelector('.error-message');
-      
-      if (!participationType) {
-        participationError?.classList.remove('hidden');
-        isValid = false;
+  participationRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      const target = this;
+      if (target.value === 'Presenter') {
+        presenterFields?.classList.remove('hidden');
+        makePresenterFieldsRequired(true);
       } else {
-        participationError?.classList.add('hidden');
+        presenterFields?.classList.add('hidden');
+        makePresenterFieldsRequired(false);
+      }
+    });
+  });
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      if (!validateStep2()) {
+        return;
       }
 
-      if (participationType && participationType.value === 'Presenter') {
-        const presenterRequiredFields = [
+      setButtonState('loading');
+
+      try {
+        const formData = new FormData(form);
+        const formValues = Object.fromEntries(formData.entries());
+        
+        const payload = { ...formValues };
+        const [ville, pays] = (formValues.ville || ',').split(',').map(s => s.trim());
+        payload.ville = ville;
+        payload.pays = pays || '';
+        
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP Error: ${response.status}`);
+        }
+
+        const result = await response.json();
+        
+        if (result.ok === true) {
+          setButtonState('success');
+          showAlert('success', messages.success);
+          form.reset();
+          showStep1();
+          setTimeout(hideAlert, 5000);
+        } else {
+          throw new Error(result.error || 'Unknown server error');
+        }
+      } catch (error) {
+        setButtonState('error');
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        if (errorMessage.includes('fetch') || errorMessage.includes('NetworkError')) {
+          showAlert('error', messages.networkError);
+        } else {
+          showAlert('error', messages.error);
+        }
+      } finally {
+        setTimeout(() => setButtonState('default'), 3000);
+      }
+    });
+  }
+  
+  function setButtonState(state) {
+      if (!submitBtn) return;
+      const text = submitBtn.querySelector('.button-text');
+      const spinner = submitBtn.querySelector('.spinner');
+      const checkmark = submitBtn.querySelector('.checkmark');
+      const cross = submitBtn.querySelector('.cross');
+
+      // Reset all
+      submitBtn.disabled = false;
+      submitBtn.classList.remove('state-loading', 'state-success', 'state-error', 'shake');
+      [text, spinner, checkmark, cross].forEach(el => el?.classList.add('hidden'));
+
+      switch (state) {
+          case 'loading':
+              submitBtn.disabled = true;
+              submitBtn.classList.add('state-loading');
+              spinner?.classList.remove('hidden');
+              break;
+          case 'success':
+              submitBtn.classList.add('state-success');
+              checkmark?.classList.remove('hidden');
+              break;
+          case 'error':
+              submitBtn.classList.add('state-error', 'shake');
+              cross?.classList.remove('hidden');
+              break;
+          default: // 'default'
+              text?.classList.remove('hidden');
+              break;
+      }
+  }
+
+
+  function validateField(id, message) {
+    const element = document.getElementById(id);
+    const errorMsg = element?.parentElement?.querySelector('.error-message');
+    let isValid = true;
+    
+    if (!element?.value.trim()) {
+        element?.classList.add('border-red-500');
+        if(errorMsg) errorMsg.textContent = message;
+        errorMsg?.classList.remove('hidden');
+        isValid = false;
+    } else {
+        element?.classList.remove('border-red-500');
+        errorMsg?.classList.add('hidden');
+    }
+    return isValid;
+  }
+
+  function validateStep1() {
+    const fields = [
+      { id: 'nom', message: messages.requiredField },
+      { id: 'prenom', message: messages.requiredField },
+      { id: 'etablissement', message: messages.requiredField },
+      { id: 'ville', message: messages.requiredField },
+      { id: 'statut', message: messages.selectStatus }
+    ];
+    let isStepValid = fields.every(field => validateField(field.id, field.message));
+    
+    // Special email validation
+    const emailField = document.getElementById('email');
+    const emailErrorMsg = emailField?.parentElement?.querySelector('.error-message');
+    if (emailField && emailErrorMsg) {
+      if (!emailField.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+        emailField.classList.add('border-red-500');
+        emailErrorMsg.textContent = messages.validEmail;
+        emailErrorMsg.classList.remove('hidden');
+        isStepValid = false;
+      } else {
+        emailField.classList.remove('border-red-500');
+        emailErrorMsg.classList.add('hidden');
+      }
+    }
+    return isStepValid;
+  }
+
+  function validateStep2() {
+    let isValid = true;
+    const participationType = document.querySelector('input[name="typeParticipation"]:checked');
+    const participationError = document.querySelector('input[name="typeParticipation"]')?.closest('.space-y-3')?.nextElementSibling;
+    
+    if (!participationType) {
+      participationError?.classList.remove('hidden');
+      isValid = false;
+    } else {
+      participationError?.classList.add('hidden');
+      if (participationType.value === 'Presenter') {
+        const presenterFieldsToValidate = [
           { id: 'titreCommunication', message: messages.requiredField },
           { id: 'auteurs', message: messages.requiredField },
           { id: 'auteurCorrespondant', message: messages.requiredField },
@@ -655,129 +498,113 @@ const t = useTranslations(locale);
           { id: 'choixCommunication', message: messages.selectType },
           { id: 'resumeFileLink', message: messages.uploadLink }
         ];
-
-        presenterRequiredFields.forEach(field => {
-          const element = document.getElementById(field.id);
-          if (!element) return;
-          
-          const errorMsg = element.parentElement?.querySelector('.error-message');
-          
-          if (!element.value.trim()) {
-            element.classList.add('border-red-500');
-            if (errorMsg) {
-              errorMsg.textContent = field.message;
-              errorMsg.classList.remove('hidden');
-            }
+        if (!presenterFieldsToValidate.every(field => validateField(field.id, field.message))) {
             isValid = false;
-          } else {
-            element.classList.remove('border-red-500');
-            if (errorMsg) {
-              errorMsg.classList.add('hidden');
-            }
-          }
-        });
-      }
-
-      return isValid;
-    }
-
-    function isValidEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-
-    function showStep1() {
-      step1?.classList.remove('hidden');
-      step2?.classList.add('hidden');
-      step1Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-      step1Indicator?.classList.add('bg-brand-primary', 'text-white');
-      step2Indicator?.classList.remove('bg-brand-primary', 'text-white');
-      step2Indicator?.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function showStep2() {
-      step1?.classList.add('hidden');
-      step2?.classList.remove('hidden');
-      step2Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
-      step2Indicator?.classList.add('bg-brand-primary', 'text-white');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function makePresenterFieldsRequired(required) {
-      const presenterInputs = presenterFields?.querySelectorAll('input, select');
-      presenterInputs?.forEach(input => {
-        if (required) {
-          input.setAttribute('required', 'required');
-        } else {
-          input.removeAttribute('required');
-          input.classList.remove('border-red-500');
-          const errorMsg = input.parentElement?.querySelector('.error-message');
-          if (errorMsg) {
-            errorMsg.classList.add('hidden');
-          }
         }
-      });
-    }
-
-    function showAlert(type, message) {
-      const alertContainer = document.getElementById('alert-container');
-      const alertContent = document.getElementById('alert-content');
-      const alertIcon = document.getElementById('alert-icon');
-      const alertMessage = document.getElementById('alert-message');
-
-      if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
-
-      alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out';
-      
-      if (type === 'loading') {
-        alertContent.classList.add('bg-blue-500', 'text-white');
-        alertIcon.innerHTML = '<svg class="animate-spin w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
-      } else if (type === 'success') {
-        alertContent.classList.add('bg-green-500', 'text-white');
-        alertIcon.innerHTML = '✅';
-      } else if (type === 'error') {
-        alertContent.classList.add('bg-red-500', 'text-white');
-        alertIcon.innerHTML = '❌';
       }
-
-      alertMessage.textContent = message;
-      alertContainer.classList.remove('hidden');
-      
-      setTimeout(() => {
-        alertContent.classList.add('opacity-100', 'translate-y-0');
-      }, 100);
     }
+    return isValid;
+  }
 
-    function hideAlert() {
-      const alertContainer = document.getElementById('alert-container');
-      const alertContent = document.getElementById('alert-content');
-      
-      if (!alertContainer || !alertContent) return;
-      
-      alertContent.classList.remove('opacity-100', 'translate-y-0');
-      alertContent.classList.add('opacity-0', 'translate-y-[-20px]');
-      
-      setTimeout(() => {
-        alertContainer.classList.add('hidden');
-      }, 500);
-    }
+  function showStep1() {
+    step1?.classList.remove('hidden');
+    step2?.classList.add('hidden');
+    step1Indicator?.classList.add('bg-brand-primary', 'text-white');
+    step1Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step2Indicator?.classList.add('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    step2Indicator?.classList.remove('bg-brand-primary', 'text-white');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-    const alertCloseBtn = document.getElementById('alert-close');
-    if (alertCloseBtn) {
-      alertCloseBtn.addEventListener('click', hideAlert);
+  function showStep2() {
+    step1?.classList.add('hidden');
+    step2?.classList.remove('hidden');
+    step2Indicator?.classList.add('bg-brand-primary', 'text-white');
+    step2Indicator?.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function makePresenterFieldsRequired(required) {
+    presenterFields?.querySelectorAll('input, select').forEach(input => {
+      if (required) {
+        input.setAttribute('required', 'required');
+      } else {
+        input.removeAttribute('required');
+        input.classList.remove('border-red-500');
+        const errorMsg = input.parentElement?.querySelector('.error-message');
+        if (errorMsg) {
+          errorMsg.classList.add('hidden');
+        }
+      }
+    });
+  }
+
+  function showAlert(type, message) {
+    const alertContainer = document.getElementById('alert-container');
+    const alertContent = document.getElementById('alert-content');
+    const alertIcon = document.getElementById('alert-icon');
+    const alertMessage = document.getElementById('alert-message');
+    if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
+
+    alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 transform transition-all duration-500 ease-in-out opacity-0 translate-y-[-20px]';
+    if (type === 'success') {
+      alertContent.classList.add('bg-green-500', 'text-white');
+      alertIcon.innerHTML = '✅';
+    } else if (type === 'error') {
+      alertContent.classList.add('bg-red-500', 'text-white');
+      alertIcon.innerHTML = '❌';
     }
-  });
+    alertMessage.textContent = message;
+    alertContainer.classList.remove('hidden');
+    setTimeout(() => {
+      alertContent.classList.add('opacity-100', 'translate-y-0');
+    }, 100);
+  }
+
+  function hideAlert() {
+    const alertContainer = document.getElementById('alert-container');
+    const alertContent = document.getElementById('alert-content');
+    if (!alertContainer || !alertContent) return;
+    alertContent.classList.remove('opacity-100', 'translate-y-0');
+    setTimeout(() => {
+      alertContainer.classList.add('hidden');
+    }, 500);
+  }
+
+  document.getElementById('alert-close')?.addEventListener('click', hideAlert);
+  
+  // Initialize button state
+  setButtonState('default');
+});
 </script>
 
 <style>
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+  #submit-form {
+    background-color: #16a34a; /* Default: green-600 */
+  }
+  #submit-form.state-loading {
+    background-color: #3b82f6; /* blue-500 */
+  }
+  #submit-form.state-success {
+    background-color: #22c55e; /* green-500 */
+  }
+  #submit-form.state-error {
+    background-color: #ef4444; /* red-500 */
   }
   
+  .button-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+  }
   .shake {
-    animation: shake 0.5s ease-in-out;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   }
 </style>

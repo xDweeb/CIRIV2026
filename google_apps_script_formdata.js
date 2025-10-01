@@ -1,14 +1,14 @@
 /*************************************************
  * CIRIV Registration → Google Sheets
- * - Accepts FormData payload from the Astro form.
- * - Saves the provided file link directly.
+ * - Accepts FormData from Astro registration form
+ * - Handles resumeFileLink as a simple text field
+ * - NO file upload processing
  *************************************************/
 
-// The name of your sheet inside the Google Sheets document.
+// The name of your sheet inside the Google Sheets document
 const SHEET_NAME = 'ciriv'; 
 
-// The columns in your Google Sheet, in order.
-// Make sure this matches your sheet exactly.
+// The columns in your Google Sheet, in order
 const COLUMNS = [
   'Timestamp',
   'Nom',
@@ -27,121 +27,108 @@ const COLUMNS = [
   'AuteurCorrespondant',
   'Thématique',
   'ChoixCommunication',
-  'RésuméFileLink' // Column for the file link
+  'RésuméFileLink'
 ];
 
 /**
- * A test function to verify the script is deployed and running.
+ * Test endpoint
  */
 function doGet() {
-  return ContentService.createTextOutput('CIRIV Registration API - OK');
+  return ContentService
+    .createTextOutput('CIRIV Registration API is working!')
+    .setMimeType(ContentService.MimeType.TEXT);
 }
 
 /**
- * Handles the POST request from the registration form.
- * Parses FormData and appends a new row to the sheet.
- * @param {Object} e The event parameter from the POST request.
+ * Handles POST requests from the registration form
+ * @param {Object} e - The event object from the POST request
  */
 function doPost(e) {
   try {
-    // Lock the script to prevent simultaneous writes
+    console.log('=== CIRIV Registration Request ===');
+    console.log('Request method:', e?.postData?.type || 'Unknown');
+    
+    // Lock to prevent concurrent writes
     const lock = LockService.getScriptLock();
-    lock.waitLock(30000); // Wait up to 30 seconds
+    if (!lock.tryLock(10000)) {
+      throw new Error('Could not obtain lock within 10 seconds');
+    }
 
-    // Get the active spreadsheet and the specific sheet by name
-    const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet = ss.getSheetByName(SHEET_NAME);
+    try {
+      // Get the spreadsheet and sheet
+      const ss = SpreadsheetApp.getActiveSpreadsheet();
+      const sheet = ss.getSheetByName(SHEET_NAME);
+      
+      if (!sheet) {
+        throw new Error(`Sheet "${SHEET_NAME}" not found`);
+      }
 
-    // Make sure the headers are present in the sheet
-    ensureHeaders_(sheet);
+      // Ensure headers exist
+      if (sheet.getLastRow() === 0) {
+        sheet.appendRow(COLUMNS);
+        console.log('Headers added to sheet');
+      }
 
-    // For FormData, the data is in e.parameter, not e.postData.contents
-    const data = e.parameter || {};
-    
-    // Log received data for debugging
-    console.log('Received FormData:', data);
-    console.log('Event object keys:', Object.keys(e));
+      // Get form data from FormData submission
+      // For FormData, parameters are in e.parameter
+      const formData = e.parameter || {};
+      
+      console.log('Received form data:', Object.keys(formData));
+      console.log('resumeFileLink value:', formData.resumeFileLink || 'Not provided');
 
-    // Create the new row array using data from the FormData payload.
-    // Use || '' as a fallback for optional fields to avoid errors.
-    const newRow = [
-      new Date(),                                    // Timestamp
-      data.nom || '',                               // Nom
-      data.prenom || '',                            // Prénom
-      data.civilite || '',                          // Civilité
-      data.email || '',                             // Email
-      data.telephone || '',                         // Téléphone
-      data.etablissement || '',                     // Etablissement
-      data.departement || '',                       // Département / Laboratoire
-      data.ville || '',                             // Ville
-      data.pays || '',                              // Pays
-      data.statut || '',                            // Statut
-      data.typeParticipation || '',                 // TypeParticipation
-      data.titreCommunication || '',                // TitreCommunication
-      data.auteurs || '',                           // Auteurs
-      data.auteurCorrespondant || '',               // AuteurCorrespondant
-      data.thematique || '',                        // Thématique
-      data.choixCommunication || '',                // ChoixCommunication
-      data.resumeFileLink || ''                     // RésuméFileLink
-    ];
+      // Build the row data array matching COLUMNS order
+      const rowData = [
+        new Date(),                              // Timestamp
+        formData.nom || '',                      // Nom
+        formData.prenom || '',                   // Prénom  
+        formData.civilite || '',                 // Civilité
+        formData.email || '',                    // Email
+        formData.telephone || '',                // Téléphone
+        formData.etablissement || '',            // Etablissement
+        formData.departement || '',              // Département / Laboratoire
+        formData.ville || '',                    // Ville
+        formData.pays || '',                     // Pays
+        formData.statut || '',                   // Statut
+        formData.typeParticipation || '',        // TypeParticipation
+        formData.titreCommunication || '',       // TitreCommunication
+        formData.auteurs || '',                  // Auteurs
+        formData.auteurCorrespondant || '',      // AuteurCorrespondant
+        formData.thematique || '',               // Thématique
+        formData.choixCommunication || '',       // ChoixCommunication
+        formData.resumeFileLink || ''            // RésuméFileLink (just a URL string)
+      ];
 
-    // Log the row data for debugging
-    console.log('Row to append:', newRow);
+      console.log('Row data to append:', rowData);
 
-    // Append the new row to the sheet
-    sheet.appendRow(newRow);
+      // Append the row to the sheet
+      sheet.appendRow(rowData);
+      
+      console.log('✅ Registration saved successfully');
 
-    // Release the lock
-    lock.releaseLock();
+      // Return success response
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          ok: true,
+          message: 'Registration saved successfully',
+          timestamp: new Date().toISOString(),
+          receivedFields: Object.keys(formData).length
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
 
-    // Return a success response
+    } finally {
+      lock.releaseLock();
+    }
+
+  } catch (error) {
+    console.error('❌ Error in doPost:', error.toString());
+    console.error('Error stack:', error.stack);
+
     return ContentService
-      .createTextOutput(JSON.stringify({ 
-        ok: true, 
-        message: 'Registration successful.',
-        timestamp: new Date().toISOString(),
-        receivedFields: Object.keys(data)
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch (err) {
-    // Log any errors and return an error response
-    console.error('Error in doPost:', err.toString());
-    console.error('Error stack:', err.stack);
-    
-    return ContentService
-      .createTextOutput(JSON.stringify({ 
-        ok: false, 
-        error: err.toString(),
+      .createTextOutput(JSON.stringify({
+        ok: false,
+        error: error.toString(),
         timestamp: new Date().toISOString()
       }))
       .setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-/**
- * Helper function to ensure the sheet has the correct headers in the first row.
- * @param {Sheet} sheet The Google Sheet to check.
- */
-function ensureHeaders_(sheet) {
-  if (sheet.getLastRow() === 0) {
-    sheet.appendRow(COLUMNS);
-    console.log('Headers added to sheet');
-  }
-}
-
-/**
- * Test function to verify sheet structure
- */
-function testSheetStructure() {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const sheet = ss.getSheetByName(SHEET_NAME);
-  
-  if (!sheet) {
-    console.log('Sheet "' + SHEET_NAME + '" not found!');
-    return;
-  }
-  
-  ensureHeaders_(sheet);
-  console.log('Sheet structure verified. Headers:', COLUMNS);
 }

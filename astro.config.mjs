@@ -4,13 +4,14 @@ import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://xdweeb.github.io/CIRIV2026/',
-  base: '/CIRIV2026/',
+  site: 'https://ciriv.org',
+  base: '/',
   trailingSlash: 'always',
   integrations: [tailwind()],
   output: 'static',
   build: {
-    assets: 'assets'
+    assets: 'assets',
+    format: 'directory'
   },
   vite: {
     define: {

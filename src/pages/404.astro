@@ -1,0 +1,37 @@
+---
+// 404 page with client-side redirect for SPA-like behavior
+---
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Page Not Found - CIRIV 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    // Simple client-side routing for GitHub Pages
+    (function() {
+      const path = window.location.pathname;
+      const segments = path.split('/').filter(Boolean);
+      
+      // If the path starts with a locale, redirect to that locale's home page
+      if (segments.length > 0) {
+        const possibleLocale = segments[0];
+        if (['fr', 'en', 'ar'].includes(possibleLocale)) {
+          // If it's a valid locale but invalid subpage, redirect to locale home
+          window.location.replace('/' + possibleLocale + '/');
+          return;
+        }
+      }
+      
+      // Default fallback to French home page
+      window.location.replace('/fr/');
+    })();
+  </script>
+</head>
+<body>
+  <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
+    <h1>Redirecting...</h1>
+    <p>If you are not redirected automatically, <a href="/fr/">click here</a>.</p>
+  </div>
+</body>
+</html>

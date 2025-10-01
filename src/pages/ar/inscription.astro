@@ -441,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const presenterFields = document.getElementById('presenter-fields');
 
   // Google Apps Script endpoint
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzS11dvmXW55l2RTmtx27LnrGTknZ4H4v-_KMlETRjOjRUGwMBoMP_FZwGjRYLkF5kNFA/exec";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOCLpKldhfumG86NSXDa1OOFkzmTPCYdSQluQ8DudiQs_r0lzvMa_QK11u4YLnpb5-Gw/exec";
 
   // Language-specific messages
   const messages = {
@@ -505,6 +505,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(payload)
       });
 
@@ -519,7 +522,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (result.ok === true) {
         showAlert('success', messages.success);
-        console.log('✅ File URL:', result.fileUrl);
+        if (result.fileUrl) {
+          console.log('✅ File uploaded successfully:', result.fileUrl);
+        }
         form.reset();
         showStep1();
         

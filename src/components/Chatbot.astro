@@ -25,17 +25,17 @@ const suggestedQuestions = faqData
 ---
 
 <!-- Chatbot Widget -->
-<div id="chatbot-widget" class={`fixed bottom-4 z-50 chatbot-container ${isRTL ? 'left-4' : 'right-4'}`} data-locale={locale}>
+<div id="chatbot-widget" class={`fixed bottom-4 z-50 chatbot-container ${isRTL ? 'left-2 sm:left-4' : 'right-2 sm:right-4'}`} data-locale={locale}>
   <!-- Chat Toggle Button -->
   <button
     id="chat-toggle"
-    class="bg-brand-primary hover:bg-brand-primaryDark text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+    class="bg-brand-primary hover:bg-brand-primaryDark text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
     aria-label={t('chatbot.title')}
   >
-    <svg id="chat-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg id="chat-icon" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.906-1.287A6.967 6.967 0 0012 21c-2.331 0-4.512-.645-6.374-1.766l-.227-.133C3.142 18.156 2 16.154 2 14V7a5 5 0 015-5h10a5 5 0 015 5v5z"/>
     </svg>
-    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <svg id="close-icon" class="w-5 h-5 sm:w-6 sm:h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
     </svg>
   </button>
@@ -43,7 +43,7 @@ const suggestedQuestions = faqData
   <!-- Chat Window -->
   <div
     id="chat-window"
-    class={`absolute bottom-16 w-96 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden animate-in slide-in-from-bottom-4 duration-300 ${isRTL ? 'left-0' : 'right-0'}`}
+    class={`absolute bottom-14 sm:bottom-16 w-80 sm:w-96 max-w-[calc(100vw-1rem)] sm:max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden animate-in slide-in-from-bottom-4 duration-300 ${isRTL ? 'left-0' : 'right-0'}`}
   >
     <!-- Chat Header -->
     <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700 bg-brand-primary text-white rounded-t-2xl">

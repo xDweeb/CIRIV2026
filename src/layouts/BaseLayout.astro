@@ -7,6 +7,7 @@ interface Props {
 }
 
 import { getAlternateUrls } from '../utils/paths';
+import Chatbot from '../components/Chatbot.astro';
 
 const {
   title = 'CIRIV 2026 - International One Health Conference',
@@ -112,5 +113,8 @@ const alternateUrlAr = new URL(alternateUrls.ar, siteUrl).href;
   </head>
   <body class="min-h-screen bg-white dark:bg-surface-dark text-slate-900 dark:text-slate-100 transition-colors">
     <slot />
+    
+    <!-- Chatbot Component -->
+    <Chatbot locale={locale} />
   </body>
 </html>

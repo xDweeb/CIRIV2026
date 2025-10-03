@@ -2,7 +2,7 @@
   {
     "id": "greeting",
     "question": { "fr": "Salutations", "en": "Greetings", "ar": "تحيات" },
-    "keywords": ["hi","hello","hey","bonjour","salut","bonsoir","سلام","اهلا","مرحبا","hi there","السلام عليكم"],
+    "keywords": ["hi","hello","hey","bonjour","salut","bonsoir","سلام","اهلا","مرحبا","السلام عليكم","hi there"],
     "answer": {
       "fr": "Bonjour 👋 ! Comment puis-je vous aider avec le congrès CIRIV 2026 ?",
       "en": "Hello 👋! How can I help you with the CIRIV 2026 congress?",
@@ -22,7 +22,7 @@
   {
     "id": 1,
     "question": { "fr": "Qu’est-ce que le CIRIV’26 ?", "en": "What is CIRIV'26?", "ar": "ما هو CIRIV'26؟" },
-    "keywords": ["ciriv","c'est quoi","what is","about","à propos","présentation","description","event","congrès","conference","المؤتمر"],
+    "keywords": ["ciriv","c'est quoi","what is","about","présentation","description","congrès","conference","event","المؤتمر"],
     "answer": {
       "fr": "👉 Le CIRIV’26 est le Congrès International de la Recherche, de l’Innovation et de la Valorisation, organisé par AMARINOVA. Il rassemble chercheurs, doctorants, étudiants et professionnels. Thème 2026 : « One Health ». ",
       "en": "👉 CIRIV’26 is the International Congress on Research, Innovation and Valorization, organized by AMARINOVA. It gathers researchers, PhD students, students, and professionals. 2026 theme: 'One Health'.",
@@ -32,7 +32,7 @@
   {
     "id": 2,
     "question": { "fr": "Quelle est la thématique du congrès ?", "en": "What is the theme of the congress?", "ar": "ما هو موضوع المؤتمر؟" },
-    "keywords": ["thème","theme","sujet","subject","topic","focus","محور","موضوع","axis","orientation"],
+    "keywords": ["thème","theme","sujet","subject","topic","focus","محور","موضوع","axis"],
     "answer": {
       "fr": "👉 La thématique est « One Health », interconnexion entre santé humaine, animale et environnement.",
       "en": "👉 The theme is 'One Health', interconnecting human, animal and environmental health.",
@@ -42,7 +42,7 @@
   {
     "id": 3,
     "question": { "fr": "Où se déroule le congrès ?", "en": "Where will the congress take place?", "ar": "أين سيعقد المؤتمر؟" },
-    "keywords": ["où","lieu","location","place","venue","address","map","site","university","faculty","مكان","العنوان","المكان"],
+    "keywords": ["où","lieu","location","place","venue","address","map","site","university","faculty","مكان","العنوان"],
     "answer": {
       "fr": "👉 Faculté des Sciences Ben M’sik, Université Hassan II de Casablanca (UH2C), Maroc.",
       "en": "👉 Faculty of Sciences Ben M’sik, Hassan II University of Casablanca (UH2C), Morocco.",
@@ -52,7 +52,7 @@
   {
     "id": 4,
     "question": { "fr": "Quelles sont les dates du congrès ?", "en": "What are the congress dates?", "ar": "ما هي تواريخ المؤتمر؟" },
-    "keywords": ["dates","quand","when","jours","programme","schedule","calendar","متى","تاريخ","تواريخ"],
+    "keywords": ["dates","quand","when","jours","programme","schedule","calendar","متى","تاريخ"],
     "answer": {
       "fr": "👉 Les 27 et 28 janvier 2026.",
       "en": "👉 January 27–28, 2026.",
@@ -102,7 +102,7 @@
   {
     "id": 9,
     "question": { "fr": "Comment payer ?", "en": "How to pay?", "ar": "كيف أدفع؟" },
-    "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك","حوالة"],
+    "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك"],
     "answer": {
       "fr": "👉 Paiement par virement ou versement bancaire sur le compte officiel. Coordonnées bancaires bientôt disponibles.",
       "en": "👉 Payment by transfer or bank deposit to the official account. Bank details soon.",
@@ -112,7 +112,7 @@
   {
     "id": 10,
     "question": { "fr": "Comment soumettre un résumé ?", "en": "How to submit an abstract?", "ar": "كيف أقدم ملخص؟" },
-    "keywords": ["soumettre","submit","abstract","résumé","poster","paper","communication","call","ملخص","عرض","تقديم"],
+    "keywords": ["soumettre","submit","abstract","résumé","poster","paper","communication","call","ملخص","عرض"],
     "answer": {
       "fr": "👉 Via le formulaire de soumission en ligne (section Appel à communications).",
       "en": "👉 Through the online submission form (Call for Papers section).",
@@ -132,7 +132,7 @@
   {
     "id": 12,
     "question": { "fr": "Programme ?", "en": "Program?", "ar": "البرنامج؟" },
-    "keywords": ["programme","schedule","agenda","planning","sessions","جدول","برنامج","محاضرات"],
+    "keywords": ["programme","schedule","agenda","planning","sessions","جدول","برنامج"],
     "answer": {
       "fr": "👉 Le programme détaillé sera bientôt disponible.",
       "en": "👉 The detailed program will be available soon.",
@@ -142,7 +142,7 @@
   {
     "id": 13,
     "question": { "fr": "Hébergement ?", "en": "Accommodation?", "ar": "الإقامة؟" },
-    "keywords": ["hébergement","hotel","accommodation","lodging","stay","night","فندق","الإقامة","سكن"],
+    "keywords": ["hébergement","hotel","accommodation","lodging","stay","night","فندق","الإقامة"],
     "answer": {
       "fr": "👉 Les informations sur l’hébergement seront bientôt disponibles.",
       "en": "👉 Accommodation information will be available soon.",
@@ -151,8 +151,8 @@
   },
   {
     "id": 14,
-    "question": { "fr": "Intervenants / conférenciers ?", "en": "Speakers?", "ar": "المتدخلون؟" },
-    "keywords": ["intervenants","speakers","conférenciers","orateurs","guests","panel","مداخلون","محاضرون","ضيوف"],
+    "question": { "fr": "Intervenants ?", "en": "Speakers?", "ar": "المتدخلون؟" },
+    "keywords": ["intervenants","speakers","conférenciers","orateurs","guests","panel","مداخلون","محاضرون"],
     "answer": {
       "fr": "👉 La liste des intervenants sera publiée prochainement.",
       "en": "👉 The list of speakers will be published soon.",
@@ -162,7 +162,7 @@
   {
     "id": 15,
     "question": { "fr": "Certificat ?", "en": "Certificate?", "ar": "شهادة؟" },
-    "keywords": ["certificat","attestation","certificate","proof","participation","شهادة","حضور","مشاركة"],
+    "keywords": ["certificat","attestation","certificate","proof","participation","شهادة","حضور"],
     "answer": {
       "fr": "👉 Oui, une attestation de participation sera remise. Détails bientôt.",
       "en": "👉 Yes, a participation certificate will be provided. Details soon.",
@@ -172,11 +172,21 @@
   {
     "id": 16,
     "question": { "fr": "Partenariats / sponsors ?", "en": "Partnerships / sponsors?", "ar": "شركاء / رعاة؟" },
-    "keywords": ["partenaire","sponsor","partnership","support","collaboration","sponsorship","شريك","راع","رعاية"],
+    "keywords": ["partenaire","sponsor","partnership","support","collaboration","sponsorship","شريك","راع"],
     "answer": {
       "fr": "👉 Les informations sur les partenariats et sponsors seront bientôt disponibles.",
       "en": "👉 Information about partnerships and sponsors will be available soon.",
       "ar": "👉 معلومات الشركاء والرعاة ستكون متاحة قريباً."
+    }
+  },
+  {
+    "id": 17,
+    "question": { "fr": "Qui est le développeur du site CIRIV ?", "en": "Who is the developer of the CIRIV website?", "ar": "من هو مطور موقع CIRIV؟" },
+    "keywords": ["developer","dev","développeur","programmer","auteur","owner","creator","taibi","yakouti","taibi el yakouti","xdweb","xdweb.engineer","site","webmaster","مطور","مبرمج","اليعقوبي"],
+    "answer": {
+      "fr": "👉 Le site CIRIV a été conçu et développé par **Taibi El Yakouti** (alias *xdweb*), développeur et data analyst. Découvrez ses projets sur [xdweb.engineer](https://xdweb.engineer).",
+      "en": "👉 The CIRIV website was designed and developed by **Taibi El Yakouti** (also known as *xdweb*), developer and data analyst. Explore more on [xdweb.engineer](https://xdweb.engineer).",
+      "ar": "👉 تم تصميم وتطوير موقع CIRIV من طرف **الطيبي اليقوتي** (*xdweb*)، مطور ومحلل بيانات. يمكنكم الاطلاع على مشاريعه عبر [xdweb.engineer](https://xdweb.engineer)."
     }
   }
 ]

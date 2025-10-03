@@ -49,7 +49,7 @@ const languageOptions = Object.entries(languages).map(([lang, label]) => ({
   <!-- Dropdown Menu -->
   <div
     id="lang-menu"
-    class={`absolute ${isRTL ? 'left-0' : 'right-0'} mt-2 w-32 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 hidden animate-slide-down`}
+    class={`absolute ${isRTL ? 'left-0' : 'right-0'} mt-2 w-32 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 hidden animate-slide-down z-50`}
     role="menu"
     aria-hidden="true"
   >
@@ -152,3 +152,52 @@ const languageOptions = Object.entries(languages).map(([lang, label]) => ({
     }
   });
 </script>
+
+<style>
+  /* Ensure dropdown is visible on mobile */
+  @media (max-width: 768px) {
+    .mobile-lang-menu .relative {
+      position: static;
+    }
+    
+    .mobile-lang-menu #lang-menu {
+      position: fixed !important;
+      top: auto !important;
+      bottom: 20px !important;
+      left: 50% !important;
+      right: auto !important;
+      transform: translateX(-50%) !important;
+      width: 200px !important;
+      z-index: 60 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    }
+    
+    /* Add backdrop for mobile */
+    .mobile-lang-menu #lang-menu:not(.hidden)::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: -1;
+    }
+  }
+  
+  /* Animation for slide down */
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-down:not(.hidden) {
+    animation: slide-down 0.2s ease-out;
+  }
+</style>

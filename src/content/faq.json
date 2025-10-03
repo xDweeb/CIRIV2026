@@ -124,9 +124,9 @@
     "question": { "fr": "Contact ?", "en": "Contact?", "ar": "التواصل؟" },
     "keywords": ["contact","mail","email","support","reach","info","message","تواصل","بريد","إيميل"],
     "answer": {
-      "fr": "👉 Vous pouvez nous écrire à info@ciriv.org",
-      "en": "👉 You can contact us at info@ciriv.org",
-      "ar": "👉 يمكنك مراسلتنا عبر البريد info@ciriv.org"
+      "fr": "👉 Vous pouvez nous écrire à <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a>",
+      "en": "👉 You can contact us at <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a>",
+      "ar": "👉 يمكنكم مراسلتنا عبر البريد <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a>"
     }
   },
   {
@@ -182,11 +182,11 @@
   {
     "id": 17,
     "question": { "fr": "Qui est le développeur du site CIRIV ?", "en": "Who is the developer of the CIRIV website?", "ar": "من هو مطور موقع CIRIV؟" },
-    "keywords": ["developer","dev","développeur","programmer","auteur","owner","creator","taibi","yakouti","taibi el yakouti","xdweb","xdweb.engineer","site","webmaster","مطور","مبرمج","اليعقوبي"],
+    "keywords": ["developer","dev","développeur","programmer","auteur","owner","creator","taibi","yakouti","taibi el yakouti","xdweb","xdweb.engineer","site","webmaster","مطور","مبرمج","طيبي اليقوتي","xdweb"],
     "answer": {
-      "fr": "👉 Le site CIRIV a été conçu et développé par **Taibi El Yakouti** (alias *xdweb*), développeur et data analyst. Découvrez ses projets sur [xdweb.engineer](https://xdweb.engineer).",
-      "en": "👉 The CIRIV website was designed and developed by **Taibi El Yakouti** (also known as *xdweb*), developer and data analyst. Explore more on [xdweb.engineer](https://xdweb.engineer).",
-      "ar": "👉 تم تصميم وتطوير موقع CIRIV من طرف **الطيبي اليقوتي** (*xdweb*)، مطور ومحلل بيانات. يمكنكم الاطلاع على مشاريعه عبر [xdweb.engineer](https://xdweb.engineer)."
+      "fr": "👉 Le site CIRIV a été conçu et développé par <strong>Taibi El Yakouti</strong> (alias <em>xdweb</em>), développeur et data analyst. Découvrez ses projets sur <a href=\"https://xdweb.engineer\" target=\"_blank\" class=\"text-brand-primary hover:underline\">xdweb.engineer</a>.",
+      "en": "👉 The CIRIV website was designed and developed by <strong>Taibi El Yakouti</strong> (also known as <em>xdweb</em>), developer and data analyst. Explore more on <a href=\"https://xdweb.engineer\" target=\"_blank\" class=\"text-brand-primary hover:underline\">xdweb.engineer</a>.",
+      "ar": "👉 تم تصميم وتطوير موقع CIRIV من طرف <strong>طيبي اليقوتي</strong> (<em>xdweb</em>)، مطور ومحلل بيانات. يمكنكم الاطلاع على مشاريعه عبر <a href=\"https://xdweb.engineer\" target=\"_blank\" class=\"text-brand-primary hover:underline\">xdweb.engineer</a>."
     }
   }
 ]

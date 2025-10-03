@@ -1,0 +1,233 @@
+---
+export interface Props {
+  locale?: 'en' | 'fr' | 'ar';
+}
+
+const { locale = 'en' } = Astro.props;
+
+// Import events data
+import eventsData from '../content/events.json';
+import { useTranslations } from '../i18n/ui.ts';
+
+const t = useTranslations(locale);
+---
+
+<div id="countdown-widget" data-locale={locale} class="countdown-container">
+  <div id="countdown-loading" class="countdown-loading">
+    <div class="loading-card">
+      <div class="loading-shimmer"></div>
+      <div class="loading-text">Loading countdown...</div>
+    </div>
+  </div>
+
+  <div id="countdown-content" class="countdown-content hidden">
+    <div class="countdown-card">
+      <div class="countdown-header">
+        <div class="calendar-icon-container">
+          <svg class="calendar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+            </path>
+          </svg>
+        </div>
+        <h2 class="countdown-subtitle">{t('countdown.nextDate')}</h2>
+      </div>
+
+      <h3 id="event-title" class="event-title">Loading...</h3>
+
+      <div class="timer-grid">
+        <div class="time-unit" data-unit="days">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front"><span id="days-display">00</span></div>
+              <div class="flip-card-back"><span id="days-next">00</span></div>
+            </div>
+          </div>
+          <div class="time-label">{t('countdown.days')}</div>
+        </div>
+
+        <div class="time-unit" data-unit="hours">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front"><span id="hours-display">00</span></div>
+              <div class="flip-card-back"><span id="hours-next">00</span></div>
+            </div>
+          </div>
+          <div class="time-label">{t('countdown.hours')}</div>
+        </div>
+
+        <div class="time-unit" data-unit="minutes">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front"><span id="minutes-display">00</span></div>
+              <div class="flip-card-back"><span id="minutes-next">00</span></div>
+            </div>
+          </div>
+          <div class="time-label">{t('countdown.minutes')}</div>
+        </div>
+
+        <div class="time-unit" data-unit="seconds">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front"><span id="seconds-display">00</span></div>
+              <div class="flip-card-back"><span id="seconds-next">00</span></div>
+            </div>
+          </div>
+          <div class="time-label">{t('countdown.seconds')}</div>
+        </div>
+      </div>
+
+      <div class="separator"><div class="separator-line"></div></div>
+
+      <div class="cta-section">
+        <p class="cta-text">{t('countdown.deadline')}</p>
+        <a href="https://www.ciriv.org/fr/dates/" class="cta-link">
+          <span class="cta-label">{t('countdown.seeAll')}</span>
+          <span class="cta-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .countdown-container {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 400px; padding: 1rem;
+  }
+
+  .countdown-loading {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 300px;
+  }
+
+  .loading-shimmer {
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(12, 96, 89, 0.4), transparent);
+    animation: shimmer 2s infinite;
+    margin-bottom: 1rem;
+  }
+  .loading-text { color: #6b7280; font-size: 0.875rem; text-align: center; }
+
+  .countdown-content { width: 100%; max-width: 64rem; }
+  .hidden { display: none !important; }
+
+  .countdown-card { padding: 2rem 1rem; background: transparent; }
+
+  .countdown-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .calendar-icon { width: 1.5rem; height: 1.5rem; color: #0c6059; }
+
+  /* Default (Light Mode) Colors */
+  .countdown-subtitle { font-size: 1.125rem; font-weight: 500; color: #4b5563; }
+  .event-title { font-size: 1.875rem; font-weight: bold; text-align: center; margin-bottom: 2.5rem; color: #4b5563; }
+  .time-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; text-align: center; width: 100%; margin-top: 0.5rem; color: #4b5563; }
+  .cta-text { font-size: 0.875rem; margin-bottom: 0.75rem; color: #6b7280; }
+
+  /* Dark Mode Colors - Only use .dark class to match your site */
+  .dark .countdown-subtitle { color: #d1d5db; }
+  .dark .event-title { color: #ffffff; }
+  .dark .time-label { color: #d1d5db; }
+  .dark .cta-text { color: #d1d5db; }
+
+  .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem; max-width: 600px; margin-inline: auto; }
+
+  .time-unit { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .flip-card { width: 5.5rem; height: 6.5rem; perspective: 1000px; margin-bottom: 0.75rem; }
+  .flip-card-inner { width: 100%; height: 100%; transform-style: preserve-3d; }
+  .flip-card.flipping .flip-card-inner { animation: flipDown 0.4s ease-out; }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    backface-visibility: hidden;
+    background: #0c6059;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+  .flip-card-back { transform: rotateX(180deg); }
+
+  .flip-card-front span,
+  .flip-card-back span {
+    font-size: 2.5rem; font-weight: bold; color: #fff; text-align: center;
+  }
+
+  .separator-line { height: 1px; background: linear-gradient(to right, transparent, #d1d5db, transparent); }
+
+  .cta-section { text-align: center; }
+  .cta-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #0c6059; font-weight: 500; font-size: 0.875rem; }
+  .cta-link:hover .cta-label, .cta-link:hover .cta-arrow { transform: translateX(0.25rem); }
+
+  @keyframes flipDown { 0%{transform:rotateX(0deg);} 100%{transform:rotateX(-180deg);} }
+  @keyframes shimmer { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
+</style>
+
+<script define:vars={{ eventsData, locale }}>
+  class CountdownWidget {
+    constructor(events, locale) {
+      this.events = events; this.locale = locale;
+      this.currentEvent = null; this.timeLeft = {};
+      this.timer = null; this.init();
+    }
+
+    init() {
+      this.findNextEvent(); this.updateDisplay(); this.startTimer(); this.hideLoading();
+    }
+
+    findNextEvent() {
+      const now = new Date().getTime();
+      const futureEvents = this.events
+        .map(e => ({...e, timestamp:new Date(e.date).getTime()}))
+        .filter(e => e.timestamp > now)
+        .sort((a,b)=>a.timestamp-b.timestamp);
+      this.currentEvent = futureEvents.length ? futureEvents[0] : this.events[0];
+
+      const titleElement = document.getElementById('event-title');
+      if (titleElement && this.currentEvent) {
+        titleElement.textContent = this.currentEvent.title[this.locale] || this.currentEvent.title.en;
+      }
+    }
+
+    calculateTimeLeft() {
+      if (!this.currentEvent) return;
+      const now = new Date().getTime();
+      const diff = this.currentEvent.timestamp - now;
+      if (diff > 0) {
+        this.timeLeft = {
+          days: Math.floor(diff/(1000*60*60*24)),
+          hours: Math.floor((diff%(1000*60*60*24))/(1000*60*60)),
+          minutes: Math.floor((diff%(1000*60*60))/(1000*60)),
+          seconds: Math.floor((diff%(1000*60))/1000)
+        };
+      } else { this.findNextEvent(); }
+    }
+
+    updateDisplay() {
+      ['days','hours','minutes','seconds'].forEach(unit=>{
+        const el=document.getElementById(`${unit}-display`);
+        const next=document.getElementById(`${unit}-next`);
+        if(el&&next){el.textContent=this.timeLeft[unit]?.toString().padStart(2,'0')||'00';
+        next.textContent=el.textContent;}
+      });
+    }
+
+    startTimer() {
+      this.calculateTimeLeft(); this.updateDisplay();
+      this.timer=setInterval(()=>{this.calculateTimeLeft(); this.updateDisplay();},1000);
+    }
+
+    hideLoading() {
+      setTimeout(()=>{
+        const loading=document.getElementById('countdown-loading');
+        const content=document.getElementById('countdown-content');
+        if(loading) loading.style.display='none'; if(content) content.classList.remove('hidden');
+      },1000);
+    }
+  }
+
+  let countdownWidget;
+  if (document.readyState==='loading') {
+    document.addEventListener('DOMContentLoaded',()=>{ countdownWidget=new CountdownWidget(eventsData,locale); });
+  } else { countdownWidget=new CountdownWidget(eventsData,locale); }
+</script>

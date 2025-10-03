@@ -1,0 +1,72 @@
+[
+  {
+    "date": "2025-10-06T00:00:00",
+    "title": {
+      "en": "Call for Communications Launch",
+      "fr": "Lancement de l'appel à communications",
+      "ar": "إطلاق دعوة للمشاركات"
+    },
+    "description": {
+      "en": "Opening of the submission period for abstracts for oral communications and posters.",
+      "fr": "Ouverture de la période de soumission des résumés pour les communications orales et les posters.",
+      "ar": "فتح فترة تقديم الملخصات للمشاركات الشفهية والملصقات."
+    },
+    "type": "announcement"
+  },
+  {
+    "date": "2025-11-15T23:59:59",
+    "title": {
+      "en": "Abstract Submission Deadline",
+      "fr": "Dernier délai de réception des résumés",
+      "ar": "الموعد النهائي لاستلام الملخصات"
+    },
+    "description": {
+      "en": "Final deadline to submit your abstracts for oral communications and posters.",
+      "fr": "Date limite pour soumettre vos résumés de communications orales et de posters.",
+      "ar": "الموعد النهائي لتقديم ملخصاتكم للمشاركات الشفهية والملصقات."
+    },
+    "type": "deadline"
+  },
+  {
+    "date": "2025-12-15T23:59:59",
+    "title": {
+      "en": "Early Bird Registration Deadline",
+      "fr": "Dernier délai pour bénéficier des tarifs d'inscription réduits",
+      "ar": "الموعد النهائي للاستفادة من أسعار التسجيل المخفضة"
+    },
+    "description": {
+      "en": "Final deadline to benefit from reduced registration fees. Regular rates apply after this date.",
+      "fr": "Date limite pour profiter des tarifs préférentiels d'inscription. Après cette date, les tarifs normaux s'appliquent.",
+      "ar": "الموعد النهائي للاستفادة من رسوم التسجيل المخفضة. الأسعار العادية تطبق بعد هذا التاريخ."
+    },
+    "type": "deadline"
+  },
+  {
+    "date": "2025-12-31T23:59:59",
+    "title": {
+      "en": "Poster and PowerPoint Presentation Deadline",
+      "fr": "Dernier délai pour l'envoi des posters et présentations PowerPoint",
+      "ar": "الموعد النهائي لإرسال الملصقات وعروض PowerPoint"
+    },
+    "description": {
+      "en": "Final deadline to submit final versions of posters and PowerPoint presentations for oral communications.",
+      "fr": "Date limite pour soumettre les versions finales des posters et présentations PowerPoint pour les communications orales.",
+      "ar": "الموعد النهائي لتقديم النسخ النهائية من الملصقات وعروض PowerPoint للمشاركات الشفهية."
+    },
+    "type": "deadline"
+  },
+  {
+    "date": "2026-06-15T00:00:00",
+    "title": {
+      "en": "CIRIV 2026 Conference Starts",
+      "fr": "Début de la conférence CIRIV 2026",
+      "ar": "بداية مؤتمر CIRIV 2026"
+    },
+    "description": {
+      "en": "The main conference event begins.",
+      "fr": "L'événement principal de la conférence commence.",
+      "ar": "يبدأ الحدث الرئيسي للمؤتمر."
+    },
+    "type": "event"
+  }
+]

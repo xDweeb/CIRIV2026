@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIRIV 2026 Countdown Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom animations for countdown */
+        @keyframes flip {
+            0%, 100% { transform: rotateX(0deg); }
+            50% { transform: rotateX(-180deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+        
+        @keyframes bounce-subtle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse-once {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .animate-flip {
+            animation: flip 0.6s ease-in-out;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+            animation: float-delayed 6s ease-in-out infinite;
+        }
+        
+        .animate-bounce-subtle {
+            animation: bounce-subtle 3s ease-in-out infinite;
+        }
+        
+        .animate-shimmer {
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .animate-fade-in {
+            animation: fade-in 1s ease-out;
+        }
+        
+        .animate-pulse-once {
+            animation: pulse-once 0.6s ease-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+    <div class="container mx-auto px-4 py-16">
+        <div id="countdown-widget" class="countdown-container">
+            <!-- Loading placeholder -->
+            <div id="countdown-loading" class="countdown-loading">
+                <div class="loading-card bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-2xl">
+                    <div class="loading-shimmer bg-gradient-to-r from-transparent via-teal-400/40 to-transparent h-1 rounded mb-4 animate-shimmer"></div>
+                    <div class="loading-text text-gray-600 dark:text-gray-300 text-center">Loading countdown...</div>
+                </div>
+            </div>
+
+            <!-- Main countdown content -->
+            <div id="countdown-content" class="countdown-content hidden">
+                <!-- Floating background elements -->
+                <div class="floating-bg floating-bg-1 absolute w-40 h-40 bg-teal-500/10 rounded-full blur-3xl animate-float"></div>
+                <div class="floating-bg floating-bg-2 absolute w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl animate-float-delayed"></div>
+                
+                <div class="countdown-card relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl max-w-4xl mx-auto p-8 md:p-12 backdrop-blur-sm border border-gray-100 dark:border-gray-700">
+                    <!-- Header with calendar icon -->
+                    <div class="countdown-header flex items-center justify-center gap-3 mb-4">
+                        <div class="calendar-icon-container relative">
+                            <svg class="calendar-icon w-6 h-6 text-teal-600 animate-bounce-subtle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <div class="icon-glow absolute inset-0 bg-teal-600/20 blur-md rounded-full animate-pulse"></div>
+                        </div>
+                        <h2 class="countdown-subtitle text-lg md:text-xl text-gray-600 dark:text-gray-300 font-medium">Next Important Date</h2>
+                    </div>
+
+                    <!-- Event title -->
+                    <h3 id="event-title" class="event-title text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent text-center mb-12">Call for Communications Launch</h3>
+
+                    <!-- Countdown timer -->
+                    <div class="timer-grid grid grid-cols-4 gap-3 md:gap-6 mb-8">
+                        <div class="time-unit flex flex-col items-center group" data-unit="days">
+                            <div class="time-card relative w-20 h-24 md:w-28 md:h-32 mb-3 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="card-background absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl shadow-lg"></div>
+                                <div class="card-shine absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-xl"></div>
+                                <div class="time-value absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-bold text-white drop-shadow-lg" id="days">00</div>
+                                <div class="time-shadow absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent rounded-b-xl"></div>
+                                <div class="pulse-effect absolute inset-0 bg-white/30 rounded-xl opacity-0 transition-opacity duration-600"></div>
+                            </div>
+                            <div class="time-label text-xs md:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">Days</div>
+                        </div>
+
+                        <div class="time-unit flex flex-col items-center group" data-unit="hours">
+                            <div class="time-card relative w-20 h-24 md:w-28 md:h-32 mb-3 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="card-background absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl shadow-lg"></div>
+                                <div class="card-shine absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-xl"></div>
+                                <div class="time-value absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-bold text-white drop-shadow-lg" id="hours">00</div>
+                                <div class="time-shadow absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent rounded-b-xl"></div>
+                                <div class="pulse-effect absolute inset-0 bg-white/30 rounded-xl opacity-0 transition-opacity duration-600"></div>
+                            </div>
+                            <div class="time-label text-xs md:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">Hours</div>
+                        </div>
+
+                        <div class="time-unit flex flex-col items-center group" data-unit="minutes">
+                            <div class="time-card relative w-20 h-24 md:w-28 md:h-32 mb-3 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="card-background absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl shadow-lg"></div>
+                                <div class="card-shine absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-xl"></div>
+                                <div class="time-value absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-bold text-white drop-shadow-lg" id="minutes">00</div>
+                                <div class="time-shadow absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent rounded-b-xl"></div>
+                                <div class="pulse-effect absolute inset-0 bg-white/30 rounded-xl opacity-0 transition-opacity duration-600"></div>
+                            </div>
+                            <div class="time-label text-xs md:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">Minutes</div>
+                        </div>
+
+                        <div class="time-unit flex flex-col items-center group" data-unit="seconds">
+                            <div class="time-card relative w-20 h-24 md:w-28 md:h-32 mb-3 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                                <div class="card-background absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl shadow-lg"></div>
+                                <div class="card-shine absolute inset-0 bg-gradient-to-b from-white/20 to-transparent rounded-xl"></div>
+                                <div class="time-value absolute inset-0 flex items-center justify-center text-3xl md:text-5xl font-bold text-white drop-shadow-lg" id="seconds">00</div>
+                                <div class="time-shadow absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/10 to-transparent rounded-b-xl"></div>
+                                <div class="pulse-effect absolute inset-0 bg-white/30 rounded-xl opacity-0 transition-opacity duration-600"></div>
+                            </div>
+                            <div class="time-label text-xs md:text-sm text-gray-500 dark:text-gray-400 uppercase tracking-widest font-semibold">Seconds</div>
+                        </div>
+                    </div>
+
+                    <!-- Separator line -->
+                    <div class="separator relative mb-8">
+                        <div class="separator-line h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent"></div>
+                        <div class="separator-shimmer absolute inset-0 h-px bg-gradient-to-r from-transparent via-teal-500/50 to-transparent animate-shimmer"></div>
+                    </div>
+
+                    <!-- Call to action -->
+                    <div class="cta-section text-center">
+                        <p class="cta-text text-sm text-gray-600 dark:text-gray-300 mb-3 animate-fade-in">Don't miss this important deadline</p>
+                        <div class="cta-link inline-flex items-center gap-2 text-teal-600 dark:text-teal-400 font-medium text-sm cursor-pointer group">
+                            <span class="cta-label transition-transform duration-300 group-hover:translate-x-1">Set a reminder</span>
+                            <span class="cta-arrow text-lg transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Events data
+        const eventsData = [
+            {
+                "date": "2025-10-06T00:00:00",
+                "title": {
+                    "en": "Call for Communications Launch",
+                    "fr": "Lancement de l'appel à communications",
+                    "ar": "إطلاق دعوة للمشاركات"
+                },
+                "description": {
+                    "en": "Opening of the submission period for abstracts for oral communications and posters.",
+                    "fr": "Ouverture de la période de soumission des résumés pour les communications orales et les posters.",
+                    "ar": "فتح فترة تقديم الملخصات للمشاركات الشفهية والملصقات."
+                },
+                "type": "announcement"
+            },
+            {
+                "date": "2025-11-15T23:59:59",
+                "title": {
+                    "en": "Abstract Submission Deadline",
+                    "fr": "Dernier délai de réception des résumés",
+                    "ar": "الموعد النهائي لاستلام الملخصات"
+                },
+                "description": {
+                    "en": "Final deadline to submit your abstracts for oral communications and posters.",
+                    "fr": "Date limite pour soumettre vos résumés de communications orales et de posters.",
+                    "ar": "الموعد النهائي لتقديم ملخصاتكم للمشاركات الشفهية والملصقات."
+                },
+                "type": "deadline"
+            },
+            {
+                "date": "2025-12-15T23:59:59",
+                "title": {
+                    "en": "Early Bird Registration Deadline",
+                    "fr": "Dernier délai pour bénéficier des tarifs d'inscription réduits",
+                    "ar": "الموعد النهائي للاستفادة من أسعار التسجيل المخفضة"
+                },
+                "description": {
+                    "en": "Final deadline to benefit from reduced registration fees. Regular rates apply after this date.",
+                    "fr": "Date limite pour profiter des tarifs préférentiels d'inscription. Après cette date, les tarifs normaux s'appliquent.",
+                    "ar": "الموعد النهائي للاستفادة من رسوم التسجيل المخفضة. الأسعار العادية تطبق بعد هذا التاريخ."
+                },
+                "type": "deadline"
+            },
+            {
+                "date": "2026-06-15T00:00:00",
+                "title": {
+                    "en": "CIRIV 2026 Conference Starts",
+                    "fr": "Début de la conférence CIRIV 2026",
+                    "ar": "بداية مؤتمر CIRIV 2026"
+                },
+                "description": {
+                    "en": "The main conference event begins.",
+                    "fr": "L'événement principal de la conférence commence.",
+                    "ar": "يبدأ الحدث الرئيسي للمؤتمر."
+                },
+                "type": "event"
+            }
+        ];
+
+        class CountdownWidget {
+            constructor(events, locale = 'en') {
+                this.events = events;
+                this.locale = locale;
+                this.currentEvent = null;
+                this.timeLeft = { days: 0, hours: 0, minutes: 0, seconds: 0 };
+                this.isFlipping = { days: false, hours: false, minutes: false, seconds: false };
+                this.timer = null;
+
+                this.init();
+            }
+
+            init() {
+                this.findNextEvent();
+                this.updateDisplay();
+                this.startTimer();
+                this.hideLoading();
+            }
+
+            findNextEvent() {
+                const now = new Date().getTime();
+                
+                // Find the next upcoming event
+                const futureEvents = this.events
+                    .map(event => ({
+                        ...event,
+                        timestamp: new Date(event.date).getTime()
+                    }))
+                    .filter(event => event.timestamp > now)
+                    .sort((a, b) => a.timestamp - b.timestamp);
+
+                if (futureEvents.length > 0) {
+                    this.currentEvent = futureEvents[0];
+                } else {
+                    // No future events, show the last event
+                    const sortedEvents = this.events
+                        .map(event => ({
+                            ...event,
+                            timestamp: new Date(event.date).getTime()
+                        }))
+                        .sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    this.currentEvent = sortedEvents[0];
+                }
+
+                // Update event title
+                const titleElement = document.getElementById('event-title');
+                if (titleElement && this.currentEvent) {
+                    titleElement.textContent = this.currentEvent.title[this.locale] || this.currentEvent.title.en;
+                }
+
+                console.log('Current event:', this.currentEvent);
+                console.log('Event date:', new Date(this.currentEvent.date));
+                console.log('Current time:', new Date());
+            }
+
+            calculateTimeLeft() {
+                if (!this.currentEvent) return;
+
+                const now = new Date().getTime();
+                const difference = this.currentEvent.timestamp - now;
+
+                console.log('Time difference:', difference, 'ms');
+
+                if (difference > 0) {
+                    const newTime = {
+                        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                        hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                        minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+                        seconds: Math.floor((difference % (1000 * 60)) / 1000)
+                    };
+
+                    // Trigger flip animation when values change
+                    Object.keys(newTime).forEach(key => {
+                        if (newTime[key] !== this.timeLeft[key]) {
+                            this.triggerFlip(key);
+                        }
+                    });
+
+                    this.timeLeft = newTime;
+                } else {
+                    // Event has passed, find next event
+                    console.log('Event passed, finding next event...');
+                    this.findNextEvent();
+                    if (this.currentEvent) {
+                        this.calculateTimeLeft();
+                    }
+                }
+            }
+
+            triggerFlip(unit) {
+                const timeCard = document.querySelector(`[data-unit="${unit}"] .time-card`);
+                const pulseEffect = timeCard?.querySelector('.pulse-effect');
+                
+                if (timeCard && pulseEffect) {
+                    // Add flip animation
+                    timeCard.classList.add('animate-flip');
+                    
+                    // Show pulse effect
+                    pulseEffect.style.opacity = '1';
+                    
+                    // Remove effects after animation
+                    setTimeout(() => {
+                        timeCard.classList.remove('animate-flip');
+                        pulseEffect.style.opacity = '0';
+                    }, 600);
+                }
+            }
+
+            updateDisplay() {
+                const elements = {
+                    days: document.getElementById('days'),
+                    hours: document.getElementById('hours'),
+                    minutes: document.getElementById('minutes'),
+                    seconds: document.getElementById('seconds')
+                };
+
+                Object.keys(elements).forEach(key => {
+                    if (elements[key]) {
+                        elements[key].textContent = String(this.timeLeft[key]).padStart(2, '0');
+                    }
+                });
+            }
+
+            startTimer() {
+                this.calculateTimeLeft();
+                this.updateDisplay();
+                
+                this.timer = setInterval(() => {
+                    this.calculateTimeLeft();
+                    this.updateDisplay();
+                }, 1000);
+            }
+
+            hideLoading() {
+                setTimeout(() => {
+                    const loading = document.getElementById('countdown-loading');
+                    const content = document.getElementById('countdown-content');
+                    
+                    if (loading) loading.style.display = 'none';
+                    if (content) content.classList.remove('hidden');
+                }, 1000);
+            }
+
+            destroy() {
+                if (this.timer) {
+                    clearInterval(this.timer);
+                }
+            }
+        }
+
+        // Initialize the countdown widget
+        let countdownWidget;
+        
+        // Wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                countdownWidget = new CountdownWidget(eventsData, 'en');
+            });
+        } else {
+            countdownWidget = new CountdownWidget(eventsData, 'en');
+        }
+
+        // Test different locales
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'f') {
+                // French
+                if (countdownWidget) countdownWidget.destroy();
+                countdownWidget = new CountdownWidget(eventsData, 'fr');
+            } else if (e.key === 'a') {
+                // Arabic
+                if (countdownWidget) countdownWidget.destroy();
+                countdownWidget = new CountdownWidget(eventsData, 'ar');
+            } else if (e.key === 'e') {
+                // English
+                if (countdownWidget) countdownWidget.destroy();
+                countdownWidget = new CountdownWidget(eventsData, 'en');
+            }
+        });
+
+        // Add test info
+        const testInfo = document.createElement('div');
+        testInfo.innerHTML = `
+            <div class="fixed bottom-4 right-4 bg-black/80 text-white p-4 rounded-lg text-sm">
+                <div class="mb-2"><strong>CIRIV 2026 Countdown Test</strong></div>
+                <div>Press F for French, A for Arabic, E for English</div>
+                <div>Current: ${new Date().toLocaleString()}</div>
+                <div>Next event: October 6, 2025 (Call for Communications Launch)</div>
+            </div>
+        `;
+        document.body.appendChild(testInfo);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (countdownWidget) {
+                countdownWidget.destroy();
+            }
+        });
+    </script>
+</body>
+</html>

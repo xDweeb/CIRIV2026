@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
+import CountdownWidget from '../../components/CountdownWidget.astro';
 import { useTranslations } from '../../i18n/ui';
 
 const locale = 'ar';
@@ -17,6 +18,13 @@ const t = useTranslations(locale);
   <Header locale={locale} currentPath={Astro.url.pathname} />
   <main>
     <Hero locale={locale} />
+    
+    <!-- Countdown Section -->
+    <section class="py-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
+      <div class="container mx-auto px-4">
+        <CountdownWidget locale={locale} />
+      </div>
+    </section>
     
     <!-- Quick Links Section -->
     <section class="py-16 bg-white dark:bg-surface-dark">

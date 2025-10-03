@@ -83,7 +83,13 @@ const baseUrl = import.meta.env.BASE_URL || '/';
             <img 
               src={`${baseUrl}assets/logos/CIRIV.png`}
               alt="CIRIV 2026 Conference Logo"
-              class="w-48 h-48 object-contain mx-auto"
+              class="w-48 h-48 object-contain mx-auto dark:hidden"
+              loading="eager"
+            />
+            <img 
+              src={`${baseUrl}assets/logos/CIRIVB.png`}
+              alt="CIRIV 2026 Conference Logo"
+              class="w-48 h-48 object-contain mx-auto hidden dark:block"
               loading="eager"
             />
           </div>

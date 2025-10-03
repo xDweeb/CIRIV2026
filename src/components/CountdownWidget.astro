@@ -153,6 +153,25 @@ const t = useTranslations(locale);
     font-size: 2.5rem; font-weight: bold; color: #fff; text-align: center;
   }
 
+  /* Mobile Responsive Styles */
+  @media (max-width: 640px) {
+    .countdown-card { padding: 1rem 0.5rem; }
+    .event-title { font-size: 1.25rem; margin-bottom: 1.5rem; }
+    .timer-grid { gap: 0.5rem; max-width: 100%; }
+    .flip-card { width: 3.5rem; height: 4rem; margin-bottom: 0.5rem; }
+    .flip-card-front span, .flip-card-back span { font-size: 1.5rem; }
+    .time-label { font-size: 0.625rem; }
+    .countdown-subtitle { font-size: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .timer-grid { grid-template-columns: repeat(4, 1fr); gap: 0.25rem; }
+    .flip-card { width: 3rem; height: 3.5rem; }
+    .flip-card-front span, .flip-card-back span { font-size: 1.25rem; }
+    .time-label { font-size: 0.5rem; }
+    .event-title { font-size: 1.125rem; }
+  }
+
   .separator-line { height: 1px; background: linear-gradient(to right, transparent, #d1d5db, transparent); }
 
   .cta-section { text-align: center; }

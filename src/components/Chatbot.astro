@@ -43,10 +43,10 @@ const suggestedQuestions = faqData
   <!-- Chat Window -->
   <div
     id="chat-window"
-    class={`absolute bottom-14 sm:bottom-16 w-80 sm:w-96 max-w-[calc(100vw-1rem)] sm:max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 hidden animate-in slide-in-from-bottom-4 duration-300 ${isRTL ? 'left-0' : 'right-0'}`}
+    class={`chat-modal absolute bottom-14 sm:bottom-16 w-[95vw] sm:w-80 md:w-96 max-w-[95vw] sm:max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 hidden animate-in slide-in-from-bottom-4 duration-300 ${isRTL ? 'left-0 sm:left-0' : 'right-0 sm:right-0'}`}
   >
     <!-- Chat Header -->
-    <div class="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700 bg-brand-primary text-white rounded-t-2xl">
+    <div class="flex items-center justify-between p-4 border-b border-gray-200 bg-brand-primary text-white rounded-t-2xl">
       <div class="flex items-center space-x-3">
         <div class="w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -70,7 +70,7 @@ const suggestedQuestions = faqData
     </div>
 
     <!-- Chat Messages -->
-    <div id="chat-messages" class="h-80 overflow-y-auto p-4 space-y-3">
+    <div id="chat-messages" class="h-80 md:h-80 lg:h-80 overflow-y-auto p-4 space-y-3 chat-messages-mobile">
       <!-- Welcome Message -->
       <div class={`flex items-start space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
         <div class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
@@ -119,13 +119,13 @@ const suggestedQuestions = faqData
     </div>
 
     <!-- Chat Input -->
-    <div class="p-4 border-t border-slate-200 dark:border-slate-700">
+    <div class="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
       <form id="chat-form" class={`flex gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
         <input
           type="text"
           id="chat-input"
           placeholder={t('chatbot.placeholder')}
-          class={`flex-1 px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-white dark:bg-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 text-sm ${isRTL ? 'text-right' : 'text-left'}`}
+          class={`flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-gray-50 text-slate-900 placeholder-slate-500 text-sm ${isRTL ? 'text-right' : 'text-left'}`}
           autocomplete="off"
         />
         <button
@@ -197,9 +197,34 @@ const suggestedQuestions = faqData
       chatMinimize?.addEventListener('click', () => this.toggleChat());
       chatForm?.addEventListener('submit', (e) => this.handleSubmit(e));
       
+      // Close modal on backdrop click (mobile only)
+      chatWindow?.addEventListener('click', (e) => {
+        if (e.target === chatWindow && window.innerWidth <= 768) {
+          this.toggleChat();
+        }
+      });
+      
+      // Handle escape key to close modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.toggleChat();
+        }
+      });
+      
       // Auto-focus input when chat opens
       chatInput?.addEventListener('focus', () => {
         setTimeout(() => chatInput.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+      });
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && this.isOpen) {
+          // Re-enable body scroll on desktop
+          document.body.style.overflow = '';
+        } else if (window.innerWidth <= 768 && this.isOpen) {
+          // Disable body scroll on mobile
+          document.body.style.overflow = 'hidden';
+        }
       });
     }
 
@@ -215,12 +240,29 @@ const suggestedQuestions = faqData
       this.isOpen = !this.isOpen;
 
       if (this.isOpen) {
+        // For mobile, add body scroll lock
+        if (window.innerWidth <= 768) {
+          document.body.style.overflow = 'hidden';
+        }
+        
         chatWindow.classList.remove('hidden');
         chatIcon?.classList.add('hidden');
         closeIcon?.classList.remove('hidden');
         chatWidget?.classList.add('chat-open'); // Pause animation
-        setTimeout(() => chatInput?.focus(), 100);
+        
+        // Focus input after animation completes
+        setTimeout(() => {
+          chatInput?.focus();
+          // Scroll to bottom of messages
+          const messagesContainer = document.getElementById('chat-messages');
+          if (messagesContainer) {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+          }
+        }, 300);
       } else {
+        // Re-enable body scroll
+        document.body.style.overflow = '';
+        
         chatWindow.classList.add('hidden');
         chatIcon?.classList.remove('hidden');
         closeIcon?.classList.add('hidden');
@@ -396,6 +438,15 @@ const suggestedQuestions = faqData
     }
   }
 
+  @keyframes slide-up-mobile {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
   /* Subtle pulse animation for chatbot button */
   @keyframes chatbot-pulse {
     0%, 100% {
@@ -433,6 +484,17 @@ const suggestedQuestions = faqData
   /* Smooth scrolling for chat messages */
   #chat-messages {
     scroll-behavior: smooth;
+    background: #ffffff; /* Ensure white background */
+  }
+
+  /* Force white background for chatbot container in all modes */
+  #chat-window {
+    background: #ffffff !important;
+  }
+
+  /* Ensure input section has white background */
+  #chat-window .border-t {
+    background: #ffffff !important;
   }
 
   /* Custom scrollbar for chat messages */
@@ -454,11 +516,111 @@ const suggestedQuestions = faqData
   }
 
   /* Responsive adjustments */
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
+    #chatbot-widget {
+      bottom: 1rem;
+      left: 0.5rem !important;
+      right: 0.5rem !important;
+      z-index: 1000;
+    }
+    
     #chat-window {
-      width: calc(100vw - 2rem);
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      top: 10% !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      height: 90vh !important;
+      max-height: 90vh !important;
+      border-radius: 1.5rem 1.5rem 0 0 !important;
+      background: #ffffff !important; /* Force white background on mobile */
+      border: 1px solid #e5e7eb !important;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    #chat-window:not(.hidden) {
+      transform: translateY(0);
+    }
+    
+    .chat-messages-mobile {
+      height: calc(90vh - 140px) !important; /* Adjust for header and input */
+      max-height: calc(90vh - 140px) !important;
+      background: #ffffff !important; /* Ensure messages area is white */
+    }
+    
+    /* Mobile chat toggle button positioning */
+    .chatbot-button {
+      position: fixed;
+      bottom: 1.5rem;
       right: 1rem;
+      z-index: 1001;
+    }
+    
+    /* RTL support for mobile */
+    .chatbot-container[data-locale="ar"] .chatbot-button {
+      right: auto;
       left: 1rem;
+    }
+    
+    /* Backdrop for mobile modal */
+    #chat-window::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    
+    .dark #chat-window::before {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    
+    #chat-window:not(.hidden)::before {
+      opacity: 1;
+    }
+    
+    /* Ensure chat header is sticky on mobile */
+    .chat-modal .bg-brand-primary {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    
+    /* Make close button more prominent on mobile */
+    #chat-minimize {
+      padding: 0.75rem !important;
+      margin: -0.5rem !important;
+    }
+    
+    /* Force white background for input section on mobile */
+    .chat-modal .border-t {
+      background: #ffffff !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    #chatbot-widget {
+      bottom: 1rem;
+      left: 0.5rem !important;
+      right: 0.5rem !important;
+    }
+    
+    .chatbot-button {
+      bottom: 1rem;
+      right: 0.75rem;
+    }
+    
+    .chatbot-container[data-locale="ar"] .chatbot-button {
+      right: auto;
+      left: 0.75rem;
     }
   }
 

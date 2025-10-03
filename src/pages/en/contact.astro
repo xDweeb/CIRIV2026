@@ -244,8 +244,19 @@ const t = useTranslations(locale);
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
 <script>
-  // Initialize EmailJS
-  emailjs.init("nxVtz6ayXRhDikg7Z");
+  // Initialize EmailJS when script loads
+  (function() {
+    // Wait for EmailJS to load
+    function initEmailJS() {
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init("nxVtz6ayXRhDikg7Z");
+        console.log('EmailJS initialized successfully');
+      } else {
+        setTimeout(initEmailJS, 100);
+      }
+    }
+    initEmailJS();
+  })();
 
   // Form submission handler
   document.addEventListener('DOMContentLoaded', function() {
@@ -254,27 +265,39 @@ const t = useTranslations(locale);
     const btnText = document.getElementById('btn-text');
     const btnLoading = document.getElementById('btn-loading');
 
-    if (form) {
+    console.log('Form elements found:', { form, submitBtn, btnText, btnLoading });
+
+    if (form && submitBtn && btnText && btnLoading) {
       form.addEventListener('submit', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         
+        console.log('Form submission intercepted');
+        
+        // Check if EmailJS is loaded
+        if (typeof emailjs === 'undefined') {
+          showAlert('Email service loading error. Please reload the page.', 'error');
+          return;
+        }
+
         // Show loading state
         submitBtn.disabled = true;
         btnText.classList.add('hidden');
         btnLoading.classList.remove('hidden');
         submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
 
+        console.log('Sending email via EmailJS...');
+
         // Send email using EmailJS
         emailjs.sendForm('service_48d81jb', 'template_jqegk6d', form)
           .then(function(response) {
-            // Success animation and message
+            console.log('Email sent successfully:', response);
             showAlert('Message sent successfully!', 'success');
             form.reset();
           })
           .catch(function(error) {
-            // Error animation and message
-            showAlert('Failed to send message. Please try again.', 'error');
             console.error('EmailJS Error:', error);
+            showAlert('Failed to send message. Please try again.', 'error');
           })
           .finally(function() {
             // Reset button state
@@ -286,6 +309,8 @@ const t = useTranslations(locale);
             }, 1000);
           });
       });
+    } else {
+      console.error('Form elements not found properly');
     }
 
     // Custom alert function with animations
@@ -332,7 +357,7 @@ const t = useTranslations(locale);
       }, 100);
 
       // Add success animation for button
-      if (type === 'success') {
+      if (type === 'success' && submitBtn) {
         submitBtn.classList.add('bg-green-500');
         setTimeout(() => {
           submitBtn.classList.remove('bg-green-500');

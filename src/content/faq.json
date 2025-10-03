@@ -106,9 +106,9 @@
     },
     "keywords": ["contact", "email", "info", "support", "registration mail", "mail", "reach out", "تواصل", "إيميل", "بريد", "support mail"],
     "answer": {
-      "fr": "Contactez-nous par email à registration@ciriv.org pour l'inscription, ou info@ciriv.org pour les questions générales.",
-      "en": "You can contact us at registration@ciriv.org for registration, or info@ciriv.org for general inquiries.",
-      "ar": "يمكنك التواصل معنا عبر البريد الإلكتروني registration@ciriv.org للتسجيل، أو info@ciriv.org للاستفسارات العامة."
+      "fr": "Contactez-nous par email à info@ciriv.org pour l'inscription, ou info@ciriv.org pour les questions générales.",
+      "en": "You can contact us at info@ciriv.org for registration, or info@ciriv.org for general inquiries.",
+      "ar": "يمكنك التواصل معنا عبر البريد الإلكتروني info@ciriv.org للتسجيل، أو info@ciriv.org للاستفسارات العامة."
     }
   }
 ,

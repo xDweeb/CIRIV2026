@@ -1,26 +1,18 @@
 [
   {
     "id": "greeting",
-    "question": {
-      "fr": "Salutations",
-      "en": "Greetings",
-      "ar": "تحيات"
-    },
-    "keywords": ["hi", "hello", "hey", "bonjour", "salut", "bonsoir", "سلام", "اهلا", "مرحبا", "hi there"],
+    "question": { "fr": "Salutations", "en": "Greetings", "ar": "تحيات" },
+    "keywords": ["hi","hello","hey","bonjour","salut","bonsoir","سلام","اهلا","مرحبا","hi there","السلام عليكم"],
     "answer": {
-      "fr": "Bonjour ! Comment puis-je vous aider avec le congrès CIRIV 2026 ?",
-      "en": "Hello! How can I help you with the CIRIV 2026 congress?",
-      "ar": "مرحباً! كيف يمكنني مساعدتك بخصوص مؤتمر CIRIV 2026؟"
+      "fr": "Bonjour 👋 ! Comment puis-je vous aider avec le congrès CIRIV 2026 ?",
+      "en": "Hello 👋! How can I help you with the CIRIV 2026 congress?",
+      "ar": "مرحباً 👋! كيف يمكنني مساعدتك بخصوص مؤتمر CIRIV 2026؟"
     }
   },
   {
     "id": "thanks",
-    "question": {
-      "fr": "Remerciements",
-      "en": "Thanks",
-      "ar": "شكر"
-    },
-    "keywords": ["thanks", "thank you", "merci", "شكرا", "choukran", "متشكر", "thanx"],
+    "question": { "fr": "Remerciements", "en": "Thanks", "ar": "شكر" },
+    "keywords": ["thanks","thank you","merci","شكرا","choukran","متشكر","thanx","gracias","بارك الله فيك"],
     "answer": {
       "fr": "Avec plaisir 😊. N’hésitez pas si vous avez d’autres questions !",
       "en": "You're welcome 😊. Feel free to ask more questions!",
@@ -29,115 +21,162 @@
   },
   {
     "id": 1,
-    "question": {
-      "fr": "Quand aura lieu le congrès CIRIV 2026?",
-      "en": "When will the CIRIV 2026 congress take place?",
-      "ar": "متى سيعقد مؤتمر CIRIV 2026؟"
-    },
-    "keywords": ["date", "time", "jour", "when", "quand", "متى", "conference date", "time of event", "temps", "programme", "schedule"],
+    "question": { "fr": "Qu’est-ce que le CIRIV’26 ?", "en": "What is CIRIV'26?", "ar": "ما هو CIRIV'26؟" },
+    "keywords": ["ciriv","c'est quoi","what is","about","à propos","présentation","description","event","congrès","conference","المؤتمر"],
     "answer": {
-      "fr": "Le congrès CIRIV 2026 aura lieu du 25 au 27 juin 2026.",
-      "en": "The CIRIV 2026 congress will take place from June 25-27, 2026.",
-      "ar": "سيعقد مؤتمر CIRIV 2026 من 25 إلى 27 يونيو 2026."
+      "fr": "👉 Le CIRIV’26 est le Congrès International de la Recherche, de l’Innovation et de la Valorisation, organisé par AMARINOVA. Il rassemble chercheurs, doctorants, étudiants et professionnels. Thème 2026 : « One Health ». ",
+      "en": "👉 CIRIV’26 is the International Congress on Research, Innovation and Valorization, organized by AMARINOVA. It gathers researchers, PhD students, students, and professionals. 2026 theme: 'One Health'.",
+      "ar": "👉 CIRIV'26 هو المؤتمر الدولي للبحث والابتكار والتثمين، تنظمه جمعية AMARINOVA. يجمع الباحثين وطلبة الدكتوراه والطلاب والمهنيين. موضوع 2026: 'الصحة الواحدة'."
     }
   },
   {
     "id": 2,
-    "question": {
-      "fr": "Quelle est la date limite d'inscription?",
-      "en": "What is the registration deadline?",
-      "ar": "ما هو الموعد النهائي للتسجيل؟"
-    },
-    "keywords": ["deadline", "date limite", "last date", "time limit", "registration deadline", "final date", "inscription", "link inscription", "موعد نهائي", "آخر أجل", "التسجيل"],
+    "question": { "fr": "Quelle est la thématique du congrès ?", "en": "What is the theme of the congress?", "ar": "ما هو موضوع المؤتمر؟" },
+    "keywords": ["thème","theme","sujet","subject","topic","focus","محور","موضوع","axis","orientation"],
     "answer": {
-      "fr": "La date limite d'inscription anticipée est le 6 octobre 2025. L'inscription tardive sera possible jusqu'au 15 décembre 2025.",
-      "en": "The early registration deadline is October 6, 2025. Late registration will be possible until December 15, 2025.",
-      "ar": "الموعد النهائي للتسجيل المبكر هو 6 أكتوبر 2025. سيكون التسجيل المتأخر متاحاً حتى 15 ديسمبر 2025."
+      "fr": "👉 La thématique est « One Health », interconnexion entre santé humaine, animale et environnement.",
+      "en": "👉 The theme is 'One Health', interconnecting human, animal and environmental health.",
+      "ar": "👉 الموضوع هو «الصحة الواحدة»، الترابط بين صحة الإنسان والحيوان والبيئة."
     }
   },
   {
     "id": 3,
-    "question": {
-      "fr": "Combien coûte l'inscription au congrès?",
-      "en": "How much does the congress registration cost?",
-      "ar": "كم تكلف رسوم التسجيل في المؤتمر؟"
-    },
-    "keywords": ["price", "fees", "tarif", "cost", "combien", "how much", "رسوم", "تكلفة", "سعر", "inscription cost"],
+    "question": { "fr": "Où se déroule le congrès ?", "en": "Where will the congress take place?", "ar": "أين سيعقد المؤتمر؟" },
+    "keywords": ["où","lieu","location","place","venue","address","map","site","university","faculty","مكان","العنوان","المكان"],
     "answer": {
-      "fr": "Les frais d'inscription anticipée sont de 350€ pour les professionnels et 200€ pour les étudiants.",
-      "en": "Early registration fees are €350 for professionals and €200 for students.",
-      "ar": "رسوم التسجيل المبكر هي 350 يورو للمهنيين و200 يورو للطلاب."
+      "fr": "👉 Faculté des Sciences Ben M’sik, Université Hassan II de Casablanca (UH2C), Maroc.",
+      "en": "👉 Faculty of Sciences Ben M’sik, Hassan II University of Casablanca (UH2C), Morocco.",
+      "ar": "👉 بكلية العلوم بن مسيك، جامعة الحسن الثاني بالدار البيضاء (UH2C)، المغرب."
     }
   },
   {
     "id": 4,
-    "question": {
-      "fr": "Où aura lieu le congrès?",
-      "en": "Where will the congress take place?",
-      "ar": "أين سيعقد المؤتمر؟"
-    },
-    "keywords": ["lieu", "location", "venue", "où", "where", "place", "address", "venue location", "أين", "مكان", "عنوان"],
+    "question": { "fr": "Quelles sont les dates du congrès ?", "en": "What are the congress dates?", "ar": "ما هي تواريخ المؤتمر؟" },
+    "keywords": ["dates","quand","when","jours","programme","schedule","calendar","متى","تاريخ","تواريخ"],
     "answer": {
-      "fr": "Le congrès CIRIV 2026 se déroulera à l'Université Hassan II de Casablanca.",
-      "en": "The CIRIV 2026 congress will be held at Hassan II University of Casablanca.",
-      "ar": "سيعقد مؤتمر CIRIV 2026 في جامعة الحسن الثاني بالدار البيضاء."
+      "fr": "👉 Les 27 et 28 janvier 2026.",
+      "en": "👉 January 27–28, 2026.",
+      "ar": "👉 27 و28 يناير 2026."
     }
   },
   {
     "id": 5,
-    "question": {
-      "fr": "Comment soumettre un résumé?",
-      "en": "How can I submit an abstract?",
-      "ar": "كيف يمكنني تقديم ملخص؟"
-    },
-    "keywords": ["submit", "soumission", "abstract", "résumé", "poster", "submission form", "how to send", "تقديم", "ملخص", "عرض", "soumission lien"],
+    "question": { "fr": "Comment s’inscrire ?", "en": "How to register?", "ar": "كيف أسجل؟" },
+    "keywords": ["inscription","register","sign up","formulaire","registration","join","participate","link","التسجيل","سجل"],
     "answer": {
-      "fr": "La soumission des résumés se fait via notre plateforme en ligne. La date limite est le 20 novembre 2025.",
-      "en": "Abstract submission is done through our online platform. The deadline is November 20, 2025.",
-      "ar": "يتم تقديم الملخصات من خلال منصتنا الإلكترونية. الموعد النهائي هو 20 نوفمبر 2025."
+      "fr": "👉 Inscription via le formulaire en ligne dans la section Inscriptions.",
+      "en": "👉 Register via the online form in the Registrations section.",
+      "ar": "👉 التسجيل عبر النموذج الإلكتروني في قسم التسجيلات."
     }
   },
   {
     "id": 6,
-    "question": {
-      "fr": "Comment contacter l'organisation?",
-      "en": "How can I contact the organization?",
-      "ar": "كيف يمكنني التواصل مع المنظمة؟"
-    },
-    "keywords": ["contact", "email", "info", "support", "registration mail", "mail", "reach out", "تواصل", "إيميل", "بريد", "support mail"],
+    "question": { "fr": "Quels sont les tarifs ?", "en": "What are the registration fees?", "ar": "ما هي رسوم التسجيل؟" },
+    "keywords": ["tarif","prix","fees","cost","combien","how much","frais","inscription","رسوم","تكلفة","سعر"],
     "answer": {
-      "fr": "Contactez-nous par email à info@ciriv.org pour l'inscription, ou info@ciriv.org pour les questions générales.",
-      "en": "You can contact us at info@ciriv.org for registration, or info@ciriv.org for general inquiries.",
-      "ar": "يمكنك التواصل معنا عبر البريد الإلكتروني info@ciriv.org للتسجيل، أو info@ciriv.org للاستفسارات العامة."
+      "fr": "👉 Les tarifs varient selon votre statut (étudiant, chercheur, professionnel). Détails bientôt disponibles.",
+      "en": "👉 Fees vary depending on your status (student, researcher, professional). Details soon.",
+      "ar": "👉 تختلف الرسوم حسب الوضع (طالب، باحث، مهني). التفاصيل قريباً."
     }
-  }
-,
+  },
   {
     "id": 7,
-    "question": {
-      "fr": "Y aura-t-il des sessions en ligne?",
-      "en": "Will there be online sessions?",
-      "ar": "هل ستكون هناك جلسات عبر الإنترنت؟"
-    },
-    "keywords": ["online", "virtual", "streaming", "webinar", "sessions", "en ligne", "virtuel", "streaming", "جلسات عبر الإنترنت", "افتراضي"],
+    "question": { "fr": "Y a-t-il un tarif réduit ?", "en": "Is there a reduced fee?", "ar": "هل هناك تخفيض؟" },
+    "keywords": ["réduction","réduit","discount","early","special price","خفض","تخفيض","خصم"],
     "answer": {
-      "fr": "Oui, certaines sessions seront diffusées en direct pour les participants à distance.",
-      "en": "Yes, some sessions will be live-streamed for remote participants.",
-      "ar": "نعم، سيتم بث بعض الجلسات مباشرة للمشاركين عن بُعد."
+      "fr": "👉 Oui, un tarif réduit avant le 15 décembre 2025.",
+      "en": "👉 Yes, reduced fee before December 15, 2025.",
+      "ar": "👉 نعم، هناك تخفيض للتسجيلات قبل 15 ديسمبر 2025."
     }
   },
   {
     "id": 8,
-    "question": {
-      "fr": "Quels sont les thèmes principaux du congrès?",
-      "en": "What are the main themes of the congress?",
-      "ar": "ما هي الموضوعات الرئيسية للمؤتمر؟"
-    },
-    "keywords": ["themes", "topics", "main subjects", "thèmes", "sujets", "topics covered", "موضوعات", "محاور", "themes discussed"],
+    "question": { "fr": "Date limite d’inscription ?", "en": "Registration deadline?", "ar": "آخر أجل للتسجيل؟" },
+    "keywords": ["deadline","limite","last date","final date","registration deadline","cut-off","موعد نهائي","آخر أجل"],
     "answer": {
-      "fr": "Le congrès se concentre sur la thématique One Health, englobant la santé humaine, la santé animale et l'environnement.",
-      "en": "The congress focuses on the One Health theme, encompassing human health, animal health, and the environment.",
-      "ar": "يركز المؤتمر على موضوع الصحة الواحدة، الذي يشمل صحة الإنسان، صحة الحيوان، والبيئة."
+      "fr": "👉 Les inscriptions en ligne se clôturent le 5 janvier 2026.",
+      "en": "👉 Online registrations close on January 5, 2026.",
+      "ar": "👉 ينتهي التسجيل عبر الإنترنت في 5 يناير 2026."
+    }
+  },
+  {
+    "id": 9,
+    "question": { "fr": "Comment payer ?", "en": "How to pay?", "ar": "كيف أدفع؟" },
+    "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك","حوالة"],
+    "answer": {
+      "fr": "👉 Paiement par virement ou versement bancaire sur le compte officiel. Coordonnées bancaires bientôt disponibles.",
+      "en": "👉 Payment by transfer or bank deposit to the official account. Bank details soon.",
+      "ar": "👉 يتم الدفع عبر التحويل أو الإيداع البنكي في الحساب الرسمي. التفاصيل قريباً."
+    }
+  },
+  {
+    "id": 10,
+    "question": { "fr": "Comment soumettre un résumé ?", "en": "How to submit an abstract?", "ar": "كيف أقدم ملخص؟" },
+    "keywords": ["soumettre","submit","abstract","résumé","poster","paper","communication","call","ملخص","عرض","تقديم"],
+    "answer": {
+      "fr": "👉 Via le formulaire de soumission en ligne (section Appel à communications).",
+      "en": "👉 Through the online submission form (Call for Papers section).",
+      "ar": "👉 عبر النموذج الإلكتروني (قسم دعوة لتقديم المداخلات)."
+    }
+  },
+  {
+    "id": 11,
+    "question": { "fr": "Contact ?", "en": "Contact?", "ar": "التواصل؟" },
+    "keywords": ["contact","mail","email","support","reach","info","message","تواصل","بريد","إيميل"],
+    "answer": {
+      "fr": "👉 Vous pouvez nous écrire à info@ciriv.org",
+      "en": "👉 You can contact us at info@ciriv.org",
+      "ar": "👉 يمكنك مراسلتنا عبر البريد info@ciriv.org"
+    }
+  },
+  {
+    "id": 12,
+    "question": { "fr": "Programme ?", "en": "Program?", "ar": "البرنامج؟" },
+    "keywords": ["programme","schedule","agenda","planning","sessions","جدول","برنامج","محاضرات"],
+    "answer": {
+      "fr": "👉 Le programme détaillé sera bientôt disponible.",
+      "en": "👉 The detailed program will be available soon.",
+      "ar": "👉 البرنامج التفصيلي سيكون متاحاً قريباً."
+    }
+  },
+  {
+    "id": 13,
+    "question": { "fr": "Hébergement ?", "en": "Accommodation?", "ar": "الإقامة؟" },
+    "keywords": ["hébergement","hotel","accommodation","lodging","stay","night","فندق","الإقامة","سكن"],
+    "answer": {
+      "fr": "👉 Les informations sur l’hébergement seront bientôt disponibles.",
+      "en": "👉 Accommodation information will be available soon.",
+      "ar": "👉 معلومات الإقامة ستكون متوفرة قريباً."
+    }
+  },
+  {
+    "id": 14,
+    "question": { "fr": "Intervenants / conférenciers ?", "en": "Speakers?", "ar": "المتدخلون؟" },
+    "keywords": ["intervenants","speakers","conférenciers","orateurs","guests","panel","مداخلون","محاضرون","ضيوف"],
+    "answer": {
+      "fr": "👉 La liste des intervenants sera publiée prochainement.",
+      "en": "👉 The list of speakers will be published soon.",
+      "ar": "👉 قائمة المتدخلين ستنشر قريباً."
+    }
+  },
+  {
+    "id": 15,
+    "question": { "fr": "Certificat ?", "en": "Certificate?", "ar": "شهادة؟" },
+    "keywords": ["certificat","attestation","certificate","proof","participation","شهادة","حضور","مشاركة"],
+    "answer": {
+      "fr": "👉 Oui, une attestation de participation sera remise. Détails bientôt.",
+      "en": "👉 Yes, a participation certificate will be provided. Details soon.",
+      "ar": "👉 نعم، سيتم تسليم شهادة مشاركة. التفاصيل قريباً."
+    }
+  },
+  {
+    "id": 16,
+    "question": { "fr": "Partenariats / sponsors ?", "en": "Partnerships / sponsors?", "ar": "شركاء / رعاة؟" },
+    "keywords": ["partenaire","sponsor","partnership","support","collaboration","sponsorship","شريك","راع","رعاية"],
+    "answer": {
+      "fr": "👉 Les informations sur les partenariats et sponsors seront bientôt disponibles.",
+      "en": "👉 Information about partnerships and sponsors will be available soon.",
+      "ar": "👉 معلومات الشركاء والرعاة ستكون متاحة قريباً."
     }
   }
 ]

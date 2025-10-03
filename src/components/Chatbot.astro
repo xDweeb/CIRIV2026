@@ -1,9 +1,6 @@
 ---
-export interface Props {
-  locale?: 'en' | 'fr' | 'ar';
-}
-
-const { locale = 'en' } = Astro.props;
+export interface Props { locale?: 'en'|'fr'|'ar' }
+const { locale='en' } = Astro.props;
 
 import { useTranslations } from '../i18n/ui.ts';
 import faqData from '../content/faq.json';
@@ -11,27 +8,24 @@ import faqData from '../content/faq.json';
 const t = useTranslations(locale);
 const isRTL = locale === 'ar';
 
-// Fallback messages for each language
 const fallbackMessages = {
   fr: "Je n'ai pas trouvé de réponse, veuillez nous contacter à",
-  en: "I did not find an answer, please contact us at", 
+  en: "I did not find an answer, please contact us at",
   ar: "لم أجد إجابة، المرجو التواصل معنا عبر البريد الإلكتروني"
 };
 
-// Get top 3 actual questions for suggestions (skip greetings/thanks)
 const suggestedQuestions = faqData
-  .filter(item => item.id && typeof item.id === 'string' && !['greeting', 'thanks'].includes(item.id))
-  .slice(0, 3);
+  .filter(i => !['greeting','thanks'].includes(i.id))
+  .slice(0,3);
 ---
 
-<!-- Chatbot Widget -->
-<div id="chatbot-widget" class={`fixed bottom-4 z-50 chatbot-container ${isRTL ? 'left-2 sm:left-4' : 'right-2 sm:right-4'}`} data-locale={locale}>
-  <!-- Chat Toggle Button -->
-  <button
-    id="chat-toggle"
-    class="chatbot-button bg-brand-primary hover:bg-brand-primaryDark text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
-    aria-label={t('chatbot.title')}
-  >
+<div id="chatbot-widget"
+     class={`fixed bottom-4 z-50 chatbot-container ${isRTL?'left-2 sm:left-4':'right-2 sm:right-4'}`}
+     data-locale={locale}>
+  <!-- Toggle Button -->
+  <button id="chat-toggle"
+    class="chatbot-button bg-brand-primary hover:bg-brand-primaryDark text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+    aria-label={t('chatbot.title')}>
     <svg id="chat-icon" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a9.863 9.863 0 01-4.906-1.287A6.967 6.967 0 0012 21c-2.331 0-4.512-.645-6.374-1.766l-.227-.133C3.142 18.156 2 16.154 2 14V7a5 5 0 015-5h10a5 5 0 015 5v5z"/>
     </svg>
@@ -41,13 +35,11 @@ const suggestedQuestions = faqData
   </button>
 
   <!-- Chat Window -->
-  <div
-    id="chat-window"
-    class={`chat-modal absolute bottom-14 sm:bottom-16 w-[95vw] sm:w-80 md:w-96 max-w-[95vw] sm:max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 hidden animate-in slide-in-from-bottom-4 duration-300 ${isRTL ? 'left-0 sm:left-0' : 'right-0 sm:right-0'}`}
-  >
-    <!-- Chat Header -->
-    <div class="flex items-center justify-between p-4 border-b border-gray-200 bg-brand-primary text-white rounded-t-2xl">
-      <div class="flex items-center space-x-3">
+  <div id="chat-window"
+       class={`chat-window hidden absolute bottom-14 sm:bottom-16 ${isRTL?'left-0':'right-0'} w-80 sm:w-96 max-w-[calc(100vw-1rem)] sm:max-w-[calc(100vw-2rem)] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col`}>
+    <!-- Header -->
+    <div class="chat-header flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-brand-primary text-white rounded-t-2xl">
+      <div class={`flex items-center ${isRTL?'space-x-reverse space-x-3':'space-x-3'}`}>
         <div class="w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
@@ -58,81 +50,71 @@ const suggestedQuestions = faqData
           <p class="text-xs opacity-90">CIRIV 2026</p>
         </div>
       </div>
-      <button
-        id="chat-minimize"
-        class="text-white hover:text-slate-200 transition-colors p-1 rounded"
-        aria-label={t('chatbot.minimize')}
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+      <button id="chat-minimize" class="p-2 rounded hover:bg-white/10 focus:outline-none transition-colors" aria-label="Close chat">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
     </div>
 
-    <!-- Chat Messages -->
-    <div id="chat-messages" class="h-80 md:h-80 lg:h-80 overflow-y-auto p-4 space-y-3 chat-messages-mobile">
-      <!-- Welcome Message -->
-      <div class={`flex items-start space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
+    <!-- Messages Area -->
+    <div id="chat-messages" class="chat-body flex-1 overflow-y-auto p-4 space-y-3">
+      <!-- Welcome -->
+      <div class={`flex items-start space-x-2 ${isRTL?'space-x-reverse':''}`}>
         <div class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
           </svg>
         </div>
-        <div class="bg-slate-100 dark:bg-slate-700 rounded-lg p-3 max-w-xs">
-          <p class="text-sm text-slate-900 dark:text-slate-100">{t('chatbot.welcome')}</p>
+        <div class="bg-slate-100 rounded-lg p-3 max-w-xs">
+          <p class="text-sm text-slate-900">{t('chatbot.welcome')}</p>
         </div>
       </div>
 
-      <!-- Suggested Questions -->
+      <!-- Suggestions -->
       <div id="suggested-questions" class="space-y-2">
-        <div class="text-xs text-slate-500 dark:text-slate-400 px-2 py-1">
-          {locale === 'fr' ? 'Questions fréquentes :' : locale === 'en' ? 'Frequently asked:' : 'أسئلة شائعة:'}
+        <div class="text-xs text-slate-500 px-2 py-1">
+          {locale==='fr'?'Questions fréquentes :':locale==='en'?'Frequently asked:':'أسئلة شائعة:'}
         </div>
-        {suggestedQuestions.map((faq) => (
+        {suggestedQuestions.map(faq => (
           <button
-            class={`suggested-question-btn w-full bg-slate-50 dark:bg-slate-600 hover:bg-slate-100 dark:hover:bg-slate-500 text-slate-700 dark:text-slate-200 rounded-lg p-3 text-sm transition-colors border border-slate-200 dark:border-slate-600 ${isRTL ? 'text-right' : 'text-left'}`}
-            data-question={faq.question[locale] || faq.question.en}
-            data-answer={faq.answer[locale] || faq.answer.en}
-          >
-            {faq.question[locale] || faq.question.en}
+            class={`suggested-question-btn w-full bg-slate-50 hover:bg-slate-100 text-slate-700 rounded-lg p-3 text-sm transition-colors border border-slate-200 ${isRTL?'text-right':'text-left'}`}
+            data-question={faq.question[locale]||faq.question.en}
+            data-answer={faq.answer[locale]||faq.answer.en}>
+            {faq.question[locale]||faq.question.en}
           </button>
         ))}
       </div>
     </div>
 
-    <!-- Typing Indicator -->
+    <!-- Typing -->
     <div id="typing-indicator" class="px-4 pb-2 hidden">
-      <div class={`flex items-start space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
+      <div class={`flex items-start space-x-2 ${isRTL?'space-x-reverse':''}`}>
         <div class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
           </svg>
         </div>
-        <div class="bg-slate-100 dark:bg-slate-700 rounded-lg p-3">
+        <div class="bg-slate-100 rounded-lg p-3">
           <div class="flex space-x-1">
-            <div class="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
-            <div class="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
-            <div class="w-2 h-2 bg-slate-400 dark:bg-slate-500 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+            <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+            <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+            <span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Chat Input -->
-    <div class="p-4 border-t border-gray-200 bg-white rounded-b-2xl">
-      <form id="chat-form" class={`flex gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-        <input
-          type="text"
-          id="chat-input"
-          placeholder={t('chatbot.placeholder')}
-          class={`flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-gray-50 text-slate-900 placeholder-slate-500 text-sm ${isRTL ? 'text-right' : 'text-left'}`}
+    <!-- Input -->
+    <div class="chat-input-wrapper relative border-t border-gray-200">
+      <form id="chat-form" class={`chat-form flex gap-2 p-3 ${isRTL?'flex-row-reverse':''}`}>
+        <input id="chat-input" type="text"
           autocomplete="off"
-        />
-        <button
-          type="submit"
-          class="px-4 py-2 bg-brand-primary hover:bg-brand-primaryDark text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          aria-label={t('chatbot.send')}
-        >
+          placeholder={t('chatbot.placeholder')}
+          class={`flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-transparent bg-white text-slate-900 placeholder-slate-500 text-sm ${isRTL?'text-right':'text-left'}`} />
+        <button type="submit"
+          class="send-btn px-4 py-2 bg-brand-primary hover:bg-brand-primaryDark text-white rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 disabled:opacity-50"
+          aria-label={t('chatbot.send')}>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
           </svg>
@@ -142,674 +124,335 @@ const suggestedQuestions = faqData
   </div>
 </div>
 
-<script define:vars={{ faqData, locale, fallbackMessages, translations: { 
-  fallback: t('chatbot.fallback'),
-  typing: t('chatbot.typing')
-} }}>
-  class Chatbot {
-    constructor(faqData, locale, fallbackMessages, translations) {
-      this.faqData = faqData;
-      this.locale = locale;
-      this.fallbackMessages = fallbackMessages;
-      this.translations = translations;
-      this.isOpen = false;
-      this.init();
-    }
-
-    init() {
-      this.bindEvents();
-      this.setupSuggestedQuestions();
-    }
-
-    setupSuggestedQuestions() {
-      const suggestedBtns = document.querySelectorAll('.suggested-question-btn');
-      suggestedBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const question = e.target.dataset.question;
-          const answer = e.target.dataset.answer;
-          
-          // Add user question to chat
-          this.addMessage(question, 'user');
-          
-          // Remove suggested questions
-          document.getElementById('suggested-questions')?.remove();
-          
-          // Show typing indicator
-          this.showTyping();
-          
-          // Add bot response after delay
-          setTimeout(() => {
-            this.hideTyping();
-            this.addMessage(answer, 'bot');
-          }, 800);
-        });
-      });
-    }
-
-    bindEvents() {
-      const chatToggle = document.getElementById('chat-toggle');
-      const chatWindow = document.getElementById('chat-window');
-      const chatMinimize = document.getElementById('chat-minimize');
-      const chatForm = document.getElementById('chat-form');
-      const chatInput = document.getElementById('chat-input');
-
-      chatToggle?.addEventListener('click', () => this.toggleChat());
-      chatMinimize?.addEventListener('click', () => this.toggleChat());
-      chatForm?.addEventListener('submit', (e) => this.handleSubmit(e));
-      
-      // Close modal on backdrop click (mobile only)
-      chatWindow?.addEventListener('click', (e) => {
-        if (e.target === chatWindow && window.innerWidth <= 768) {
-          this.toggleChat();
-        }
-      });
-      
-      // Handle escape key to close modal
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && this.isOpen) {
-          this.toggleChat();
-        }
-      });
-      
-      // Mobile keyboard handling for input field
-      if (chatInput) {
-        this.setupMobileKeyboardHandling(chatInput, chatWindow);
-      }
-      
-      // Handle window resize
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && this.isOpen) {
-          // Re-enable body scroll on desktop
-          document.body.style.overflow = '';
-        } else if (window.innerWidth <= 768 && this.isOpen) {
-          // Disable body scroll on mobile
-          document.body.style.overflow = 'hidden';
-        }
-      });
-    }
-
-    setupMobileKeyboardHandling(chatInput, chatWindow) {
-      // Variables to track keyboard state
-      let originalViewportHeight = window.innerHeight;
-      let keyboardOpen = false;
-      let originalChatWindowTransform = '';
-      
-      // Store original transform for restoration
-      const storeOriginalTransform = () => {
-        if (chatWindow && window.innerWidth <= 768) {
-          const computedStyle = window.getComputedStyle(chatWindow);
-          originalChatWindowTransform = computedStyle.transform;
-        }
-      };
-      
-      // Detect virtual keyboard on mobile
-      const handleViewportChange = () => {
-        if (window.innerWidth <= 768 && this.isOpen) {
-          const currentViewportHeight = window.innerHeight;
-          const heightDifference = originalViewportHeight - currentViewportHeight;
-          
-          // Keyboard likely opened if viewport shrunk significantly
-          if (heightDifference > 150) {
-            if (!keyboardOpen) {
-              keyboardOpen = true;
-              this.adjustForKeyboard(chatWindow, heightDifference);
-            }
-          } else {
-            // Keyboard likely closed
-            if (keyboardOpen) {
-              keyboardOpen = false;
-              this.resetFromKeyboard(chatWindow);
-            }
-          }
-        }
-      };
-      
-      // Input focus event - prepare for keyboard
-      chatInput.addEventListener('focus', () => {
-        if (window.innerWidth <= 768 && this.isOpen) {
-          storeOriginalTransform();
-          originalViewportHeight = window.innerHeight;
-          
-          // Add a small delay to detect viewport changes
-          setTimeout(() => {
-            handleViewportChange();
-          }, 300);
-          
-          // Ensure input stays visible
-          setTimeout(() => {
-            chatInput.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'center',
-              inline: 'nearest'
-            });
-          }, 350);
-        }
-      });
-      
-      // Input blur event - keyboard might close
-      chatInput.addEventListener('blur', () => {
-        if (window.innerWidth <= 768 && this.isOpen) {
-          setTimeout(() => {
-            handleViewportChange();
-          }, 300);
-        }
-      });
-      
-      // Handle input events to maintain visibility while typing
-      chatInput.addEventListener('input', () => {
-        if (window.innerWidth <= 768 && this.isOpen && keyboardOpen) {
-          // Ensure input stays visible while typing
-          setTimeout(() => {
-            chatInput.scrollIntoView({ 
-              behavior: 'smooth', 
-              block: 'end',
-              inline: 'nearest'
-            });
-          }, 100);
-        }
-      });
-      
-      // Listen for viewport resize (works on most mobile browsers)
-      window.addEventListener('resize', handleViewportChange);
-      
-      // For iOS - visual viewport API if available
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener('resize', handleViewportChange);
-      }
-    }
-
-    adjustForKeyboard(chatWindow, keyboardHeight) {
-      if (chatWindow && window.innerWidth <= 768) {
-        // Calculate how much to move the chat window up
-        const moveUp = Math.min(keyboardHeight * 0.6, 200); // Move up max 200px
-        
-        // Add keyboard-active class for better styling control
-        chatWindow.classList.add('keyboard-active');
-        
-        chatWindow.style.transform = `translateY(-${moveUp}px)`;
-        chatWindow.style.transition = 'transform 0.3s ease-in-out';
-        
-        // Also adjust the chat messages container height
-        const messagesContainer = document.getElementById('chat-messages');
-        if (messagesContainer) {
-          const currentHeight = messagesContainer.offsetHeight;
-          const newHeight = Math.max(currentHeight - moveUp, 200); // Minimum 200px
-          messagesContainer.style.height = `${newHeight}px`;
-          messagesContainer.style.transition = 'height 0.3s ease-in-out';
-        }
-        
-        // For iOS Safari - additional adjustments
-        if (this.isIOS()) {
-          document.body.style.position = 'fixed';
-          document.body.style.width = '100%';
-        }
-      }
-    }
-
-    resetFromKeyboard(chatWindow) {
-      if (chatWindow && window.innerWidth <= 768) {
-        // Remove keyboard-active class
-        chatWindow.classList.remove('keyboard-active');
-        
-        // Reset chat window position
-        chatWindow.style.transform = 'translateY(0)';
-        chatWindow.style.transition = 'transform 0.3s ease-in-out';
-        
-        // Reset chat messages container height
-        const messagesContainer = document.getElementById('chat-messages');
-        if (messagesContainer) {
-          messagesContainer.style.height = 'calc(90vh - 140px)';
-          messagesContainer.style.transition = 'height 0.3s ease-in-out';
-        }
-        
-        // Reset iOS Safari specific styles
-        if (this.isIOS()) {
-          document.body.style.position = '';
-          document.body.style.width = '';
-        }
-      }
-    }
-
-    isIOS() {
-      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    }
-
-    toggleChat() {
-      const chatWindow = document.getElementById('chat-window');
-      const chatIcon = document.getElementById('chat-icon');
-      const closeIcon = document.getElementById('close-icon');
-      const chatInput = document.getElementById('chat-input');
-      const chatWidget = document.getElementById('chatbot-widget');
-
-      if (!chatWindow) return;
-
-      this.isOpen = !this.isOpen;
-
-      if (this.isOpen) {
-        // For mobile, add body scroll lock
-        if (window.innerWidth <= 768) {
-          document.body.style.overflow = 'hidden';
-        }
-        
-        chatWindow.classList.remove('hidden');
-        chatIcon?.classList.add('hidden');
-        closeIcon?.classList.remove('hidden');
-        chatWidget?.classList.add('chat-open'); // Pause animation
-        
-        // Focus input after animation completes
-        setTimeout(() => {
-          chatInput?.focus();
-          // Scroll to bottom of messages
-          const messagesContainer = document.getElementById('chat-messages');
-          if (messagesContainer) {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-          }
-        }, 300);
-      } else {
-        // Re-enable body scroll
-        document.body.style.overflow = '';
-        
-        // Reset any keyboard adjustments when closing
-        if (window.innerWidth <= 768) {
-          this.resetFromKeyboard(chatWindow);
-        }
-        
-        chatWindow.classList.add('hidden');
-        chatIcon?.classList.remove('hidden');
-        closeIcon?.classList.add('hidden');
-        chatWidget?.classList.remove('chat-open'); // Resume animation
-      }
-    }
-
-    async handleSubmit(e) {
-      e.preventDefault();
-      const chatInput = document.getElementById('chat-input');
-      const message = chatInput?.value.trim();
-      
-      if (!message) return;
-
-      // Remove suggested questions if still visible
-      document.getElementById('suggested-questions')?.remove();
-
-      // Add user message
-      this.addMessage(message, 'user');
-      chatInput.value = '';
-
-      // Show typing indicator
-      this.showTyping();
-
-      // Simulate thinking time
-      await new Promise(resolve => setTimeout(resolve, 800 + Math.random() * 1200));
-
-      // Hide typing indicator
-      this.hideTyping();
-
-      // Find and add bot response
-      const response = this.findAnswer(message);
-      this.addMessage(response, 'bot');
-    }
-
-    findAnswer(query) {
-      const normalizedQuery = query.toLowerCase().trim();
-      const queryWords = normalizedQuery.split(' ');
-      
-      // Enhanced search with keywords
-      const results = this.faqData
-        .map(item => {
-          const question = (item.question[this.locale] || item.question.en).toLowerCase();
-          const keywords = item.keywords || [];
-          
-          let score = 0;
-          
-          // Score based on question text matches
-          queryWords.forEach(word => {
-            if (question.includes(word)) {
-              score += word.length;
-            }
-          });
-          
-          // Score based on keyword matches (higher weight)
-          keywords.forEach(keyword => {
-            const keywordLower = keyword.toLowerCase();
-            queryWords.forEach(word => {
-              if (keywordLower.includes(word) || word.includes(keywordLower)) {
-                score += keyword.length * 2; // Higher weight for keyword matches
-              }
-            });
-            
-            // Exact keyword match gets bonus
-            if (normalizedQuery.includes(keywordLower)) {
-              score += keyword.length * 3;
-            }
-          });
-          
-          // Bonus for exact substring match in question
-          if (question.includes(normalizedQuery)) {
-            score += normalizedQuery.length * 2;
-          }
-          
-          return { item, score };
-        })
-        .filter(result => result.score > 0)
-        .sort((a, b) => b.score - a.score);
-      
-      // Return best match if score is good enough
-      if (results.length > 0 && results[0].score > 2) {
-        const bestMatch = results[0].item;
-        return bestMatch.answer[this.locale] || bestMatch.answer.en;
-      }
-      
-      // Fallback response with mailto link
-      const fallbackText = this.fallbackMessages[this.locale];
-      return `${fallbackText} <a href="mailto:info@ciriv.org" class="text-brand-primary hover:text-brand-primaryDark underline">info@ciriv.org</a>`;
-    }
-
-    addMessage(content, sender) {
-      const messagesContainer = document.getElementById('chat-messages');
-      if (!messagesContainer) return;
-
-      const messageDiv = document.createElement('div');
-      messageDiv.className = 'flex items-start space-x-2';
-      
-      if (sender === 'user') {
-        messageDiv.className = 'flex items-start space-x-2 justify-end';
-        messageDiv.innerHTML = `
-          <div class="bg-brand-primary text-white rounded-lg p-3 max-w-xs">
-            <p class="text-sm">${this.escapeHtml(content)}</p>
-          </div>
-          <div class="w-8 h-8 bg-slate-300 dark:bg-slate-600 rounded-full flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-slate-600 dark:text-slate-300" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
-            </svg>
-          </div>
-        `;
-      } else {
-        messageDiv.innerHTML = `
-          <div class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
-            </svg>
-          </div>
-          <div class="bg-slate-100 dark:bg-slate-700 rounded-lg p-3 max-w-xs">
-            <p class="text-sm text-slate-900 dark:text-slate-100">${content}</p>
-          </div>
-        `;
-      }
-
-      messagesContainer.appendChild(messageDiv);
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-
-    showTyping() {
-      const typingIndicator = document.getElementById('typing-indicator');
-      if (typingIndicator) {
-        typingIndicator.classList.remove('hidden');
-        document.getElementById('chat-messages')?.scrollTo({
-          top: document.getElementById('chat-messages').scrollHeight,
-          behavior: 'smooth'
-        });
-      }
-    }
-
-    hideTyping() {
-      const typingIndicator = document.getElementById('typing-indicator');
-      if (typingIndicator) {
-        typingIndicator.classList.add('hidden');
-      }
-    }
-
-    escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+<script define:vars={{ faqData, locale, fallbackMessages }}>
+class Chatbot {
+  constructor(faqData, locale, fallbackMessages){
+    this.faqData = faqData;
+    this.locale = locale;
+    this.fallback = fallbackMessages;
+    this.isOpen = false;
+    this.mobile = window.matchMedia('(max-width: 767px)').matches;
+    this.init();
   }
 
-  // Initialize chatbot when DOM is ready
-  let chatbot;
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-      chatbot = new Chatbot(faqData, locale, fallbackMessages, translations);
+  init(){
+    this.cache();
+    this.bind();
+    this.setupSuggested();
+    this.setupViewportHandlers();
+  }
+
+  cache(){
+    this.widget = document.getElementById('chatbot-widget');
+    this.windowEl = document.getElementById('chat-window');
+    this.toggleBtn = document.getElementById('chat-toggle');
+    this.minBtn = document.getElementById('chat-minimize');
+    this.chatIcon = document.getElementById('chat-icon');
+    this.closeIcon = document.getElementById('close-icon');
+    this.form = document.getElementById('chat-form');
+    this.input = document.getElementById('chat-input');
+    this.messages = document.getElementById('chat-messages');
+    this.typing = document.getElementById('typing-indicator');
+    this.suggestions = document.getElementById('suggested-questions');
+    this.header = this.windowEl?.querySelector('.chat-header');
+    this.inputWrap = this.windowEl?.querySelector('.chat-input-wrapper');
+  }
+
+  bind(){
+    this.toggleBtn?.addEventListener('click',()=>this.toggle());
+    this.minBtn?.addEventListener('click',()=>this.toggle());
+    this.form?.addEventListener('submit',(e)=>this.submit(e));
+
+    // Keep input visible above keyboard
+    this.input?.addEventListener('focus', ()=> this.onFocus());
+    this.input?.addEventListener('blur', ()=> this.onBlur());
+  }
+
+  setupSuggested(){
+    document.querySelectorAll('.suggested-question-btn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const q = btn.getAttribute('data-question');
+        const a = btn.getAttribute('data-answer');
+        this.addMessage(q,'user');
+        this.removeSuggestions();
+        this.showTyping();
+        setTimeout(()=>{
+          this.hideTyping();
+            this.addMessage(a,'bot');
+        },600);
+      });
     });
-  } else {
-    chatbot = new Chatbot(faqData, locale, fallbackMessages, translations);
   }
+
+  setupViewportHandlers(){
+    if(window.visualViewport){
+      window.visualViewport.addEventListener('resize', ()=> this.adjustForKeyboard());
+    }
+    window.addEventListener('orientationchange', ()=> setTimeout(()=>this.adjustForKeyboard(),300));
+    window.addEventListener('resize', ()=> {
+      this.mobile = window.matchMedia('(max-width: 767px)').matches;
+      this.adjustForKeyboard();
+    });
+  }
+
+  toggle(){
+    if(!this.windowEl) return;
+    this.isOpen = !this.isOpen;
+    if(this.isOpen){
+      this.windowEl.classList.remove('hidden');
+      this.chatIcon?.classList.add('hidden');
+      this.closeIcon?.classList.remove('hidden');
+      this.widget?.classList.add('chat-open');
+      if(this.mobile){
+        this.windowEl.classList.add('mobile-full');
+        this.adjustForKeyboard();
+      }
+      setTimeout(()=>this.input?.focus(),120);
+      this.scrollBottom(true);
+    } else {
+      this.windowEl.classList.add('hidden');
+      this.chatIcon?.classList.remove('hidden');
+      this.closeIcon?.classList.add('hidden');
+      this.widget?.classList.remove('chat-open');
+      this.windowEl.classList.remove('mobile-full','keyboard-shift');
+      document.body.classList.remove('chatlock');
+      this.windowEl.style.setProperty('--vvh','');
+    }
+  }
+
+  submit(e){
+    e.preventDefault();
+    const val = this.input.value.trim();
+    if(!val) return;
+    this.addMessage(val,'user');
+    this.removeSuggestions();
+    this.input.value='';
+    this.showTyping();
+    setTimeout(()=>{
+      this.hideTyping();
+      const ans = this.findAnswer(val);
+      this.addMessage(ans,'bot');
+    }, 600 + Math.random()*600);
+  }
+
+  removeSuggestions(){
+    if(this.suggestions){
+      this.suggestions.remove();
+      this.suggestions = null;
+    }
+  }
+
+  showTyping(){
+    if(!this.typing) return;
+    this.typing.classList.remove('hidden');
+    this.scrollBottom();
+  }
+
+  hideTyping(){
+    if(!this.typing) return;
+    this.typing.classList.add('hidden');
+  }
+
+  findAnswer(q){
+    const query = q.toLowerCase();
+    const words = query.split(/\s+/);
+    const results = this.faqData.map(item=>{
+      const question = (item.question[this.locale]||item.question.en).toLowerCase();
+      const keywords = (item.keywords||[]).map(k=>k.toLowerCase());
+      let score=0;
+      words.forEach(w=>{
+        if(question.includes(w)) score += w.length;
+        keywords.forEach(kw=>{
+          if(kw===w) score += kw.length*3;
+          else if(kw.includes(w)||w.includes(kw)) score += kw.length*2;
+        });
+      });
+      if(question.includes(query)) score += query.length*2;
+      return {item,score};
+    }).filter(r=>r.score>0).sort((a,b)=>b.score-a.score);
+    if(results.length && results[0].score>2){
+      const best = results[0].item;
+      return best.answer[this.locale]||best.answer.en;
+    }
+    const fb = this.fallback[this.locale];
+    return `${fb} <a href="mailto:registration@ciriv.org" class="text-brand-primary underline">registration@ciriv.org</a>`;
+  }
+
+  addMessage(content, sender){
+    if(!this.messages) return;
+    const wrap = document.createElement('div');
+    if(sender==='user'){
+      wrap.className='flex justify-end';
+      wrap.innerHTML=`
+        <div class="bg-brand-primary text-white rounded-lg p-3 max-w-xs">
+          <p class="text-sm">${this.escape(content)}</p>
+        </div>`;
+    } else {
+      wrap.className='flex items-start space-x-2';
+      wrap.innerHTML=`
+        <div class="w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd"/>
+          </svg>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-3 max-w-xs">
+          <p class="text-sm text-slate-900">${content}</p>
+        </div>`;
+    }
+    this.messages.appendChild(wrap);
+    this.scrollBottom();
+  }
+
+  scrollBottom(force=false){
+    if(!this.messages) return;
+    requestAnimationFrame(()=>{
+      this.messages.scrollTop = this.messages.scrollHeight;
+      if(force) this.messages.scrollTop = this.messages.scrollHeight;
+    });
+  }
+
+  onFocus(){
+    if(this.mobile){
+      this.adjustForKeyboard(true);
+      document.body.classList.add('chatlock');
+      setTimeout(()=>this.scrollBottom(true),150);
+    }
+  }
+
+  onBlur(){
+    if(this.mobile){
+      this.windowEl?.classList.remove('keyboard-shift');
+      document.body.classList.remove('chatlock');
+      this.adjustForKeyboard();
+    }
+  }
+
+  adjustForKeyboard(fromFocus=false){
+    if(!this.isOpen || !this.mobile || !this.windowEl) return;
+    const vv = window.visualViewport;
+    if(vv){
+      this.windowEl.style.setProperty('--vvh', vv.height+'px');
+      if(fromFocus || vv.height < window.innerHeight){
+        this.windowEl.classList.add('keyboard-shift');
+      } else {
+        this.windowEl.classList.remove('keyboard-shift');
+      }
+    } else {
+      // Fallback
+      this.windowEl.style.setProperty('--vvh', window.innerHeight+'px');
+    }
+    this.recalcBodyHeight();
+    this.scrollBottom();
+  }
+
+  recalcBodyHeight(){
+    if(!this.windowEl||!this.messages) return;
+    const hHeader = this.header?.offsetHeight || 0;
+    const hInput = this.inputWrap?.offsetHeight || 0;
+    const total = this.windowEl.offsetHeight;
+    const bodyH = total - hHeader - hInput;
+    if(bodyH>80) this.messages.style.height = bodyH+'px';
+  }
+
+  escape(t){
+    const d=document.createElement('div');
+    d.textContent=t;
+    return d.innerHTML;
+  }
+}
+
+let chatbot;
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',()=>chatbot=new Chatbot(faqData, locale, fallbackMessages));
+}else{
+  chatbot=new Chatbot(faqData, locale, fallbackMessages);
+}
 </script>
 
 <style>
-  /* Custom animations for chatbot */
-  @keyframes slide-in-from-bottom-4 {
-    from {
-      transform: translateY(1rem);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+/* Base */
+.chat-window { background:#ffffff !important; }
+.chat-header { 
+  background: var(--brand-primary, #059669) !important; 
+  color: white !important;
+}
+.chat-input-wrapper { background:#ffffff; }
+.chat-body { background:#ffffff; }
 
-  @keyframes slide-up-mobile {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
+/* Mobile full view (drawer) */
+@media (max-width:767px){
+  .chat-window.mobile-full{
+    position:fixed !important;
+    inset:auto 0 0 0 !important;
+    margin:0;
+    width:100vw !important;
+    max-width:100vw !important;
+    border-radius:1.25rem 1.25rem 0 0;
+    height:calc(var(--vvh, 100vh) - 56px);
+    display:flex;
+    flex-direction:column;
+    animation:drawer-in .3s ease;
+    transform:translateY(0);
   }
+  .chat-window.mobile-full.keyboard-shift{
+    height:calc(var(--vvh, 100vh) - 8px);
+  }
+  body.chatlock { overflow:hidden; }
+}
 
-  /* Subtle pulse animation for chatbot button */
-  @keyframes chatbot-pulse {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.05);
-    }
-  }
+/* Animations */
+@keyframes drawer-in{
+  from { transform:translateY(20px); opacity:0; }
+  to { transform:translateY(0); opacity:1; }
+}
 
-  .chatbot-button {
-    animation: chatbot-pulse 4s ease-in-out infinite;
-    animation-delay: 2s; /* Start after 2 seconds */
-  }
+/* Button pulse */
+@keyframes chatbot-pulse {
+  0%,100% { transform:scale(1); }
+  50% { transform:scale(1.05); }
+}
+.chatbot-button { animation:chatbot-pulse 4s ease-in-out infinite; animation-delay:2s; }
+.chatbot-button:hover, .chat-open .chatbot-button { animation-play-state:paused; }
 
-  /* Pause animation on hover */
-  .chatbot-button:hover {
-    animation-play-state: paused;
-  }
+/* Close button styling */
+#chat-minimize {
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  /* Pause animation when chat is open */
-  .chat-open .chatbot-button {
-    animation-play-state: paused;
-  }
+#chat-minimize:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
 
-  .animate-in {
-    animation-duration: 300ms;
-    animation-fill-mode: both;
+@media (max-width: 767px) {
+  #chat-minimize {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.75rem !important;
   }
+}
 
-  .slide-in-from-bottom-4 {
-    animation-name: slide-in-from-bottom-4;
-  }
+/* Scrollbar */
+#chat-messages { scroll-behavior:smooth; }
+#chat-messages::-webkit-scrollbar { width:6px; }
+#chat-messages::-webkit-scrollbar-thumb { background:rgba(0,0,0,.25); border-radius:3px; }
 
-  /* Smooth scrolling for chat messages */
-  #chat-messages {
-    scroll-behavior: smooth;
-    background: #ffffff; /* Ensure white background */
-  }
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce){
+  .chatbot-button { animation:none; }
+}
 
-  /* Force white background for chatbot container in all modes */
-  #chat-window {
-    background: #ffffff !important;
-  }
+/* RTL adjustments (auto via flex classes already) */
 
-  /* Ensure input section has white background */
-  #chat-window .border-t {
-    background: #ffffff !important;
-  }
-
-  /* Custom scrollbar for chat messages */
-  #chat-messages::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  #chat-messages::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  #chat-messages::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.5);
-    border-radius: 3px;
-  }
-
-  .dark #chat-messages::-webkit-scrollbar-thumb {
-    background-color: rgba(75, 85, 99, 0.5);
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    #chatbot-widget {
-      bottom: 1rem;
-      left: 0.5rem !important;
-      right: 0.5rem !important;
-      z-index: 1000;
-    }
-    
-    #chat-window {
-      position: fixed !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      top: 10% !important;
-      width: 100vw !important;
-      max-width: 100vw !important;
-      height: 90vh !important;
-      max-height: 90vh !important;
-      border-radius: 1.5rem 1.5rem 0 0 !important;
-      background: #ffffff !important; /* Force white background on mobile */
-      border: 1px solid #e5e7eb !important;
-      transform: translateY(100%);
-      transition: transform 0.3s ease-in-out;
-      /* Enable smooth transitions for keyboard adjustments */
-      will-change: transform;
-    }
-    
-    #chat-window:not(.hidden) {
-      transform: translateY(0);
-    }
-    
-    /* Keyboard adjustment styles */
-    #chat-window.keyboard-active {
-      transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
-    }
-    
-    .chat-messages-mobile {
-      height: calc(90vh - 140px) !important; /* Adjust for header and input */
-      max-height: calc(90vh - 140px) !important;
-      background: #ffffff !important; /* Ensure messages area is white */
-      /* Enable smooth height transitions */
-      transition: height 0.3s ease-in-out;
-      overflow-y: auto;
-      /* Improved scrolling on mobile */
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Mobile chat toggle button positioning */
-    .chatbot-button {
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1rem;
-      z-index: 1001;
-    }
-    
-    /* RTL support for mobile */
-    .chatbot-container[data-locale="ar"] .chatbot-button {
-      right: auto;
-      left: 1rem;
-    }
-    
-    /* Backdrop for mobile modal */
-    #chat-window::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-    
-    .dark #chat-window::before {
-      background: rgba(0, 0, 0, 0.7);
-    }
-    
-    #chat-window:not(.hidden)::before {
-      opacity: 1;
-    }
-    
-    /* Ensure chat header is sticky on mobile */
-    .chat-modal .bg-brand-primary {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    
-    /* Make close button more prominent on mobile */
-    #chat-minimize {
-      padding: 0.75rem !important;
-      margin: -0.5rem !important;
-    }
-    
-    /* Force white background for input section on mobile */
-    .chat-modal .border-t {
-      background: #ffffff !important;
-      /* Make input area sticky at bottom */
-      position: sticky;
-      bottom: 0;
-      z-index: 10;
-    }
-    
-    /* Improve input field on mobile */
-    #chat-input {
-      font-size: 16px !important; /* Prevent zoom on iOS */
-      line-height: 1.5;
-      padding: 0.75rem !important;
-      border-radius: 0.75rem;
-    }
-    
-    /* Improve button accessibility on mobile */
-    button[type="submit"] {
-      min-width: 48px;
-      min-height: 48px;
-      padding: 0.75rem !important;
+/* Safe area (iOS) */
+@supports(padding:max(0px)){
+  @media (max-width:767px){
+    .chat-window.mobile-full{
+      padding-bottom: max(0px, env(safe-area-inset-bottom));
     }
   }
-
-  @media (max-width: 640px) {
-    #chatbot-widget {
-      bottom: 1rem;
-      left: 0.5rem !important;
-      right: 0.5rem !important;
-    }
-    
-    .chatbot-button {
-      bottom: 1rem;
-      right: 0.75rem;
-    }
-    
-    .chatbot-container[data-locale="ar"] .chatbot-button {
-      right: auto;
-      left: 0.75rem;
-    }
-  }
-
-  /* Reduce motion for users who prefer it */
-  @media (prefers-reduced-motion: reduce) {
-    .chatbot-button {
-      animation: none;
-    }
-  }
+}
 </style>

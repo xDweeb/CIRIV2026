@@ -20,17 +20,17 @@ const baseUrl = import.meta.env.BASE_URL || '/';
   </div>
 
   <div class="container mx-auto px-4 relative z-10">
-    <div class={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center ${isRTL ? 'lg:grid-flow-col-dense' : ''}`}>
+    <div class={`grid lg:grid-cols-2 gap-12 lg:gap-16 items-center`}>
       <!-- Content -->
-      <div class={`${isRTL ? 'lg:col-start-2 text-right' : 'text-left'} animate-fade-in`}>
-        <div class={`max-w-2xl lg:max-w-3xl ${isRTL ? 'mr-auto' : ''}`}>
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-white leading-tight mb-6 whitespace-normal break-words hyphens-none">
+      <div class={`${isRTL ? 'lg:col-start-1 text-right' : 'lg:col-start-2 text-left'} animate-fade-in`}>
+        <div class={`max-w-2xl lg:max-w-3xl ${isRTL ? 'ml-auto' : 'mr-auto lg:mr-0'}`}>
+          <h1 class={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-white leading-tight whitespace-normal break-words hyphens-none ${isRTL ? 'text-right mb-10' : 'text-left mb-6'}`}>
             <span class="bg-gradient-to-r from-brand-primary to-brand-accent bg-clip-text text-transparent inline-block">
               {t('hero.title')}
             </span>
           </h1>
           
-          <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-xl lg:max-w-2xl">
+          <p class={`text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-8 leading-relaxed max-w-xl lg:max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
             {t('hero.subtitle')}
           </p>
         </div>
@@ -52,7 +52,7 @@ const baseUrl = import.meta.env.BASE_URL || '/';
           <p class={`text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider ${isRTL ? 'text-right' : 'text-left'}`}>
             {t('hero.trustedBy')}
           </p>
-          <div class={`flex items-center gap-8 ${isRTL ? 'justify-end' : 'justify-start'}`}>
+          <div class={`flex items-center gap-8 ${isRTL ? 'justify-end flex-row-reverse' : 'justify-start'}`}>
             <img 
               src={`${baseUrl}assets/logos/UH2C.png`}
               alt="UH2C University Logo"
@@ -76,7 +76,7 @@ const baseUrl = import.meta.env.BASE_URL || '/';
       </div>
 
       <!-- Visual Element -->
-      <div class={`${isRTL ? 'lg:col-start-1' : ''} flex items-center justify-center animate-fade-in`}>
+      <div class={`${isRTL ? 'lg:col-start-2' : 'lg:col-start-1'} flex items-center justify-center animate-fade-in`}>
         <div class="relative">
           <!-- Main Logo/Visual -->
           <div class="relative z-10 bg-white dark:bg-slate-800 rounded-3xl p-12 shadow-2xl shadow-brand-primary/10 border border-slate-200 dark:border-slate-700">
@@ -95,8 +95,8 @@ const baseUrl = import.meta.env.BASE_URL || '/';
           </div>
           
           <!-- Floating Elements -->
-          <div class="absolute -top-4 -right-4 w-16 h-16 bg-brand-accent/20 rounded-full blur-xl animate-pulse"></div>
-          <div class="absolute -bottom-4 -left-4 w-20 h-20 bg-teal-400/20 rounded-full blur-xl animate-pulse" style="animation-delay: 1s;"></div>
+          <div class={`absolute -top-4 w-16 h-16 bg-brand-accent/20 rounded-full blur-xl animate-pulse ${isRTL ? '-left-4' : '-right-4'}`}></div>
+          <div class={`absolute -bottom-4 w-20 h-20 bg-teal-400/20 rounded-full blur-xl animate-pulse ${isRTL ? '-right-4' : '-left-4'}`} style="animation-delay: 1s;"></div>
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ const suggestedQuestions = faqData
   <!-- Chat Toggle Button -->
   <button
     id="chat-toggle"
-    class="bg-brand-primary hover:bg-brand-primaryDark text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
+    class="chatbot-button bg-brand-primary hover:bg-brand-primaryDark text-white p-3 sm:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2"
     aria-label={t('chatbot.title')}
   >
     <svg id="chat-icon" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,6 +208,7 @@ const suggestedQuestions = faqData
       const chatIcon = document.getElementById('chat-icon');
       const closeIcon = document.getElementById('close-icon');
       const chatInput = document.getElementById('chat-input');
+      const chatWidget = document.getElementById('chatbot-widget');
 
       if (!chatWindow) return;
 
@@ -217,11 +218,13 @@ const suggestedQuestions = faqData
         chatWindow.classList.remove('hidden');
         chatIcon?.classList.add('hidden');
         closeIcon?.classList.remove('hidden');
+        chatWidget?.classList.add('chat-open'); // Pause animation
         setTimeout(() => chatInput?.focus(), 100);
       } else {
         chatWindow.classList.add('hidden');
         chatIcon?.classList.remove('hidden');
         closeIcon?.classList.add('hidden');
+        chatWidget?.classList.remove('chat-open'); // Resume animation
       }
     }
 
@@ -393,6 +396,31 @@ const suggestedQuestions = faqData
     }
   }
 
+  /* Subtle pulse animation for chatbot button */
+  @keyframes chatbot-pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .chatbot-button {
+    animation: chatbot-pulse 4s ease-in-out infinite;
+    animation-delay: 2s; /* Start after 2 seconds */
+  }
+
+  /* Pause animation on hover */
+  .chatbot-button:hover {
+    animation-play-state: paused;
+  }
+
+  /* Pause animation when chat is open */
+  .chat-open .chatbot-button {
+    animation-play-state: paused;
+  }
+
   .animate-in {
     animation-duration: 300ms;
     animation-fill-mode: both;
@@ -431,6 +459,13 @@ const suggestedQuestions = faqData
       width: calc(100vw - 2rem);
       right: 1rem;
       left: 1rem;
+    }
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .chatbot-button {
+      animation: none;
     }
   }
 </style>

@@ -20,7 +20,7 @@ const fallbackMessages = {
 
 // Get top 3 actual questions for suggestions (skip greetings/thanks)
 const suggestedQuestions = faqData
-  .filter(item => !['greeting', 'thanks'].includes(item.id))
+  .filter(item => item.id && typeof item.id === 'string' && !['greeting', 'thanks'].includes(item.id))
   .slice(0, 3);
 ---
 
@@ -211,10 +211,10 @@ const suggestedQuestions = faqData
         }
       });
       
-      // Auto-focus input when chat opens
-      chatInput?.addEventListener('focus', () => {
-        setTimeout(() => chatInput.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-      });
+      // Mobile keyboard handling for input field
+      if (chatInput) {
+        this.setupMobileKeyboardHandling(chatInput, chatWindow);
+      }
       
       // Handle window resize
       window.addEventListener('resize', () => {
@@ -226,6 +226,152 @@ const suggestedQuestions = faqData
           document.body.style.overflow = 'hidden';
         }
       });
+    }
+
+    setupMobileKeyboardHandling(chatInput, chatWindow) {
+      // Variables to track keyboard state
+      let originalViewportHeight = window.innerHeight;
+      let keyboardOpen = false;
+      let originalChatWindowTransform = '';
+      
+      // Store original transform for restoration
+      const storeOriginalTransform = () => {
+        if (chatWindow && window.innerWidth <= 768) {
+          const computedStyle = window.getComputedStyle(chatWindow);
+          originalChatWindowTransform = computedStyle.transform;
+        }
+      };
+      
+      // Detect virtual keyboard on mobile
+      const handleViewportChange = () => {
+        if (window.innerWidth <= 768 && this.isOpen) {
+          const currentViewportHeight = window.innerHeight;
+          const heightDifference = originalViewportHeight - currentViewportHeight;
+          
+          // Keyboard likely opened if viewport shrunk significantly
+          if (heightDifference > 150) {
+            if (!keyboardOpen) {
+              keyboardOpen = true;
+              this.adjustForKeyboard(chatWindow, heightDifference);
+            }
+          } else {
+            // Keyboard likely closed
+            if (keyboardOpen) {
+              keyboardOpen = false;
+              this.resetFromKeyboard(chatWindow);
+            }
+          }
+        }
+      };
+      
+      // Input focus event - prepare for keyboard
+      chatInput.addEventListener('focus', () => {
+        if (window.innerWidth <= 768 && this.isOpen) {
+          storeOriginalTransform();
+          originalViewportHeight = window.innerHeight;
+          
+          // Add a small delay to detect viewport changes
+          setTimeout(() => {
+            handleViewportChange();
+          }, 300);
+          
+          // Ensure input stays visible
+          setTimeout(() => {
+            chatInput.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'center',
+              inline: 'nearest'
+            });
+          }, 350);
+        }
+      });
+      
+      // Input blur event - keyboard might close
+      chatInput.addEventListener('blur', () => {
+        if (window.innerWidth <= 768 && this.isOpen) {
+          setTimeout(() => {
+            handleViewportChange();
+          }, 300);
+        }
+      });
+      
+      // Handle input events to maintain visibility while typing
+      chatInput.addEventListener('input', () => {
+        if (window.innerWidth <= 768 && this.isOpen && keyboardOpen) {
+          // Ensure input stays visible while typing
+          setTimeout(() => {
+            chatInput.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'end',
+              inline: 'nearest'
+            });
+          }, 100);
+        }
+      });
+      
+      // Listen for viewport resize (works on most mobile browsers)
+      window.addEventListener('resize', handleViewportChange);
+      
+      // For iOS - visual viewport API if available
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener('resize', handleViewportChange);
+      }
+    }
+
+    adjustForKeyboard(chatWindow, keyboardHeight) {
+      if (chatWindow && window.innerWidth <= 768) {
+        // Calculate how much to move the chat window up
+        const moveUp = Math.min(keyboardHeight * 0.6, 200); // Move up max 200px
+        
+        // Add keyboard-active class for better styling control
+        chatWindow.classList.add('keyboard-active');
+        
+        chatWindow.style.transform = `translateY(-${moveUp}px)`;
+        chatWindow.style.transition = 'transform 0.3s ease-in-out';
+        
+        // Also adjust the chat messages container height
+        const messagesContainer = document.getElementById('chat-messages');
+        if (messagesContainer) {
+          const currentHeight = messagesContainer.offsetHeight;
+          const newHeight = Math.max(currentHeight - moveUp, 200); // Minimum 200px
+          messagesContainer.style.height = `${newHeight}px`;
+          messagesContainer.style.transition = 'height 0.3s ease-in-out';
+        }
+        
+        // For iOS Safari - additional adjustments
+        if (this.isIOS()) {
+          document.body.style.position = 'fixed';
+          document.body.style.width = '100%';
+        }
+      }
+    }
+
+    resetFromKeyboard(chatWindow) {
+      if (chatWindow && window.innerWidth <= 768) {
+        // Remove keyboard-active class
+        chatWindow.classList.remove('keyboard-active');
+        
+        // Reset chat window position
+        chatWindow.style.transform = 'translateY(0)';
+        chatWindow.style.transition = 'transform 0.3s ease-in-out';
+        
+        // Reset chat messages container height
+        const messagesContainer = document.getElementById('chat-messages');
+        if (messagesContainer) {
+          messagesContainer.style.height = 'calc(90vh - 140px)';
+          messagesContainer.style.transition = 'height 0.3s ease-in-out';
+        }
+        
+        // Reset iOS Safari specific styles
+        if (this.isIOS()) {
+          document.body.style.position = '';
+          document.body.style.width = '';
+        }
+      }
+    }
+
+    isIOS() {
+      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     }
 
     toggleChat() {
@@ -262,6 +408,11 @@ const suggestedQuestions = faqData
       } else {
         // Re-enable body scroll
         document.body.style.overflow = '';
+        
+        // Reset any keyboard adjustments when closing
+        if (window.innerWidth <= 768) {
+          this.resetFromKeyboard(chatWindow);
+        }
         
         chatWindow.classList.add('hidden');
         chatIcon?.classList.remove('hidden');
@@ -539,16 +690,28 @@ const suggestedQuestions = faqData
       border: 1px solid #e5e7eb !important;
       transform: translateY(100%);
       transition: transform 0.3s ease-in-out;
+      /* Enable smooth transitions for keyboard adjustments */
+      will-change: transform;
     }
     
     #chat-window:not(.hidden) {
       transform: translateY(0);
     }
     
+    /* Keyboard adjustment styles */
+    #chat-window.keyboard-active {
+      transition: transform 0.3s ease-in-out, height 0.3s ease-in-out;
+    }
+    
     .chat-messages-mobile {
       height: calc(90vh - 140px) !important; /* Adjust for header and input */
       max-height: calc(90vh - 140px) !important;
       background: #ffffff !important; /* Ensure messages area is white */
+      /* Enable smooth height transitions */
+      transition: height 0.3s ease-in-out;
+      overflow-y: auto;
+      /* Improved scrolling on mobile */
+      -webkit-overflow-scrolling: touch;
     }
     
     /* Mobile chat toggle button positioning */
@@ -603,6 +766,25 @@ const suggestedQuestions = faqData
     /* Force white background for input section on mobile */
     .chat-modal .border-t {
       background: #ffffff !important;
+      /* Make input area sticky at bottom */
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+    }
+    
+    /* Improve input field on mobile */
+    #chat-input {
+      font-size: 16px !important; /* Prevent zoom on iOS */
+      line-height: 1.5;
+      padding: 0.75rem !important;
+      border-radius: 0.75rem;
+    }
+    
+    /* Improve button accessibility on mobile */
+    button[type="submit"] {
+      min-width: 48px;
+      min-height: 48px;
+      padding: 0.75rem !important;
     }
   }
 

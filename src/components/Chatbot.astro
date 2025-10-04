@@ -253,29 +253,248 @@ class Chatbot {
     this.typing.classList.add('hidden');
   }
 
+  // Smart FAQ matching with fuzzy search, typo tolerance, and multilingual support
   findAnswer(q){
-    const query = q.toLowerCase();
-    const words = query.split(/\s+/);
-    const results = this.faqData.map(item=>{
-      const question = (item.question[this.locale]||item.question.en).toLowerCase();
-      const keywords = (item.keywords||[]).map(k=>k.toLowerCase());
-      let score=0;
-      words.forEach(w=>{
-        if(question.includes(w)) score += w.length;
-        keywords.forEach(kw=>{
-          if(kw===w) score += kw.length*3;
-          else if(kw.includes(w)||w.includes(kw)) score += kw.length*2;
+    // ----------------------------
+    // 1. Text normalization utilities
+    // ----------------------------
+    const removeAccents = (str) => 
+      str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    
+    const removeArabicDiacritics = (str) => 
+      str.replace(/[\u0610-\u061A\u064B-\u065F\u0670\u06D6-\u06ED]/g, '')
+         .replace(/ـ/g, ''); // remove tashkeel & tatweel
+    
+    const collapseRepeats = (word) => 
+      word.replace(/(.)\1{2,}/g, '$1$1'); // merciii -> mercii, thaaanks -> thaanks
+    
+    const stripPunctuation = (str) => 
+      str.replace(/[.,!?;:()\\[\\]{}«»"'+=/_<>@#$%^&*|`~،؟…−–—]/g, ' ');
+    
+    const normalize = (str) => {
+      if (!str) return '';
+      let s = str.toLowerCase();
+      s = removeAccents(s);
+      s = removeArabicDiacritics(s);
+      s = stripPunctuation(s);
+      s = s.replace(/\s+/g, ' ').trim();
+      return s;
+    };
+
+    // ----------------------------
+    // 2. Stop words and synonym mapping
+    // ----------------------------
+    const stopWords = {
+      fr: ['le','la','les','un','une','des','du','de','d','et','ou','est','au','aux','ce','cet','cette','sur','pour','stp','svp','pls','merci','bcp'],
+      en: ['the','a','an','of','and','or','is','are','to','in','on','at','please','pls','stp','thanks','thank','thx','thanx'],
+      ar: ['من','في','على','عن','الى','إلى','هل','ما','ماذا','كيف','لماذا','وين','وينه','منفضلك','ال','مع','ثم','او','أو']
+    };
+
+    // Common synonym/variation mapping for better matching
+    const synonymMap = {
+      // Thanks variations
+      'thx': 'thanks', 'thanx': 'thanks', 'tnx': 'thanks', 'merciii': 'merci', 'mercii': 'merci', 'mercie': 'merci',
+      'shukran': 'شكرا', 'شكراً': 'شكرا', 'شكراا': 'شكرا', 'شكرااا': 'شكرا',
+      // Location variations
+      'lieux': 'lieu', 'localisation': 'lieu', 'location': 'lieu', 'place': 'lieu', 'where': 'where', 'ou': 'où', 'ou?': 'où',
+      // Date variations
+      'dates': 'date', 'datte': 'date', 'deadline': 'date', 'deadlines': 'date',
+      // Congress variations
+      'congress': 'congres', 'congrès': 'congres', 'conference': 'congres', 'conf': 'congres'
+    };
+
+    const activeStopWords = stopWords[this.locale] || [];
+    
+    const tokenize = (str) => {
+      return normalize(str)
+        .split(' ')
+        .filter(Boolean)
+        .map(collapseRepeats)
+        .map(token => synonymMap[token] || token)
+        .filter(token => !activeStopWords.includes(token));
+    };
+
+    // ----------------------------
+    // 3. Similarity calculation helpers
+    // ----------------------------
+    const levenshtein = (a, b) => {
+      if (a === b) return 0;
+      const aLen = a.length, bLen = b.length;
+      if (!aLen) return bLen;
+      if (!bLen) return aLen;
+      
+      const matrix = Array.from({length: aLen + 1}, () => new Array(bLen + 1));
+      for (let i = 0; i <= aLen; i++) matrix[i][0] = i;
+      for (let j = 0; j <= bLen; j++) matrix[0][j] = j;
+      
+      for (let i = 1; i <= aLen; i++) {
+        for (let j = 1; j <= bLen; j++) {
+          const cost = a[i-1] === b[j-1] ? 0 : 1;
+          matrix[i][j] = Math.min(
+            matrix[i-1][j] + 1,     // deletion
+            matrix[i][j-1] + 1,     // insertion
+            matrix[i-1][j-1] + cost // substitution
+          );
+        }
+      }
+      return matrix[aLen][bLen];
+    };
+
+    const similarity = (a, b) => {
+      if (!a || !b) return 0;
+      if (a === b) return 1;
+      const distance = levenshtein(a, b);
+      const maxLength = Math.max(a.length, b.length);
+      return 1 - distance / maxLength; // 0 to 1 scale
+    };
+
+    // Bigram similarity for better fuzzy matching
+    const getBigrams = (str) => {
+      const bigrams = [];
+      for (let i = 0; i < str.length - 1; i++) {
+        bigrams.push(str.slice(i, i + 2));
+      }
+      return bigrams;
+    };
+
+    const jaccardSimilarity = (a, b) => {
+      const bigramsA = new Set(getBigrams(a));
+      const bigramsB = new Set(getBigrams(b));
+      let intersection = 0;
+      bigramsA.forEach(bigram => {
+        if (bigramsB.has(bigram)) intersection++;
+      });
+      const union = bigramsA.size + bigramsB.size - intersection;
+      return union ? intersection / union : 0;
+    };
+
+    // ----------------------------
+    // 4. Process user query
+    // ----------------------------
+    const rawQuery = q || '';
+    const normalizedQuery = normalize(rawQuery);
+    const userTokensAll = tokenize(rawQuery);
+    const userTokens = [...new Set(userTokensAll)]; // Remove duplicates
+    
+    if (!userTokens.length) {
+      const fallback = this.fallback[this.locale];
+      return `${fallback} <a href="mailto:info@ciriv.org" class="text-brand-primary underline">info@ciriv.org</a>`;
+    }
+
+    // ----------------------------
+    // 5. Score each FAQ item
+    // ----------------------------
+    let bestItem = null;
+    let bestScore = 0;
+
+    for (const item of this.faqData) {
+      // Get localized question text with fallback
+      const questionText = item.question[this.locale] || item.question.en || '';
+      const normalizedQuestion = normalize(questionText);
+      const questionTokens = tokenize(questionText);
+
+      // Process keywords
+      const keywordTokens = (item.keywords || [])
+        .map(keyword => tokenize(keyword).join(' '))
+        .join(' ')
+        .split(' ')
+        .filter(Boolean);
+
+      const candidateTokensRaw = [...questionTokens, ...keywordTokens];
+      const candidateTokens = [...new Set(candidateTokensRaw)]; // Deduplicate
+
+      if (!candidateTokens.length) continue;
+
+      // --- Component A: Exact token overlap
+      let exactMatches = 0;
+      userTokens.forEach(userToken => {
+        if (candidateTokens.includes(userToken)) exactMatches++;
+      });
+      const exactScore = exactMatches / userTokens.length; // 0 to 1
+
+      // --- Component B: Fuzzy token matching
+      let fuzzyAccumulation = 0;
+      userTokens.forEach(userToken => {
+        if (candidateTokens.includes(userToken)) return; // Already counted in exact
+        
+        // Find best similarity with candidate tokens
+        let bestLocalSimilarity = 0;
+        for (const candidateToken of candidateTokens) {
+          const stringSimilarity = similarity(userToken, candidateToken);
+          // Bonus for substring matches (e.g., 'regist' vs 'registration')
+          const substringBonus = (candidateToken.includes(userToken) || userToken.includes(candidateToken)) ? 0.1 : 0;
+          const totalSimilarity = Math.min(1, stringSimilarity + substringBonus);
+          
+          if (totalSimilarity > bestLocalSimilarity) {
+            bestLocalSimilarity = totalSimilarity;
+          }
+          if (bestLocalSimilarity === 1) break; // Perfect match found
+        }
+        
+        // Only count meaningful fuzzy matches (threshold 0.55)
+        if (bestLocalSimilarity >= 0.55) {
+          fuzzyAccumulation += bestLocalSimilarity;
+        }
+      });
+      const fuzzyScore = fuzzyAccumulation / userTokens.length; // 0 to 1
+
+      // --- Component C: Keyword prominence boost
+      let keywordBoost = 0;
+      const keywordSet = new Set((item.keywords || []).map(kw => normalize(kw)));
+      userTokens.forEach(userToken => {
+        keywordSet.forEach(keyword => {
+          if (!keyword) return;
+          if (keyword === userToken) {
+            keywordBoost += 0.12; // Exact keyword match
+          } else {
+            const keywordSimilarity = similarity(userToken, keyword);
+            if (keywordSimilarity >= 0.8) {
+              keywordBoost += 0.08; // Close keyword match
+            }
+          }
         });
       });
-      if(question.includes(query)) score += query.length*2;
-      return {item,score};
-    }).filter(r=>r.score>0).sort((a,b)=>b.score-a.score);
-    if(results.length && results[0].score>2){
-      const best = results[0].item;
-      return best.answer[this.locale]||best.answer.en;
+      keywordBoost = Math.min(keywordBoost, 0.35); // Cap the boost
+
+      // --- Component D: Full question similarity (bigrams + Levenshtein)
+      const fullLevenshteinSim = similarity(normalizedQuery, normalizedQuestion);
+      const fullJaccardSim = jaccardSimilarity(normalizedQuery, normalizedQuestion);
+      const fullCompositeSim = (fullLevenshteinSim * 0.6 + fullJaccardSim * 0.4); // 0 to 1
+
+      // --- Aggregate weighted score
+      let finalScore = 
+        exactScore * 0.45 +        // Exact token matches (highest weight)
+        fuzzyScore * 0.30 +        // Fuzzy token matches
+        fullCompositeSim * 0.15 +  // Full text similarity
+        keywordBoost;              // Keyword prominence (already scaled)
+
+      // Small bonus for very short queries that are fully contained
+      if (normalizedQuery.length <= 8 && normalizedQuestion.includes(normalizedQuery)) {
+        finalScore += 0.05;
+      }
+
+      finalScore = Math.min(finalScore, 1); // Clamp to 1
+
+      if (finalScore > bestScore) {
+        bestScore = finalScore;
+        bestItem = item;
+      }
     }
-    const fb = this.fallback[this.locale];
-    return `${fb} <a href="mailto:info@ciriv.org" class="text-brand-primary underline">info@ciriv.org</a>`;
+
+    // ----------------------------
+    // 6. Apply threshold and return result
+    // ----------------------------
+    const SIMILARITY_THRESHOLD = 0.40;
+    
+    if (bestItem && bestScore >= SIMILARITY_THRESHOLD) {
+      return bestItem.answer[this.locale] || bestItem.answer.en;
+    }
+
+    // ----------------------------
+    // 7. Fallback response
+    // ----------------------------
+    const fallback = this.fallback[this.locale];
+    return `${fallback} <a href="mailto:info@ciriv.org" class="text-brand-primary underline">info@ciriv.org</a>`;
   }
 
   addMessage(content, sender){

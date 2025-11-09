@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations } from '../../i18n/ui.ts';
+
+const locale = 'fr';
+const t = useTranslations(locale);
+---
+
+<BaseLayout locale={locale} title={t('pricing.title')}>
+  <main class="container mx-auto px-4 py-12">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-brand-primary mb-4">
+        {t('pricing.title')}
+      </h1>
+      <div class="w-24 h-1 bg-brand-primary mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Section 1: Registration Fees -->
+    <section class="mb-12">
+      <h2 class="text-3xl font-bold text-center mb-8 text-brand-primary">
+        {t('pricing.registration')}
+      </h2>
+      
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full text-center rounded-xl shadow-md overflow-hidden">
+          <thead class="bg-brand-primary text-white font-semibold">
+            <tr>
+              <th class="py-4 px-6">{t('pricing.category')}</th>
+              <th class="py-4 px-6">{t('pricing.earlyBird')}</th>
+              <th class="py-4 px-6">{t('pricing.regular')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
+              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.teachers')}</td>
+              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">1200 MAD</td>
+              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">1500 MAD</td>
+            </tr>
+            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
+              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.phd')}</td>
+              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">700 MAD</td>
+              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">900 MAD</td>
+            </tr>
+            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
+              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.students')}</td>
+              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">400 MAD</td>
+              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">500 MAD</td>
+            </tr>
+            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
+              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.professionals')}</td>
+              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">2000 MAD</td>
+              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">2500 MAD</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="text-center mt-6 text-slate-600 dark:text-slate-300 italic">
+        {t('pricing.description')}
+      </p>
+    </section>
+
+    <!-- Section 2: Payment Information -->
+    <section class="mt-12 border-t border-slate-200 dark:border-slate-700 pt-8">
+      <h2 class="text-3xl font-bold text-center mb-8 text-brand-primary">
+        {t('payment.title')}
+      </h2>
+
+      <div class="max-w-2xl mx-auto">
+        <div class="rounded-xl p-6 bg-slate-100 dark:bg-slate-800 shadow-md">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div>
+              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.bank')}:</span>
+              <p class="text-slate-900 dark:text-white">BANK OF AFRICA</p>
+            </div>
+            <div>
+              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.holder')}:</span>
+              <p class="text-slate-900 dark:text-white">Association CIRIV</p>
+            </div>
+            <div class="md:col-span-2">
+              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.rib')}:</span>
+              <p class="text-slate-900 dark:text-white font-mono text-lg" id="ribNumber">123 456 7890 0000 1234 5678 9012</p>
+            </div>
+            <div>
+              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.swift')}:</span>
+              <p class="text-slate-900 dark:text-white">BMCE MA MC</p>
+            </div>
+          </div>
+          
+          <div class="flex justify-center">
+            <button 
+              id="copyRibBtn" 
+              class="bg-brand-primary hover:bg-brand-primary/80 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+            >
+              {t('payment.copyRib')}
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Email Instructions -->
+    <section class="mt-12 border-t border-slate-200 dark:border-slate-700 pt-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+          <p class="text-slate-700 dark:text-slate-300 mb-4">
+            {t('payment.instructions')}
+          </p>
+          <p class="font-mono text-lg font-semibold text-blue-600 dark:text-blue-400 mb-4" id="emailAddress">
+            info@ciriv.org
+          </p>
+          <button 
+            id="copyEmailBtn" 
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg mb-4"
+          >
+            {t('payment.copyEmail')}
+          </button>
+        </div>
+
+        <div class="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
+          <p class="text-amber-800 dark:text-amber-200 font-medium">
+            ⚠️ {t('payment.confirmation')}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+      <span id="toastMessage">{t('payment.ribCopied')}</span>
+    </div>
+  </main>
+
+  <script>
+    // Copy to clipboard functionality
+    function copyToClipboard(text, successMessage) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(successMessage);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast(successMessage);
+      });
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      
+      if (toast && toastMessage) {
+        toastMessage.textContent = message;
+        toast.classList.remove('translate-x-full');
+        
+        setTimeout(() => {
+          toast.classList.add('translate-x-full');
+        }, 3000);
+      }
+    }
+
+    // RIB copy button
+    const copyRibBtn = document.getElementById('copyRibBtn');
+    const ribNumber = document.getElementById('ribNumber');
+    
+    if (copyRibBtn && ribNumber) {
+      copyRibBtn.addEventListener('click', () => {
+        const ribText = ribNumber.textContent.trim();
+        copyToClipboard(ribText, '✅ RIB copié !');
+      });
+    }
+
+    // Email copy button
+    const copyEmailBtn = document.getElementById('copyEmailBtn');
+    const emailAddress = document.getElementById('emailAddress');
+    
+    if (copyEmailBtn && emailAddress) {
+      copyEmailBtn.addEventListener('click', () => {
+        const emailText = emailAddress.textContent.trim();
+        copyToClipboard(emailText, '✅ Email copié !');
+      });
+    }
+  </script>
+</BaseLayout>

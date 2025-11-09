@@ -1,0 +1,49 @@
+---
+export interface Props { locale?: 'en'|'fr'|'ar' }
+const { locale='en' } = Astro.props;
+
+import { useTranslations } from '../i18n/ui.ts';
+import orga from '../data/committee_organisation.json';
+
+const t = useTranslations(locale);
+const isRTL = locale === 'ar';
+
+const titles = {
+  fr: 'Comité d\'Organisation',
+  en: 'Organizing Committee',
+  ar: 'اللجنة التنظيمية'
+};
+---
+
+<section id="comite-organisation" class="py-16 bg-slate-50 dark:bg-slate-800">
+  <div class="container mx-auto px-4">
+    <h2 class={`text-3xl font-bold text-center mb-12 text-slate-900 dark:text-white ${isRTL ? 'font-arabic' : ''}`}>
+      {titles[locale]}
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      {orga.map((member) => (
+        <div class="flex flex-col items-center text-center bg-white dark:bg-slate-700 rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 p-6 border border-slate-100 dark:border-slate-600">
+          <div class="relative mb-6">
+            <img 
+              src={member.image} 
+              alt={member.name} 
+              class="w-28 h-28 rounded-full object-cover shadow-lg border-4 border-white dark:border-slate-600"
+              loading="lazy"
+            />
+            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-primary rounded-full border-4 border-white dark:border-slate-700 flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class={`font-semibold text-lg text-brand-primary mb-2 ${isRTL ? 'font-arabic text-right' : 'text-center'}`}>
+            {member.name}
+          </h3>
+          <p class={`text-slate-600 dark:text-slate-300 text-sm leading-relaxed ${isRTL ? 'font-arabic text-right' : 'text-center'}`}>
+            {member.role}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

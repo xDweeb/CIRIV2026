@@ -1,0 +1,192 @@
+---
+export interface Props {
+  locale?: 'en' | 'fr' | 'ar';
+}
+
+const { locale = 'fr' } = Astro.props;
+
+import { useTranslations } from '../i18n/ui.ts';
+import committee from '../data/committee_scientifique.json';
+
+const t = useTranslations(locale);
+const isRTL = locale === 'ar';
+
+// Use translation system
+const title = t('committee.scientific');
+const searchPlaceholder = t('search.placeholder');
+---
+
+<section id="comite-scientifique" class="py-16 bg-slate-50 dark:bg-slate-900" dir={isRTL ? 'rtl' : 'ltr'}>
+  <div class="container mx-auto px-4">
+    <!-- Section Title -->
+    <div class="text-center mb-12">
+      <h2 class={`text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4 ${isRTL ? 'font-arabic' : ''}`}>
+        {title}
+      </h2>
+      <p class={`text-lg text-slate-600 dark:text-slate-300 mb-6 ${isRTL ? 'font-arabic' : ''}`}>
+        {locale === 'fr' && 'Découvrez les membres du comité scientifique du CIRIV 2026'}
+        {locale === 'en' && 'Meet the members of the CIRIV 2026 scientific committee'}
+        {locale === 'ar' && 'تعرف على أعضاء اللجنة العلمية لـ CIRIV 2026'}
+      </p>
+      <div class="w-24 h-1 bg-brand-primary mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex justify-center mb-8">
+      <input 
+        type="text" 
+        id="committee-search"
+        placeholder={searchPlaceholder}
+        class={`w-full max-w-md px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-all duration-200 ${isRTL ? 'text-right font-arabic' : 'text-left'}`}
+      />
+    </div>
+
+    <!-- Committee Members Grid -->
+    <div id="committee-grid" class={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+      {committee.map((member, index) => (
+        <div 
+          class="committee-member p-6 rounded-xl shadow-md bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-300 hover:shadow-lg border border-slate-200 dark:border-slate-700"
+          data-name={member.name.toLowerCase()}
+          data-role={member.role.toLowerCase()}
+          style={`animation-delay: ${index * 0.05}s`}
+        >
+          <!-- Member Info -->
+          <h3 class={`font-semibold text-lg text-slate-800 dark:text-white mb-3 leading-tight ${isRTL ? 'font-arabic' : ''}`}>
+            {member.name}
+          </h3>
+          <p class={`text-slate-600 dark:text-slate-300 text-sm leading-relaxed ${isRTL ? 'font-arabic' : ''}`}>
+            {member.role}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- No Results Message -->
+    <div id="no-results" class="hidden text-center py-12">
+      <div class="text-slate-400 dark:text-slate-500">
+        <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <p class={`text-lg font-medium ${isRTL ? 'font-arabic' : ''}`}>
+          {t('search.noResults')}
+        </p>
+        <p class={`text-sm mt-2 ${isRTL ? 'font-arabic' : ''}`}>
+          {locale === 'fr' && 'Essayez de modifier votre recherche'}
+          {locale === 'en' && 'Try adjusting your search'}
+          {locale === 'ar' && 'حاول تعديل البحث'}
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer Note -->
+    <div class="text-center mt-12">
+      <p class={`text-slate-500 dark:text-slate-400 text-sm ${isRTL ? 'font-arabic' : ''}`}>
+        {locale === 'fr' && 'Membres éminents de la communauté scientifique'}
+        {locale === 'en' && 'Eminent members of the scientific community'}
+        {locale === 'ar' && 'أعضاء بارزون من المجتمع العلمي'}
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('committee-search');
+  const memberCards = document.querySelectorAll('.committee-member');
+  const noResults = document.getElementById('no-results');
+  const grid = document.getElementById('committee-grid');
+
+  if (searchInput && memberCards.length > 0) {
+    searchInput.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      memberCards.forEach(card => {
+        const name = card.getAttribute('data-name') || '';
+        const role = card.getAttribute('data-role') || '';
+        
+        if (name.includes(searchTerm) || role.includes(searchTerm)) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Show/hide no results message
+      if (visibleCount === 0 && searchTerm !== '') {
+        noResults.classList.remove('hidden');
+        grid.classList.add('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        grid.classList.remove('hidden');
+      }
+    });
+  }
+});
+</script>
+
+<style>
+  /* Animation for cards on load */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .committee-member {
+    animation: fadeInUp 0.4s ease-out forwards;
+    opacity: 0;
+  }
+
+  /* Search input focus styles */
+  #committee-search:focus {
+    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+  }
+
+  /* RTL adjustments */
+  [dir="rtl"] .grid > div {
+    text-align: right;
+  }
+
+  [dir="rtl"] #committee-search {
+    text-align: right;
+  }
+
+  /* Responsive improvements */
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    section {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    
+    #committee-search {
+      display: none;
+    }
+  }
+
+  /* Accessibility improvements */
+  .committee-member:focus-within {
+    outline: 2px solid var(--brand-primary, #059669);
+    outline-offset: 2px;
+  }
+
+  /* Smooth transitions for search results */
+  .committee-member {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+</style>

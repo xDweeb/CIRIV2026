@@ -74,19 +74,19 @@
     "question": { "fr": "Quels sont les tarifs ?", "en": "What are the registration fees?", "ar": "ما هي رسوم التسجيل؟" },
     "keywords": ["tarif","prix","fees","cost","combien","how much","frais","inscription","رسوم","تكلفة","سعر"],
     "answer": {
-      "fr": "👉 Les tarifs varient selon votre statut (étudiant, chercheur, professionnel). Détails bientôt disponibles.",
-      "en": "👉 Fees vary depending on your status (student, researcher, professional). Details soon.",
-      "ar": "👉 تختلف الرسوم حسب الوضع (طالب، باحث، مهني). التفاصيل قريباً."
+      "fr": "👉 **Étudiants:** 400 DH (avant mars), 800 DH (après mars) | **Professeurs:** 500 DH (avant mars), 1000 DH (après mars) | **Professionnels:** 1000 DH (avant mars), 2000 DH (après mars)",
+      "en": "👉 **Students:** 400 MAD (before March), 800 MAD (after March) | **Professors:** 500 MAD (before March), 1000 MAD (after March) | **Professionals:** 1000 MAD (before March), 2000 MAD (after March)",
+      "ar": "👉 **الطلاب:** 400 درهم (قبل مارس)، 800 درهم (بعد مارس) | **الأساتذة:** 500 درهم (قبل مارس)، 1000 درهم (بعد مارس) | **المهنيون:** 1000 درهم (قبل مارس)، 2000 درهم (بعد مارس)"
     }
   },
   {
     "id": 7,
     "question": { "fr": "Y a-t-il un tarif réduit ?", "en": "Is there a reduced fee?", "ar": "هل هناك تخفيض؟" },
-    "keywords": ["réduction","réduit","discount","early","special price","خفض","تخفيض","خصم"],
+    "keywords": ["réduction","réduit","discount","early","special price","خفض","تخفيض","خصم","mars","march"],
     "answer": {
-      "fr": "👉 Oui, un tarif réduit avant le 15 décembre 2025.",
-      "en": "👉 Yes, reduced fee before December 15, 2025.",
-      "ar": "👉 نعم، هناك تخفيض للتسجيلات قبل 15 ديسمبر 2025."
+      "fr": "👉 Oui ! Profitez des tarifs préférentiels avant mars 2026. Les prix augmentent après cette date.",
+      "en": "👉 Yes! Enjoy preferential rates before March 2026. Prices increase after this date.",
+      "ar": "👉 نعم! استفيدوا من الأسعار المخفضة قبل مارس 2026. الأسعار ترتفع بعد هذا التاريخ."
     }
   },
   {
@@ -102,11 +102,11 @@
   {
     "id": 9,
     "question": { "fr": "Comment payer ?", "en": "How to pay?", "ar": "كيف أدفع؟" },
-    "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك"],
+    "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك","compte","account"],
     "answer": {
-      "fr": "👉 Paiement par virement ou versement bancaire sur le compte officiel. Coordonnées bancaires bientôt disponibles.",
-      "en": "👉 Payment by transfer or bank deposit to the official account. Bank details soon.",
-      "ar": "👉 يتم الدفع عبر التحويل أو الإيداع البنكي في الحساب الرسمي. التفاصيل قريباً."
+      "fr": "👉 Paiement par virement bancaire - **FC SOLUTION MAROC** | **SAHAM BANK** | **RIB:** 022 787 0001250029131511 33 | **BIC:** SGMBMAMCXXX. Envoyez le justificatif de paiement à registration@cirivi.org",
+      "en": "👉 Payment by bank transfer - **FC SOLUTION MAROC** | **SAHAM BANK** | **RIB:** 022 787 0001250029131511 33 | **BIC:** SGMBMAMCXXX. Send payment proof to registration@cirivi.org",
+      "ar": "👉 الدفع عبر التحويل البنكي - **FC SOLUTION MAROC** | **SAHAM BANK** | **رقم الحساب:** 022 787 0001250029131511 33 | **BIC:** SGMBMAMCXXX. أرسل إثبات الدفع إلى registration@cirivi.org"
     }
   },
   {
@@ -122,11 +122,11 @@
   {
     "id": 11,
     "question": { "fr": "Contact ?", "en": "Contact?", "ar": "التواصل؟" },
-    "keywords": ["contact","mail","email","support","reach","info","message","تواصل","بريد","إيميل"],
+    "keywords": ["contact","mail","email","support","reach","info","message","تواصل","بريد","إيميل","registration"],
     "answer": {
-      "fr": "👉 Vous pouvez nous écrire à <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a>",
-      "en": "👉 You can contact us at <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a>",
-      "ar": "👉 يمكنكم مراسلتنا عبر البريد <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a>"
+      "fr": "👉 **Email général:** <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>**Inscriptions:** <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 **Adresse:** Faculté des Sciences Ben M'sik, Casablanca",
+      "en": "👉 **General email:** <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>**Registrations:** <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 **Address:** Faculty of Sciences Ben M'sik, Casablanca",
+      "ar": "👉 **البريد العام:** <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>**التسجيلات:** <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 **العنوان:** كلية العلوم بن مسيك، الدار البيضاء"
     }
   },
   {
@@ -187,6 +187,16 @@
       "fr": "👉 Le site CIRIV a été conçu et développé par <strong>Taibi El Yakouti</strong> (alias <em>xdweb</em>), développeur et data analyst. Découvrez ses projets sur <a href=\"https://xdweb.engineer\" target=\"_blank\" class=\"text-brand-primary hover:underline\">xdweb.engineer</a>.",
       "en": "👉 The CIRIV website was designed and developed by <strong>Taibi El Yakouti</strong> (also known as <em>xdweb</em>), developer and data analyst. Explore more on <a href=\"https://xdweb.engineer\" target=\"_blank\" class=\"text-brand-primary hover:underline\">xdweb.engineer</a>.",
       "ar": "👉 تم تصميم وتطوير موقع CIRIV من طرف <strong>طيبي اليقوتي</strong> (<em>xdweb</em>)، مطور ومحلل بيانات. يمكنكم الاطلاع على مشاريعه عبر <a href=\"https://xdweb.engineer\" target=\"_blank\" class=\"text-brand-primary hover:underline\">xdweb.engineer</a>."
+    }
+  },
+  {
+    "id": 18,
+    "question": { "fr": "Réseaux sociaux ?", "en": "Social media?", "ar": "وسائل التواصل؟" },
+    "keywords": ["social","facebook","instagram","linkedin","réseaux","follow","twitter","وسائل التواصل","فيسبوك","انستغرام","لينكد ان"],
+    "answer": {
+      "fr": "👉 Suivez-nous sur nos réseaux sociaux :<br>🔗 **LinkedIn:** CIRIV Congrès<br>📷 **Instagram:** @ciriv.congres",
+      "en": "👉 Follow us on social media:<br>🔗 **LinkedIn:** CIRIV Congress<br>📷 **Instagram:** @ciriv.congres",
+      "ar": "👉 تابعونا على وسائل التواصل الاجتماعي:<br>🔗 **LinkedIn:** CIRIV Congress<br>📷 **Instagram:** @ciriv.congres"
     }
   }
 ]

@@ -194,9 +194,9 @@
     "question": { "fr": "Réseaux sociaux ?", "en": "Social media?", "ar": "وسائل التواصل؟" },
     "keywords": ["social","facebook","instagram","linkedin","réseaux","follow","twitter","وسائل التواصل","فيسبوك","انستغرام","لينكد ان"],
     "answer": {
-      "fr": "👉 Suivez-nous sur nos réseaux sociaux :<br>🔗 **LinkedIn:** CIRIV Congrès<br>📷 **Instagram:** @ciriv.congres",
-      "en": "👉 Follow us on social media:<br>🔗 **LinkedIn:** CIRIV Congress<br>📷 **Instagram:** @ciriv.congres",
-      "ar": "👉 تابعونا على وسائل التواصل الاجتماعي:<br>🔗 **LinkedIn:** CIRIV Congress<br>📷 **Instagram:** @ciriv.congres"
+      "fr": "👉 Suivez-nous sur nos réseaux sociaux :<br>🔗 LinkedIn: CIRIV Congrès<br>📷 Instagram: @ciriv.congres",
+      "en": "👉 Follow us on social media:<br>🔗 LinkedIn: CIRIV Congress<br>📷 Instagram: @ciriv.congres",
+      "ar": "👉 تابعونا على وسائل التواصل الاجتماعي:<br>🔗 LinkedIn: CIRIV Congress<br>📷 Instagram: @ciriv.congres"
     }
   }
 ]

@@ -74,9 +74,9 @@
     "question": { "fr": "Quels sont les tarifs ?", "en": "What are the registration fees?", "ar": "ما هي رسوم التسجيل؟" },
     "keywords": ["tarif","prix","fees","cost","combien","how much","frais","inscription","رسوم","تكلفة","سعر"],
     "answer": {
-      "fr": "👉 **Étudiants:** 400 DH (avant mars), 800 DH (après mars) | **Professeurs:** 500 DH (avant mars), 1000 DH (après mars) | **Professionnels:** 1000 DH (avant mars), 2000 DH (après mars)",
-      "en": "👉 **Students:** 400 MAD (before March), 800 MAD (after March) | **Professors:** 500 MAD (before March), 1000 MAD (after March) | **Professionals:** 1000 MAD (before March), 2000 MAD (after March)",
-      "ar": "👉 **الطلاب:** 400 درهم (قبل مارس)، 800 درهم (بعد مارس) | **الأساتذة:** 500 درهم (قبل مارس)، 1000 درهم (بعد مارس) | **المهنيون:** 1000 درهم (قبل مارس)، 2000 درهم (بعد مارس)"
+      "fr": "👉 <strong>Étudiants:</strong> 400 DH (avant mars), 800 DH (après mars)<br><strong>Professeurs:</strong> 500 DH (avant mars), 1000 DH (après mars)<br><strong>Professionnels:</strong> 1000 DH (avant mars), 2000 DH (après mars)",
+      "en": "👉 <strong>Students:</strong> 400 MAD (before March), 800 MAD (after March)<br><strong>Professors:</strong> 500 MAD (before March), 1000 MAD (after March)<br><strong>Professionals:</strong> 1000 MAD (before March), 2000 MAD (after March)",
+      "ar": "👉 <strong>الطلاب:</strong> 400 درهم (قبل مارس)، 800 درهم (بعد مارس)<br><strong>الأساتذة:</strong> 500 درهم (قبل مارس)، 1000 درهم (بعد مارس)<br><strong>المهنيون:</strong> 1000 درهم (قبل مارس)، 2000 درهم (بعد مارس)"
     }
   },
   {
@@ -104,9 +104,9 @@
     "question": { "fr": "Comment payer ?", "en": "How to pay?", "ar": "كيف أدفع؟" },
     "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك","compte","account"],
     "answer": {
-      "fr": "👉 Paiement par virement bancaire - **FC SOLUTION MAROC** | **SAHAM BANK** | **RIB:** 022 787 0001250029131511 33 | **BIC:** SGMBMAMCXXX. Envoyez le justificatif de paiement à registration@cirivi.org",
-      "en": "👉 Payment by bank transfer - **FC SOLUTION MAROC** | **SAHAM BANK** | **RIB:** 022 787 0001250029131511 33 | **BIC:** SGMBMAMCXXX. Send payment proof to registration@cirivi.org",
-      "ar": "👉 الدفع عبر التحويل البنكي - **FC SOLUTION MAROC** | **SAHAM BANK** | **رقم الحساب:** 022 787 0001250029131511 33 | **BIC:** SGMBMAMCXXX. أرسل إثبات الدفع إلى registration@cirivi.org"
+      "fr": "👉 Paiement par virement bancaire<br><strong>Compagnie:</strong> FC SOLUTION MAROC<br><strong>Banque:</strong> SAHAM BANK<br><strong>RIB:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 Envoyez le justificatif à <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a>",
+      "en": "👉 Payment by bank transfer<br><strong>Company:</strong> FC SOLUTION MAROC<br><strong>Bank:</strong> SAHAM BANK<br><strong>RIB:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 Send payment proof to <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a>",
+      "ar": "👉 الدفع عبر التحويل البنكي<br><strong>الشركة:</strong> FC SOLUTION MAROC<br><strong>البنك:</strong> SAHAM BANK<br><strong>رقم الحساب:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 أرسل إثبات الدفع إلى <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a>"
     }
   },
   {
@@ -124,9 +124,9 @@
     "question": { "fr": "Contact ?", "en": "Contact?", "ar": "التواصل؟" },
     "keywords": ["contact","mail","email","support","reach","info","message","تواصل","بريد","إيميل","registration"],
     "answer": {
-      "fr": "👉 **Email général:** <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>**Inscriptions:** <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 **Adresse:** Faculté des Sciences Ben M'sik, Casablanca",
-      "en": "👉 **General email:** <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>**Registrations:** <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 **Address:** Faculty of Sciences Ben M'sik, Casablanca",
-      "ar": "👉 **البريد العام:** <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>**التسجيلات:** <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 **العنوان:** كلية العلوم بن مسيك، الدار البيضاء"
+      "fr": "👉 📧 <strong>Email général:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>Inscriptions:</strong> <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 <strong>Adresse:</strong> Faculté des Sciences Ben M'sik, Casablanca",
+      "en": "👉 📧 <strong>General email:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>Registrations:</strong> <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 <strong>Address:</strong> Faculty of Sciences Ben M'sik, Casablanca",
+      "ar": "👉 📧 <strong>البريد العام:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>التسجيلات:</strong> <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 <strong>العنوان:</strong> كلية العلوم بن مسيك، الدار البيضاء"
     }
   },
   {
@@ -194,9 +194,9 @@
     "question": { "fr": "Réseaux sociaux ?", "en": "Social media?", "ar": "وسائل التواصل؟" },
     "keywords": ["social","facebook","instagram","linkedin","réseaux","follow","twitter","وسائل التواصل","فيسبوك","انستغرام","لينكد ان"],
     "answer": {
-      "fr": "👉 Suivez-nous sur nos réseaux sociaux :<br>🔗 LinkedIn: CIRIV Congrès<br>📷 Instagram: @ciriv.congres",
-      "en": "👉 Follow us on social media:<br>🔗 LinkedIn: CIRIV Congress<br>📷 Instagram: @ciriv.congres",
-      "ar": "👉 تابعونا على وسائل التواصل الاجتماعي:<br>🔗 LinkedIn: CIRIV Congress<br>📷 Instagram: @ciriv.congres"
+      "fr": "👉 Suivez-nous sur nos réseaux sociaux :<br>🔗 <a href=\"https://linkedin.com/company/ciriv-congres\" target=\"_blank\" class=\"text-brand-primary hover:underline\">LinkedIn: CIRIV Congrès</a><br>📷 <a href=\"https://instagram.com/ciriv.congres\" target=\"_blank\" class=\"text-brand-primary hover:underline\">Instagram: @ciriv.congres</a>",
+      "en": "👉 Follow us on social media:<br>🔗 <a href=\"https://linkedin.com/company/ciriv-congres\" target=\"_blank\" class=\"text-brand-primary hover:underline\">LinkedIn: CIRIV Congress</a><br>📷 <a href=\"https://instagram.com/ciriv.congres\" target=\"_blank\" class=\"text-brand-primary hover:underline\">Instagram: @ciriv.congres</a>",
+      "ar": "👉 تابعونا على وسائل التواصل الاجتماعي:<br>🔗 <a href=\"https://linkedin.com/company/ciriv-congres\" target=\"_blank\" class=\"text-brand-primary hover:underline\">LinkedIn: CIRIV Congress</a><br>📷 <a href=\"https://instagram.com/ciriv.congres\" target=\"_blank\" class=\"text-brand-primary hover:underline\">Instagram: @ciriv.congres</a>"
     }
   }
 ]

@@ -1,20 +1,6 @@
 [
   {
-    "date": "2025-10-06T00:00:00",
-    "title": {
-      "en": "Call for Communications Launch",
-      "fr": "Lancement de l'appel à communications",
-      "ar": "إطلاق دعوة للمشاركات"
-    },
-    "description": {
-      "en": "Opening of the submission period for abstracts for oral communications and posters.",
-      "fr": "Ouverture de la période de soumission des résumés pour les communications orales et les posters.",
-      "ar": "فتح فترة تقديم الملخصات للمشاركات الشفهية والملصقات."
-    },
-    "type": "announcement"
-  },
-  {
-    "date": "2025-11-15T23:59:59",
+    "date": "2025-12-15T23:59:59",
     "title": {
       "en": "Abstract Submission Deadline",
       "fr": "Dernier délai de réception des résumés",
@@ -28,21 +14,21 @@
     "type": "deadline"
   },
   {
-    "date": "2025-12-15T23:59:59",
+    "date": "2026-01-05T23:59:59",
     "title": {
-      "en": "Early Bird Registration Deadline",
-      "fr": "Dernier délai pour bénéficier des tarifs d'inscription réduits",
-      "ar": "الموعد النهائي للاستفادة من أسعار التسجيل المخفضة"
+      "en": "Registration Deadline",
+      "fr": "Dernier délai d'inscription",
+      "ar": "الموعد النهائي للتسجيل"
     },
     "description": {
-      "en": "Final deadline to benefit from reduced registration fees. Regular rates apply after this date.",
-      "fr": "Date limite pour profiter des tarifs préférentiels d'inscription. Après cette date, les tarifs normaux s'appliquent.",
-      "ar": "الموعد النهائي للاستفادة من رسوم التسجيل المخفضة. الأسعار العادية تطبق بعد هذا التاريخ."
+      "en": "Final deadline for online registration to participate in the congress.",
+      "fr": "Date limite d'inscription en ligne pour participer au congrès.",
+      "ar": "الموعد النهائي للتسجيل عبر الإنترنت للمشاركة في المؤتمر."
     },
     "type": "deadline"
   },
   {
-    "date": "2025-12-31T23:59:59",
+    "date": "2026-01-20T23:59:59",
     "title": {
       "en": "Poster and PowerPoint Presentation Deadline",
       "fr": "Dernier délai pour l'envoi des posters et présentations PowerPoint",
@@ -56,16 +42,16 @@
     "type": "deadline"
   },
   {
-    "date": "2026-06-15T00:00:00",
+    "date": "2026-01-27T08:00:00",
     "title": {
-      "en": "CIRIV 2026 Conference Starts",
-      "fr": "Début de la conférence CIRIV 2026",
+      "en": "CIRIV 2026 Congress Starts",
+      "fr": "Début du congrès CIRIV 2026",
       "ar": "بداية مؤتمر CIRIV 2026"
     },
     "description": {
-      "en": "The main conference event begins.",
-      "fr": "L'événement principal de la conférence commence.",
-      "ar": "يبدأ الحدث الرئيسي للمؤتمر."
+      "en": "Two days dedicated to exchanges on research, innovation and valorization around the One Health theme.",
+      "fr": "Deux journées dédiées aux échanges sur la recherche, l'innovation et la valorisation autour de la thématique One Health.",
+      "ar": "يومان مخصصان للتبادل حول البحث والابتكار والتثمين حول موضوع الصحة الواحدة."
     },
     "type": "event"
   }

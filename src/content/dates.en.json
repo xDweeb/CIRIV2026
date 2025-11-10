@@ -1,48 +1,36 @@
 [
   {
-    "date": "January 24, 2026",
+    "date": "December 15, 2025",
     "title": "Abstract Submission Deadline",
     "description": "Final deadline to submit your abstracts for oral communications and posters.",
     "type": "deadline"
   },
   {
-    "date": "From November 30, 2025 to February 8, 2026",
+    "date": "From December 16, 2025 to January 10, 2026",
     "title": "Acceptance Notification Period",
     "description": "Authors will receive the decision regarding the acceptance of their submitted abstracts.",
     "type": "announcement"
   },
   {
-    "date": "January 1, 2026",
-    "title": "Final Panel Program",
-    "description": "Release of the definitive panel program for the congress.",
-    "type": "announcement"
-  },
-  {
-    "date": "February 23, 2026",
-    "title": "Early Bird Registration Deadline",
-    "description": "Final deadline to benefit from reduced registration fees. Regular rates apply after this date.",
-    "type": "deadline"
-  },
-  {
-    "date": "March 11, 2026",
-    "title": "Poster and PowerPoint Presentation Deadline",
-    "description": "Final deadline to submit final versions of posters and PowerPoint presentations for oral communications.",
-    "type": "deadline"
-  },
-  {
-    "date": "March 16, 2026",
+    "date": "January 5, 2026",
     "title": "Online Registration Closes",
     "description": "Final deadline to register for the congress. No registrations will be accepted after this date.",
     "type": "deadline"
   },
   {
-    "date": "March 20, 2026",
+    "date": "January 15, 2026",
     "title": "Final Congress Program",
     "description": "Release of the definitive congress program with all sessions and speakers.",
     "type": "announcement"
   },
   {
-    "date": "April 7–8, 2026",
+    "date": "January 20, 2026",
+    "title": "Poster and PowerPoint Presentation Deadline",
+    "description": "Final deadline to submit final versions of posters and PowerPoint presentations for oral communications.",
+    "type": "deadline"
+  },
+  {
+    "date": "January 27–28, 2026",
     "title": "CIRIV 2026 Congress",
     "description": "Two days dedicated to discussions on research, innovation, and valorization, around the One Health theme, which encompasses human health, animal health, and the environment, with national and international experts.",
     "type": "event"

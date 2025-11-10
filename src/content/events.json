@@ -1,6 +1,6 @@
 [
   {
-    "date": "2025-12-15T23:59:59",
+    "date": "2026-01-24T23:59:59",
     "title": {
       "en": "Abstract Submission Deadline",
       "fr": "Dernier délai de réception des résumés",
@@ -14,21 +14,21 @@
     "type": "deadline"
   },
   {
-    "date": "2026-01-05T23:59:59",
+    "date": "2026-02-23T23:59:59",
     "title": {
-      "en": "Registration Deadline",
-      "fr": "Dernier délai d'inscription",
-      "ar": "الموعد النهائي للتسجيل"
+      "en": "Early Bird Registration Deadline",
+      "fr": "Dernier délai pour bénéficier des tarifs d'inscription réduits",
+      "ar": "الموعد النهائي للاستفادة من أسعار التسجيل المخفضة"
     },
     "description": {
-      "en": "Final deadline for online registration to participate in the congress.",
-      "fr": "Date limite d'inscription en ligne pour participer au congrès.",
-      "ar": "الموعد النهائي للتسجيل عبر الإنترنت للمشاركة في المؤتمر."
+      "en": "Final deadline to benefit from reduced registration fees. Regular rates apply after this date.",
+      "fr": "Date limite pour profiter des tarifs préférentiels d'inscription. Après cette date, les tarifs normaux s'appliquent.",
+      "ar": "الموعد النهائي للاستفادة من رسوم التسجيل المخفضة. الأسعار العادية تطبق بعد هذا التاريخ."
     },
     "type": "deadline"
   },
   {
-    "date": "2026-01-20T23:59:59",
+    "date": "2026-03-11T23:59:59",
     "title": {
       "en": "Poster and PowerPoint Presentation Deadline",
       "fr": "Dernier délai pour l'envoi des posters et présentations PowerPoint",
@@ -42,7 +42,21 @@
     "type": "deadline"
   },
   {
-    "date": "2026-01-27T08:00:00",
+    "date": "2026-03-16T23:59:59",
+    "title": {
+      "en": "Registration Deadline",
+      "fr": "Clôture des inscriptions en ligne",
+      "ar": "إغلاق التسجيل عبر الإنترنت"
+    },
+    "description": {
+      "en": "Final deadline for online registration to participate in the congress.",
+      "fr": "Date limite d'inscription en ligne pour participer au congrès.",
+      "ar": "الموعد النهائي للتسجيل عبر الإنترنت للمشاركة في المؤتمر."
+    },
+    "type": "deadline"
+  },
+  {
+    "date": "2026-04-07T08:00:00",
     "title": {
       "en": "CIRIV 2026 Congress Starts",
       "fr": "Début du congrès CIRIV 2026",

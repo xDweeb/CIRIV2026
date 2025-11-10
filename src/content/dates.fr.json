@@ -1,36 +1,48 @@
 [
   {
-    "date": "15 décembre 2025",
+    "date": "24 janvier 2026",
     "title": "Dernier délai de réception des résumés",
     "description": "Date limite pour soumettre vos résumés de communications orales et de posters.",
     "type": "deadline"
   },
   {
-    "date": "Du 16 décembre 2025 au 10 janvier 2026",
+    "date": "Du 30 novembre 2025 au 8 février 2026",
     "title": "Notification d'acceptation des résumés soumis",
     "description": "Les auteurs recevront la décision concernant l'acceptation de leurs résumés soumis.",
     "type": "announcement"
   },
   {
-    "date": "5 janvier 2026",
-    "title": "Clôture des inscriptions en ligne",
-    "description": "Date limite d'inscription pour participer au congrès. Aucune inscription ne sera acceptée après cette date.",
-    "type": "deadline"
-  },
-  {
-    "date": "15 janvier 2026",
-    "title": "Programme définitif du congrès",
-    "description": "Publication du programme définitif du congrès avec toutes les sessions et intervenants.",
+    "date": "1er janvier 2026",
+    "title": "Programme définitif des panels",
+    "description": "Publication du programme définitif des panels du congrès.",
     "type": "announcement"
   },
   {
-    "date": "20 janvier 2026",
+    "date": "23 février 2026",
+    "title": "Dernier délai pour bénéficier des tarifs d'inscription réduits",
+    "description": "Date limite pour profiter des tarifs préférentiels d'inscription. Après cette date, les tarifs normaux s'appliquent.",
+    "type": "deadline"
+  },
+  {
+    "date": "11 mars 2026",
     "title": "Dernier délai pour l'envoi des posters et présentations PowerPoint",
     "description": "Date limite pour soumettre les versions finales des posters et présentations PowerPoint pour les communications orales.",
     "type": "deadline"
   },
   {
-    "date": "27–28 janvier 2026",
+    "date": "16 mars 2026",
+    "title": "Clôture des inscriptions en ligne",
+    "description": "Date limite d'inscription pour participer au congrès. Aucune inscription ne sera acceptée après cette date.",
+    "type": "deadline"
+  },
+  {
+    "date": "20 mars 2026",
+    "title": "Programme définitif du congrès",
+    "description": "Publication du programme définitif du congrès avec toutes les sessions et intervenants.",
+    "type": "announcement"
+  },
+  {
+    "date": "7–8 avril 2026",
     "title": "Congrès CIRIV 2026",
     "description": "Deux journées dédiées aux échanges sur la recherche, l'innovation et la valorisation, autour de la thématique One Health qui englobe la santé humaine, la santé animale et l'environnement, avec des experts nationaux et internationaux.",
     "type": "event"

@@ -14,18 +14,18 @@
     "question": { "fr": "Remerciements", "en": "Thanks", "ar": "شكر" },
     "keywords": ["thanks","thank you","merci","شكرا","choukran","متشكر","thanx","gracias","بارك الله فيك"],
     "answer": {
-      "fr": "Avec plaisir 😊. N’hésitez pas si vous avez d’autres questions !",
+      "fr": "Avec plaisir 😊. N'hésitez pas si vous avez d'autres questions !",
       "en": "You're welcome 😊. Feel free to ask more questions!",
       "ar": "على الرحب والسعة 😊. لا تتردد في طرح أي سؤال آخر!"
     }
   },
   {
     "id": 1,
-    "question": { "fr": "Qu’est-ce que le CIRIV’26 ?", "en": "What is CIRIV'26?", "ar": "ما هو CIRIV'26؟" },
+    "question": { "fr": "Qu'est-ce que le CIRIV'26 ?", "en": "What is CIRIV'26?", "ar": "ما هو CIRIV'26؟" },
     "keywords": ["ciriv","c'est quoi","what is","about","présentation","description","congrès","conference","event","المؤتمر"],
     "answer": {
-      "fr": "👉 Le CIRIV’26 est le Congrès International de la Recherche, de l’Innovation et de la Valorisation, organisé par AMARINOVA. Il rassemble chercheurs, doctorants, étudiants et professionnels. Thème 2026 : « One Health ». ",
-      "en": "👉 CIRIV’26 is the International Congress on Research, Innovation and Valorization, organized by AMARINOVA. It gathers researchers, PhD students, students, and professionals. 2026 theme: 'One Health'.",
+      "fr": "👉 Le CIRIV'26 est le Congrès International de la Recherche, de l'Innovation et de la Valorisation, organisé par AMARINOVA. Il rassemble chercheurs, doctorants, étudiants et professionnels. Thème 2026 : « One Health ». ",
+      "en": "👉 CIRIV'26 is the International Congress on Research, Innovation and Valorization, organized by AMARINOVA. It gathers researchers, PhD students, students, and professionals. 2026 theme: 'One Health'.",
       "ar": "👉 CIRIV'26 هو المؤتمر الدولي للبحث والابتكار والتثمين، تنظمه جمعية AMARINOVA. يجمع الباحثين وطلبة الدكتوراه والطلاب والمهنيين. موضوع 2026: 'الصحة الواحدة'."
     }
   },
@@ -44,8 +44,8 @@
     "question": { "fr": "Où se déroule le congrès ?", "en": "Where will the congress take place?", "ar": "أين سيعقد المؤتمر؟" },
     "keywords": ["où","lieu","location","place","venue","address","map","site","university","faculty","مكان","العنوان"],
     "answer": {
-      "fr": "👉 Faculté des Sciences Ben M’sik, Université Hassan II de Casablanca (UH2C), Maroc.",
-      "en": "👉 Faculty of Sciences Ben M’sik, Hassan II University of Casablanca (UH2C), Morocco.",
+      "fr": "👉 Faculté des Sciences Ben M'sik, Université Hassan II de Casablanca (UH2C), Maroc.",
+      "en": "👉 Faculty of Sciences Ben M'sik, Hassan II University of Casablanca (UH2C), Morocco.",
       "ar": "👉 بكلية العلوم بن مسيك، جامعة الحسن الثاني بالدار البيضاء (UH2C)، المغرب."
     }
   },
@@ -54,14 +54,14 @@
     "question": { "fr": "Quelles sont les dates du congrès ?", "en": "What are the congress dates?", "ar": "ما هي تواريخ المؤتمر؟" },
     "keywords": ["dates","quand","when","jours","programme","schedule","calendar","متى","تاريخ"],
     "answer": {
-      "fr": "👉 Les 27 et 28 janvier 2026.",
-      "en": "👉 January 27–28, 2026.",
-      "ar": "👉 27 و28 يناير 2026."
+      "fr": "👉 Les 7 et 8 avril 2026.",
+      "en": "👉 April 7–8, 2026.",
+      "ar": "👉 7 و8 أبريل 2026."
     }
   },
   {
     "id": 5,
-    "question": { "fr": "Comment s’inscrire ?", "en": "How to register?", "ar": "كيف أسجل؟" },
+    "question": { "fr": "Comment s'inscrire ?", "en": "How to register?", "ar": "كيف أسجل؟" },
     "keywords": ["inscription","register","sign up","formulaire","registration","join","participate","link","التسجيل","سجل"],
     "answer": {
       "fr": "👉 Inscription via le formulaire en ligne dans la section Inscriptions.",
@@ -91,12 +91,12 @@
   },
   {
     "id": 8,
-    "question": { "fr": "Date limite d’inscription ?", "en": "Registration deadline?", "ar": "آخر أجل للتسجيل؟" },
+    "question": { "fr": "Date limite d'inscription ?", "en": "Registration deadline?", "ar": "آخر أجل للتسجيل؟" },
     "keywords": ["deadline","limite","last date","final date","registration deadline","cut-off","موعد نهائي","آخر أجل"],
     "answer": {
-      "fr": "👉 Les inscriptions en ligne se clôturent le 5 janvier 2026.",
-      "en": "👉 Online registrations close on January 5, 2026.",
-      "ar": "👉 ينتهي التسجيل عبر الإنترنت في 5 يناير 2026."
+      "fr": "👉 Les inscriptions en ligne se clôturent le 16 mars 2026.",
+      "en": "👉 Online registrations close on March 16, 2026.",
+      "ar": "👉 ينتهي التسجيل عبر الإنترنت في 16 مارس 2026."
     }
   },
   {
@@ -144,7 +144,7 @@
     "question": { "fr": "Hébergement ?", "en": "Accommodation?", "ar": "الإقامة؟" },
     "keywords": ["hébergement","hotel","accommodation","lodging","stay","night","فندق","الإقامة"],
     "answer": {
-      "fr": "👉 Les informations sur l’hébergement seront bientôt disponibles.",
+      "fr": "👉 Les informations sur l'hébergement seront bientôt disponibles.",
       "en": "👉 Accommodation information will be available soon.",
       "ar": "👉 معلومات الإقامة ستكون متوفرة قريباً."
     }

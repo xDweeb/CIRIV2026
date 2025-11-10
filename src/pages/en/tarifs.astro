@@ -9,7 +9,7 @@ const t = useTranslations(locale);
 ---
 
 <BaseLayout locale={locale} title={t('pricing.title')}>
-  <Header locale={locale} />
+  <Header locale={locale} currentPath={Astro.url.pathname} />
   <main class="container mx-auto px-4 py-8 md:py-12">
     <!-- Page Header -->
     <div class="text-center mb-8 md:mb-12 fade-in">

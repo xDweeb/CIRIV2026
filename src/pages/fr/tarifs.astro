@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui.ts';
 
 const locale = 'fr';
@@ -7,93 +9,139 @@ const t = useTranslations(locale);
 ---
 
 <BaseLayout locale={locale} title={t('pricing.title')}>
-  <main class="container mx-auto px-4 py-12">
+  <Header locale={locale} currentPath={Astro.url.pathname} />
+  <main class="container mx-auto px-4 py-8 md:py-12">
     <!-- Page Header -->
-    <div class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold text-brand-primary mb-4">
+    <div class="text-center mb-8 md:mb-12 fade-in">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-primary mb-4">
         {t('pricing.title')}
       </h1>
       <div class="w-24 h-1 bg-brand-primary mx-auto rounded-full"></div>
     </div>
 
-    <!-- Section 1: Registration Fees -->
-    <section class="mb-12">
-      <h2 class="text-3xl font-bold text-center mb-8 text-brand-primary">
+    <!-- Section 1: Pricing Cards (Mobile-First) -->
+    <section class="mb-12 md:mb-16">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-brand-primary">
         {t('pricing.registration')}
       </h2>
       
-      <div class="overflow-x-auto">
-        <table class="table-auto w-full text-center rounded-xl shadow-md overflow-hidden">
-          <thead class="bg-brand-primary text-white font-semibold">
-            <tr>
-              <th class="py-4 px-6">{t('pricing.category')}</th>
-              <th class="py-4 px-6">{t('pricing.earlyBird')}</th>
-              <th class="py-4 px-6">{t('pricing.regular')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
-              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.teachers')}</td>
-              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">1200 MAD</td>
-              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">1500 MAD</td>
-            </tr>
-            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
-              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.phd')}</td>
-              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">700 MAD</td>
-              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">900 MAD</td>
-            </tr>
-            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
-              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.students')}</td>
-              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">400 MAD</td>
-              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">500 MAD</td>
-            </tr>
-            <tr class="odd:bg-white even:bg-slate-50 dark:odd:bg-slate-800 dark:even:bg-slate-700 hover:bg-brand-accent/10 transition-all">
-              <td class="py-4 px-6 font-medium text-slate-800 dark:text-white">{t('pricing.professionals')}</td>
-              <td class="py-4 px-6 text-green-600 dark:text-green-400 font-semibold">2000 MAD</td>
-              <td class="py-4 px-6 text-red-600 dark:text-red-400 font-semibold">2500 MAD</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Pricing Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 max-w-5xl mx-auto">
+        <!-- Students Card -->
+        <div class="pricing-card group">
+          <div class="card-icon">
+            <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+            </svg>
+          </div>
+          <h3 class="text-lg md:text-xl font-semibold text-slate-800 dark:text-white mb-3 text-center">
+            Étudiants
+          </h3>
+          <div class="price-container">
+            <div class="price-early">
+              <span class="price-label">Avant mars (après acceptation)</span>
+              <span class="price-amount">400 DH</span>
+            </div>
+            <div class="price-divider"></div>
+            <div class="price-regular">
+              <span class="price-label">Après mars</span>
+              <span class="price-amount">800 DH</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professors Card -->
+        <div class="pricing-card group">
+          <div class="card-icon">
+            <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-lg md:text-xl font-semibold text-slate-800 dark:text-white mb-3 text-center">
+            Professeurs
+          </h3>
+          <div class="price-container">
+            <div class="price-early">
+              <span class="price-label">Avant mars</span>
+              <span class="price-amount">500 DH</span>
+            </div>
+            <div class="price-divider"></div>
+            <div class="price-regular">
+              <span class="price-label">Après mars</span>
+              <span class="price-amount">1 000 DH</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professionals Card -->
+        <div class="pricing-card group">
+          <div class="card-icon">
+            <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-lg md:text-xl font-semibold text-slate-800 dark:text-white mb-3 text-center">
+            Professionnels
+          </h3>
+          <div class="price-container">
+            <div class="price-early">
+              <span class="price-label">Avant mars</span>
+              <span class="price-amount">1 000 DH</span>
+            </div>
+            <div class="price-divider"></div>
+            <div class="price-regular">
+              <span class="price-label">Après mars</span>
+              <span class="price-amount">2 000 DH</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p class="text-center mt-6 text-slate-600 dark:text-slate-300 italic">
+      <p class="text-center text-base md:text-lg text-slate-600 dark:text-slate-300 italic px-4">
         {t('pricing.description')}
       </p>
     </section>
 
     <!-- Section 2: Payment Information -->
-    <section class="mt-12 border-t border-slate-200 dark:border-slate-700 pt-8">
-      <h2 class="text-3xl font-bold text-center mb-8 text-brand-primary">
+    <section class="mb-12 md:mb-16 border-t border-slate-200 dark:border-slate-700 pt-8 md:pt-12">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8 text-brand-primary">
         {t('payment.title')}
       </h2>
 
-      <div class="max-w-2xl mx-auto">
-        <div class="rounded-xl p-6 bg-slate-100 dark:bg-slate-800 shadow-md">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div>
-              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.bank')}:</span>
-              <p class="text-slate-900 dark:text-white">BANK OF AFRICA</p>
+      <div class="max-w-3xl mx-auto">
+        <div class="payment-card">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+            <div class="payment-info-item">
+              <span class="payment-label">Société</span>
+              <p class="payment-value">FC SOLUTION MAROC</p>
             </div>
-            <div>
-              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.holder')}:</span>
-              <p class="text-slate-900 dark:text-white">Association CIRIV</p>
+            <div class="payment-info-item">
+              <span class="payment-label">Banque</span>
+              <p class="payment-value">SAHAM BANK</p>
             </div>
-            <div class="md:col-span-2">
-              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.rib')}:</span>
-              <p class="text-slate-900 dark:text-white font-mono text-lg" id="ribNumber">123 456 7890 0000 1234 5678 9012</p>
+            <div class="sm:col-span-2 payment-info-item highlight">
+              <span class="payment-label">RIB</span>
+              <p class="payment-value font-mono text-base md:text-lg" id="ribNumber">
+                022 787 0001250029131511 33
+              </p>
             </div>
-            <div>
-              <span class="font-semibold text-slate-700 dark:text-slate-300">{t('payment.swift')}:</span>
-              <p class="text-slate-900 dark:text-white">BMCE MA MC</p>
+            <div class="payment-info-item">
+              <span class="payment-label">BIC</span>
+              <p class="payment-value">SGMBMAMCXXX</p>
             </div>
           </div>
           
           <div class="flex justify-center">
             <button 
               id="copyRibBtn" 
-              class="bg-brand-primary hover:bg-brand-primary/80 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg"
+              class="copy-button"
+              aria-label="Copy RIB number to clipboard"
             >
-              {t('payment.copyRib')}
+              <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>{t('payment.copyRib')}</span>
             </button>
           </div>
         </div>
@@ -101,65 +149,215 @@ const t = useTranslations(locale);
     </section>
 
     <!-- Section 3: Email Instructions -->
-    <section class="mt-12 border-t border-slate-200 dark:border-slate-700 pt-8">
-      <div class="max-w-2xl mx-auto text-center">
-        <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
-          <p class="text-slate-700 dark:text-slate-300 mb-4">
+    <section class="mb-8 md:mb-12 border-t border-slate-200 dark:border-slate-700 pt-8 md:pt-12">
+      <div class="max-w-2xl mx-auto">
+        <div class="email-card">
+          <p class="text-base md:text-lg text-slate-700 dark:text-slate-300 mb-4 text-center">
             {t('payment.instructions')}
           </p>
-          <p class="font-mono text-lg font-semibold text-blue-600 dark:text-blue-400 mb-4" id="emailAddress">
-            info@ciriv.org
+          <p class="email-address" id="emailAddress">
+            registration@cirivi.org
           </p>
           <button 
             id="copyEmailBtn" 
-            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 shadow-md hover:shadow-lg mb-4"
+            class="copy-button email-button"
+            aria-label="Copy email address to clipboard"
           >
-            {t('payment.copyEmail')}
+            <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <span>{t('payment.copyEmail')}</span>
           </button>
         </div>
 
-        <div class="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl">
+        <div class="warning-box">
+          <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+          </svg>
           <p class="text-amber-800 dark:text-amber-200 font-medium">
-            ⚠️ {t('payment.confirmation')}
+            {t('payment.confirmation')}
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50">
+    <!-- Toast Notification (Bottom for mobile) -->
+    <div id="toast" class="toast" role="alert" aria-live="polite">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+      </svg>
       <span id="toastMessage">{t('payment.ribCopied')}</span>
     </div>
   </main>
 
+  <style>
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    /* Pricing Cards */
+    .pricing-card {
+      @apply bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300;
+      @apply border-2 border-transparent hover:border-brand-accent;
+      @apply transform hover:-translate-y-1;
+    }
+
+    .card-icon {
+      @apply w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-gradient-to-br from-brand-primary to-brand-accent;
+      @apply rounded-2xl flex items-center justify-center text-white;
+      @apply shadow-md group-hover:shadow-lg transition-all duration-300;
+      @apply group-hover:scale-110;
+    }
+
+    .price-container {
+      @apply space-y-3;
+    }
+
+    .price-early,
+    .price-regular {
+      @apply flex flex-col items-center py-3;
+    }
+
+    .price-label {
+      @apply text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-1 text-center;
+    }
+
+    .price-amount {
+      @apply text-xl md:text-2xl font-bold;
+    }
+
+    .price-early .price-amount {
+      @apply text-green-600 dark:text-green-400;
+    }
+
+    .price-regular .price-amount {
+      @apply text-red-600 dark:text-red-400;
+    }
+
+    .price-divider {
+      @apply h-px bg-slate-200 dark:bg-slate-700;
+    }
+
+    /* Payment Card */
+    .payment-card {
+      @apply rounded-2xl p-6 md:p-8 bg-gradient-to-br from-slate-50 to-slate-100;
+      @apply dark:from-slate-800 dark:to-slate-900 shadow-lg;
+    }
+
+    .payment-info-item {
+      @apply space-y-2;
+    }
+
+    .payment-info-item.highlight {
+      @apply bg-white dark:bg-slate-700/50 rounded-xl p-4;
+    }
+
+    .payment-label {
+      @apply block text-sm md:text-base font-semibold text-slate-700 dark:text-slate-300;
+    }
+
+    .payment-value {
+      @apply text-base md:text-lg text-slate-900 dark:text-white font-medium;
+    }
+
+    /* Email Card */
+    .email-card {
+      @apply bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800;
+      @apply rounded-2xl p-6 md:p-8 space-y-4;
+    }
+
+    .email-address {
+      @apply font-mono text-lg md:text-xl font-semibold text-blue-600 dark:text-blue-400;
+      @apply text-center py-3 px-4 bg-white dark:bg-blue-900/30 rounded-lg;
+    }
+
+    /* Buttons */
+    .copy-button {
+      @apply flex items-center gap-3 px-6 py-3.5 md:px-8 md:py-4;
+      @apply bg-brand-primary hover:bg-brand-primary/90 text-white;
+      @apply rounded-xl font-semibold text-base md:text-lg;
+      @apply shadow-md hover:shadow-lg active:shadow-sm;
+      @apply transition-all duration-200;
+      @apply transform hover:scale-105 active:scale-95;
+      @apply min-h-[44px] min-w-[44px];
+      @apply touch-manipulation;
+    }
+
+    .copy-button:focus-visible {
+      @apply outline-none ring-4 ring-brand-accent ring-offset-2;
+    }
+
+    .email-button {
+      @apply bg-blue-600 hover:bg-blue-700 mx-auto;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      @apply mt-6 p-4 md:p-6 bg-amber-50 dark:bg-amber-900/20;
+      @apply border-2 border-amber-200 dark:border-amber-800 rounded-xl;
+      @apply flex items-start gap-3 text-left;
+    }
+
+    /* Toast */
+    .toast {
+      @apply fixed bottom-4 left-1/2 -translate-x-1/2 md:bottom-auto md:top-4 md:left-auto md:right-4 md:translate-x-0;
+      @apply bg-green-600 text-white px-6 py-4 rounded-xl shadow-2xl;
+      @apply flex items-center gap-3 font-medium text-base;
+      @apply transform translate-y-32 md:translate-y-0 md:translate-x-full;
+      @apply transition-transform duration-300 ease-out;
+      @apply z-50 max-w-[calc(100vw-2rem)];
+      @apply opacity-0 invisible;
+    }
+
+    .toast.show {
+      @apply translate-y-0 md:translate-x-0 opacity-100 visible;
+    }
+  </style>
+
   <script>
     // Copy to clipboard functionality
-    function copyToClipboard(text, successMessage) {
+    function copyToClipboard(text: string, successMessage: string) {
       navigator.clipboard.writeText(text).then(() => {
         showToast(successMessage);
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
+      }).catch(() => {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
         document.body.appendChild(textArea);
         textArea.select();
-        document.execCommand('copy');
+        try {
+          document.execCommand('copy');
+          showToast(successMessage);
+        } catch (err) {
+          console.error('Failed to copy:', err);
+        }
         document.body.removeChild(textArea);
-        showToast(successMessage);
       });
     }
 
-    function showToast(message) {
+    function showToast(message: string) {
       const toast = document.getElementById('toast');
       const toastMessage = document.getElementById('toastMessage');
       
       if (toast && toastMessage) {
         toastMessage.textContent = message;
-        toast.classList.remove('translate-x-full');
+        toast.classList.add('show');
         
         setTimeout(() => {
-          toast.classList.add('translate-x-full');
+          toast.classList.remove('show');
         }, 3000);
       }
     }
@@ -170,8 +368,8 @@ const t = useTranslations(locale);
     
     if (copyRibBtn && ribNumber) {
       copyRibBtn.addEventListener('click', () => {
-        const ribText = ribNumber.textContent.trim();
-        copyToClipboard(ribText, '✅ RIB copié !');
+        const ribText = ribNumber.textContent?.trim() || '';
+        copyToClipboard(ribText, 'RIB copié !');
       });
     }
 
@@ -181,9 +379,11 @@ const t = useTranslations(locale);
     
     if (copyEmailBtn && emailAddress) {
       copyEmailBtn.addEventListener('click', () => {
-        const emailText = emailAddress.textContent.trim();
-        copyToClipboard(emailText, '✅ Email copié !');
+        const emailText = emailAddress.textContent?.trim() || '';
+        copyToClipboard(emailText, 'Email copié !');
       });
     }
   </script>
+  
+  <Footer locale={locale} />
 </BaseLayout>

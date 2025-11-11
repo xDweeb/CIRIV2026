@@ -74,9 +74,9 @@
     "question": { "fr": "Quels sont les tarifs ?", "en": "What are the registration fees?", "ar": "ما هي رسوم التسجيل؟" },
     "keywords": ["tarif","prix","fees","cost","combien","how much","frais","inscription","رسوم","تكلفة","سعر"],
     "answer": {
-      "fr": "👉 <strong>Étudiants:</strong> 400 DH (avant mars), 800 DH (après mars)<br><strong>Professeurs:</strong> 500 DH (avant mars), 1000 DH (après mars)<br><strong>Professionnels:</strong> 1000 DH (avant mars), 2000 DH (après mars)",
-      "en": "👉 <strong>Students:</strong> 400 MAD (before March), 800 MAD (after March)<br><strong>Professors:</strong> 500 MAD (before March), 1000 MAD (after March)<br><strong>Professionals:</strong> 1000 MAD (before March), 2000 MAD (after March)",
-      "ar": "👉 <strong>الطلاب:</strong> 400 درهم (قبل مارس)، 800 درهم (بعد مارس)<br><strong>الأساتذة:</strong> 500 درهم (قبل مارس)، 1000 درهم (بعد مارس)<br><strong>المهنيون:</strong> 1000 درهم (قبل مارس)، 2000 درهم (بعد مارس)"
+      "fr": "👉 <strong>Étudiants:</strong> 400 DH (avant le 23 février 2026), 800 DH (après le 23 février 2026)<br><strong>Professeurs:</strong> 500 DH (avant le 23 février 2026), 1000 DH (après le 23 février 2026)<br><strong>Professionnels:</strong> 1000 DH (avant le 23 février 2026), 2000 DH (après le 23 février 2026)",
+      "en": "👉 <strong>Students:</strong> 400 MAD (before February 23, 2026), 800 MAD (after February 23, 2026)<br><strong>Professors:</strong> 500 MAD (before February 23, 2026), 1000 MAD (after February 23, 2026)<br><strong>Professionals:</strong> 1000 MAD (before February 23, 2026), 2000 MAD (after February 23, 2026)",
+      "ar": "👉 <strong>الطلاب:</strong> 400 درهم (قبل 23 فبراير 2026)، 800 درهم (بعد 23 فبراير 2026)<br><strong>الأساتذة:</strong> 500 درهم (قبل 23 فبراير 2026)، 1000 درهم (بعد 23 فبراير 2026)<br><strong>المهنيون:</strong> 1000 درهم (قبل 23 فبراير 2026)، 2000 درهم (بعد 23 فبراير 2026)"
     }
   },
   {
@@ -84,9 +84,9 @@
     "question": { "fr": "Y a-t-il un tarif réduit ?", "en": "Is there a reduced fee?", "ar": "هل هناك تخفيض؟" },
     "keywords": ["réduction","réduit","discount","early","special price","خفض","تخفيض","خصم","mars","march"],
     "answer": {
-      "fr": "👉 Oui ! Profitez des tarifs préférentiels avant mars 2026. Les prix augmentent après cette date.",
-      "en": "👉 Yes! Enjoy preferential rates before March 2026. Prices increase after this date.",
-      "ar": "👉 نعم! استفيدوا من الأسعار المخفضة قبل مارس 2026. الأسعار ترتفع بعد هذا التاريخ."
+      "fr": "👉 Oui ! Profitez des tarifs préférentiels avant le 23 février 2026. Les prix augmentent après cette date.",
+      "en": "👉 Yes! Enjoy preferential rates before February 23, 2026. Prices increase after this date.",
+      "ar": "👉 نعم! استفيدوا من الأسعار المخفضة قبل 23 فبراير 2026. الأسعار ترتفع بعد هذا التاريخ."
     }
   },
   {

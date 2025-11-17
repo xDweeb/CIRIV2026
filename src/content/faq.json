@@ -74,9 +74,9 @@
     "question": { "fr": "Quels sont les tarifs ?", "en": "What are the registration fees?", "ar": "ما هي رسوم التسجيل؟" },
     "keywords": ["tarif","prix","fees","cost","combien","how much","frais","inscription","رسوم","تكلفة","سعر"],
     "answer": {
-      "fr": "👉 <strong>Étudiants:</strong> 400 DH (avant le 23 février 2026), 800 DH (après le 23 février 2026)<br><strong>Professeurs:</strong> 500 DH (avant le 23 février 2026), 1000 DH (après le 23 février 2026)<br><strong>Professionnels:</strong> 1000 DH (avant le 23 février 2026), 2000 DH (après le 23 février 2026)",
-      "en": "👉 <strong>Students:</strong> 400 MAD (before February 23, 2026), 800 MAD (after February 23, 2026)<br><strong>Professors:</strong> 500 MAD (before February 23, 2026), 1000 MAD (after February 23, 2026)<br><strong>Professionals:</strong> 1000 MAD (before February 23, 2026), 2000 MAD (after February 23, 2026)",
-      "ar": "👉 <strong>الطلاب:</strong> 400 درهم (قبل 23 فبراير 2026)، 800 درهم (بعد 23 فبراير 2026)<br><strong>الأساتذة:</strong> 500 درهم (قبل 23 فبراير 2026)، 1000 درهم (بعد 23 فبراير 2026)<br><strong>المهنيون:</strong> 1000 درهم (قبل 23 فبراير 2026)، 2000 درهم (بعد 23 فبراير 2026)"
+      "fr": "👉 <strong>Étudiants:</strong> 400 DH (avant le 23 février 2026), 700 DH (après le 23 février 2026)<br><strong>Professeurs & Professionnels:</strong> 1000 DH (avant le 23 février 2026), 1500 DH (après le 23 février 2026)",
+      "en": "👉 <strong>Students:</strong> 400 MAD (before February 23, 2026), 700 MAD (after February 23, 2026)<br><strong>Professors & Professionals:</strong> 1000 MAD (before February 23, 2026), 1500 MAD (after February 23, 2026)",
+      "ar": "👉 <strong>الطلاب:</strong> 400 درهم (قبل 23 فبراير 2026)، 700 درهم (بعد 23 فبراير 2026)<br><strong>الأساتذة والمهنيون:</strong> 1000 درهم (قبل 23 فبراير 2026)، 1500 درهم (بعد 23 فبراير 2026)"
     }
   },
   {
@@ -104,9 +104,9 @@
     "question": { "fr": "Comment payer ?", "en": "How to pay?", "ar": "كيف أدفع؟" },
     "keywords": ["paiement","payment","pay","bank","virement","versement","wire","IBAN","RIB","الدفع","البنك","compte","account"],
     "answer": {
-      "fr": "👉 Paiement par virement bancaire<br><strong>Compagnie:</strong> FC SOLUTION MAROC<br><strong>Banque:</strong> SAHAM BANK<br><strong>RIB:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 Envoyez le justificatif à <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a>",
-      "en": "👉 Payment by bank transfer<br><strong>Company:</strong> FC SOLUTION MAROC<br><strong>Bank:</strong> SAHAM BANK<br><strong>RIB:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 Send payment proof to <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a>",
-      "ar": "👉 الدفع عبر التحويل البنكي<br><strong>الشركة:</strong> FC SOLUTION MAROC<br><strong>البنك:</strong> SAHAM BANK<br><strong>رقم الحساب:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 أرسل إثبات الدفع إلى <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a>"
+      "fr": "👉 Paiement par virement bancaire<br><strong>Compagnie:</strong> FC SOLUTION MAROC<br><strong>Banque:</strong> SAHAM BANK<br><strong>RIB:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 Envoyez le justificatif à <a href=\"mailto:registration@ciriv.org\" class=\"text-brand-primary hover:underline\">registration@ciriv.org</a>",
+      "en": "👉 Payment by bank transfer<br><strong>Company:</strong> FC SOLUTION MAROC<br><strong>Bank:</strong> SAHAM BANK<br><strong>RIB:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 Send payment proof to <a href=\"mailto:registration@ciriv.org\" class=\"text-brand-primary hover:underline\">registration@ciriv.org</a>",
+      "ar": "👉 الدفع عبر التحويل البنكي<br><strong>الشركة:</strong> FC SOLUTION MAROC<br><strong>البنك:</strong> SAHAM BANK<br><strong>رقم الحساب:</strong> 022 787 0001250029131511 33<br><strong>BIC:</strong> SGMBMAMCXXX<br>📧 أرسل إثبات الدفع إلى <a href=\"mailto:registration@ciriv.org\" class=\"text-brand-primary hover:underline\">registration@ciriv.org</a>"
     }
   },
   {
@@ -124,9 +124,9 @@
     "question": { "fr": "Contact ?", "en": "Contact?", "ar": "التواصل؟" },
     "keywords": ["contact","mail","email","support","reach","info","message","تواصل","بريد","إيميل","registration"],
     "answer": {
-      "fr": "👉 📧 <strong>Email général:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>Inscriptions:</strong> <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 <strong>Adresse:</strong> Faculté des Sciences Ben M'sik, Casablanca",
-      "en": "👉 📧 <strong>General email:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>Registrations:</strong> <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 <strong>Address:</strong> Faculty of Sciences Ben M'sik, Casablanca",
-      "ar": "👉 📧 <strong>البريد العام:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>التسجيلات:</strong> <a href=\"mailto:registration@cirivi.org\" class=\"text-brand-primary hover:underline\">registration@cirivi.org</a><br>📍 <strong>العنوان:</strong> كلية العلوم بن مسيك، الدار البيضاء"
+      "fr": "👉 📧 <strong>Email général:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>Inscriptions:</strong> <a href=\"mailto:registration@ciriv.org\" class=\"text-brand-primary hover:underline\">registration@ciriv.org</a><br>📍 <strong>Adresse:</strong> Faculté des Sciences Ben M'sik, Casablanca",
+      "en": "👉 📧 <strong>General email:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>Registrations:</strong> <a href=\"mailto:registration@ciriv.org\" class=\"text-brand-primary hover:underline\">registration@ciriv.org</a><br>📍 <strong>Address:</strong> Faculty of Sciences Ben M'sik, Casablanca",
+      "ar": "👉 📧 <strong>البريد العام:</strong> <a href=\"mailto:info@ciriv.org\" class=\"text-brand-primary hover:underline\">info@ciriv.org</a><br>📋 <strong>التسجيلات:</strong> <a href=\"mailto:registration@ciriv.org\" class=\"text-brand-primary hover:underline\">registration@ciriv.org</a><br>📍 <strong>العنوان:</strong> كلية العلوم بن مسيك، الدار البيضاء"
     }
   },
   {

@@ -91,9 +91,9 @@ const alternateUrlAr = new URL(alternateUrls.ar, siteUrl).href;
       (function() {
         function getStoredTheme() {
           try {
-            return localStorage.getItem('theme') || 'dark';
+            return localStorage.getItem('theme') || 'light';
           } catch {
-            return 'dark';
+            return 'light';
           }
         }
        

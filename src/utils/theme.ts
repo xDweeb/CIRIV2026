@@ -14,7 +14,7 @@ export function getStoredTheme(): Theme {
       return stored;
     }
   }
-  return 'dark';
+  return 'light';
 }
 
 export function setStoredTheme(theme: Theme): void {

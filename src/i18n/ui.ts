@@ -19,7 +19,7 @@ export const ui = {
     'cta.inscription': 'Inscription',
     'cta.register': 'S\'inscrire maintenant',
     'hero.title': 'Congrès International de la Recherche, d\'Innovation et Valorisation',
-    'hero.subtitle': '1er édition : One Health',
+    'hero.subtitle': '1re édition : One Health',
     'hero.trustedBy': 'Soutenu par',
     'footer.quickLinks': 'Liens rapides',
     'footer.copyright': '© 2026 CIRIV. Tous droits réservés.',

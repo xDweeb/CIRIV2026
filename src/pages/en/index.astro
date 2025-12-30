@@ -4,6 +4,7 @@ import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
 import Footer from '../../components/Footer.astro';
 import CountdownWidget from '../../components/CountdownWidget.astro';
+import SponsorsSection from '../../components/SponsorsSection.astro';
 import { useTranslations } from '../../i18n/ui';
 import { link } from '../../utils/paths';
 
@@ -78,6 +79,9 @@ const t = useTranslations(locale);
         </div>
       </div>
     </section>
+
+    <!-- Sponsors Section -->
+    <SponsorsSection locale={locale} showCTA={true} />
   </main>
   <Footer locale={locale} />
 </BaseLayout>

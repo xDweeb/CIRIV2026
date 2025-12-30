@@ -30,8 +30,7 @@ const baseUrl = import.meta.env.BASE_URL || '/';
             </span>
           </h1>
           
-          <p class={`text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 leading-relaxed ${isRTL ? 'max-w-4xl text-right' : 'max-w-xl lg:max-w-2xl text-left'}`}>
-            {t('hero.subtitle')}
+          <p class={`text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 mb-6 sm:mb-8 leading-relaxed ${isRTL ? 'max-w-4xl text-right' : 'max-w-xl lg:max-w-2xl text-left'}`} set:html={t('hero.subtitle')}>
           </p>
         </div>
         

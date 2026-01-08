@@ -1,0 +1,118 @@
+---
+interface Props {
+  modalId: string;
+}
+
+const { modalId } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL || '/';
+const placeholderImage = `${baseUrl}images/avatar-placeholder.svg`;
+---
+
+<!-- Bio Modal Template - Hidden by default, controlled via JS -->
+<div 
+  id={modalId}
+  class="bio-modal fixed inset-0 z-50 hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby={`${modalId}-title`}
+>
+  <!-- Backdrop -->
+  <div class="modal-backdrop absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+  
+  <!-- Modal Container -->
+  <div class="modal-container absolute inset-0 overflow-y-auto">
+    <div class="flex min-h-full items-center justify-center p-4">
+      <!-- Modal Content -->
+      <div class="modal-content relative w-full max-w-2xl transform rounded-2xl bg-white dark:bg-slate-800 shadow-2xl transition-all duration-300 scale-95 opacity-0">
+        <!-- Close Button -->
+        <button 
+          type="button"
+          class="modal-close absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 hover:text-slate-700 dark:hover:text-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent"
+          aria-label="Close modal"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+
+        <!-- Modal Body -->
+        <div class="p-6 sm:p-8">
+          <div class="flex flex-col sm:flex-row gap-6">
+            <!-- Left: Bio Text -->
+            <div class="flex-1 order-2 sm:order-1">
+              <h3 id={`${modalId}-title`} class="modal-name text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">
+                <!-- Filled by JS -->
+              </h3>
+              <p class="modal-role text-sm text-brand-primary dark:text-brand-accent mb-4">
+                <!-- Filled by JS -->
+              </p>
+              <div class="modal-bio prose prose-slate dark:prose-invert prose-sm max-w-none text-slate-600 dark:text-slate-300 leading-relaxed">
+                <!-- Filled by JS -->
+              </div>
+            </div>
+
+            <!-- Right: Image -->
+            <div class="flex-shrink-0 order-1 sm:order-2 flex justify-center sm:justify-end">
+              <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-4 ring-brand-primary/20 dark:ring-brand-accent/20 bg-slate-200 dark:bg-slate-600">
+                <img 
+                  class="modal-image w-full h-full object-cover"
+                  src={placeholderImage}
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bio-modal.active {
+    display: block;
+  }
+  
+  .bio-modal.active .modal-backdrop {
+    opacity: 1;
+  }
+  
+  .bio-modal.active .modal-content {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>
+
+<script define:vars={{ modalId }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    const backdrop = modal.querySelector('.modal-backdrop');
+    const closeBtn = modal.querySelector('.modal-close');
+    const container = modal.querySelector('.modal-container');
+
+    // Close modal function
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close on backdrop click
+    container?.addEventListener('click', (e) => {
+      if (e.target === container || e.target === backdrop) {
+        closeModal();
+      }
+    });
+
+    // Close on button click
+    closeBtn?.addEventListener('click', closeModal);
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+  });
+</script>

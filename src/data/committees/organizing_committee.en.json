@@ -1,0 +1,23 @@
+[
+  {
+    "id": "org-1",
+    "name": "Pr. NOURY Soraya",
+    "role": "Department of Veterinary Biological and Pharmaceutical Sciences, Physiology and Therapeutics Unit, IAV Hassan II, Rabat",
+    "image": "/images/committees/noury-soraya.png",
+    "bio": "Pr. Soraya NOURY is a researcher-teacher and head of the Physiology and Therapeutics Unit at the Hassan II Institute of Agronomy and Veterinary Medicine (Rabat, Morocco). A specialist in physiological and therapeutic approaches applied to animal health, she is actively involved in developing the One Health concept, integrating animal, human, and environmental dimensions.\n\nHer work focuses on the pathophysiology of animal diseases with zoonotic potential, alternative therapies (phytotherapy and aromatherapy), and animal welfare. These three areas are essential for risk prevention and the sustainability of health systems. Engaged in several national and international projects, she works to spread the One Health culture among students, professionals, and the general public. She is also the 2nd Vice-President of the AMARINNOVA association, dedicated to research and innovation, which is currently organizing CIRIV'26."
+  },
+  {
+    "id": "org-2",
+    "name": "Mr. Soufiyane El Moussati",
+    "role": "Founder of FC Solution Maroc, Vice-President of AMARINNOVA Association",
+    "image": "/images/committees/el-moussati-soufiyane.png",
+    "bio": "Soufiyane El Moussati is a Moroccan engineer and entrepreneur recognized for his expertise in hygiene, cleanliness, and pest management. With an engineering background focused on health safety, he has developed a rigorous and professional approach to public hygiene issues and health risk prevention.\n\nHe is the founding director of FC SOLUTION Maroc (FCS), a company specializing in pest control hygiene and 3D services (disinfection, pest control, and rodent control). Through this structure, he actively contributes to improving cleanliness and sanitation standards in public and private establishments.\n\nAlongside his leadership role, Soufiyane El Moussati regularly serves as an expert consultant for national institutions and media, providing technical insight on health safety and hygiene issues in Morocco. His career is now cited as an example of innovation and professionalization in the cleanliness sector.\n\nHe is also Vice-President and founder of the AMARINNOVA Association, organizer of the CIRIV'26 event."
+  },
+  {
+    "id": "org-3",
+    "name": "Pr. LAAKILI Amal",
+    "role": "Researcher-Teacher, ISPITS Rabat",
+    "image": "/images/committees/laakili-amal.png",
+    "bio": "Pr. Laakili Amal is a researcher-teacher at the Higher Institute of Nursing Professions and Health Techniques (ISPITS Rabat, Morocco). A specialist in biotechnology and molecular biology, her work focuses on the genetic diversity of endemic plant species in Morocco.\n\nCommitted to developing the One Health concept, she teaches molecular biology, varietal selection, and cell biology. She is a member of the Moroccan Association for Biosecurity, Biosafety, and Health Safety (AMBS), member of the Training, Research, and Standards division."
+  }
+]

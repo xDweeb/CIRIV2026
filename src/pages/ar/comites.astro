@@ -2,9 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ComiteScientifique from '../../components/ComiteScientifique.astro';
-import ComiteOrganisation from '../../components/ComiteOrganisation.astro';
+import CommitteeSection from '../../components/committees/CommitteeSection.astro';
 import { useTranslations } from '../../i18n/ui';
+import { link } from '../../utils/paths';
+
+// Import JSON data (Arabic)
+import honoraryCommittee from '../../data/committees/honorary_committee.ar.json';
+import congressChairs from '../../data/committees/congress_chairs.ar.json';
+import organizingCommittee from '../../data/committees/organizing_committee.ar.json';
+import scientificCommittee from '../../data/committees/scientific_committee.ar.json';
 
 const locale = 'ar';
 const t = useTranslations(locale);
@@ -12,28 +18,54 @@ const t = useTranslations(locale);
 
 <BaseLayout
   title="اللجان - CIRIV 2026"
-  description="تعرف على أعضاء اللجان العلمية والتنظيمية لمؤتمر CIRIV 2026"
+  description="تعرف على أعضاء اللجان المنظمة لمؤتمر CIRIV 2026"
   locale={locale}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
   
-  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
+  <main dir="rtl" class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
     <div class="container mx-auto px-4">
       <!-- Header -->
       <div class="text-center mb-16">
         <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-          لجاننا
+          {t('committees.pageTitle' as any)}
         </h1>
         <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-          تعرف على الخبراء والمهنيين الذين ينظمون ويشرفون علميًا على CIRIV 2026
+          {t('committees.pageDescription' as any)}
         </p>
       </div>
 
-      <!-- Scientific Committee -->
-      <ComiteScientifique locale={locale} />
+      <!-- Congress Chairs -->
+      <CommitteeSection 
+        titleKey="committees.congressChairs"
+        data={congressChairs}
+        locale={locale}
+        sectionId="congress-chairs"
+      />
+
+      <!-- Honorary Committee -->
+      <CommitteeSection 
+        titleKey="committees.honorary"
+        data={honoraryCommittee}
+        locale={locale}
+        sectionId="honorary"
+      />
 
       <!-- Organizing Committee -->
-      <ComiteOrganisation locale={locale} />
+      <CommitteeSection 
+        titleKey="committees.organizing"
+        data={organizingCommittee}
+        locale={locale}
+        sectionId="organizing"
+      />
+
+      <!-- Scientific Committee -->
+      <CommitteeSection 
+        titleKey="committees.scientific"
+        data={scientificCommittee}
+        locale={locale}
+        sectionId="scientific"
+      />
 
       <!-- Contact Section -->
       <div class="text-center mt-16">
@@ -45,7 +77,7 @@ const t = useTranslations(locale);
             هل لديك أسئلة؟ لا تتردد في الاتصال بلجاننا
           </p>
           <a
-            href="/ar/contact/"
+            href={link({ locale, slug: 'contact' })}
             class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
           >
             اتصل بنا

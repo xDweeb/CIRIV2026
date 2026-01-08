@@ -1,0 +1,150 @@
+---
+import { useTranslations } from '../../i18n/ui';
+import BioModal from './BioModal.astro';
+
+interface Member {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  bio: string;
+}
+
+interface Props {
+  titleKey: string;
+  subtitleKey?: string;
+  data: Member[];
+  locale: 'fr' | 'en' | 'ar';
+  sectionId: string;
+}
+
+const { titleKey, subtitleKey, data, locale, sectionId } = Astro.props;
+const t = useTranslations(locale);
+const isRTL = locale === 'ar';
+const baseUrl = import.meta.env.BASE_URL || '/';
+const modalId = `modal-${sectionId}`;
+const placeholderImage = `${baseUrl}images/avatar-placeholder.svg`;
+
+// Helper to get title - handle both direct keys and nested keys
+function getTitle(key: string): string {
+  try {
+    return t(key as any) || key;
+  } catch {
+    return key;
+  }
+}
+---
+
+<section class={`committee-section py-12 ${isRTL ? 'rtl' : ''}`} data-section-id={sectionId}>
+  <!-- Section Header -->
+  <div class={`text-center mb-10 ${isRTL ? 'text-right' : ''}`}>
+    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-3">
+      {getTitle(titleKey)}
+    </h2>
+    <div class="w-20 h-1 bg-gradient-to-r from-brand-primary to-brand-accent mx-auto rounded-full"></div>
+    {subtitleKey && (
+      <p class="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+        {getTitle(subtitleKey)}
+      </p>
+    )}
+  </div>
+
+  <!-- Members Grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    {data.map((member) => (
+      <div 
+        class="member-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-primary/30 dark:hover:border-brand-accent/30"
+        data-member-id={member.id}
+      >
+        <!-- Avatar -->
+        <div class="flex justify-center mb-4">
+          <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-slate-100 dark:ring-slate-700 group-hover:ring-brand-primary/20 dark:group-hover:ring-brand-accent/20 transition-all duration-300 bg-slate-200 dark:bg-slate-600">
+            <img 
+              src={member.image || placeholderImage}
+              alt={member.name}
+              class="w-full h-full object-cover"
+              loading="lazy"
+              onerror={`this.onerror=null; this.src='${placeholderImage}'`}
+            />
+          </div>
+        </div>
+
+        <!-- Name -->
+        <h3 class={`text-lg font-semibold text-slate-900 dark:text-white mb-2 ${isRTL ? 'text-right' : 'text-center'}`}>
+          {member.name}
+        </h3>
+
+        <!-- Role -->
+        <p class={`text-sm text-slate-600 dark:text-slate-400 mb-4 leading-relaxed ${isRTL ? 'text-right' : 'text-center'}`}>
+          {member.role}
+        </p>
+
+        <!-- Bio Button (only if bio exists and is not empty) -->
+        {member.bio && member.bio.trim() !== '' && (
+          <div class={`flex ${isRTL ? 'justify-end' : 'justify-center'}`}>
+            <button 
+              type="button"
+              class="bio-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-brand-primary dark:text-brand-accent bg-brand-primary/10 dark:bg-brand-accent/10 hover:bg-brand-primary/20 dark:hover:bg-brand-accent/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 dark:focus:ring-offset-slate-800"
+              data-name={member.name}
+              data-role={member.role}
+              data-image={member.image || placeholderImage}
+              data-bio={member.bio}
+              data-modal={modalId}
+              aria-label={`${t('committees.viewBio' as any)} ${member.name}`}
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              {t('committees.bio' as any)}
+            </button>
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <!-- Bio Modal for this section -->
+  <BioModal modalId={modalId} />
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Handle all bio buttons
+    document.querySelectorAll('.bio-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const button = e.currentTarget as HTMLButtonElement;
+        const modalId = button.dataset.modal;
+        const modal = document.getElementById(modalId || '');
+        
+        if (!modal) return;
+
+        // Populate modal content
+        const name = button.dataset.name || '';
+        const role = button.dataset.role || '';
+        const image = button.dataset.image || '';
+        const bio = button.dataset.bio || '';
+
+        const nameEl = modal.querySelector('.modal-name');
+        const roleEl = modal.querySelector('.modal-role');
+        const imageEl = modal.querySelector('.modal-image') as HTMLImageElement;
+        const bioEl = modal.querySelector('.modal-bio');
+
+        if (nameEl) nameEl.textContent = name;
+        if (roleEl) roleEl.textContent = role;
+        if (imageEl) {
+          imageEl.src = image;
+          imageEl.alt = name;
+        }
+        if (bioEl) bioEl.textContent = bio;
+
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Focus the close button for accessibility
+        const closeBtn = modal.querySelector('.modal-close') as HTMLButtonElement;
+        closeBtn?.focus();
+      });
+    });
+  });
+</script>

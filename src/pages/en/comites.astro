@@ -2,9 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import ComiteScientifique from '../../components/ComiteScientifique.astro';
-import ComiteOrganisation from '../../components/ComiteOrganisation.astro';
+import CommitteeSection from '../../components/committees/CommitteeSection.astro';
 import { useTranslations } from '../../i18n/ui';
+import { link } from '../../utils/paths';
+
+// Import JSON data (English)
+import honoraryCommittee from '../../data/committees/honorary_committee.en.json';
+import congressChairs from '../../data/committees/congress_chairs.en.json';
+import organizingCommittee from '../../data/committees/organizing_committee.en.json';
+import scientificCommittee from '../../data/committees/scientific_committee.en.json';
 
 const locale = 'en';
 const t = useTranslations(locale);
@@ -12,7 +18,7 @@ const t = useTranslations(locale);
 
 <BaseLayout
   title="Committees - CIRIV 2026"
-  description="Meet the scientific and organizing committee members of the CIRIV 2026 conference"
+  description="Meet the committee members organizing CIRIV 2026"
   locale={locale}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
@@ -22,18 +28,44 @@ const t = useTranslations(locale);
       <!-- Header -->
       <div class="text-center mb-16">
         <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-          Our Committees
+          {t('committees.pageTitle' as any)}
         </h1>
         <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-          Meet the experts and professionals who organize and scientifically supervise CIRIV 2026
+          {t('committees.pageDescription' as any)}
         </p>
       </div>
 
-      <!-- Scientific Committee -->
-      <ComiteScientifique locale={locale} />
+      <!-- Congress Chairs -->
+      <CommitteeSection 
+        titleKey="committees.congressChairs"
+        data={congressChairs}
+        locale={locale}
+        sectionId="congress-chairs"
+      />
+
+      <!-- Honorary Committee -->
+      <CommitteeSection 
+        titleKey="committees.honorary"
+        data={honoraryCommittee}
+        locale={locale}
+        sectionId="honorary"
+      />
 
       <!-- Organizing Committee -->
-      <ComiteOrganisation locale={locale} />
+      <CommitteeSection 
+        titleKey="committees.organizing"
+        data={organizingCommittee}
+        locale={locale}
+        sectionId="organizing"
+      />
+
+      <!-- Scientific Committee -->
+      <CommitteeSection 
+        titleKey="committees.scientific"
+        data={scientificCommittee}
+        locale={locale}
+        sectionId="scientific"
+      />
 
       <!-- Contact Section -->
       <div class="text-center mt-16">
@@ -45,7 +77,7 @@ const t = useTranslations(locale);
             Have questions? Don't hesitate to contact our committees
           </p>
           <a
-            href="/en/contact/"
+            href={link({ locale, slug: 'contact' })}
             class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
           >
             Contact Us

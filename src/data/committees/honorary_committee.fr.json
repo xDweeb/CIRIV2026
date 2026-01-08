@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "id": "hon-1",
+    "name": "Pr. Fassi Fihri Ouafae",
+    "role": "Département de Pathologie et Santé Publique Vétérinaire, Unité de Microbiologie Immunologie et Maladies Contagieuses (MIMC), IAV Hassan II, Rabat",
+    "image": "/images/committees/fassi-fihri-ouafae.png",
+    "bio": "Le Professeur Ouafae Fassi Fihri s'impose comme une autorité académique incontournable et une ardente défenseuse de l'approche \"One Health\" au Maroc. Ses rôles clés et son expertise sont multiples: elle préside l'association One Health Maroc, orientant ainsi la direction d'initiatives visant à promouvoir une santé intégrée, englobant les dimensions humaine, animale et environnementale.\n\nEn parallèle, elle exerce en tant que directrice de la filière de médecine vétérinaire et enseignante chercheure à l'IAV Hassan II de Rabat, où son expertise en virologie, immunologie et maladies infectieuses est dédiée à la recherche fondamentale et à la formation des futurs professionnels. Reconnue comme experte en santé publique, elle offre un conseil stratégique précieux, notamment sur les zoonoses et les maladies émergentes, comme l'a illustré la crise de la COVID-19.\n\nVéritable championne de la collaboration, le Professeur Fassi Fihri œuvre activement à la promotion d'une synergie multidisciplinaire entre la médecine humaine, la médecine vétérinaire et les sciences de l'environnement, essentielle pour une gestion efficace des crises sanitaires modernes. Son engagement est fondamental pour l'application concrète des liens cruciaux qui unissent la santé de l'homme, de l'animal et de l'écosystème global."
+  },
+  {
+    "id": "hon-2",
+    "name": "Pr. Bouchra BELKADI",
+    "role": "Université Mohammed V de Rabat, Faculté des Sciences, Laboratoire de Microbiologie et de Biologie Moléculaire (LMBM)",
+    "image": "/images/committees/bouchra-belkadi.png",
+    "bio": "Pr. Bouchra BELKADI est enseignante-chercheuse à l'Université Mohammed V de Rabat, Faculté des Sciences, au sein du Laboratoire de Microbiologie et de Biologie Moléculaire (LMBM). Ingénieure agronome diplômée de l'IAV Hassan II, elle est titulaire d'un DEA en nutrition humaine de l'Université Paris VI et d'un doctorat en biologie moléculaire des plantes.\n\nSes recherches portent sur la diversité génétique, l'écologie moléculaire microbienne et végétale, ainsi que l'épidémiologie moléculaire des maladies infectieuses, avec un fort accent sur la génomique. Elle est auteure de plus de 100 publications scientifiques.\n\nExperte reconnue en biosécurité, biosûreté et prévention des risques biologiques, elle conjugue recherche, formation et sensibilisation scientifique. Elle est cofondatrice du Master euro-africain en biosécurité et biosûreté (MEABB) et directrice scientifique du laboratoire mobile P3 DIMLAB. Présidente de l'Association Marocaine de Biosécurité, de Biosûreté et de Sécurité Sanitaire (AMBS), elle œuvre à la promotion d'une culture de prévention des risques biologiques et sanitaires, notamment dans le cadre de l'approche One Health, en cohérence avec les standards internationaux et les Objectifs de Développement Durable."
+  }
+]

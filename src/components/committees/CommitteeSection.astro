@@ -50,10 +50,10 @@ function getTitle(key: string): string {
   </div>
 
   <!-- Members Grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+  <div class="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
     {data.map((member) => (
       <div 
-        class="member-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-primary/30 dark:hover:border-brand-accent/30"
+        class="member-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-primary/30 dark:hover:border-brand-accent/30 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
         data-member-id={member.id}
       >
         <!-- Avatar -->

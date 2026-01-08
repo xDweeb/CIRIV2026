@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "sci-1",
+    "name": "Pr. Ahmed CHETOUI",
+    "role": "Professor of Higher Education, Senior Lecturer at the National School of Public Health (ENSP) of Rabat",
+    "image": "/images/committees/ahmed-chetoui.png",
+    "bio": "PhD in Health Sciences, Public Health and Epidemiology. Master's degree in Paramedical Education. State Diploma in Polyvalent Nursing. Professor of Higher Education, Senior Lecturer at the National School of Public Health (ENSP) of Rabat, Morocco.\n\nAhmed CHETOUI is a researcher in public health and epidemiology of chronic diseases. He holds a national doctorate in Biology and Health from Sultan Moulay Slimane University. He is an associate researcher at the Biological Engineering Laboratory – Functional and Pathological Biology Team, at Sultan Moulay Slimane University. His work focuses on diabetes, hypertension, obesity, nutrition, and behavioral health determinants.\n\nHe directed the Regional Public Health-Environmental Health Laboratory of the Regional Health Directorate Béni-Mellal Khénifra (2013–2024) and since 2010, has been responsible for food and drinking water quality control.\n\nHis research, focused on diabetes, hypertension, obesity, dietary habits, and health-related behaviors in Morocco, has resulted in numerous publications in indexed international scientific journals. He also participates in peer review of scientific articles for international journals. Committed to training, research, and student support, he actively contributes to strengthening public health-environmental health competencies in Morocco."
+  },
+  {
+    "id": "sci-2",
+    "name": "Dr. Fatima CHGOURY",
+    "role": "Toxicologist Researcher, Pasteur Institute of Morocco, Casablanca",
+    "image": "/images/committees/fatima-chgoury.png",
+    "bio": "Dr. Fatima CHGOURY is a toxicologist researcher at the Pasteur Institute of Morocco in Casablanca, specialized in scorpion envenomation. Her research work initially aims to improve the strategy of antivenom therapy. It is based on the structural, functional, and pathophysiological characterization of toxic venom molecules, as well as the engineering of antidotes with high neutralizing potential.\n\nA second research axis focuses on the identification and valorization of venom-derived biomolecules for therapeutic purposes, particularly for the development of new approaches against major pathologies such as microbial infections, neurodegenerative diseases, and cardiovascular pathologies."
+  },
+  {
+    "id": "sci-3",
+    "name": "Pr. Siham ROUAS",
+    "role": "Department of Food and Nutritional Sciences, Agricultural and Food Industries Program, IAV Hassan II",
+    "image": "/images/committees/siham-rouas.png",
+    "bio": "Siham Rouas is a doctor-engineer in agricultural and food industries and Senior Lecturer at the Hassan II Institute of Agronomy and Veterinary Medicine (IAV Hassan II), within the Department of Nutritional and Food Sciences. She is responsible for the Taste and Food Science Laboratory within the SAN department of the Agricultural and Food Industries program.\n\nHer doctoral work focused on the quality, typicity, and labeling of virgin olive oil, using standardized physicochemical analyses, descriptive sensory analysis, and the study of terroir effect in an integrated approach to food product characterization.\n\nHer career is marked by a multidisciplinary approach, consolidated by two master's degrees in Law and Labor Sciences and in Business Engineering, allowing her to articulate the technological, regulatory, economic, and strategic dimensions of agri-food systems and production chains.\n\nBefore joining higher education, she contributed to several agri-food development projects conducted with the Agricultural Development Agency (ADA), the Partnership Agency for Progress (APP), and cooperatives, focusing on value chain analysis, technological upgrading of processing units, implementation of quality and food safety approaches, and valorization of terroir products.\n\nHer current work is part of a circular economy logic, focused on physicochemical and organoleptic characterization of food products, valorization of olive by-products, optimization of agri-food processes, and improvement of food system sustainability in Morocco."
+  },
+  {
+    "id": "sci-4",
+    "name": "Pr. Leila MEDRAOUI",
+    "role": "Researcher-Teacher, Mohammed V University, Faculty of Sciences, Rabat",
+    "image": "/images/committees/leila-medraoui.png",
+    "bio": "Pr. Leila MEDRAOUI is a researcher-teacher at Mohammed V University, Faculty of Sciences (Rabat), with a doctorate in plant biotechnology. Member of the microbiology and molecular biology team at the Plant Biotechnology, Biodiversity and Environment Research Center and the ICESCO Chair in Open Education.\n\nHer work focuses on genetic and genomic diversity of endemic plant species or those of socio-economic interest in Morocco. She teaches molecular biology, genomics, and responsible science; has supervised several doctorates and published numerous articles.\n\nMember of national and international consortia on the conservation and valorization of plant genetic resources and on biosecurity/biosafety. Committed to ethics and scientific integrity, she promotes biosecurity. She is a member of the Euro-African Master's in Biosecurity and Biosafety committee and the AMBS board, responsible for the Training, Research and Standards division, and participates in organizing awareness caravans and training for health professionals and researchers on biorisk management. Active mentor of para-university activities."
+  }
+]

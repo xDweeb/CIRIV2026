@@ -1,20 +1,14 @@
 [
   {
-    "date": "24 janvier 2026",
-    "title": "Dernier délai de réception des résumés",
+    "date": "01 Mars 2026",
+    "title": "Prologement du délai de réception des résumés",
     "description": "Date limite pour soumettre vos résumés de communications orales et de posters.",
     "type": "deadline"
   },
   {
-    "date": "Du 30 novembre 2025 au 8 février 2026",
+    "date": "Du 30 novembre 2025 au 15 Mars 2026",
     "title": "Notification d'acceptation des résumés soumis",
     "description": "Les auteurs recevront la décision concernant l'acceptation de leurs résumés soumis.",
-    "type": "announcement"
-  },
-  {
-    "date": "1er janvier 2026",
-    "title": "Programme définitif des panels",
-    "description": "Publication du programme définitif des panels du congrès.",
     "type": "announcement"
   },
   {
@@ -43,7 +37,7 @@
   },
   {
     "date": "7–8 avril 2026",
-    "title": "Congrès CIRIV 2026",
+    "title": "Congrès CIRIV'26",
     "description": "Deux journées dédiées aux échanges sur la recherche, l'innovation et la valorisation, autour de la thématique One Health qui englobe la santé humaine, la santé animale et l'environnement, avec des experts nationaux et internationaux.",
     "type": "event"
   }

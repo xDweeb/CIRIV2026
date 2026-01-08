@@ -1,1 +1,30 @@
-[]
+[
+  {
+    "id": "sci-1",
+    "name": "Pr. Ahmed CHETOUI",
+    "role": "Professeur de l'enseignement supérieur, Maître de conférences à l'École Nationale de Santé Publique (ENSP) de Rabat",
+    "image": "/images/committees/ahmed-chetoui.png",
+    "bio": "PhD en sciences de la santé, santé publique et épidémiologie. Master (2ème cycle) en Enseignement paramédical. Diplôme d'état d'infirmier Polyvalent. Professeur de l'enseignement supérieur, maître de conférences à l'École Nationale de Santé Publique (ENSP) de Rabat, Maroc.\n\nAhmed CHETOUI est chercheur en santé publique et épidémiologie des maladies chroniques. Il est titulaire d'un doctorat national en Biologie et Santé de l'Université Sultan Moulay Slimane. Il est chercheur associé au Laboratoire de Génie Biologique – Équipe de Biologie Fonctionnelle et Pathologique, de l'Université Sultan Moulay Slimane, ses travaux portent sur le diabète, l'hypertension, l'obésité, la nutrition et les déterminants comportementaux en santé.\n\nIl a dirigé le Laboratoire régional de Santé Publique-santé environnement de la Direction Régionale de la Santé Béni-Mellal Khénifra (2013–2024) et depuis 2010, chargé du contrôle de la qualité des denrées alimentaires et des eaux de boisson.\n\nSes recherches, centrées sur le diabète, l'hypertension, l'obésité, les habitudes alimentaires et les comportements liés à la santé au Maroc, ont donné lieu à la publication de nombreux articles dans des revues scientifiques internationales indexées. Il participe également à l'évaluation par les pairs d'articles scientifiques pour des journaux internationaux. Engagé dans la formation, la recherche et l'accompagnement des étudiants, il contribue activement au renforcement des compétences en santé publique-santé environnement au Maroc."
+  },
+  {
+    "id": "sci-2",
+    "name": "Dr. Fatima CHGOURY",
+    "role": "Chercheuse toxicologue, Institut Pasteur du Maroc, Casablanca",
+    "image": "/images/committees/fatima-chgoury.png",
+    "bio": "Dr. Fatima CHGOURY est chercheuse toxicologue à l'Institut Pasteur du Maroc à Casablanca, spécialisée dans le domaine des envenimations scorpioniques. Ses travaux de recherche s'inscrivent, dans un premier temps, d'améliorer la stratégie de la thérapie antivenimeuse. Elles reposent sur la caractérisation structurale, fonctionnelle et physiopathologique des molécules toxiques des venins, ainsi que sur l'ingénierie d'antidotes à fort potentiel neutralisant.\n\nUn second axe de recherche est focalisé sur l'identification et la valorisation de biomolécules issues des venins à visée thérapeutique, notamment pour le développement de nouvelles approches contre des pathologies d'intérêt majeur telles que les infections microbiennes, les maladies neurodégénératives, les pathologies cardiovasculaires."
+  },
+  {
+    "id": "sci-3",
+    "name": "Pr. Siham ROUAS",
+    "role": "Département des sciences alimentaires et nutritionnelles, Filière Industries Agricoles et Alimentaires, IAV Hassan II",
+    "image": "/images/committees/siham-rouas.png",
+    "bio": "Siham Rouas est docteure-ingénieure en industries agricoles et alimentaires et Maître de conférences à l'Institut Agronomique et Vétérinaire Hassan II (IAV Hassan II), au sein du Département des Sciences Nutritionnelles et Alimentaires. Elle est responsable du Laboratoire du Goût et des Sciences de l'Aliment au sein du département SAN de la filière des Industries Agricoles et Alimentaires.\n\nSes travaux de doctorat ont porté sur la qualité, la typicité et la labellisation de l'huile d'olive vierge, en mobilisant des analyses physico-chimiques normalisées, l'analyse sensorielle descriptive et l'étude de l'effet terroir dans une approche intégrée de caractérisation des produits alimentaires.\n\nSon parcours est marqué par une approche pluridisciplinaire, consolidée par deux masters en Droit et Sciences du Travail et en Ingénierie des Affaires, lui permettant d'articuler les dimensions technologiques, réglementaires, économiques et stratégiques des systèmes agroalimentaires et des filières de production.\n\nAvant de rejoindre l'enseignement supérieur, elle a contribué à plusieurs projets de développement agroalimentaire menés avec l'Agence de Développement Agricole (ADA), l'Agence de Partenariat pour le Progrès (APP) et des coopératives, portant sur l'analyse des chaînes de valeur, la mise à niveau technologique des unités de transformation, l'application des démarches qualité et sécurité sanitaire, et la valorisation des produits de terroir.\n\nSes travaux actuels s'inscrivent dans une logique d'économie circulaire, axée sur la caractérisation physico-chimique et organoleptique des produits alimentaires, la valorisation des sous-produits de l'olivier, l'optimisation des procédés agroalimentaires et l'amélioration de la durabilité des systèmes alimentaires au Maroc."
+  },
+  {
+    "id": "sci-4",
+    "name": "Pr. Leila MEDRAOUI",
+    "role": "Enseignante-chercheuse, Université Mohammed V, Faculté des Sciences, Rabat",
+    "image": "/images/committees/leila-medraoui.png",
+    "bio": "Pr. Leila MEDRAOUI est enseignante-chercheuse à l'Université Mohammed V, Faculté des Sciences (Rabat), docteure en biotechnologie végétale. Membre de l'équipe de microbiologie et biologie moléculaire du Centre de Recherche en Biotechnologie des Plantes, Biodiversité et Environnement et de la Chaire ICESCO en éducation ouverte.\n\nSes travaux portent sur la diversité génétique et génomique d'espèces végétales endémiques ou à intérêt socio-économique au Maroc. Elle enseigne biologie moléculaire, génomique et science responsable ; a encadré plusieurs doctorats et a publié plusieurs articles.\n\nMembre de consortia nationaux et internationaux sur la conservation et la valorisation des ressources génétiques végétales et sur la biosécurité/biosûreté. Engagée pour l'éthique et l'intégrité scientifique, elle promeut la biosécurité. Elle est membre du comité du Master Euro-Africain en Biosécurité et Biosûreté et du bureau de l'AMBS, responsable du pôle Formation, Recherche et Standards, et participe à l'organisation de caravanes de sensibilisation et de formations pour professionnels de santé et chercheurs sur la gestion du biorisque. Mentor d'activités para-universitaires active."
+  }
+]

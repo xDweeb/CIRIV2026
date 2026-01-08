@@ -16,6 +16,7 @@ const baseUrl = import.meta.env.BASE_URL || '/';
 // Navigation items
 const navItems = [
   { key: 'nav.home', href: link({ locale }) },
+  { key: 'nav.programme', href: link({ locale, slug: 'programme' }) },
   { key: 'nav.dates', href: link({ locale, slug: 'dates' }) },
   { key: 'nav.comites', href: link({ locale, slug: 'comites' }) },
   { key: 'nav.sponsors', href: link({ locale, slug: 'sponsors' }) },
@@ -56,9 +57,9 @@ function isActiveLink(href: string, currentPath: string): boolean {
         <a 
           href={link({ locale })} 
           class="text-xl font-bold text-brand-primary dark:text-brand-accent hover:text-brand-primaryDark dark:hover:text-teal-300 transition-colors"
-          aria-label={`${t('nav.home')} - CIRIV 2026`}
+          aria-label={`${t('nav.home')} - CIRIV'26`}
         >
-          CIRIV 2026
+          CIRIV'26
         </a>
       </div>
 

@@ -4,9 +4,9 @@
     "question": { "fr": "Salutations", "en": "Greetings", "ar": "تحيات" },
     "keywords": ["hi","hello","hey","bonjour","salut","bonsoir","سلام","اهلا","مرحبا","السلام عليكم","hi there"],
     "answer": {
-      "fr": "Bonjour 👋 ! Comment puis-je vous aider avec le congrès CIRIV 2026 ?",
-      "en": "Hello 👋! How can I help you with the CIRIV 2026 congress?",
-      "ar": "مرحباً 👋! كيف يمكنني مساعدتك بخصوص مؤتمر CIRIV 2026؟"
+      "fr": "Bonjour 👋 ! Comment puis-je vous aider avec le congrès CIRIV'26 ?",
+      "en": "Hello 👋! How can I help you with the CIRIV'26 congress?",
+      "ar": "مرحباً 👋! كيف يمكنني مساعدتك بخصوص مؤتمر CIRIV'26؟"
     }
   },
   {

@@ -1,20 +1,14 @@
 [
   {
-    "date": "January 24, 2026",
-    "title": "Abstract Submission Deadline",
+    "date": "March 01, 2026",
+    "title": "Extended Abstract Submission Deadline",
     "description": "Final deadline to submit your abstracts for oral communications and posters.",
     "type": "deadline"
   },
   {
-    "date": "From November 30, 2025 to February 8, 2026",
+    "date": "From November 30, 2025 to March 15, 2026",
     "title": "Acceptance Notification Period",
     "description": "Authors will receive the decision regarding the acceptance of their submitted abstracts.",
-    "type": "announcement"
-  },
-  {
-    "date": "January 1, 2026",
-    "title": "Final Panel Program",
-    "description": "Release of the definitive panel program for the congress.",
     "type": "announcement"
   },
   {
@@ -43,7 +37,7 @@
   },
   {
     "date": "April 7–8, 2026",
-    "title": "CIRIV 2026 Congress",
+    "title": "CIRIV'26 Congress",
     "description": "Two days dedicated to discussions on research, innovation, and valorization, around the One Health theme, which encompasses human health, animal health, and the environment, with national and international experts.",
     "type": "event"
   }

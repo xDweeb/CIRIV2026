@@ -11,6 +11,7 @@ import { link } from '../../utils/paths';
 
 const locale = 'en';
 const t = useTranslations(locale);
+const eventImage = '/images/home/4.png';
 ---
 
 <BaseLayout
@@ -19,71 +20,195 @@ const t = useTranslations(locale);
   locale={locale}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
-  <main>
+  
+  <main class="overflow-hidden">
     <Hero locale={locale} />
+    
     <OneHealthPillars locale={locale} />
     
-    <!-- Countdown Section -->
-    <section class="py-8 sm:py-12 md:py-16 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
-      <div class="container mx-auto px-2 sm:px-4">
-        <CountdownWidget locale={locale} />
-      </div>
-    </section>
-    
-    <!-- Quick Links Section -->
-    <section class="py-8 sm:py-12 md:py-16 bg-white dark:bg-surface-dark">
-      <div class="container mx-auto px-2 sm:px-4">
-        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          <a 
-            href={link({ locale, slug: 'dates' })} 
-            class="group p-6 bg-slate-50 dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
-          >
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Important Dates</h3>
+    <section class="py-20 relative bg-slate-50 dark:bg-slate-900/50">
+      <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent"></div>
+      
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          
+          <div class="space-y-6 animate-on-scroll opacity-0 translate-y-8 transition-all duration-700">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-sm font-semibold">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              Word from the Organizing Committee
             </div>
-            <p class="text-slate-600 dark:text-slate-300">View the complete schedule of events and deadlines</p>
-          </a>
 
-          <a 
-            href={link({ locale, slug: 'comites' })} 
-            class="group p-6 bg-slate-50 dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
-          >
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Committees</h3>
-            </div>
-            <p class="text-slate-600 dark:text-slate-300">Meet the scientific and organizing committee members</p>
-          </a>
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white leading-tight">
+              1st Edition CIRIV’26: <br/>
+              <span class="text-emerald-600 dark:text-emerald-400">"One Health Trajectory 2030"</span>
+            </h2>
 
-          <a 
-            href={link({ locale, slug: 'contact' })} 
-            class="group p-6 bg-slate-50 dark:bg-slate-800 rounded-xl hover:shadow-lg transition-all duration-300 hover:scale-105"
-          >
-            <div class="flex items-center gap-4 mb-4">
-              <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center group-hover:bg-brand-primary group-hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-              </div>
-              <h3 class="text-xl font-semibold text-slate-900 dark:text-white">Contact</h3>
+            <div class="prose prose-lg dark:prose-invert text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p>
+                The <strong class="text-slate-900 dark:text-white">CIRIV’26</strong>, first edition of the International Congress on Research, Innovation and Valorization, organized by the Moroccan Association for Research, Innovation and Valorization <span class="font-semibold text-emerald-600">AMARINNOVA</span>, will be held on <strong>April 7 and 8, 2026</strong> at the Hassan II Agronomic and Veterinary Institute in Rabat.
+              </p>
+              <p>
+                Under the theme <em>"One Health Trajectory 2030: Evaluation and Implementation Strategies"</em>, the congress aims to analyze progress, address challenges, and propose concrete strategies for the effective implementation of the One Health approach.
+              </p>
+              <p>
+                Bringing together researchers, teachers, students, institutions, and socio-economic actors, CIRIV’26 constitutes a platform for exchange and collaboration dedicated to the promotion of global health.
+              </p>
             </div>
-            <p class="text-slate-600 dark:text-slate-300">Contact the organizing team for any questions</p>
-          </a>
+
+            <div class="pt-4 border-l-4 border-emerald-500 pl-4 mt-6 bg-white dark:bg-white/5 p-4 rounded-r-lg shadow-sm">
+              <p class="text-lg font-medium text-slate-800 dark:text-slate-100 italic">
+                "Welcome to CIRIV’26: Together for One Health, today and for tomorrow."
+              </p>
+            </div>
+            
+            <div class="pt-4">
+               <a href={link({ locale, slug: 'programme' })} class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-emerald-600 hover:bg-emerald-700 transition-all duration-300 hover:shadow-lg hover:shadow-emerald-600/30">
+                  Discover the Program
+                  <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+               </a>
+            </div>
+          </div>
+
+          <div class="relative flex justify-center lg:justify-end animate-on-scroll opacity-0 translate-x-8 transition-all duration-700 delay-200">
+            <div class="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full transform scale-75 animate-pulse"></div>
+            
+            <div class="relative z-10 w-full max-w-md transform hover:scale-105 transition-transform duration-500">
+               <img 
+                 src={eventImage} 
+                 alt="CIRIV 2026 One Health Poster" 
+                 class="w-full h-auto rounded-2xl shadow-2xl border-4 border-white dark:border-slate-800 animate-float"
+               />
+               <div class="absolute -bottom-6 -left-6 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 flex items-center gap-3 animate-bounce-slow">
+                  <div class="bg-emerald-100 p-2 rounded-lg text-emerald-600">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                  </div>
+                  <div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-bold uppercase">Date</p>
+                    <p class="text-lg font-bold text-slate-900 dark:text-white">April 07-08, 2026</p>
+                  </div>
+               </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <!-- Sponsors Section -->
+    <section class="py-20 relative overflow-hidden bg-emerald-950">
+      
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-900 via-slate-900 to-black opacity-90"></div>
+      <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 40px 40px;"></div>
+      
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-[100px] animate-pulse"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]"></div>
+
+      <div class="container mx-auto px-4 relative z-10">
+         
+         <div class="text-center mb-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-emerald-300 text-sm font-medium mb-4">
+               <svg class="w-4 h-4 animate-spin-slow" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+               Next Important Deadline
+            </div>
+         </div>
+         
+         <CountdownWidget locale={locale} />
+         
+      </div>
+    </section>
+    
+    <section class="py-20 bg-slate-50 dark:bg-slate-950">
+      <div class="container mx-auto px-4">
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
+          
+          <a href={link({ locale, slug: 'dates' })} class="group relative bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-800 overflow-hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+               <svg class="w-24 h-24 text-emerald-500" fill="currentColor" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg>
+            </div>
+            <div class="relative z-10">
+               <div class="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+               </div>
+               <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Important Dates</h3>
+               <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">View the complete schedule of events and deadlines.</p>
+               <span class="inline-block mt-4 text-emerald-600 font-semibold text-sm group-hover:underline">View Calendar &rarr;</span>
+            </div>
+          </a>
+
+          <a href={link({ locale, slug: 'comites' })} class="group relative bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-800 overflow-hidden">
+             <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <svg class="w-24 h-24 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+             </div>
+             <div class="relative z-10">
+               <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+               </div>
+               <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Committees</h3>
+               <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">Discover the distinguished members of the scientific and organizing committees.</p>
+               <span class="inline-block mt-4 text-blue-600 font-semibold text-sm group-hover:underline">View Members &rarr;</span>
+             </div>
+          </a>
+
+          <a href={link({ locale, slug: 'contact' })} class="group relative bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 dark:border-slate-800 overflow-hidden">
+             <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <svg class="w-24 h-24 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+             </div>
+             <div class="relative z-10">
+               <div class="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-purple-600 mb-6 group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
+                 <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+               </div>
+               <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Contact</h3>
+               <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">A question? Contact the organizing team for any assistance.</p>
+               <span class="inline-block mt-4 text-purple-600 font-semibold text-sm group-hover:underline">Contact Us &rarr;</span>
+             </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
     <SponsorsSection locale={locale} showCTA={true} />
   </main>
+  
   <Footer locale={locale} />
 </BaseLayout>
+
+<style>
+  /* Custom Animations needed for this page */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  // Simple Intersection Observer to fade in elements on scroll
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-8', 'translate-x-8');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>

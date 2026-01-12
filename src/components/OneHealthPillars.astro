@@ -1,0 +1,148 @@
+---
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  locale: 'fr' | 'en' | 'ar';
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const isRTL = locale === 'ar';
+const baseUrl = import.meta.env.BASE_URL || '/';
+
+const pillars = [
+  {
+    id: 1,
+    titleKey: 'pillars.human.title',
+    descKey: 'pillars.human.desc',
+    image: 'images/home/1.png', // تأكد أن الصور موجودة في public/images/home
+    alt: 'Santé Humaine & Rabat',
+    defaultTitle: 'Santé Humaine',
+    defaultDesc: 'Promouvoir le bien-être des populations à travers une approche préventive et intégrée.',
+    delay: 'delay-0'
+  },
+  {
+    id: 2,
+    titleKey: 'pillars.animal.title',
+    descKey: 'pillars.animal.desc',
+    image: 'images/home/2.png',
+    alt: 'Santé Animale & Rabat',
+    defaultTitle: 'Santé Animale',
+    defaultDesc: 'Surveiller et améliorer la santé animale pour prévenir les zoonoses et garantir la sécurité sanitaire.',
+    delay: 'delay-200' // قللت الوقت قليلاً ليكون أسرع
+  },
+  {
+    id: 3,
+    titleKey: 'pillars.environment.title',
+    descKey: 'pillars.environment.desc',
+    image: 'images/home/3.png',
+    alt: 'Santé Environnementale & Rabat',
+    defaultTitle: 'Santé Environnementale',
+    defaultDesc: 'Protéger nos écosystèmes essentiels pour assurer un avenir durable pour toutes les espèces.',
+    delay: 'delay-500' // قللت الوقت قليلاً
+  }
+];
+
+const getTranslation = (key: string, fallback: string) => {
+  const text = t(key as any);
+  return text === key ? fallback : text;
+};
+---
+
+<section id="one-health-pillars" class="py-24 bg-white dark:bg-slate-950 overflow-hidden relative">
+  <div class="absolute inset-0 pointer-events-none opacity-30 dark:opacity-10" style="background-image: radial-gradient(#059669 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    
+    <div class="text-center mb-20 opacity-0 translate-y-12 transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] section-header">
+      <span class="text-emerald-600 font-semibold tracking-wider uppercase text-sm mb-2 block">Thématiques</span>
+      <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">
+        {t('pillars.sectionTitle') || 'Les Piliers du One Health'}
+      </h2>
+      <div class="w-20 h-1.5 bg-emerald-500 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {pillars.map((pillar) => (
+        <div class={`
+            pillar-card relative group 
+            h-[500px] md:h-[600px] 
+            rounded-[2rem] overflow-hidden 
+            border border-gray-200/50 dark:border-white/10
+            shadow-xl hover:shadow-2xl hover:shadow-emerald-900/20
+            transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] 
+            transform translate-y-24 opacity-0
+            ${pillar.delay}
+        `}>
+          
+          <div class="absolute inset-0 overflow-hidden">
+            <img 
+              src={`${baseUrl}${pillar.image}`} 
+              alt={pillar.alt}
+              class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+              loading="lazy"
+            />
+          </div>
+          
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent opacity-80 transition-opacity duration-500 group-hover:opacity-90"></div>
+          
+          <div class={`absolute bottom-24 ${isRTL ? 'left-6' : 'right-6'} text-white/5 text-8xl md:text-9xl font-black select-none pointer-events-none transition-transform duration-700 group-hover:-translate-y-4`}>
+            0{pillar.id}
+          </div>
+
+          <div class={`absolute bottom-0 left-0 right-0 p-8 md:p-10 ${isRTL ? 'text-right' : 'text-left'} z-20`}>
+            
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3 drop-shadow-md transform transition-transform duration-500 group-hover:-translate-y-2">
+              {getTranslation(pillar.titleKey, pillar.defaultTitle)}
+            </h3>
+            
+            <div class="overflow-hidden">
+               <p class="text-gray-200 text-base md:text-lg leading-relaxed transform translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out delay-75">
+                 {getTranslation(pillar.descKey, pillar.defaultDesc)}
+               </p>
+            </div>
+
+            <div class={`h-1 w-12 bg-emerald-500 mt-6 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left ${isRTL ? 'origin-right' : 'origin-left'}`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Advanced Intersection Observer
+  const setupObserver = () => {
+    const observerOptions = {
+      threshold: 0.15, // Trigger when 15% is visible
+      rootMargin: '0px 0px -100px 0px' // Offset to trigger slightly before bottom
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          // Apply the visible state classes
+          el.classList.remove('opacity-0', 'translate-y-12', 'translate-y-24');
+          el.classList.add('opacity-100', 'translate-y-0');
+          
+          // Stop observing once revealed so it doesn't animate again when scrolling up
+          observer.unobserve(el);
+        }
+      });
+    }, observerOptions);
+
+    // Target elements
+    const header = document.querySelector('.section-header');
+    const cards = document.querySelectorAll('.pillar-card');
+
+    if (header) observer.observe(header);
+    cards.forEach(card => observer.observe(card));
+  };
+
+  // Run on load
+  setupObserver();
+
+  // Re-run on Astro page transitions (if view transitions are enabled)
+  document.addEventListener('astro:page-load', setupObserver);
+</script>

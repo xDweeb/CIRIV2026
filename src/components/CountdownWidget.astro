@@ -1,252 +1,110 @@
 ---
-export interface Props {
-  locale?: 'en' | 'fr' | 'ar';
+import { useTranslations } from '../i18n/ui';
+
+interface Props {
+  locale: 'fr' | 'en' | 'ar';
 }
 
-const { locale = 'en' } = Astro.props;
-
-// Import events data
-import eventsData from '../content/events.json';
-import { useTranslations } from '../i18n/ui.ts';
-
+const { locale } = Astro.props;
 const t = useTranslations(locale);
+
+// Target Date (Update this date as needed)
+const targetDate = "2026-01-30T23:59:00"; 
 ---
 
-<div id="countdown-widget" data-locale={locale} class="countdown-container">
-  <div id="countdown-loading" class="countdown-loading">
-    <div class="loading-card">
-      <div class="loading-shimmer"></div>
-      <div class="loading-text">Loading countdown...</div>
-    </div>
-  </div>
+<div class="w-full max-w-4xl mx-auto" id="countdown-wrapper" data-target={targetDate}>
+  
+  <h3 class="text-2xl md:text-3xl font-bold text-center text-white mb-10 drop-shadow-md">
+    {t('countdown.deadlineLabel') || 'Dernier délai de réception des résumés'}
+  </h3>
 
-  <div id="countdown-content" class="countdown-content hidden">
-    <div class="countdown-card">
-      <div class="countdown-header">
-        <div class="calendar-icon-container">
-          <svg class="calendar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-            </path>
-          </svg>
-        </div>
-        <h2 class="countdown-subtitle">{t('countdown.nextDate')}</h2>
-      </div>
-
-      <h3 id="event-title" class="event-title">Loading...</h3>
-
-      <div class="timer-grid">
-        <div class="time-unit" data-unit="days">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front"><span id="days-display">00</span></div>
-              <div class="flip-card-back"><span id="days-next">00</span></div>
-            </div>
-          </div>
-          <div class="time-label">{t('countdown.days')}</div>
-        </div>
-
-        <div class="time-unit" data-unit="hours">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front"><span id="hours-display">00</span></div>
-              <div class="flip-card-back"><span id="hours-next">00</span></div>
-            </div>
-          </div>
-          <div class="time-label">{t('countdown.hours')}</div>
-        </div>
-
-        <div class="time-unit" data-unit="minutes">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front"><span id="minutes-display">00</span></div>
-              <div class="flip-card-back"><span id="minutes-next">00</span></div>
-            </div>
-          </div>
-          <div class="time-label">{t('countdown.minutes')}</div>
-        </div>
-
-        <div class="time-unit" data-unit="seconds">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front"><span id="seconds-display">00</span></div>
-              <div class="flip-card-back"><span id="seconds-next">00</span></div>
-            </div>
-          </div>
-          <div class="time-label">{t('countdown.seconds')}</div>
-        </div>
-      </div>
-
-      <div class="separator"><div class="separator-line"></div></div>
-
-      <div class="cta-section">
-        <p class="cta-text">{t('countdown.deadline')}</p>
-        <a href="https://www.ciriv.org/fr/dates/" class="cta-link">
-          <span class="cta-label">{t('countdown.seeAll')}</span>
-          <span class="cta-arrow">→</span>
-        </a>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center px-4">
+    
+    <div class="group relative">
+      <div class="absolute inset-0 bg-white/10 rounded-2xl blur-sm group-hover:bg-white/20 transition-all duration-500"></div>
+      <div class="relative bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-xl">
+        <span class="block text-4xl md:text-6xl font-black text-white font-mono tracking-tight" id="days">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Jours</span>
       </div>
     </div>
+
+    <div class="group relative">
+      <div class="absolute inset-0 bg-white/10 rounded-2xl blur-sm group-hover:bg-white/20 transition-all duration-500"></div>
+      <div class="relative bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-xl">
+        <span class="block text-4xl md:text-6xl font-black text-white font-mono tracking-tight" id="hours">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Heures</span>
+      </div>
+    </div>
+
+    <div class="group relative">
+      <div class="absolute inset-0 bg-white/10 rounded-2xl blur-sm group-hover:bg-white/20 transition-all duration-500"></div>
+      <div class="relative bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-xl">
+        <span class="block text-4xl md:text-6xl font-black text-white font-mono tracking-tight" id="minutes">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Minutes</span>
+      </div>
+    </div>
+
+    <div class="group relative">
+      <div class="absolute inset-0 bg-emerald-500/20 rounded-2xl blur-md animate-pulse"></div>
+      <div class="relative bg-white/10 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-4 md:p-6 shadow-xl">
+        <span class="block text-4xl md:text-6xl font-black text-emerald-400 font-mono tracking-tight" id="seconds">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Secondes</span>
+      </div>
+    </div>
+
   </div>
+  
+  <div class="text-center mt-12">
+     <a href="#" class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-emerald-900 bg-white rounded-full hover:bg-emerald-50 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1">
+        Soumettre maintenant
+        <svg class="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+     </a>
+  </div>
+
 </div>
 
-<style>
-  .countdown-container {
-    display: flex; align-items: center; justify-content: center;
-    min-height: 400px; padding: 1rem;
-  }
+<script>
+  function updateCountdown() {
+    const wrapper = document.getElementById('countdown-wrapper');
+    if (!wrapper) return;
+    
+    // Check if target is defined
+    if (!wrapper.dataset.target) return;
 
-  .countdown-loading {
-    display: flex; align-items: center; justify-content: center;
-    width: 100%; height: 300px;
-  }
+    const target = new Date(wrapper.dataset.target).getTime();
+    const now = new Date().getTime();
+    const gap = target - now;
 
-  .loading-shimmer {
-    width: 100%; height: 4px;
-    background: linear-gradient(90deg, transparent, rgba(12, 96, 89, 0.4), transparent);
-    animation: shimmer 2s infinite;
-    margin-bottom: 1rem;
-  }
-  .loading-text { color: #6b7280; font-size: 0.875rem; text-align: center; }
-
-  .countdown-content { width: 100%; max-width: 64rem; }
-  .hidden { display: none !important; }
-
-  .countdown-card { padding: 2rem 1rem; background: transparent; }
-
-  .countdown-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; }
-  .calendar-icon { width: 1.5rem; height: 1.5rem; color: #0c6059; }
-
-  /* Default (Light Mode) Colors */
-  .countdown-subtitle { font-size: 1.125rem; font-weight: 500; color: #4b5563; }
-  .event-title { font-size: 1.875rem; font-weight: bold; text-align: center; margin-bottom: 2.5rem; color: #4b5563; }
-  .time-label { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; text-align: center; width: 100%; margin-top: 0.5rem; color: #4b5563; }
-  .cta-text { font-size: 0.875rem; margin-bottom: 0.75rem; color: #6b7280; }
-
-  /* Dark Mode Colors - Only use .dark class to match your site */
-  .dark .countdown-subtitle { color: #d1d5db; }
-  .dark .event-title { color: #ffffff; }
-  .dark .time-label { color: #d1d5db; }
-  .dark .cta-text { color: #d1d5db; }
-
-  .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem; max-width: 600px; margin-inline: auto; }
-
-  .time-unit { display: flex; flex-direction: column; align-items: center; justify-content: center; }
-
-  .flip-card { width: 5.5rem; height: 6.5rem; perspective: 1000px; margin-bottom: 0.75rem; }
-  .flip-card-inner { width: 100%; height: 100%; transform-style: preserve-3d; }
-  .flip-card.flipping .flip-card-inner { animation: flipDown 0.4s ease-out; }
-
-  .flip-card-front,
-  .flip-card-back {
-    position: absolute; width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    backface-visibility: hidden;
-    background: #0c6059;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  }
-  .flip-card-back { transform: rotateX(180deg); }
-
-  .flip-card-front span,
-  .flip-card-back span {
-    font-size: 2.5rem; font-weight: bold; color: #fff; text-align: center;
-  }
-
-  /* Mobile Responsive Styles */
-  @media (max-width: 640px) {
-    .countdown-card { padding: 1rem 0.5rem; }
-    .event-title { font-size: 1.25rem; margin-bottom: 1.5rem; }
-    .timer-grid { gap: 0.5rem; max-width: 100%; }
-    .flip-card { width: 3.5rem; height: 4rem; margin-bottom: 0.5rem; }
-    .flip-card-front span, .flip-card-back span { font-size: 1.5rem; }
-    .time-label { font-size: 0.625rem; }
-    .countdown-subtitle { font-size: 1rem; }
-  }
-
-  @media (max-width: 480px) {
-    .timer-grid { grid-template-columns: repeat(4, 1fr); gap: 0.25rem; }
-    .flip-card { width: 3rem; height: 3.5rem; }
-    .flip-card-front span, .flip-card-back span { font-size: 1.25rem; }
-    .time-label { font-size: 0.5rem; }
-    .event-title { font-size: 1.125rem; }
-  }
-
-  .separator-line { height: 1px; background: linear-gradient(to right, transparent, #d1d5db, transparent); }
-
-  .cta-section { text-align: center; }
-  .cta-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #0c6059; font-weight: 500; font-size: 0.875rem; }
-  .cta-link:hover .cta-label, .cta-link:hover .cta-arrow { transform: translateX(0.25rem); }
-
-  @keyframes flipDown { 0%{transform:rotateX(0deg);} 100%{transform:rotateX(-180deg);} }
-  @keyframes shimmer { 0%{transform:translateX(-100%);} 100%{transform:translateX(100%);} }
-</style>
-
-<script define:vars={{ eventsData, locale }}>
-  class CountdownWidget {
-    constructor(events, locale) {
-      this.events = events; this.locale = locale;
-      this.currentEvent = null; this.timeLeft = {};
-      this.timer = null; this.init();
+    if (gap < 0) {
+        // Handle expiration if needed (e.g. show "Expired")
+        return; 
     }
 
-    init() {
-      this.findNextEvent(); this.updateDisplay(); this.startTimer(); this.hideLoading();
-    }
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-    findNextEvent() {
-      const now = new Date().getTime();
-      const futureEvents = this.events
-        .map(e => ({...e, timestamp:new Date(e.date).getTime()}))
-        .filter(e => e.timestamp > now)
-        .sort((a,b)=>a.timestamp-b.timestamp);
-      this.currentEvent = futureEvents.length ? futureEvents[0] : this.events[0];
+    const d = Math.floor(gap / day);
+    const h = Math.floor((gap % day) / hour);
+    const m = Math.floor((gap % hour) / minute);
+    const s = Math.floor((gap % minute) / second);
 
-      const titleElement = document.getElementById('event-title');
-      if (titleElement && this.currentEvent) {
-        titleElement.textContent = this.currentEvent.title[this.locale] || this.currentEvent.title.en;
-      }
-    }
+    const elDays = document.getElementById('days');
+    const elHours = document.getElementById('hours');
+    const elMinutes = document.getElementById('minutes');
+    const elSeconds = document.getElementById('seconds');
 
-    calculateTimeLeft() {
-      if (!this.currentEvent) return;
-      const now = new Date().getTime();
-      const diff = this.currentEvent.timestamp - now;
-      if (diff > 0) {
-        this.timeLeft = {
-          days: Math.floor(diff/(1000*60*60*24)),
-          hours: Math.floor((diff%(1000*60*60*24))/(1000*60*60)),
-          minutes: Math.floor((diff%(1000*60*60))/(1000*60)),
-          seconds: Math.floor((diff%(1000*60))/1000)
-        };
-      } else { this.findNextEvent(); }
-    }
-
-    updateDisplay() {
-      ['days','hours','minutes','seconds'].forEach(unit=>{
-        const el=document.getElementById(`${unit}-display`);
-        const next=document.getElementById(`${unit}-next`);
-        if(el&&next){el.textContent=this.timeLeft[unit]?.toString().padStart(2,'0')||'00';
-        next.textContent=el.textContent;}
-      });
-    }
-
-    startTimer() {
-      this.calculateTimeLeft(); this.updateDisplay();
-      this.timer=setInterval(()=>{this.calculateTimeLeft(); this.updateDisplay();},1000);
-    }
-
-    hideLoading() {
-      setTimeout(()=>{
-        const loading=document.getElementById('countdown-loading');
-        const content=document.getElementById('countdown-content');
-        if(loading) loading.style.display='none'; if(content) content.classList.remove('hidden');
-      },1000);
-    }
+    if(elDays) elDays.innerText = d.toString().padStart(2, '0');
+    if(elHours) elHours.innerText = h.toString().padStart(2, '0');
+    if(elMinutes) elMinutes.innerText = m.toString().padStart(2, '0');
+    if(elSeconds) elSeconds.innerText = s.toString().padStart(2, '0');
   }
 
-  let countdownWidget;
-  if (document.readyState==='loading') {
-    document.addEventListener('DOMContentLoaded',()=>{ countdownWidget=new CountdownWidget(eventsData,locale); });
-  } else { countdownWidget=new CountdownWidget(eventsData,locale); }
+  // Start only if component exists
+  const wrapper = document.getElementById('countdown-wrapper');
+  if (wrapper) {
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  }
 </script>

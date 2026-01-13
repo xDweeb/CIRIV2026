@@ -1,5 +1,12 @@
 [
   {
+    "id": "chair-0",
+    "name": "Pr. Fassi Fihri Ouafae",
+    "role": "Director of the Veterinary Medicine Program and Professor at the Department of Pathology and Veterinary Public Health, IAV Hassan II, Rabat.",
+    "image": "/images/committees/fassi-fihri-ouafae.png",
+    "bio": "Professor Ouafae Fassi Fihri stands as an essential academic authority and a passionate advocate of the \"One Health\" approach in Morocco. Her key roles and expertise are multiple: she chairs the One Health Morocco association, thus directing initiatives aimed at promoting integrated health, encompassing human, animal and environmental dimensions.\n\nAt the same time, she serves as director of the veterinary medicine program and researcher-teacher at IAV Hassan II in Rabat, where her expertise in virology, immunology and infectious diseases is dedicated to fundamental research and training future professionals."
+  },
+  {
     "id": "chair-1",
     "name": "Mr. Soufiyane El Moussati",
     "role": "CEO of FC Solution Maroc, Founder and Vice-President of AMARINNOVA Association",
@@ -8,7 +15,7 @@
   },
   {
     "id": "chair-2",
-    "name": "Dr. TANANE Omar",
+    "name": "Pr. TANANE Omar",
     "role": "Scientific Research, Eco-Innovation & Circular Economy for territorial development and autonomy",
     "image": "/images/committees/tanane-omar.jfif",
     "bio": "Doctor of Sciences from Hassan II University of Casablanca, Morocco, and holder of a management diploma from ISCAE Business School in Casablanca. Professor at the Faculty of Sciences of Hassan II University of Casablanca, Morocco. Mission Officer for the Promotion of Scientific Research and Technology Transfer at the University Presidency.\n\nPatent specialist at the World Intellectual Property Organization. Certified by the EPO European Patent Office. Certified by the International Labour Office (ILO) as a National Facilitator. Expert trainer at the Moroccan Office of Industrial Property.\n\nHe has obtained certificates from the World Intellectual Property Organization WIPO and a certificate from the Global Intellectual Property Academy GIPA, USPTO Washington USA. Editor-in-chief of the Journal of Entrepreneurship and Innovation REINNOVA. Coordinator of the Technology Innovation Support Center TISC. Inventor (8 patents filed). His research interests cover innovation, entrepreneurship, and patents."

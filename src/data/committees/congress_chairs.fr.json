@@ -1,5 +1,12 @@
 [
   {
+    "id": "chair-0",
+    "name": "Pr. Fassi Fihri Ouafae",
+    "role": "Directrice de la filière de Médecine Vétérinaire et professeure au Département de Pathologie et de Santé Publique Vétérinaire, IAV Hassan II, Rabat.",
+    "image": "/images/committees/fassi-fihri-ouafae.png",
+    "bio": "Le Professeur Ouafae Fassi Fihri s'impose comme une autorité académique incontournable et une ardente défenseuse de l'approche \"One Health\" au Maroc. Ses rôles clés et son expertise sont multiples: elle préside l'association One Health Maroc, orientant ainsi la direction d'initiatives visant à promouvoir une santé intégrée, englobant les dimensions humaine, animale et environnementale.\n\nEn parallèle, elle exerce en tant que directrice de la filière de médecine vétérinaire et enseignante chercheure à l'IAV Hassan II de Rabat, où son expertise en virologie, immunologie et maladies infectieuses est dédiée à la recherche fondamentale et à la formation des futurs professionnels."
+  },
+  {
     "id": "chair-1",
     "name": "Mr. Soufiyane El Moussati",
     "role": "Président Directeur Général de la société FC Solution Maroc, Fondateur et Vice-président de l'association AMARINNOVA",
@@ -8,7 +15,7 @@
   },
   {
     "id": "chair-2",
-    "name": "Dr. TANANE Omar",
+    "name": "Pr. TANANE Omar",
     "role": "Recherche Scientifique, Eco-Innovation & Economie Circulaire pour le développement et l'autonomie territoriale",
     "image": "/images/committees/tanane-omar.jfif",
     "bio": "Docteur en sciences de l'Université Hassan II de Casablanca au Maroc et titulaire d'un diplôme de gestion de l'école de commerce ISCAE de Casablanca. Professeur à la Faculté des Sciences de l'Université Hassan II de Casablanca, Maroc. Chargé de Mission de Promotion de la Recherche Scientifique et du Transfert Technologique à la Présidence de l'Université.\n\nSpécialiste des brevets à l'Organisation Mondiale de la Propriété Intellectuelle. Certifié par l'OEB Office Européen des Brevets. Certifié par le Bureau International du Travail (BIT) en tant que Facilitateur National. Expert formateur Office Marocain de la Propriété Industrielle.\n\nIl a obtenu des certificats de l'Organisation mondiale de la propriété intellectuelle OMPI et un certificat de la Global Intellectual Property Academy GIPA, USPTO Washington USA. Rédacteur en chef Revue de l'Entrepreneuriat et de L'Innovation REINNOVA. Coordonnateur du Centre de soutien à l'innovation technologique TISC. Inventeur (8 brevets déposés). Ses intérêts de recherche couvrent l'innovation, l'entrepreneuriat, les brevets."

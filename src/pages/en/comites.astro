@@ -11,6 +11,7 @@ import honoraryCommittee from '../../data/committees/honorary_committee.en.json'
 import congressChairs from '../../data/committees/congress_chairs.en.json';
 import organizingCommittee from '../../data/committees/organizing_committee.en.json';
 import scientificCommittee from '../../data/committees/scientific_committee.en.json';
+import digitalCommunication from '../../data/committees/digital_communication.en.json';
 
 const locale = 'en';
 const t = useTranslations(locale);
@@ -49,6 +50,7 @@ const t = useTranslations(locale);
         data={honoraryCommittee}
         locale={locale}
         sectionId="honorary"
+        columns={4}
       />
 
       <!-- Organizing Committee -->
@@ -65,6 +67,14 @@ const t = useTranslations(locale);
         data={scientificCommittee}
         locale={locale}
         sectionId="scientific"
+      />
+
+      <!-- Digital Communication Committee -->
+      <CommitteeSection 
+        titleKey="committees.digital"
+        data={digitalCommunication}
+        locale={locale}
+        sectionId="digital"
       />
 
       <!-- Contact Section -->

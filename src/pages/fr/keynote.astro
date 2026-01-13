@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CommitteeSection from '../../components/committees/CommitteeSection.astro';
+import { useTranslations } from '../../i18n/ui';
+import { link } from '../../utils/paths';
+
+// Import JSON data (French)
+import keynoteSpeakers from '../../data/committees/keynote_speakers.fr.json';
+
+const locale = 'fr';
+const t = useTranslations(locale);
+---
+
+<BaseLayout
+  title="Conférenciers Invités - CIRIV'26"
+  description="Découvrez les conférenciers invités du CIRIV'26"
+  locale={locale}
+>
+  <Header locale={locale} currentPath={Astro.url.pathname} />
+  
+  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12">
+    <div class="container mx-auto px-4">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
+          {t('keynote.pageTitle' as any)}
+        </h1>
+        <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+          {t('keynote.pageDescription' as any)}
+        </p>
+      </div>
+
+      <!-- Keynote Speakers -->
+      <CommitteeSection 
+        titleKey="keynote.section"
+        data={keynoteSpeakers}
+        locale={locale}
+        sectionId="keynote-speakers"
+      />
+
+      <!-- Contact Section -->
+      <div class="text-center mt-16">
+        <div class="bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl p-8 text-white">
+          <h2 class="text-2xl font-bold mb-4">
+            Contactez nos équipes
+          </h2>
+          <p class="text-lg mb-6 opacity-90">
+            Vous avez des questions ? N'hésitez pas à nous contacter
+          </p>
+          <a
+            href={link({ locale, slug: 'contact' })}
+            class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
+          >
+            Nous contacter
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <Footer locale={locale} />
+</BaseLayout>

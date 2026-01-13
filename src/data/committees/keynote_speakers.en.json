@@ -1,0 +1,23 @@
+[
+  {
+    "id": "giovanni-ghielmetti",
+    "name": "Pr. Giovanni Ghielmetti",
+    "role": "Researcher in Veterinary Public Health, Vetsuisse Faculty, University of Zurich",
+    "image": "/images/committees/ghielmetti-giovanni.png",
+    "bio": "Pr. Giovanni Ghielmetti is a researcher in veterinary public health at the Vetsuisse Faculty of the University of Zurich. Giovanni Ghielmetti leads the tuberculosis and mycobacteria diagnostic laboratory at the Institute for Food Safety and Hygiene of the University of Zurich. Author of more than 70 scientific publications, his work focuses on the characterization of new species of the Mycobacterium tuberculosis complex affecting wild animals, as well as on diagnostic methods for diseases caused by non-tuberculous mycobacteria."
+  },
+  {
+    "id": "jean-michel-michaux",
+    "name": "Dr Jean-Michel Michaux",
+    "role": "Corresponding Member of the French Academy of Veterinary Medicine, Director of ISTAV",
+    "image": "/images/committees/michaux-jean-michel.png",
+    "bio": "Dr Jean-Michel Michaux is a French Doctor of Veterinary Medicine, alumnus of the National Veterinary School of Lyon, specialized in canine and feline pathology. He practiced in a veterinary clinic of his own for companion animals from 1980 to 2013. Former President of the National Union of Liberal Practice Veterinarians, Founder of the French Association of Veterinarians for Companion Animals and Scientific Director of the AFVAC Annual National Congress. He created the Scientific and Technical Institute for the Urban Animal (ISTAV) where he organizes an Annual Congress on the theme 'Animals in the City'. He was appointed corresponding member of the French Academy of Veterinary Medicine and Inspector General of Veterinary Public Health in extraordinary service."
+  },
+  {
+    "id": "bouchra-belkadi",
+    "name": "Pr. Bouchra BELKADI",
+    "role": "Mohammed V University of Rabat, Faculty of Sciences, Laboratory of Microbiology and Molecular Biology (LMBM)",
+    "image": "/images/committees/bouchra-belkadi.png",
+    "bio": "Pr. Bouchra BELKADI is a researcher-teacher at Mohammed V University of Rabat, Faculty of Sciences, within the Laboratory of Microbiology and Molecular Biology (LMBM). An agricultural engineer graduated from IAV Hassan II, she holds a DEA in human nutrition from Paris VI University and a doctorate in plant molecular biology.\n\nHer research focuses on genetic diversity, microbial and plant molecular ecology, as well as molecular epidemiology of infectious diseases, with a strong emphasis on genomics. She has authored over 100 scientific publications.\n\nA recognized expert in biosecurity, biosafety, and biological risk prevention, she combines research, training, and scientific awareness. She is co-founder of the Euro-African Master in Biosecurity and Biosafety (MEABB) and scientific director of the P3 DIMLAB mobile laboratory. President of the Moroccan Association for Biosecurity, Biosafety, and Health Safety (AMBS), she works to promote a culture of biological and health risk prevention, particularly within the One Health approach, in line with international standards and the Sustainable Development Goals."
+  }
+]

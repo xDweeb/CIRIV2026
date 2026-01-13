@@ -9,11 +9,19 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-// Target Date (Update this date as needed)
-const targetDate = "2026-01-30T23:59:00"; 
+// Target Date: 01 Mars 2026 - Deadline for abstract submission
+const targetDate = "2026-03-01T23:59:00";
+
+// Labels based on locale
+const labels = {
+  fr: { days: 'Jours', hours: 'Heures', minutes: 'Minutes', seconds: 'Secondes', submit: 'Soumettre maintenant' },
+  en: { days: 'Days', hours: 'Hours', minutes: 'Minutes', seconds: 'Seconds', submit: 'Submit now' },
+  ar: { days: 'أيام', hours: 'ساعات', minutes: 'دقائق', seconds: 'ثواني', submit: 'أرسل الآن' }
+};
+const l = labels[locale];
 ---
 
-<div class="w-full max-w-4xl mx-auto" id="countdown-wrapper" data-target={targetDate}>
+<div class="countdown-wrapper w-full max-w-4xl mx-auto" data-target={targetDate}>
   
   <h3 class="text-2xl md:text-3xl font-bold text-center text-white mb-10 drop-shadow-md">
     {t('countdown.deadlineLabel') || 'Dernier délai de réception des résumés'}
@@ -24,32 +32,32 @@ const targetDate = "2026-01-30T23:59:00";
     <div class="group relative">
       <div class="absolute inset-0 bg-white/10 rounded-2xl blur-sm group-hover:bg-white/20 transition-all duration-500"></div>
       <div class="relative bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-xl">
-        <span class="block text-4xl md:text-6xl font-black text-white font-mono tracking-tight" id="days">00</span>
-        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Jours</span>
+        <span class="countdown-days block text-4xl md:text-6xl font-black text-white font-mono tracking-tight">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">{l.days}</span>
       </div>
     </div>
 
     <div class="group relative">
       <div class="absolute inset-0 bg-white/10 rounded-2xl blur-sm group-hover:bg-white/20 transition-all duration-500"></div>
       <div class="relative bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-xl">
-        <span class="block text-4xl md:text-6xl font-black text-white font-mono tracking-tight" id="hours">00</span>
-        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Heures</span>
+        <span class="countdown-hours block text-4xl md:text-6xl font-black text-white font-mono tracking-tight">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">{l.hours}</span>
       </div>
     </div>
 
     <div class="group relative">
       <div class="absolute inset-0 bg-white/10 rounded-2xl blur-sm group-hover:bg-white/20 transition-all duration-500"></div>
       <div class="relative bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-4 md:p-6 shadow-xl">
-        <span class="block text-4xl md:text-6xl font-black text-white font-mono tracking-tight" id="minutes">00</span>
-        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Minutes</span>
+        <span class="countdown-minutes block text-4xl md:text-6xl font-black text-white font-mono tracking-tight">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">{l.minutes}</span>
       </div>
     </div>
 
     <div class="group relative">
       <div class="absolute inset-0 bg-emerald-500/20 rounded-2xl blur-md animate-pulse"></div>
       <div class="relative bg-white/10 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-4 md:p-6 shadow-xl">
-        <span class="block text-4xl md:text-6xl font-black text-emerald-400 font-mono tracking-tight" id="seconds">00</span>
-        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">Secondes</span>
+        <span class="countdown-seconds block text-4xl md:text-6xl font-black text-emerald-400 font-mono tracking-tight">00</span>
+        <span class="text-xs md:text-sm uppercase tracking-widest text-emerald-200 mt-2 block">{l.seconds}</span>
       </div>
     </div>
 
@@ -57,7 +65,7 @@ const targetDate = "2026-01-30T23:59:00";
   
   <div class="text-center mt-12">
      <a href={link({ locale, slug: 'inscription' })} class="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-emerald-900 bg-white rounded-full hover:bg-emerald-50 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transform hover:-translate-y-1">
-        Soumettre maintenant
+        {l.submit}
         <svg class="w-5 h-5 ml-2 -mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
      </a>
   </div>
@@ -65,47 +73,59 @@ const targetDate = "2026-01-30T23:59:00";
 </div>
 
 <script>
-  function updateCountdown() {
-    const wrapper = document.getElementById('countdown-wrapper');
-    if (!wrapper) return;
+  function initCountdowns() {
+    const wrappers = document.querySelectorAll('.countdown-wrapper');
     
-    // Check if target is defined
-    if (!wrapper.dataset.target) return;
+    wrappers.forEach((wrapper) => {
+      const targetStr = wrapper.getAttribute('data-target');
+      if (!targetStr) return;
 
-    const target = new Date(wrapper.dataset.target).getTime();
-    const now = new Date().getTime();
-    const gap = target - now;
+      const target = new Date(targetStr).getTime();
+      
+      const elDays = wrapper.querySelector('.countdown-days');
+      const elHours = wrapper.querySelector('.countdown-hours');
+      const elMinutes = wrapper.querySelector('.countdown-minutes');
+      const elSeconds = wrapper.querySelector('.countdown-seconds');
 
-    if (gap < 0) {
-        // Handle expiration if needed (e.g. show "Expired")
-        return; 
-    }
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const gap = target - now;
 
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
+        if (gap < 0) {
+          if(elDays) elDays.textContent = '00';
+          if(elHours) elHours.textContent = '00';
+          if(elMinutes) elMinutes.textContent = '00';
+          if(elSeconds) elSeconds.textContent = '00';
+          return;
+        }
 
-    const d = Math.floor(gap / day);
-    const h = Math.floor((gap % day) / hour);
-    const m = Math.floor((gap % hour) / minute);
-    const s = Math.floor((gap % minute) / second);
+        const second = 1000;
+        const minute = second * 60;
+        const hour = minute * 60;
+        const day = hour * 24;
 
-    const elDays = document.getElementById('days');
-    const elHours = document.getElementById('hours');
-    const elMinutes = document.getElementById('minutes');
-    const elSeconds = document.getElementById('seconds');
+        const d = Math.floor(gap / day);
+        const h = Math.floor((gap % day) / hour);
+        const m = Math.floor((gap % hour) / minute);
+        const s = Math.floor((gap % minute) / second);
 
-    if(elDays) elDays.innerText = d.toString().padStart(2, '0');
-    if(elHours) elHours.innerText = h.toString().padStart(2, '0');
-    if(elMinutes) elMinutes.innerText = m.toString().padStart(2, '0');
-    if(elSeconds) elSeconds.innerText = s.toString().padStart(2, '0');
+        if(elDays) elDays.textContent = d.toString().padStart(2, '0');
+        if(elHours) elHours.textContent = h.toString().padStart(2, '0');
+        if(elMinutes) elMinutes.textContent = m.toString().padStart(2, '0');
+        if(elSeconds) elSeconds.textContent = s.toString().padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
   }
 
-  // Start only if component exists
-  const wrapper = document.getElementById('countdown-wrapper');
-  if (wrapper) {
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+  // Run on page load and after navigation (for Astro view transitions)
+  document.addEventListener('DOMContentLoaded', initCountdowns);
+  document.addEventListener('astro:page-load', initCountdowns);
+  
+  // Also run immediately in case DOMContentLoaded already fired
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initCountdowns();
   }
 </script>

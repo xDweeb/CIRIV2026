@@ -16,14 +16,23 @@ interface Props {
   data: Member[];
   locale: 'fr' | 'en' | 'ar';
   sectionId: string;
+  columns?: 2 | 3 | 4;
 }
 
-const { titleKey, subtitleKey, data, locale, sectionId } = Astro.props;
+const { titleKey, subtitleKey, data, locale, sectionId, columns = 3 } = Astro.props;
 const t = useTranslations(locale);
 const isRTL = locale === 'ar';
 const baseUrl = import.meta.env.BASE_URL || '/';
 const modalId = `modal-${sectionId}`;
 const placeholderImage = `${baseUrl}images/avatar-placeholder.svg`;
+
+// Column width classes based on columns prop
+const columnClasses = {
+  2: 'w-full sm:w-[calc(50%-12px)]',
+  3: 'w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]',
+  4: 'w-full sm:w-[calc(50%-12px)] lg:w-[calc(25%-18px)]'
+};
+const cardWidthClass = columnClasses[columns];
 
 // Helper to get title - handle both direct keys and nested keys
 function getTitle(key: string): string {
@@ -50,15 +59,15 @@ function getTitle(key: string): string {
   </div>
 
   <!-- Members Grid -->
-  <div class="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
+  <div class="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
     {data.map((member) => (
       <div 
-        class="member-card group bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-primary/30 dark:hover:border-brand-accent/30 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+        class={`member-card group bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all duration-300 border border-slate-200 dark:border-slate-700 hover:border-brand-primary/30 dark:hover:border-brand-accent/30 ${cardWidthClass}`}
         data-member-id={member.id}
       >
         <!-- Avatar -->
-        <div class="flex justify-center mb-4">
-          <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-slate-100 dark:ring-slate-700 group-hover:ring-brand-primary/20 dark:group-hover:ring-brand-accent/20 transition-all duration-300 bg-slate-200 dark:bg-slate-600">
+        <div class="flex justify-center mb-3">
+          <div class="w-20 h-20 rounded-full overflow-hidden ring-4 ring-slate-100 dark:ring-slate-700 group-hover:ring-brand-primary/20 dark:group-hover:ring-brand-accent/20 transition-all duration-300 bg-slate-200 dark:bg-slate-600">
             <img 
               src={member.image || placeholderImage}
               alt={member.name}
@@ -70,12 +79,12 @@ function getTitle(key: string): string {
         </div>
 
         <!-- Name -->
-        <h3 class={`text-lg font-semibold text-slate-900 dark:text-white mb-2 ${isRTL ? 'text-right' : 'text-center'}`}>
+        <h3 class={`text-base font-semibold text-slate-900 dark:text-white mb-1 ${isRTL ? 'text-right' : 'text-center'}`}>
           {member.name}
         </h3>
 
         <!-- Role -->
-        <p class={`text-sm text-slate-600 dark:text-slate-400 mb-4 leading-relaxed ${isRTL ? 'text-right' : 'text-center'}`}>
+        <p class={`text-xs text-slate-600 dark:text-slate-400 mb-3 leading-relaxed ${isRTL ? 'text-right' : 'text-center'}`}>
           {member.role}
         </p>
 

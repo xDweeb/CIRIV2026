@@ -1,16 +1,30 @@
 [
   {
     "id": "hon-1",
+    "name": "Pr. Abdelaziz EL HRAIKI",
+    "role": "Director General of the Hassan II Institute of Agronomy and Veterinary Medicine (IAV), Rabat",
+    "image": "/images/committees/abdelaziz-el-hraiki.png",
+    "bio": "Pr. Abdelaziz El Hraiki is a central figure in agricultural and veterinary higher education in Morocco. Currently Director General of the Hassan II Institute of Agronomy and Veterinary Medicine (IAV), he was appointed to this strategic position in March 2021, before having his mandate renewed in 2025 to continue the institution's modernization.\n\nAn eminent researcher, he holds a doctorate in veterinary medicine and a Ph.D. A recognized specialist in toxicology, pharmacy, and biochemistry, he has devoted much of his career to teaching and research within the department of veterinary biological and pharmaceutical sciences. His scientific work, widely published, deals notably with health risks related to mycotoxins and food safety.\n\nUnder his governance in 2026, IAV Hassan II is establishing itself as a regional center of excellence, strengthening its international cooperation, particularly with Africa and the Middle East. Pr. El Hraiki is praised for his academic leadership, his commitment to agricultural innovation, and his essential contribution to training Moroccan technical elites within the framework of the Generation Green plan."
+  },
+  {
+    "id": "hon-2",
+    "name": "Pr. Abdeslam EL BOUARI",
+    "role": "Dean of the Faculty of Sciences Ben M'Sick, Hassan II University of Casablanca",
+    "image": "/images/committees/abdeslam-el-bouari.png",
+    "bio": "Pr. Abdeslam El Bouari is an eminent Moroccan academic, currently Dean of the Faculty of Sciences Ben M'Sick (FSBM) at Hassan II University of Casablanca in 2026. A professor of higher education, he has established himself as a leading figure in the field of materials physicochemistry.\n\nDirector of the Applied Materials Physicochemistry Laboratory (LPCMA), his research work is resolutely oriented towards sustainable development. He is particularly recognized for his innovations concerning biomass valorization (notably date palm fibers) and the creation of ecological construction materials, such as bio-sourced thermal insulators and geopolymers. His scientific publications, widely cited, contribute to positioning Morocco on the map of global green research.\n\nAs an academic manager, Pr. El Bouari works for the modernization of the university by integrating emerging technologies and artificial intelligence into curricula. Under his direction, FSBM strengthens its industrial partnerships and research-innovation dynamics, thus promoting the professional integration of doctoral students and national academic excellence."
+  },
+  {
+    "id": "hon-3",
     "name": "Pr. Fassi Fihri Ouafae",
     "role": "Department of Pathology and Veterinary Public Health, Microbiology, Immunology and Infectious Diseases Unit (MIMC), IAV Hassan II, Rabat",
     "image": "/images/committees/fassi-fihri-ouafae.png",
     "bio": "Professor Ouafae Fassi Fihri stands as an undeniable academic authority and a passionate advocate for the \"One Health\" approach in Morocco. Her key roles and expertise are multiple: she presides over the One Health Morocco association, thus guiding initiatives aimed at promoting integrated health, encompassing human, animal, and environmental dimensions.\n\nAt the same time, she serves as director of the veterinary medicine program and researcher-teacher at IAV Hassan II in Rabat, where her expertise in virology, immunology, and infectious diseases is dedicated to fundamental research and training future professionals. Recognized as a public health expert, she provides valuable strategic advice, particularly on zoonoses and emerging diseases, as illustrated by the COVID-19 crisis.\n\nA true champion of collaboration, Professor Fassi Fihri actively works to promote multidisciplinary synergy between human medicine, veterinary medicine, and environmental sciences, essential for effective management of modern health crises. Her commitment is fundamental to the practical application of the crucial links that unite the health of humans, animals, and the global ecosystem."
   },
   {
-    "id": "hon-2",
-    "name": "Pr. Bouchra BELKADI",
-    "role": "Mohammed V University of Rabat, Faculty of Sciences, Laboratory of Microbiology and Molecular Biology (LMBM)",
-    "image": "/images/committees/bouchra-belkadi.png",
-    "bio": "Pr. Bouchra BELKADI is a researcher-teacher at Mohammed V University of Rabat, Faculty of Sciences, within the Laboratory of Microbiology and Molecular Biology (LMBM). An agricultural engineer graduated from IAV Hassan II, she holds a DEA in human nutrition from Paris VI University and a doctorate in plant molecular biology.\n\nHer research focuses on genetic diversity, microbial and plant molecular ecology, as well as molecular epidemiology of infectious diseases, with a strong emphasis on genomics. She has authored over 100 scientific publications.\n\nA recognized expert in biosecurity, biosafety, and biological risk prevention, she combines research, training, and scientific awareness. She is co-founder of the Euro-African Master in Biosecurity and Biosafety (MEABB) and scientific director of the P3 DIMLAB mobile laboratory. President of the Moroccan Association for Biosecurity, Biosafety, and Health Safety (AMBS), she works to promote a culture of biological and health risk prevention, particularly within the One Health approach, in line with international standards and the Sustainable Development Goals."
+    "id": "hon-4",
+    "name": "Pr. Anass KETTANI",
+    "role": "Vice-President of Hassan II University of Casablanca, in charge of Academic and Student Affairs",
+    "image": "/images/committees/anass-kettani.png",
+    "bio": "Pr. Anass Kettani is a leading Moroccan academic and researcher, holding in 2026 the position of Vice-President of Hassan II University of Casablanca (UH2C), in charge of Academic and Student Affairs. A professor of higher education at the Faculty of Sciences Ben M'Sik, he is a recognized expert in biochemistry and bioinformatics.\n\nHis research work is distinguished by the valorization of therapeutic molecules from Moroccan biodiversity, particularly the study of venoms. Beyond the laboratory, he is a key actor in the transformation of the educational system. As director of the Integration and Entrepreneurship Hub, he has established an innovative support model that stimulates business creation by students, strengthening bridges between academia and the private sector.\n\nA visionary, he is actively committed in 2026 to the integration of artificial intelligence and technological sovereignty in Africa. A regular speaker at international bodies, he promotes an open university focused on employability and digital innovation. His leadership contributes to positioning UH2C as a strategic center of excellence for Morocco's socio-economic development."
   }
 ]

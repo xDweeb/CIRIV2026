@@ -38,30 +38,23 @@ function isActiveLink(href: string, currentPath: string): boolean {
 <header class="sticky top-0 z-50 bg-white/90 dark:bg-surface-dark/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
   <div class="container mx-auto px-2 sm:px-4">
     <div class="flex items-center justify-between py-2 sm:py-3">
-      <!-- Logo and Brand -->
-      <div class={`flex items-center gap-3 ${isRTL ? 'flex-row-reverse' : ''}`}>
+      <!-- Logo -->
+      <a href={link({ locale })} class={`flex items-center ${isRTL ? 'flex-row-reverse' : ''}`} aria-label={`${t('nav.home')} - CIRIV'26`}>
         <img 
           src={`${baseUrl}assets/logos/CIRIV.png`} 
           alt="CIRIV Logo" 
-          class="h-10 w-10 object-contain dark:hidden"
-          width="40"
-          height="40"
+          class="h-12 w-12 object-contain dark:hidden"
+          width="48"
+          height="48"
         />
         <img 
           src={`${baseUrl}assets/logos/CIRIVB.png`} 
           alt="CIRIV Logo" 
-          class="h-10 w-10 object-contain hidden dark:block"
-          width="40"
-          height="40"
+          class="h-12 w-12 object-contain hidden dark:block"
+          width="48"
+          height="48"
         />
-        <a 
-          href={link({ locale })} 
-          class="text-xl font-bold text-brand-primary dark:text-brand-accent hover:text-brand-primaryDark dark:hover:text-teal-300 transition-colors"
-          aria-label={`${t('nav.home')} - CIRIV'26`}
-        >
-          CIRIV'26
-        </a>
-      </div>
+      </a>
 
       <!-- Desktop Navigation -->
       <nav class={`hidden md:flex items-center gap-6 ${isRTL ? 'flex-row-reverse' : ''}`} aria-label="Main navigation">

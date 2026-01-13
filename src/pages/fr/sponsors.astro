@@ -44,6 +44,56 @@ const hasSponsors = sponsors && sponsors.length > 0;
         </p>
       </div>
 
+      <!-- Institutional Partners Section -->
+      <section class="mb-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-brand-primary dark:text-brand-accent mb-8">
+          Partenaires Institutionnels
+        </h2>
+        <div class="flex flex-wrap justify-center items-center gap-8 md:gap-12 max-w-4xl mx-auto">
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <img src="/assets/logos/AMARINOVA.png" alt="AMARINNOVA" class="h-20 w-auto mx-auto" />
+            <p class="text-center mt-3 text-sm font-medium text-slate-700 dark:text-slate-300">AMARINNOVA</p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <img src="/assets/logos/IAV.png" alt="IAV Hassan II" class="h-20 w-auto mx-auto" />
+            <p class="text-center mt-3 text-sm font-medium text-slate-700 dark:text-slate-300">IAV Hassan II</p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <img src="/assets/logos/FSBM.png" alt="FSBM" class="h-20 w-auto mx-auto" />
+            <p class="text-center mt-3 text-sm font-medium text-slate-700 dark:text-slate-300">FSBM</p>
+          </div>
+          <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <img src="/assets/logos/UH2C.png" alt="Université Hassan II" class="h-20 w-auto mx-auto" />
+            <p class="text-center mt-3 text-sm font-medium text-slate-700 dark:text-slate-300">Université Hassan II</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download Sponsoring Dossier -->
+      <section class="mb-16">
+        <div class="max-w-3xl mx-auto bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg border border-slate-200 dark:border-slate-700 text-center">
+          <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-8 h-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Devenir Partenaire</h3>
+          <p class="text-slate-600 dark:text-slate-300 mb-6">
+            Téléchargez notre dossier de sponsoring pour découvrir les différentes opportunités de partenariat.
+          </p>
+          <a 
+            href="/documents/Dossier_Sponsoring_CIRIV2026.pdf" 
+            download
+            class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl transition-colors duration-200 shadow-lg hover:shadow-emerald-600/30"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Télécharger le dossier de sponsoring
+          </a>
+        </div>
+      </section>
+
       {hasSponsors ? (
         <!-- Sponsors Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">

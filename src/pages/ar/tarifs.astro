@@ -78,6 +78,31 @@ const t = useTranslations(locale);
       <p class="text-center text-base md:text-lg text-slate-600 dark:text-slate-300 italic px-4 font-arabic">
         {t('pricing.description')}
       </p>
+
+      <!-- Abstract Template Download (RTL) -->
+      <div class="max-w-2xl mx-auto mt-8 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center">
+            <svg class="w-6 h-6 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-1 font-arabic">{t('abstract.templateTitle')}</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mb-3 font-arabic">{t('abstract.templateDesc')}</p>
+            <a 
+              href="/documents/CIRIV26_Abstract_Template.docx" 
+              download
+              class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+              <span class="font-arabic">{t('abstract.downloadButton')}</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Section 2: Payment Information -->

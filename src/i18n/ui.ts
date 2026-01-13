@@ -132,6 +132,9 @@ export const ui = {
     'pillars.session5.desc': 'Exploiter l\'intelligence artificielle et les nouvelles technologies pour la santé.',
     'pillars.session6.title': 'Durabilité & Résilience',
     'pillars.session6.desc': 'Construire des systèmes de santé résilients face aux défis climatiques et sociaux.',
+    'abstract.templateTitle': 'Modèle de Résumé (Abstract)',
+    'abstract.templateDesc': 'Veuillez utiliser ce modèle officiel pour soumettre votre résumé.',
+    'abstract.downloadButton': 'Télécharger le modèle',
   },
   en: {
     'nav.home': 'Home',
@@ -258,6 +261,9 @@ export const ui = {
     'pillars.session5.desc': 'Leveraging artificial intelligence and new technologies for health.',
     'pillars.session6.title': 'Sustainability & Resilience',
     'pillars.session6.desc': 'Building resilient health systems to face climate and social challenges.',
+    'abstract.templateTitle': 'Abstract Template',
+    'abstract.templateDesc': 'Please use this official template to submit your abstract.',
+    'abstract.downloadButton': 'Download Template',
   },
   ar: {
     'nav.home': 'الرئيسية',
@@ -384,6 +390,9 @@ export const ui = {
     'pillars.session5.desc': 'توظيف الذكاء الاصطناعي والتقنيات الجديدة لخدمة الصحة.',
     'pillars.session6.title': 'الاستدامة والمرونة',
     'pillars.session6.desc': 'بناء أنظمة صحية مرنة لمواجهة التحديات المناخية والاجتماعية.',
+    'abstract.templateTitle': 'نموذج الملخص',
+    'abstract.templateDesc': 'يرجى استخدام هذا النموذج الرسمي لتقديم ملخصكم.',
+    'abstract.downloadButton': 'تحميل النموذج',
   },
 } as const;
 

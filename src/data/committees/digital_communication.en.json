@@ -1,9 +1,26 @@
 [
   {
     "id": "digital-1",
-    "name": "OUSSAMA ABOULMAHASSINE EL IDRISS",
+    "name": "Taibi EL YAKOUTI",
+    "role": "Data & AI Analyst | Robotics Educator & Competitor | Software Engineer | Digital Designer & Creator – CIRIV'26",
+    "image": "/images/committees/taibi-elyakouti.png",
+    "bio": "Taibi El Yakouti is a third-year student in Information Systems Engineering at SUPMTI – School of Management, Telecommunications and Computer Science. His profile combines software engineering, data analysis, artificial intelligence, and robotics, with a strong focus on innovation and digital transformation.\n\nCommitted to education and knowledge sharing, he works as a trainer in programming, robotics, and digital technologies for diverse audiences, adapting his teaching approaches to each level.\n\nFounder and President of the CMC Rabat Robotics Club, he leads technical and educational initiatives and mentors teams on competition and innovation-oriented projects. He has participated in technological competitions with distinguished results.\n\nFor the CIRIV'26 Congress, he is the designer and developer of the official website, handling architecture, development, and user experience optimization to showcase the scientific and institutional content of the congress.",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/xdweb"
+    }
+  },
+  {
+    "id": "digital-2",
+    "name": "Oussama ABOULMAHASSINE EL IDRISS",
     "role": "Master 2 Student in Biotechnology and Quality, Faculty of Sciences Ben M'Sik, Hassan II University of Casablanca",
     "image": "/images/committees/oussama-aboulmahassine.png",
-    "bio": "Master 2 student in Biotechnology and Quality at the Faculty of Sciences Ben M'Sik of Hassan II University of Casablanca, he is interested in quality, health safety, and the valorization of scientific research, with particular interest in integrated approaches linking human health, animal health, environment, and innovation.\n\nHe is a member of the organizing committee of the International Congress for Research, Innovation and Valorization (CIRIV'26), an international scientific event structured around the One Health concept. In this context, he contributes to scientific and logistical organization, document management, as well as scientific and digital communication of the congress, interacting with national and international researchers, experts, and speakers.\n\nSimultaneously, he holds the position of Vice-President of the Ibn Khaldoun Club for Social and Cultural Action at the Faculty of Sciences Ben M'Sik, where he participates in the design, coordination, and implementation of social, cultural, and scientific initiatives promoting student engagement.\n\nHe has over five years of experience in digital marketing and professional community management."
+    "bio": "Master 2 student in Biotechnology and Quality at the Faculty of Sciences Ben M'Sik of Hassan II University of Casablanca, he is interested in quality, health safety, and the valorization of scientific research, with particular interest in integrated approaches linking human health, animal health, environment, and innovation.\n\nHe is a member of the organizing committee of the International Congress for Research, Innovation and Valorization (CIRIV'26), an international scientific event structured around the One Health concept. In this context, he contributes to scientific and logistical organization, document management, as well as scientific and digital communication of the congress.\n\nVice-President of the Ibn Khaldoun Club for Social and Cultural Action at the Faculty of Sciences Ben M'Sik, he participates in the design and implementation of social, cultural, and scientific initiatives promoting student engagement.\n\nHe has over five years of experience in digital marketing and professional community management."
+  },
+  {
+    "id": "digital-3",
+    "name": "Assya LAMAIZI",
+    "role": "PhD Candidate – Laboratory of Biology and Health, Hassan II University of Casablanca",
+    "image": "/images/committees/assya-lamaizi.png",
+    "bio": "PhD candidate at the Laboratory of Biology and Health, Faculty of Sciences Ben M'Sick, Hassan II University of Casablanca.\n\nActive member of the Society of Experimental Biology (SEB), Animal Biology section.\n\nScientific Committee Coordinator of the AQUADIVE association, specializing in scientific and technical scuba diving.\n\nResearch interests focused on the ecology and conservation of venomous organisms, with particular attention to environmental interactions and biodiversity conservation challenges."
   }
 ]

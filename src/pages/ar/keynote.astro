@@ -2,56 +2,133 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import CommitteeSection from '../../components/committees/CommitteeSection.astro';
 import { useTranslations } from '../../i18n/ui';
 import { link } from '../../utils/paths';
 
-// Import JSON data (Arabic)
+// Import JSON data directly
 import keynoteSpeakers from '../../data/committees/keynote_speakers.ar.json';
 
 const locale = 'ar';
 const t = useTranslations(locale);
+const baseUrl = import.meta.env.BASE_URL || '/';
 ---
 
 <BaseLayout
   title="المتحدثون الرئيسيون - CIRIV'26"
-  description="تعرف على المتحدثين الرئيسيين في مؤتمر CIRIV'26"
+  description="اكتشف المتحدثين الرئيسيين ذوي الشهرة العالمية في CIRIV'26"
   locale={locale}
 >
   <Header locale={locale} currentPath={Astro.url.pathname} />
   
-  <main class="min-h-screen bg-gradient-to-br from-slate-50 to-teal-50 dark:from-surface-dark dark:to-slate-800 py-12" dir="rtl">
-    <div class="container mx-auto px-4">
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <h1 class="text-4xl lg:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-          {t('keynote.pageTitle' as any)}
-        </h1>
-        <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
-          {t('keynote.pageDescription' as any)}
-        </p>
+  <main class="min-h-screen bg-slate-50 dark:bg-slate-900 pb-20" dir="rtl">
+    
+    <section class="relative py-20 lg:py-24 bg-emerald-900 overflow-hidden">
+       <div class="absolute inset-0 opacity-10 bg-[url('/images/pattern.svg')]"></div>
+       <div class="absolute inset-0 bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 opacity-95"></div>
+       <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
+
+       <div class="container mx-auto px-4 relative z-10 text-center">
+         <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-sm font-bold tracking-widest uppercase mb-6 backdrop-blur-sm border border-emerald-500/30 font-arabic">
+            خبرة ورؤية
+         </span>
+         <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight drop-shadow-lg font-arabic">
+           {t('keynote.pageTitle') || "المتحدثون الرئيسيون"}
+         </h1>
+         <p class="text-lg md:text-xl text-emerald-100/90 max-w-2xl mx-auto leading-relaxed font-light font-arabic">
+           {t('keynote.pageDescription') || "تعرف على قادة الفكر والخبراء الدوليين الذين سيشكلون نقاشات CIRIV'26."}
+         </p>
+       </div>
+    </section>
+
+    <div class="container mx-auto px-4 -mt-16 relative z-20">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        
+        {keynoteSpeakers.map((speaker: any) => (
+          <div class="group relative bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-slate-100 dark:border-slate-700 flex flex-col">
+            
+            <div class="h-32 bg-gradient-to-r from-emerald-600 to-teal-600 relative overflow-hidden">
+               <div class="absolute inset-0 bg-black/10"></div>
+               <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(white 1px, transparent 1px); background-size: 10px 10px;"></div>
+            </div>
+
+            <div class="relative px-8 flex justify-center -mt-16">
+               <div class="relative w-32 h-32 md:w-40 md:h-40 rounded-full p-1.5 bg-white dark:bg-slate-800 shadow-xl">
+                 <div class="w-full h-full rounded-full overflow-hidden relative">
+                    {speaker.image ? (
+                      <img 
+                        src={speaker.image} 
+                        alt={speaker.name} 
+                        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div class="w-full h-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-400">
+                        <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                      </div>
+                    )}
+                 </div>
+                 
+                 <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md border-2 border-white dark:border-slate-800 whitespace-nowrap">
+                    متحدث رئيسي
+                 </div>
+               </div>
+            </div>
+
+            <div class="p-8 pt-6 text-center flex-grow flex flex-col items-center">
+               
+               <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-emerald-600 transition-colors font-arabic">
+                 {speaker.name}
+               </h3>
+               
+               {speaker.role && (
+                 <p class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm uppercase tracking-wide mb-3 font-arabic">
+                   {speaker.role}
+                 </p>
+               )}
+
+               <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 line-clamp-4 font-arabic">
+                 {speaker.institution || speaker.description || "خبير دولي في مجال البحث والابتكار."}
+               </p>
+
+               <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700 w-full flex justify-center">
+                  {speaker.bio && (
+                    <button 
+                      type="button"
+                      class="bio-btn inline-flex items-center gap-2 text-sm font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors group-hover:gap-3 font-arabic"
+                      data-name={speaker.name}
+                      data-role={speaker.role || ''}
+                      data-image={speaker.image || ''}
+                      data-bio={speaker.bio}
+                    >
+                      <span>عرض السيرة الذاتية</span>
+                      <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </button>
+                  )}
+               </div>
+            </div>
+
+          </div>
+        ))}
+
       </div>
 
-      <!-- Keynote Speakers -->
-      <CommitteeSection 
-        titleKey="keynote.section"
-        data={keynoteSpeakers}
-        locale={locale}
-        sectionId="keynote-speakers"
-      />
+      <div class="mt-24 text-center">
+        <div class="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-10 md:p-14 text-white shadow-2xl relative overflow-hidden max-w-4xl mx-auto">
+          
+          <div class="absolute top-0 left-0 p-8 opacity-10">
+             <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"></path></svg>
+          </div>
 
-      <!-- Contact Section -->
-      <div class="text-center mt-16">
-        <div class="bg-gradient-to-r from-brand-primary to-brand-accent rounded-2xl p-8 text-white">
-          <h2 class="text-2xl font-bold mb-4">
-            تواصل مع فريقنا
+          <h2 class="text-2xl md:text-3xl font-bold mb-4 relative z-10 font-arabic">
+            هل ترغب في المشاركة كمتحدث؟
           </h2>
-          <p class="text-lg mb-6 opacity-90">
-            هل لديك أسئلة؟ لا تتردد في الاتصال بنا
+          <p class="text-lg mb-8 opacity-90 max-w-xl mx-auto relative z-10 font-arabic">
+            ترحب اللجنة العلمية بالمقترحات ذات الجودة العالية. تواصل معنا لمزيد من المعلومات.
           </p>
+          
           <a
             href={link({ locale, slug: 'contact' })}
-            class="inline-flex items-center gap-3 px-8 py-4 bg-white text-brand-primary font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-primary"
+            class="relative z-10 inline-flex items-center gap-3 px-8 py-4 bg-white text-emerald-700 font-bold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-50 font-arabic"
           >
             اتصل بنا
             <svg class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -60,8 +137,94 @@ const t = useTranslations(locale);
           </a>
         </div>
       </div>
+
     </div>
+
+    <!-- Bio Modal -->
+    <div id="bio-modal" class="fixed inset-0 z-50 hidden" role="dialog" aria-modal="true" dir="rtl">
+      <div class="modal-backdrop absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+      <div class="modal-container absolute inset-0 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4">
+          <div class="modal-content relative w-full max-w-2xl transform rounded-2xl bg-white dark:bg-slate-800 shadow-2xl transition-all duration-300 scale-95 opacity-0">
+            <button type="button" class="modal-close absolute top-4 left-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" aria-label="إغلاق">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div class="p-6 sm:p-8">
+              <div class="flex flex-col sm:flex-row gap-6">
+                <div class="flex-1 order-2 sm:order-1">
+                  <h3 class="modal-name text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2 font-arabic"></h3>
+                  <p class="modal-role text-sm text-emerald-600 dark:text-emerald-400 mb-4 font-arabic"></p>
+                  <div class="modal-bio prose prose-slate dark:prose-invert prose-sm max-w-none text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line font-arabic"></div>
+                </div>
+                <div class="flex-shrink-0 order-1 sm:order-2 flex justify-center sm:justify-start">
+                  <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden ring-4 ring-emerald-500/20 bg-slate-200 dark:bg-slate-600">
+                    <img class="modal-image w-full h-full object-cover" src="" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
   
   <Footer locale={locale} />
 </BaseLayout>
+
+<style>
+  #bio-modal.active { display: block; }
+  #bio-modal.active .modal-backdrop { opacity: 1; }
+  #bio-modal.active .modal-content { opacity: 1; transform: scale(1); }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('bio-modal');
+    if (!modal) return;
+
+    const backdrop = modal.querySelector('.modal-backdrop');
+    const closeBtn = modal.querySelector('.modal-close');
+    const container = modal.querySelector('.modal-container');
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    backdrop?.addEventListener('click', closeModal);
+    closeBtn?.addEventListener('click', closeModal);
+    container?.addEventListener('click', (e) => {
+      if (e.target === container) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    });
+
+    document.querySelectorAll('.bio-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const button = e.currentTarget as HTMLButtonElement;
+        const name = button.dataset.name || '';
+        const role = button.dataset.role || '';
+        const image = button.dataset.image || '';
+        const bio = button.dataset.bio || '';
+
+        const nameEl = modal.querySelector('.modal-name');
+        const roleEl = modal.querySelector('.modal-role');
+        const imageEl = modal.querySelector('.modal-image') as HTMLImageElement;
+        const bioEl = modal.querySelector('.modal-bio');
+
+        if (nameEl) nameEl.textContent = name;
+        if (roleEl) roleEl.textContent = role;
+        if (imageEl) { imageEl.src = image; imageEl.alt = name; }
+        if (bioEl) bioEl.textContent = bio;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        closeBtn?.focus();
+      });
+    });
+  });
+</script>

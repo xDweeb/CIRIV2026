@@ -2,12 +2,19 @@
 import { useTranslations } from '../../i18n/ui';
 import BioModal from './BioModal.astro';
 
+interface Social {
+  linkedin?: string;
+  twitter?: string;
+  website?: string;
+}
+
 interface Member {
   id: string;
   name: string;
   role: string;
   image: string;
   bio: string;
+  social?: Social;
 }
 
 interface Props {
@@ -98,6 +105,7 @@ function getTitle(key: string): string {
               data-role={member.role}
               data-image={member.image || placeholderImage}
               data-bio={member.bio}
+              data-linkedin={member.social?.linkedin || ''}
               data-modal={modalId}
               aria-label={`${t('committees.viewBio' as any)} ${member.name}`}
             >
@@ -132,11 +140,14 @@ function getTitle(key: string): string {
         const role = button.dataset.role || '';
         const image = button.dataset.image || '';
         const bio = button.dataset.bio || '';
+        const linkedin = button.dataset.linkedin || '';
 
         const nameEl = modal.querySelector('.modal-name');
         const roleEl = modal.querySelector('.modal-role');
         const imageEl = modal.querySelector('.modal-image') as HTMLImageElement;
         const bioEl = modal.querySelector('.modal-bio');
+        const linkedinEl = modal.querySelector('.modal-linkedin') as HTMLAnchorElement;
+        const socialContainer = modal.querySelector('.modal-social');
 
         if (nameEl) nameEl.textContent = name;
         if (roleEl) roleEl.textContent = role;
@@ -145,6 +156,16 @@ function getTitle(key: string): string {
           imageEl.alt = name;
         }
         if (bioEl) bioEl.textContent = bio;
+        
+        // Handle LinkedIn link
+        if (linkedinEl && socialContainer) {
+          if (linkedin) {
+            linkedinEl.href = linkedin;
+            (socialContainer as HTMLElement).style.display = 'flex';
+          } else {
+            (socialContainer as HTMLElement).style.display = 'none';
+          }
+        }
 
         // Show modal
         modal.classList.add('active');

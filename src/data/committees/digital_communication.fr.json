@@ -1,9 +1,26 @@
 [
   {
     "id": "digital-1",
-    "name": "OUSSAMA ABOULMAHASSINE EL IDRISS",
+    "name": "Taibi EL YAKOUTI",
+    "role": "Analyste Data & IA | Formateur et Compétiteur en Robotique | Ingénieur Logiciel | Designer Digital & Concepteur – CIRIV'26",
+    "image": "/images/committees/taibi-elyakouti.png",
+    "bio": "Taibi El Yakouti est étudiant en troisième année de Licence en Ingénierie des Systèmes Informatiques à la SUPMTI – École Supérieure de Management, Télécommunication et Informatique. Son profil réunit l'ingénierie logicielle, l'analyse de données, l'intelligence artificielle et la robotique, avec une orientation marquée vers l'innovation et la transformation digitale.\n\nEngagé dans la formation et la transmission, il intervient en tant que formateur en programmation, robotique et technologies numériques auprès de publics variés, en adaptant ses approches pédagogiques à chaque niveau.\n\nFondateur et Président du Club Robotique CMC Rabat, il pilote des initiatives techniques et éducatives et accompagne des équipes sur des projets orientés compétition et innovation. Il a participé à des compétitions technologiques avec des résultats distingués.\n\nDans le cadre du Congrès CIRIV'26, il est le concepteur et développeur du site web officiel, assurant l'architecture, le développement et l'optimisation de l'expérience utilisateur pour valoriser les contenus scientifiques et institutionnels du congrès.",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/xdweb"
+    }
+  },
+  {
+    "id": "digital-2",
+    "name": "Oussama ABOULMAHASSINE EL IDRISS",
     "role": "Étudiant en Master 2 Biotechnologie et Qualité, Faculté des Sciences Ben M'Sik, Université Hassan II de Casablanca",
     "image": "/images/committees/oussama-aboulmahassine.png",
-    "bio": "Étudiant en Master 2 Biotechnologie et Qualité à la Faculté des Sciences Ben M'Sik de l'Université Hassan II de Casablanca, il s'intéresse aux domaines de la qualité, de la sécurité sanitaire et de la valorisation de la recherche scientifique, avec un intérêt particulier pour les approches intégrées reliant santé humaine, santé animale, environnement et innovation.\n\nIl est membre du comité d'organisation du Congrès International de la Recherche, de l'Innovation et de la Valorisation (CIRIV'26), événement scientifique international structuré autour du concept One Health. Dans ce cadre, il contribue à l'organisation scientifique et logistique, à la gestion documentaire, ainsi qu'à la communication scientifique et digitale du congrès, en interaction avec des chercheurs, experts et intervenants nationaux et internationaux.\n\nParallèlement, il occupe le poste de Vice-Président du Club Ibn Khaldoun pour l'Action Sociale et Culturelle à la Faculté des Sciences Ben M'Sik, où il participe à la conception, à la coordination et à la mise en œuvre d'initiatives sociales, culturelles et scientifiques favorisant l'engagement étudiant.\n\nIl dispose de plus de cinq ans d'expérience en marketing digital et community management professionnel reconnu."
+    "bio": "Étudiant en Master 2 Biotechnologie et Qualité à la Faculté des Sciences Ben M'Sik de l'Université Hassan II de Casablanca, il s'intéresse aux domaines de la qualité, de la sécurité sanitaire et de la valorisation de la recherche scientifique, avec un intérêt particulier pour les approches intégrées reliant santé humaine, santé animale, environnement et innovation.\n\nIl est membre du comité d'organisation du Congrès International de la Recherche, de l'Innovation et de la Valorisation (CIRIV'26), événement scientifique international structuré autour du concept One Health. Dans ce cadre, il contribue à l'organisation scientifique et logistique, à la gestion documentaire, ainsi qu'à la communication scientifique et digitale du congrès.\n\nVice-Président du Club Ibn Khaldoun pour l'Action Sociale et Culturelle à la Faculté des Sciences Ben M'Sik, il participe à la conception et à la mise en œuvre d'initiatives sociales, culturelles et scientifiques favorisant l'engagement étudiant.\n\nIl dispose de plus de cinq ans d'expérience en marketing digital et community management professionnel."
+  },
+  {
+    "id": "digital-3",
+    "name": "Assya LAMAIZI",
+    "role": "Doctorante – Laboratoire de Biologie et Santé, Université Hassan II de Casablanca",
+    "image": "/images/committees/assya-lamaizi.png",
+    "bio": "Doctorante au Laboratoire de Biologie et Santé, Faculté des Sciences Ben M'Sick, Université Hassan II de Casablanca.\n\nMembre actif de la Society of Experimental Biology (SEB), section Animal Biology.\n\nCoordinatrice du Comité scientifique de l'association AQUADIVE, spécialisée en plongée sous-marine scientifique et technique.\n\nAxes de recherche centrés sur l'écologie et la conservation des organismes venimeux, avec une attention particulière portée aux interactions environnementales et aux enjeux de préservation de la biodiversité."
   }
 ]

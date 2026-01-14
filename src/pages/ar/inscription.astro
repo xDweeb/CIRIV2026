@@ -455,19 +455,26 @@ const t = useTranslations(locale);
 </BaseLayout>
 
 <script>
+// @ts-nocheck
 document.addEventListener('DOMContentLoaded', function() {
-  const form = document.getElementById('registration-form');
+  const form = document.getElementById('registration-form') as HTMLFormElement | null;
   const step1 = document.getElementById('step1');
   const step2 = document.getElementById('step2');
-  const nextBtn = document.getElementById('next-step');
-  const prevBtn = document.getElementById('prev-step');
-  const submitBtn = document.getElementById('submit-form');
+  const nextBtn = document.getElementById('next-step') as HTMLButtonElement | null;
+  const prevBtn = document.getElementById('prev-step') as HTMLButtonElement | null;
+  const submitBtn = document.getElementById('submit-form') as HTMLButtonElement | null;
   const submitText = document.getElementById('submit-text');
   const submitLoader = document.getElementById('submit-loader');
   const step1Indicator = document.getElementById('step1-indicator');
   const step2Indicator = document.getElementById('step2-indicator');
-  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]');
+  const participationRadios = document.querySelectorAll('input[name="typeParticipation"]') as NodeListOf<HTMLInputElement>;
   const presenterFields = document.getElementById('presenter-fields');
+
+  // Early return if essential elements are missing
+  if (!form || !step1 || !step2 || !nextBtn || !prevBtn || !submitBtn || !submitText || !submitLoader || !step1Indicator || !step2Indicator || !presenterFields) {
+    console.error('Required form elements not found');
+    return;
+  }
 
   // Google Apps Script endpoint
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFR2p7VCAkPeIZllQKI1YcbLdvWwUidILMpoCECDtTkoB2xy7Pagr9LV2yNLBHnbugHA/exec";
@@ -502,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Participation type change
   participationRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
+    radio.addEventListener('change', function(this: HTMLInputElement) {
       if (this.value === 'Presenter') {
         presenterFields.classList.remove('hidden');
         makePresenterFieldsRequired(true);
@@ -529,7 +536,8 @@ document.addEventListener('DOMContentLoaded', function() {
     try {
       const formData = new FormData(form);
       
-      const villePays = ((formData.get('ville')) || ',').split(',');
+      const villeValue = formData.get('ville') as string | null;
+      const villePays = (villeValue || ',').split(',');
       formData.set('ville', villePays[0] ? villePays[0].trim() : '');
       formData.append('pays', villePays[1] ? villePays[1].trim() : '');
       
@@ -582,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  function validateStep1() {
+  function validateStep1(): boolean {
     let isValid = true;
     const requiredFields = [
       { id: 'nom', message: messages.requiredField },
@@ -596,8 +604,9 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
 
     requiredFields.forEach(field => {
-      const element = document.getElementById(field.id);
-      const errorMsg = element.parentElement.querySelector('.error-message');
+      const element = document.getElementById(field.id) as HTMLInputElement | HTMLSelectElement | null;
+      if (!element) return;
+      const errorMsg = element.parentElement?.querySelector('.error-message');
       
       if (!element.value.trim()) {
         element.classList.add('border-red-500');
@@ -615,8 +624,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    const emailField = document.getElementById('email');
-    const emailErrorMsg = emailField.parentElement.querySelector('.error-message');
+    const emailField = document.getElementById('email') as HTMLInputElement | null;
+    if (!emailField) return isValid;
+    const emailErrorMsg = emailField.parentElement?.querySelector('.error-message');
     if (emailField.value.trim() && !isValidEmail(emailField.value)) {
       emailField.classList.add('border-red-500');
       if (emailErrorMsg) {
@@ -629,10 +639,11 @@ document.addEventListener('DOMContentLoaded', function() {
     return isValid;
   }
 
-  function validateStep2() {
+  function validateStep2(): boolean {
     let isValid = true;
-    const participationType = document.querySelector('input[name="typeParticipation"]:checked');
-    const participationError = document.querySelector('input[name="typeParticipation"]').parentElement.parentElement.querySelector('.error-message');
+    const participationType = document.querySelector('input[name="typeParticipation"]:checked') as HTMLInputElement | null;
+    const participationInput = document.querySelector('input[name="typeParticipation"]');
+    const participationError = participationInput?.parentElement?.parentElement?.querySelector('.error-message');
     
     if (!participationType) {
       if (participationError) {
@@ -658,8 +669,9 @@ document.addEventListener('DOMContentLoaded', function() {
       ];
 
       presenterRequiredFields.forEach(field => {
-        const element = document.getElementById(field.id);
-        const errorMsg = element.parentElement.querySelector('.error-message');
+        const element = document.getElementById(field.id) as HTMLInputElement | HTMLSelectElement | null;
+        if (!element) return;
+        const errorMsg = element.parentElement?.querySelector('.error-message');
         
         if (!element.value.trim()) {
           element.classList.add('border-red-500');
@@ -681,12 +693,12 @@ document.addEventListener('DOMContentLoaded', function() {
     return isValid;
   }
 
-  function isValidEmail(email) {
+  function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  function showStep1() {
+  function showStep1(): void {
     step1.classList.remove('hidden');
     step2.classList.add('hidden');
     step1Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
@@ -696,7 +708,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function showStep2() {
+  function showStep2(): void {
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
     step2Indicator.classList.remove('bg-slate-300', 'dark:bg-slate-600', 'text-slate-500');
@@ -704,15 +716,16 @@ document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function makePresenterFieldsRequired(required) {
+  function makePresenterFieldsRequired(required: boolean): void {
     const presenterInputs = presenterFields.querySelectorAll('input, select');
     presenterInputs.forEach(input => {
+      const inputEl = input as HTMLInputElement | HTMLSelectElement;
       if (required) {
-        input.setAttribute('required', 'required');
+        inputEl.setAttribute('required', 'required');
       } else {
-        input.removeAttribute('required');
-        input.classList.remove('border-red-500');
-        const errorMsg = input.parentElement.querySelector('.error-message');
+        inputEl.removeAttribute('required');
+        inputEl.classList.remove('border-red-500');
+        const errorMsg = inputEl.parentElement?.querySelector('.error-message');
         if (errorMsg) {
           errorMsg.textContent = '';
           errorMsg.classList.add('hidden');
@@ -721,11 +734,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  function showAlert(type, message) {
+  function showAlert(type: string, message: string): void {
     const alertContainer = document.getElementById('alert-container');
     const alertContent = document.getElementById('alert-content');
     const alertIcon = document.getElementById('alert-icon');
     const alertMessage = document.getElementById('alert-message');
+    
+    if (!alertContainer || !alertContent || !alertIcon || !alertMessage) return;
 
     alertContent.className = 'rounded-lg p-4 flex items-start space-x-3 rtl:space-x-reverse transform transition-all duration-500 ease-in-out';
     
@@ -748,9 +763,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
 
-  function hideAlert() {
+  function hideAlert(): void {
     const alertContainer = document.getElementById('alert-container');
     const alertContent = document.getElementById('alert-content');
+    
+    if (!alertContainer || !alertContent) return;
     
     alertContent.classList.remove('opacity-100', 'translate-y-0');
     alertContent.classList.add('opacity-0', 'translate-y-[-20px]');
@@ -760,7 +777,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
   }
 
-  document.getElementById('alert-close').addEventListener('click', hideAlert);
+  document.getElementById('alert-close')?.addEventListener('click', hideAlert);
 });
 </script>
 

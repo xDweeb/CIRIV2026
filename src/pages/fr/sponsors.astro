@@ -3,11 +3,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { useTranslations } from '../../i18n/ui';
-import sponsors from '../../content/sponsors.json';
+import sponsorsData from '../../content/sponsors.json';
 
 const locale = 'fr';
 const t = useTranslations(locale);
 const baseUrl = import.meta.env.BASE_URL || '/';
+
+// Cast to proper type
+const sponsors = sponsorsData as Array<{
+  name: string;
+  type: string;
+  url: string;
+  logo?: string;
+}>;
 
 // Type mapping for translations
 const typeLabels: Record<string, string> = {

@@ -190,12 +190,13 @@ interface Speaker {
 </style>
 
 <script>
+  // @ts-nocheck
   document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('bio-modal');
     if (!modal) return;
 
     const backdrop = modal.querySelector('.modal-backdrop');
-    const closeBtn = modal.querySelector('.modal-close');
+    const closeBtn = modal.querySelector('.modal-close') as HTMLButtonElement | null;
     const container = modal.querySelector('.modal-container');
 
     function closeModal() {

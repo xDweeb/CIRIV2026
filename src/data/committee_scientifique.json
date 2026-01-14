@@ -1,4 +1,5 @@
 [
+
   { "name": "Pr. D. Hassoumi", "role": "Doyen de la Faculté des Sciences et Technologies Agroalimentaires, Université Boubacar Bâ de Tillaberi, Niger" },
   { "name": "Pr. A. Saidou", "role": "Faculté des Sciences Agronomiques, Université Boubacar Bâ de Tillabéri, Niger" },
   { "name": "Pr. Nait Sidi Ahmed", "role": "Université Jean Monnet, Saint Étienne, France" },
@@ -55,4 +56,9 @@
   { "name": "Dr. Bouchra El Amiri", "role": "Chercheure, Institut National de la Recherche Agronomique (INRA), CRAA Settat" },
   { "name": "Pr. Aicha Madkour", "role": "Faculté des Sciences, Université Mohammed V de Rabat" }
 ]
+,
+{
+  "name": "Pr. Abdelmounaim MANOUSSI",
+  "role": "Professeur de l’enseignement supérieur, maître de conférences à l’École Nationale de Santé Publique (ENSP) de Rabat, Maroc. PhD en sciences de la santé, santé publique et épidémiologie. Plus de 20 ans d’expérience en santé, enseignement et recherche. Chercheur associé au laboratoire Sciences et Technologies de la Santé, Institut Supérieur des Sciences de la Santé de Settat. Auteur de nombreuses publications scientifiques sur la morbidité maternelle et néonatale, la santé mentale post-partum et les déterminants sociaux de la santé."
+}
 

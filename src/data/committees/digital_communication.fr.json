@@ -11,13 +11,23 @@
   },
   {
     "id": "digital-2",
+    "name": "Mme Farah SELOUANE",
+    "role": "Stagiaire en IA & Data Analytics | Passionnée de Robotique & Arduino | Responsable Multimédia & Réseaux Sociaux au CMC Robotics Club",
+    "image": "/images/committees/farah-selouane.png",
+    "bio": "Passionnée par la compréhension et la construction des systèmes intelligents, je poursuis actuellement ma deuxième année en Intelligence Artificielle & Data Analytics au CMC Rabat-Tamesna. Mon parcours a débuté par l'apprentissage des bases de la programmation, des bases de données, des processus ETL et de la préparation des données, avant d'évoluer vers les systèmes décisionnels, les statistiques appliquées, la visualisation des données et les techniques analytiques avancées. Je suis convaincue que les données, lorsqu'elles sont bien comprises et exploitées, permettent de prendre de meilleures décisions et de créer de nouvelles opportunités.\n\nEn parallèle de mon parcours académique, je développe activement mes compétences techniques à travers la robotique. Membre du CMC Robotics Club, je travaille avec Arduino, l'électronique et le langage C pour concevoir et tester des robots autonomes. Ma participation à des compétitions universitaires (ENSA, EHTP, UM6P) a renforcé mes capacités de résolution de problèmes, mon esprit d'équipe et mon aptitude à travailler sous des contraintes réelles d'ingénierie.\n\nPar ailleurs, je dirige l'équipe Multimédia & Réseaux Sociaux du club, où je suis chargée de la communication visuelle, de la couverture des événements, de la création de contenu et des rapports mensuels d'activités. Cette expérience m'a permis d'allier créativité et organisation, d'améliorer mes compétences en communication et de renforcer la visibilité et l'impact des initiatives du club.\n\nMon objectif est d'évoluer en tant que Data Analyste, de continuer à développer mes compétences en intelligence artificielle, en robotique et en création de contenu digital, tout en contribuant à des projets à forte valeur ajoutée au sein de la communauté technologique marocaine.",
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/farah-selouane/"
+    }
+  },
+  {
+    "id": "digital-3",
     "name": "Oussama ABOULMAHASSINE EL IDRISS",
     "role": "Étudiant en Master 2 Biotechnologie et Qualité, Faculté des Sciences Ben M'Sik, Université Hassan II de Casablanca",
     "image": "/images/committees/oussama-aboulmahassine.png",
     "bio": "Étudiant en Master 2 Biotechnologie et Qualité à la Faculté des Sciences Ben M'Sik de l'Université Hassan II de Casablanca, il s'intéresse aux domaines de la qualité, de la sécurité sanitaire et de la valorisation de la recherche scientifique, avec un intérêt particulier pour les approches intégrées reliant santé humaine, santé animale, environnement et innovation.\n\nIl est membre du comité d'organisation du Congrès International de la Recherche, de l'Innovation et de la Valorisation (CIRIV'26), événement scientifique international structuré autour du concept One Health. Dans ce cadre, il contribue à l'organisation scientifique et logistique, à la gestion documentaire, ainsi qu'à la communication scientifique et digitale du congrès.\n\nVice-Président du Club Ibn Khaldoun pour l'Action Sociale et Culturelle à la Faculté des Sciences Ben M'Sik, il participe à la conception et à la mise en œuvre d'initiatives sociales, culturelles et scientifiques favorisant l'engagement étudiant.\n\nIl dispose de plus de cinq ans d'expérience en marketing digital et community management professionnel."
   },
   {
-    "id": "digital-3",
+    "id": "digital-4",
     "name": "Assya LAMAIZI",
     "role": "Doctorante – Laboratoire de Biologie et Santé, Université Hassan II de Casablanca",
     "image": "/images/committees/assya-lamaizi.png",
